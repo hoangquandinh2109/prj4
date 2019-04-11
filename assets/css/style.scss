@@ -285,145 +285,156 @@ body{
             width: 75%;
             padding: 0 15px;
         }
-    }
-
-    //slide banner tu
-    .slide-banner-tu{
-        .owl-carousel{
-            position: relative;
-            &:hover{
+        //slide banner tu
+        .slide-banner-tu{
+            .owl-carousel{
+                position: relative;
+                &:hover{
+                    .owl-nav{
+                        button.owl-next{
+                            transform: translateX(0%);
+                        }
+                        button.owl-prev{
+                            transform: translateX(0%);
+                        }
+                    }
+                }
                 .owl-nav{
-                    button.owl-next{
-                        transform: translateX(0%);
-                    }
+                    position: absolute;
+                    width: 100%;
+                    overflow: hidden;
+                    @include center-in-vertical();
                     button.owl-prev{
-                        transform: translateX(0%);
+                        @include triangle(50px,25px,0px,#fff);
+                        transform: translateX(-100%);
+                        transition: .4s;
+                        position: relative;
+                        &:focus{
+                            outline: none;
+                        }
+                        &:hover{
+                            border-left-color: $color-pink;
+                            color: #fff;
+                        }
+                        span{
+                            position: absolute;
+                            @include center-in-vertical();
+                            left: -20px;
+                        }
                     }
-                }
-            }
-            .owl-nav{
-                position: absolute;
-                width: 100%;
-                overflow: hidden;
-                @include center-in-vertical();
-                button.owl-prev{
-                    @include triangle(50px,25px,0px,#fff);
-                    transform: translateX(-100%);
-                    transition: .4s;
-                    position: relative;
-                    &:focus{
-                        outline: none;
-                    }
-                    &:hover{
-                        border-left-color: $color-pink;
-                        color: #fff;
-                    }
-                    span{
-                        position: absolute;
-                        @include center-in-vertical();
-                        left: -20px;
-                    }
-                }
-                button.owl-next{
-                    float: right;
-                    @include triangle(50px,0px,25px,#fff);
-                    transform: translateX(100%);
-                    transition: .4s;
-                    position: relative;
-                    &:focus{
-                        outline: none;
-                    }
-                    &:hover{
-                        border-right-color: $color-pink;
-                        color: #fff;
-                    }
-                    span{
-                        position: absolute;
-                        @include center-in-vertical();
-                        right: -20px;
+                    button.owl-next{
+                        float: right;
+                        @include triangle(50px,0px,25px,#fff);
+                        transform: translateX(100%);
+                        transition: .4s;
+                        position: relative;
+                        &:focus{
+                            outline: none;
+                        }
+                        &:hover{
+                            border-right-color: $color-pink;
+                            color: #fff;
+                        }
+                        span{
+                            position: absolute;
+                            @include center-in-vertical();
+                            right: -20px;
+                        }
                     }
                 }
             }
         }
-    }
-    //end slide banner tu
-
-    //product
-    .product-block{
-        > .row{
-
-            &:not(:last-child) .product-item:before{
-                content: '';
-                @include center-in-horizontal();
-                background-color: #ccc;
-                width: calc(100% - 30px);
-                position: absolute;
-                height: 1px;
-                bottom: 0px;
-            }
-
-            .product-item{
-                float: left;
-                width: 25%;
-                padding: 15px;
-                position: relative;
-
-                &:not(:last-child):after{
-                    content: '';
-                    @include center-in-vertical();
-                    background-color: #ccc;
-                    height: calc(100% - 30px);
-                    position: absolute;
-                    width: 1px;
-                    right: 0px;
+        //end slide banner tu
+    
+        //event
+        .event{
+            margin-top: 20px;
+            a{
+                img{
+                    width: 100%;
                 }
-
-                .review-n-button-tu{
-                    .review-tu{
+            }
+        }
+    
+        //product
+        .product-block{
+            > .row{
+    
+                &:not(:last-child) .product-item:before{
+                    content: '';
+                    @include center-in-horizontal();
+                    background-color: #ccc;
+                    width: calc(100% - 30px);
+                    position: absolute;
+                    height: 1px;
+                    bottom: 0px;
+                }
+    
+                .product-item{
+                    float: left;
+                    width: 25%;
+                    padding: 15px;
+                    position: relative;
+    
+                    &:not(:last-child):after{
+                        content: '';
+                        @include center-in-vertical();
+                        background-color: #ccc;
+                        height: calc(100% - 30px);
+                        position: absolute;
+                        width: 1px;
+                        right: 0px;
                     }
-                    .button-tu{
-                        .btn-addtocart{
-                            float: left;
-                            border: 1px solid #ccc;
-                            width: max-content;
-                            &:hover{
+    
+                    .review-n-button-tu{
+                        .review-tu{
+                        }
+                        .button-tu{
+                            .btn-addtocart{
+                                float: left;
+                                border: 1px solid #ccc;
+                                width: max-content;
+                                &:hover{
+                                    >span.icon-btn{
+                                        
+                                    background-color: $color-blue;
+                                    }
+                                    >span.tool-title{
+                                        color: $color-blue;
+                                    }
+                                }
                                 >span.icon-btn{
-                                    
-                                background-color: $color-blue;
+                                    padding: 5px;
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                    background-color: $color-pink;
+                                    display: inline-block;
+                                    i{
+                                        font-size: 10px;
+                                        color: #fff;
+                                    }
                                 }
                                 >span.tool-title{
-                                    color: $color-blue;
+                                    padding: 5px;
+                                    display: inline-block;
                                 }
                             }
-                            >span.icon-btn{
-                                padding: 5px;
-                                background-color: $color-pink;
-                                display: inline-block;
-                                i{
-                                    font-size: 10px;
-                                    color: #fff;
+                            .btn-love{
+                                float: left;
+                                border: 1px solid #ccc;
+                                border-left: 0px;
+                                width: max-content;
+                                span{
+                                    display: inline-block;
+                                    padding: 5px;
+                                    i{
+                                        font-size: 10px;
+                                        color: $color-pink;
+                                    }
                                 }
-                            }
-                            >span.tool-title{
-                                padding: 5px;
-                                display: inline-block;
-                            }
-                        }
-                        .btn-love{
-                            float: left;
-                            border: 1px solid #ccc;
-                            border-left: 0px;
-                            width: max-content;
-                            span{
-                                display: inline-block;
-                                padding: 5px;
-                                i{
-                                    font-size: 10px;
-                                    color: $color-pink;
+                                &:hover span i{
+                                    color: $color-border-pink;
                                 }
-                            }
-                            &:hover span i{
-                                color: $color-border-pink;
                             }
                         }
                     }
@@ -431,5 +442,6 @@ body{
             }
         }
     }
+
     // end body web
 }
