@@ -395,4 +395,90 @@ body .slide-banner-tu .owl-carousel .owl-nav button.owl-next span {
   top: 50%;
   right: -20px;
 }
+
+body .product-block > .row:not(:last-child) .product-item:before {
+  content: '';
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  left: 50%;
+  background-color: #ccc;
+  width: calc(100% - 30px);
+  position: absolute;
+  height: 1px;
+  bottom: 0px;
+}
+
+body .product-block > .row .product-item {
+  float: left;
+  width: 25%;
+  padding: 15px;
+  position: relative;
+}
+
+body .product-block > .row .product-item:not(:last-child):after {
+  content: '';
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  top: 50%;
+  background-color: #ccc;
+  height: calc(100% - 30px);
+  position: absolute;
+  width: 1px;
+  right: 0px;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart {
+  float: left;
+  border: 1px solid #ccc;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart:hover > span.icon-btn {
+  background-color: #76c4ce;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart:hover > span.tool-title {
+  color: #76c4ce;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart > span.icon-btn {
+  padding: 5px;
+  background-color: #ee6c92;
+  display: inline-block;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart > span.icon-btn i {
+  font-size: 10px;
+  color: #fff;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart > span.tool-title {
+  padding: 5px;
+  display: inline-block;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-love {
+  float: left;
+  border: 1px solid #ccc;
+  border-left: 0px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-love span {
+  display: inline-block;
+  padding: 5px;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-love span i {
+  font-size: 10px;
+  color: #ee6c92;
+}
+
+body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-love:hover span i {
+  color: #db1952;
+}
 /*# sourceMappingURL=style.css.map */

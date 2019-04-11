@@ -3,6 +3,12 @@ $(document).ready(function(){
         items: 1,
         nav: true,
         loop: true,
-        dots: false
+        autoplay: true,
+        autoplayHoverPause: true,
+        dots: false,
+        mouseDrag: false,
+        autoplayTimeout: 2000,
+        autoplaySpeed: 1000,
+        navSpeed: 1000
     });
   });
