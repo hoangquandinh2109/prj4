@@ -394,6 +394,7 @@ body{
                                 float: left;
                                 border: 1px solid #ccc;
                                 width: max-content;
+                                cursor: pointer;
                                 &:hover{
                                     >span.icon-btn{
                                         
@@ -416,10 +417,16 @@ body{
                                 }
                                 >span.tool-title{
                                     padding: 5px;
+                                    -moz-user-select: none;
+                                    -webkit-user-select: none; 
+                                    -ms-user-select:none; 
+                                    user-select:none;
+                                    -o-user-select:none;
                                     display: inline-block;
                                 }
                             }
                             .btn-love{
+                                cursor: pointer;
                                 float: left;
                                 border: 1px solid #ccc;
                                 border-left: 0px;

@@ -441,6 +441,7 @@ body .web-body .product-block > .row .product-item .review-n-button-tu .button-t
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+  cursor: pointer;
 }
 
 body .web-body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart:hover > span.icon-btn {
@@ -466,10 +467,16 @@ body .web-body .product-block > .row .product-item .review-n-button-tu .button-t
 
 body .web-body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-addtocart > span.tool-title {
   padding: 5px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
   display: inline-block;
 }
 
 body .web-body .product-block > .row .product-item .review-n-button-tu .button-tu .btn-love {
+  cursor: pointer;
   float: left;
   border: 1px solid #ccc;
   border-left: 0px;
