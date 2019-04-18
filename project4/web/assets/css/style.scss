@@ -48,6 +48,7 @@ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+
 	font-style: normal;
 }
 body{
+    background-color: #f5f5f5;
     a{
         &:hover{
             text-decoration: none!important;
@@ -165,7 +166,7 @@ body{
         }
     }
     .navigation{
-        background: #ccc;
+        background: #e5e5e5;
         .container{
             position: relative;
         }
@@ -350,20 +351,67 @@ body{
         .event{
             margin-top: 20px;
             a{
+                display: block;
+                position: relative;
+                &:after{
+                    position: absolute;
+                    content: '';
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    border: 0px solid #cccccc61;
+                    transition: .3s ease;
+                }
+                &:hover:after{
+                    border-width: 25px;
+                }
                 img{
                     width: 100%;
                 }
             }
         }
-    
+        .title-row{
+            margin-top: 20px;
+            color: #fff;
+            padding: 7px;
+            padding-left: 30px;
+            padding-right: 0;   
+            background-color: $color-blue;
+            text-transform: uppercase;
+            position: relative;
+            font-family: "MerriweatherSans";
+            >span{
+                font-weight: bold;
+            }
+            &:after{
+                content: '';
+                position: absolute;
+                height: 1px;
+                width: 20px;
+                background-color: #f5f5f5;
+                top: 50%;
+                left: 3px;
+            }
+            &:before{
+                content: '';
+                position: absolute;
+                @include center-in-vertical();
+                @include triangle(10px, 5px, 0px, #f5f5f5);
+                left: 0;
+
+            }
+        }
         //product
         .product-block{
+            background-color: #fff;
+            padding: 0 20px;
+            border: 1px solid #e5e5e5;
             > .row{
-    
                 &:not(:last-child) .product-item:before{
                     content: '';
                     @include center-in-horizontal();
-                    background-color: #ccc;
+                    background-color: #e5e5e5;
                     width: calc(100% - 30px);
                     position: absolute;
                     height: 1px;
@@ -373,27 +421,73 @@ body{
                 .product-item{
                     float: left;
                     width: 25%;
-                    padding: 15px;
+                    padding: 30px 20px;
                     position: relative;
     
                     &:not(:last-child):after{
                         content: '';
                         @include center-in-vertical();
-                        background-color: #ccc;
+                        background-color: #e5e5e5;
                         height: calc(100% - 30px);
                         position: absolute;
                         width: 1px;
                         right: 0px;
                     }
-    
+                    .image-product{
+                        img{
+                            display: block;
+                            margin: 0 auto;
+                        }
+                    }
+                    .product-info{
+                        border-bottom: 1px solid #e5e5e5;
+                        padding-bottom: 10px;
+                        >p{
+                            font-weight: bold;
+                            font-family: "MerriweatherSans";
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                        }
+                        .price{
+                            color: $color-blue;
+                            font-weight: bold;
+                        }
+                        .old-price{
+                            text-decoration: line-through;
+                        }
+                        .new-price{
+                            color: $color-border-pink;
+                            font-weight: bold;
+                        }
+                    }
                     .review-n-button-tu{
                         .review-tu{
+                            padding-top: 10px;
+                            padding-bottom: 10px;
+                            .star-review{
+                                float: left;
+                                position: relative;
+                                width: max-content;
+                                color: #e5e5e5;
+                                .star-reviewed{
+                                    position: absolute;
+                                    top: 0;
+                                    color: #fc0;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                }
+                            }
+                            .quantity-review{
+                                float: right;
+                            }
                         }
                         .button-tu{
                             .btn-addtocart{
                                 float: left;
-                                border: 1px solid #ccc;
-                                width: max-content;
+                                border: 1px solid #e5e5e5;
+                                width: calc(100% - 30px);
+                                cursor: pointer;
                                 &:hover{
                                     >span.icon-btn{
                                         
@@ -405,27 +499,39 @@ body{
                                 }
                                 >span.icon-btn{
                                     padding: 5px;
+                                    float: left;
                                     padding-left: 10px;
                                     padding-right: 10px;
+                                    width: 30px;
+                                    height: 30px;
                                     background-color: $color-pink;
                                     display: inline-block;
+                                    text-align: center;
+                                    position: relative;
                                     i{
+                                        position: absolute;
+                                        @include center-in-both-dimen();
                                         font-size: 10px;
                                         color: #fff;
                                     }
                                 }
                                 >span.tool-title{
+                                    float: left;
+                                    width: calc(100% - 30px);
+                                    text-align: center;
                                     padding: 5px;
                                     display: inline-block;
                                 }
                             }
                             .btn-love{
                                 float: left;
-                                border: 1px solid #ccc;
+                                border: 1px solid #e5e5e5;
                                 border-left: 0px;
-                                width: max-content;
+                                cursor: pointer;
+                                width: 30px;
                                 span{
-                                    display: inline-block;
+                                    display: block;
+                                    text-align: center;
                                     padding: 5px;
                                     i{
                                         font-size: 10px;
@@ -444,4 +550,41 @@ body{
     }
 
     // end body web
+
+
+    .content-n-cart{
+        position: relative;
+        .content{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            left: 0;
+            transition: 0.3s ease;
+            .clickdetrove{
+                right: 0;
+                transition: 0.3s ease;
+            }
+        }
+        .content.vao{
+            left: -250px;
+            .clickdetrove{
+                position: fixed;
+                top: 0; left: 0; right: 250px; bottom: 0;
+                background-color: #0000005c;
+                z-index: 100000;
+            }
+        }
+        .cart{
+            right: -250px;
+            top: 0;
+            transition: 0.3s ease;
+            position: fixed;
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+        }
+        .cart.ra{
+            right: 0;
+        }
+    }
 }
