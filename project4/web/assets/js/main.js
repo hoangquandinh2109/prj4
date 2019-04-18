@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    
     $(".btn-addtocart").click(function(){
 //        alert("mua gì");
         $(".content").addClass("vao");
@@ -12,3 +13,5 @@ $(document).ready(function(){
         $(".cart").removeClass("ra");
     });
 });
+
+new WOW().init();

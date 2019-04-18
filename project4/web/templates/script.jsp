@@ -9,4 +9,5 @@
 <script src="assets/library/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/library/owlcarousel/js/owl.carousel.min.js"></script>
 <script src="assets/js/slideconfig.js"></script>
+<script src="assets/library/wowjs/wow.js"></script>
 <script src="assets/js/main.js"></script>

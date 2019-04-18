@@ -12,3 +12,29 @@ $(document).ready(function(){
         navSpeed: 1000
     });
   });
+  $(document).ready(function(){
+    $(".owl-carousel.product-slide").owlCarousel({
+        items: 4,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        dots: false,
+        mouseDrag: true,
+        autoplayTimeout: 4000,
+        autoplaySpeed: 2000,
+        dragEndSpeed:1000
+    });
+  });
+  $(document).ready(function(){
+    $(".owl-carousel.left-vertical-product-slide").owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        dots: false,
+        mouseDrag: true,
+        autoplayTimeout: 4000,
+        autoplaySpeed: 2000,
+        dragEndSpeed:1000
+    });
+  });

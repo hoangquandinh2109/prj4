@@ -23,11 +23,11 @@
 <div class="header-main">
     <div class="container">
         <div class="header-logo">
-            <img src="https://cdn.shopify.com/s/files/1/2334/1307/files/logo_190x30.png" alt="">
+            <img class="wow bounceIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/logo_190x30.png" alt="">
         </div>
         <div class="header-service">
             <div class="clearfix">
-                <div class="pull-left clearfix">
+                <div class="wow fadeInDown pull-left clearfix">
                     <div class="box-icon">
                         <i class="fas fa-truck"></i>
                         <!-- <i class="fal fa-truck"></i> -->
@@ -37,7 +37,7 @@
                         <p><em>on order over $100.00</em></p>
                     </div>
                 </div>
-                <div class="pull-left clearfix">
+                <div style="animation-delay: .5s;" class="wow fadeInDown pull-left clearfix">
                     <div class="box-icon">
                             <i class="fas fa-undo-alt"></i>
                     </div>
@@ -46,7 +46,7 @@
                         <p><em>free 90 days return policy</em></p>
                     </div>
                 </div>
-                <div class="pull-left clearfix">
+                <div style="animation-delay: 1s;" class="wow fadeInDown  pull-left clearfix">
                     <div class="box-icon">
                         <i class="far fa-money-bill-alt"></i>
                     </div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="header-cart">
+        <div style="animation-delay: 1.5s;" class="wow fadeInDown header-cart">
             <div class="title-cart">
                 <i class="fas fa-shopping-cart"></i>
             </div>
