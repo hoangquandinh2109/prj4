@@ -11,3 +11,4 @@
 <script src="assets/js/slideconfig.js"></script>
 <script src="assets/library/wowjs/wow.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/library/wowjs/infinite-scroll-docs.min.js"></script>

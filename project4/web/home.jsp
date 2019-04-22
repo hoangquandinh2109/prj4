@@ -336,4 +336,5 @@
         </div>
         <c:import url="templates/script.jsp"></c:import>
     </body>
+
 </html>

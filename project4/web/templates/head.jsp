@@ -12,4 +12,4 @@
 <link rel="stylesheet" href="assets/library/owlcarousel/css/owl.carousel.min.css">
 <link rel="stylesheet" href="assets/library/animatecss/animate.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<title>Document</title>
+<title>CANG CU COT</title>
