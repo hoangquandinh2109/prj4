@@ -13,8 +13,21 @@ $(document).ready(function(){
     });
   });
   $(document).ready(function(){
-    $(".owl-carousel.product-slide").owlCarousel({
+    $(".owl-carousel.product-slide.nothing").owlCarousel({
         items: 4,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        dots: false,
+        mouseDrag: true,
+        autoplayTimeout: 4000,
+        autoplaySpeed: 2000,
+        dragEndSpeed:1000
+    });
+  });
+  $(document).ready(function(){
+    $(".owl-carousel.product-slide.quanvippro").owlCarousel({
+        items: 2,
         loop: true,
         autoplay: true,
         autoplayHoverPause: true,

@@ -1,0 +1,63 @@
+
+@font-face{
+    font-family:"Font Awesome 5 Brands";
+    font-style:normal;font-weight:normal;
+    font-display:auto;src:url(../library/fontawesome/webfonts/fa-brands-400.eot);
+    src:url(../library/fontawesome/webfonts/fa-brands-400.eot?#iefix) format("embedded-opentype"),url(../library/fontawesome/webfonts/fa-brands-400.woff2) format("woff2"),url(../library/fontawesome/webfonts/fa-brands-400.woff) format("woff"),url(../library/fontawesome/webfonts/fa-brands-400.ttf) format("truetype"),url(../library/fontawesome/webfonts/fa-brands-400.svg#fontawesome) format("svg")}.fab{font-family:"Font Awesome 5 Brands"
+}
+@font-face{font-family:"Font Awesome 5 Pro";font-style:normal;font-weight:300;font-display:auto;src:url(../library/fontawesome/webfonts/fa-light-300.eot);src:url(../library/fontawesome/webfonts/fa-light-300.eot?#iefix) format("embedded-opentype"),url(../library/fontawesome/webfonts/fa-light-300.woff2) format("woff2"),url(../library/fontawesome/webfonts/fa-light-300.woff) format("woff"),url(../library/fontawesome/webfonts/fa-light-300.ttf) format("truetype"),url(../library/fontawesome/webfonts/fa-light-300.svg#fontawesome) format("svg")}.fal{font-weight:300}
+@font-face{font-family:"Font Awesome 5 Pro";font-style:normal;font-weight:400;font-display:auto;src:url(../library/fontawesome/webfonts/fa-regular-400.eot);src:url(../library/fontawesome/webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"),url(../library/fontawesome/webfonts/fa-regular-400.woff2) format("woff2"),url(../library/fontawesome/webfonts/fa-regular-400.woff) format("woff"),url(../library/fontawesome/webfonts/fa-regular-400.ttf) format("truetype"),url(../library/fontawesome/webfonts/fa-regular-400.svg#fontawesome) format("svg")}.fal,.far{font-family:"Font Awesome 5 Pro"}.far{font-weight:400}
+@font-face{font-family:"Font Awesome 5 Pro";font-style:normal;font-weight:900;font-display:auto;src:url(../library/fontawesome/webfonts/fa-solid-900.eot);src:url(../library/fontawesome/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(../library/fontawesome/webfonts/fa-solid-900.woff2) format("woff2"),url(../library/fontawesome/webfonts/fa-solid-900.woff) format("woff"),url(../library/fontawesome/webfonts/fa-solid-900.ttf) format("truetype"),url(../library/fontawesome/webfonts/fa-solid-900.svg#fontawesome) format("svg")}.fa,.fas{font-family:"Font Awesome 5 Pro";font-weight:900}
+@mixin center-in-vertical() {  
+    transform: translateY(-50%);  
+    top: 50%;
+}
+@mixin center-in-horizontal() {  
+    transform: translateX(-50%);  
+    left: 50%;
+}
+@mixin center-in-both-dimen() {  
+    transform: translate(-50%, -50%);  
+    top: 50%;
+    left: 50%;
+}
+@mixin triangle($height, $left, $right, $color){
+    border-bottom: ($height / 2) solid transparent;
+    border-top: ($height / 2) solid transparent;
+    border-right: $right solid $color;
+    border-left: $left solid $color;
+}
+.web-body{
+    .path{
+        span{
+            position: relative;
+            &:not(:first-child){
+                padding-left: 10px;
+                &:after{
+                    content:'\f105';
+                    position: absolute;
+                    left: 0;
+                    font-family:"Font Awesome 5 Pro";
+                    font-weight: 900;
+                    @include center-in-vertical();}
+            }
+        }
+    }
+    .details{
+        padding-top: 20px;
+    }
+    .more-product{
+        .event{
+            padding: 0;
+        }
+        .product-slide .owl-item{
+            padding: 10px;
+        }
+    }
+
+}
+.details-block{
+    .review-tu{
+        width:170px;
+    }
+}
