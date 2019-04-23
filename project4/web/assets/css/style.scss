@@ -565,26 +565,6 @@ body{
         }
     }
     .review-n-button-tu{
-        .review-tu{
-            padding-top: 10px;
-            padding-bottom: 10px;
-            .star-review{
-                float: left;
-                position: relative;
-                width: max-content;
-                color: #e5e5e5;
-                .star-reviewed{
-                    position: absolute;
-                    top: 0;
-                    color: #fc0;
-                    overflow: hidden;
-                    white-space: nowrap;
-                }
-            }
-            .quantity-review{
-                float: right;
-            }
-        }
         .button-tu{
             .btn-addtocart{
                 float: left;
@@ -695,5 +675,26 @@ body{
         span{
             display: block;
         }
+    }
+}
+
+.review-tu{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .star-review{
+        float: left;
+        position: relative;
+        width: max-content;
+        color: #e5e5e5;
+        .star-reviewed{
+            position: absolute;
+            top: 0;
+            color: #fc0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+    .quantity-review{
+        float: right;
     }
 }
