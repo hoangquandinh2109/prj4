@@ -29,40 +29,65 @@ create table staff(
 	
 )
 go
+drop table if exists category
+go
+create table category(
+	catID varchar(20) primary key,
+	catName varchar(20)
+)
+drop table if exists imgStog
+create table imgStog (
+	imgID int identity primary key,
+	img_name varchar(255),
+	proID varchar(10) foreign key REFERENCES product(proID)
+)
+
+
+drop table if exists tbTag
+go
+create table tbTag(
+	tagID int identity primary key,
+	tag varchar(255)
+)
+go
 Drop table if exists product
 go
 create table product(
 	proID varchar(10) primary key,
 	proName nvarchar(255),
-	proDetails nvarchar(max),
+	proDetails text,
+	
 	proPrice int,
+	quantity int,
 	DateRelease date,
 	proStatus bit,
+	tagID int foreign key REFERENCES tbTag(tagID),
+	catID varchar(20) foreign key REFERENCES category(catID),
 	imgID int foreign key REFERENCES imgStog(imgID)
 )
 go
-drop table if exists imgStog
-create table imgStog (
-	imgID int identity primary key,
-	img_link varchar(255),
-	proID varchar(10) foreign key REFERENCES product(proID)
+
+Drop table if exists purchaseItem
+go
+create table purchaseItem(
+	purItemID varchar(20) primary key,
+	proID varchar(10) foreign key REFERENCES product(proID),
+	quantity int
+	
 )
-
-
+go
 Drop table if exists purchase
 go
 create table purchase (
 	purID int identity primary key,
 	cusID int foreign key REFERENCES customer(cusID),
-	total_price int
+	purItemID varchar(20) foreign key REFERENCES purchaseItem(purItemID),
+	total_price int,
+	purchaseStatus tinyint,
+	date_order_placed date,
+	date_order_paid date,
+
+
 )
-Drop table if exists purchaseItem
-go
-create table purchaseItem(
-	purItemID int identity primary key,
-	proID varchar(10) foreign key REFERENCES product(proID),
-	quantity int,
-	
-)
-go
+
 
