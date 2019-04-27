@@ -1,6 +1,6 @@
 <%-- 
-    Document   : createStaff
-    Created on : Apr 19, 2019, 7:16:16 PM
+    Document   : login
+    Created on : Apr 25, 2019, 9:21:14 PM
     Author     : bemap
 --%>
 
@@ -10,8 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
     </head>
     <body>
         <h1>Hello World!</h1>
+        
     </body>
 </html>

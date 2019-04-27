@@ -1,34 +1,40 @@
-.form-container {
-  padding: 16px;
-  background-color: white;
-}
-
-input {
-  background-color: #f1f1f1;
-  display: inline-block;
-  margin: 5px 0 22px 0;
-  padding: 15px;
-  width: 50%;
-  border: none;
-}
-
-input:focus {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-.submit-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
+.content-container .row-form::after {
+  content: '';
+  display: table;
+  clear: both;
   width: 100%;
-  opacity: 0.9;
 }
 
-.submit-button:hover {
-  opacity: 1;
+.content-container .row-form::after .col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
 }
-/*# sourceMappingURL=adminContent.css.map */
+
+.content-container .row-form::after .col-25 .labelf {
+  color: red;
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.content-container .row-form::after .col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.content-container .row-form::after .col-75 .ipText {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0 0px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 600px) {
+  .col-25, col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
