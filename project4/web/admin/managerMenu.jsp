@@ -10,10 +10,9 @@
 
 <html>
     <head>
-    
-<link rel="stylesheet" href="../assets/css/adminContent.css">
-<link rel="stylesheet" href="../assets/css/adminStyle.css">
-<title>CANG CU COT ADMIN V.</title>
+
+        <c:import url="../templates/importAdmin.jsp"></c:import>
+        
     </head> 
     <body>
         <div class="header" id="header">
@@ -26,16 +25,18 @@
         <!--<a class="mobile" href="#">MENU</a> -->
         <div id="container">
             <div class="sidebar">
-              <ul class="nav">
-                  <li><a href="#">Create new Staff</a></li>
-                  <li><a href="#">View product</a></li>
-                  <li><a href="#">Get report</a></li>
-                  <li><a href="#">View feedback</a></li>
-                  <li><a href="#">Account list</a></li>
-              </ul>     
+                <ul class="nav">
+                    <li><a href="#">Create new Staff</a></li>
+                    <li><a href="#">View product</a></li>
+                    <li><a href="#">Get report</a></li>
+                    <li><a href="#">View feedback</a></li>
+                    <li><a href="#">Account list</a></li>
+                </ul>     
             </div>
-            <c:import url="insertPro.jsp"></c:import>
-           
+             <c:import url="insertPro.jsp"></c:import>
         </div>
+
+
+    
 </body>
 </html>

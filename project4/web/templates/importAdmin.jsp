@@ -5,10 +5,8 @@
 --%>
 
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../assets/library/fontawesome/css/all.min.css">
-
-<link rel="stylesheet" href="../assets/css/adminContent.css">
-<link rel="stylesheet" href="../assets/css/adminStyle.css">
+<link rel="stylesheet" href="../assets/library/bootstrap/css/bootstrap.min.css">
+ <link rel="stylesheet" href="../assets/library/via_admin/main.css">
 <title>CANG CU COT ADMIN V.</title>

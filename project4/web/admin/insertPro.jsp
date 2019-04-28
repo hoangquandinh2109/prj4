@@ -1,103 +1,34 @@
 <%-- 
-    Document   : insertPro
-    Created on : Apr 25, 2019, 10:22:31 PM
+    Document   : insertPor
+    Created on : Apr 28, 2019, 6:07:36 PM
     Author     : bemap
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
-<div class="content">
-    <h2>THIS IS FUCKING WOW SHIT</h2>
-    <p>SOME TEXT</p>
-    <div id="box">
-        <div class="box-top">
-            <h2>Create New Product</h2>
-        </div>
-        <div class="box-panel">
-
-            <div class="content-container">
-                <form>
-                    <div class="row-form">
-                        <div class="col-25">
-                            <label class="lablef" for="proID">Category</label>
-                        </div>
-                        <div class="col-75">
-                            <div class="category-selection">
-                                <select id="categoryID" name="categoryID">
-                                    <option value="#">
-                                        Select your Cate
-                                    </option>
-                                    <option value="#">
-                                        Select your Cate
-                                    </option>
-                                    <option value="#">
-                                        Select your Cate
-                                    </option>
-                                    <option value="#">
-                                        Select your Cate
-                                    </option>
-                                </select>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row-form">
-                        <div class="col-25">
-                            <label class="lablef" for="proName">Product Name</label>
-                        </div>
-                        <div class="col-75">
-                            <input class="ipText" type="text" name="proName">
-                        </div>
-                    </div>
-                    <div class="row-form">
-                        <div class="col-25">
-                            <label class="lablef" for="proName">Product Details</label>
-                        </div>
-                        <div class="col-75">
-                            <input  class="ipText" type="text" name="proDetails">
-                        </div>
-                    </div>
-                    <div class="row-form">
-                        <div class="col-25">
-                            <label class="lablef" for="quantity">Quantity</label>
-                        </div>
-                        <div class="col-75">
-                            <input  class="ipText" type="number" name="quantity">
-                        </div>
-                    </div>
-                    <div class="row-form">
-                        <div class="col-25">
-                            <label class="lablef" for="date">Date PICKER</label>
-                        </div>
-                        <div class="col-75">
-                            <input class="ipText" type="text" name="date">
-                        </div>
-                    </div>
-                    <div class="row-form">
-                        <div class="col-25">
-                            <label class="lablef" for="tag">Add tags</label>
-                        </div>
-                        <div class="col-75">
-                            <textarea  class="ipText" id="tag" name="tag" style="height:100px"></textarea>
-                        </div>
-                    </div>
-                    <div class="row-form">
-                        <div class="col-25">
-                            <label class="lablef" for="tag">Images</label>
-                        </div>
-                        <div class="col-75">
-                            <input  class="ipText" type="text" name="img">
-                        </div>
-                    </div>
-
-
-                </form>
-            </div>
-
-
-        </div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <c:import url="../templates/importAdmin.jsp"></c:import>
+    </head>
+    <body>
+    <c:import url="../templates/adminPage.jsp"></c:import>
+       <main class="app-content">
+    <div class="app-title">
+      <div>
+        <h1><i class="fa fa-edit"></i> Form Samples</h1>
+        <p>Sample forms</p>
+      </div>
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item">Forms</li>
+        <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
+      </ul>
     </div>
-</div>
-</div>
-
+    <div class="row">
+        <p>SOME THING CHANGE </p>
+    </div>
+  </main>
+    <c:import url="../templates/adminScript.jsp"></c:import>
+    </body>
+</html>
