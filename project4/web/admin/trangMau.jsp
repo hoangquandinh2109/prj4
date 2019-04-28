@@ -1,6 +1,6 @@
 <%-- 
-    Document   : insertPor
-    Created on : Apr 28, 2019, 6:07:36 PM
+    Document   : trangMau
+    Created on : Apr 28, 2019, 11:53:52 PM
     Author     : bemap
 --%>
 
@@ -8,12 +8,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <!--BUOC 1 import adminHead.jsp trong the <head></head>
+         
+         Buoc 2 import adminPage sau the <body>
+         Buoc 3 code trong the <main><row></main>
+         //DUNG BOOTSTRAP HAY CHINH FONT END CHO FORM THEM DEP
+         Buoc 4 import scrpit o cuoi the body
+         CHAY TRUDC TIEP O FILE NAY LUON Shift+F6
+    -->
     <head>
+   
         <c:import url="../templates/adminHead.jsp"></c:import>
     </head>
+           
+            
+
     <body>
     <c:import url="../templates/adminPage.jsp"></c:import>
-       <main class="app-content">
+           <main class="app-content">
     <div class="app-title">
       <div>
         <h1><i class="fa fa-edit"></i> Form Samples</h1>
@@ -26,9 +38,9 @@
       </ul>
     </div>
     <div class="row">
-        <p>SOME THING CHANGE </p>
+        <p>CODE CONTENT HERE</p>
     </div>
   </main>
-    <c:import url="../templates/adminScript.jsp"></c:import>
+             <c:import url="../templates/adminScript.jsp"></c:import>
     </body>
 </html>

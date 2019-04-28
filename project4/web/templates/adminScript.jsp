@@ -9,3 +9,4 @@
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/mainAdmin.js"></script>
+    <script src="../assets/plugin/pace.min.js"></script>
