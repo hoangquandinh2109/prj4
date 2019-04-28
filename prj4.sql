@@ -23,6 +23,10 @@ go
 create table staff(
 	staffID varchar(10) primary key,
 	staffName nvarchar(255),
+	staffPhone varchar(10),
+	staffEmail varchar(50),
+	staffAddress varchar(255),
+
 	staffPassword nvarchar(255),
 	[role] tinyint,
 	staffStatus bit
@@ -56,12 +60,11 @@ create table product(
 	proID varchar(10) primary key,
 	proName nvarchar(255),
 	proDetails text,
-	
 	proPrice int,
 	quantity int,
 	DateRelease date,
 	proStatus bit,
-	tagID int foreign key REFERENCES tbTag(tagID),
+	tags varchar(255),
 	catID varchar(20) foreign key REFERENCES category(catID),
 	imgID int foreign key REFERENCES imgStog(imgID)
 )
@@ -88,6 +91,29 @@ create table purchase (
 	date_order_paid date,
 
 
+)
+drop table if exists feedback
+go
+create table feedback(
+	feedId int identity primary key,
+	[Subject] varchar(500),
+	[Message]	text,
+	ReceivedDate datetime,
+	sender int foreign key REFERENCES customer(cusID)
+	
+)
+go
+drop table if exists mailbox
+go
+create table mailbox(
+	mailID int identity primary key,
+	[Subject] varchar(500),
+	[Message]	text,
+	ReceivedDate datetime,
+	cusID int foreign key REFERENCES customer(cusID),
+	replyContent text,
+	replyDate datetime,
+	staffID varchar(10)  foreign key REFERENCES staff(staffID)
 )
 
 
