@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
        
            <c:import url="../templates/adminHead.jsp"></c:import>
-           
+           <c:if test="${mess eq null}"></c:if>
         </head>
         <body>
             <section class="material-half-bg">
