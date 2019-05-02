@@ -61,7 +61,7 @@ create table product(
 	quantity int,
 	DateRelease date,
 	proStatus bit,
-	tagID int foreign key REFERENCES tbTag(tagID),
+	tags varchar(255),
 	catID varchar(20) foreign key REFERENCES category(catID),
 	imgID int foreign key REFERENCES imgStog(imgID)
 )
