@@ -194,7 +194,7 @@
                                 </div>
                                 <div class="block-title-n-slide">
                                     <div class="title-row">FOR <span>HER</span></div>
-                                    <div class="owl-carousel product-slide" >
+                                    <div class="owl-carousel product-slide nothing" >
                                         <c:forEach items="${list}" var="ssd">
                                         <div class="product-item wow fadeIn">
                                             <div class="image-product">
@@ -237,7 +237,6 @@
                                 </div>
                                 <div class="block-title-n-slide">
                                     <div class="title-row">FOR <span>HIM</span></div>
-                                    <div class="owl-carousel product-slide" >
                                     <div class="owl-carousel product-slide nothing" >
                                         <c:forEach items="${list}" var="ssd">
                                         <div class="product-item wow fadeIn">
@@ -281,7 +280,7 @@
                                 </div>
                                 <div class="block-title-n-slide">
                                     <div class="title-row">FOR <span>HER</span></div>
-                                    <div class="owl-carousel product-slide" >
+                                    <div class="owl-carousel product-slide nothing" >
                                         <c:forEach items="${list}" var="ssd">
                                         <div class="product-item wow fadeIn">
                                             <div class="image-product">
