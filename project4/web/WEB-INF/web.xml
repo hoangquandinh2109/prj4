@@ -8,6 +8,10 @@
         <servlet-name>InsertUserSeverlet</servlet-name>
         <servlet-class>Servlet.InsertUserSeverlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>testServlet</servlet-name>
+        <servlet-class>Servlet.testServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -16,12 +20,16 @@
         <servlet-name>InsertUserSeverlet</servlet-name>
         <url-pattern>/InsertUserSeverlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>testServlet</servlet-name>
+        <url-pattern>/testServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>home</welcome-file>
+        <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

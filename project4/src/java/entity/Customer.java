@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author USER
+ * @author bemap
  */
 @Entity
 @Table(name = "customer", catalog = "projectSem4", schema = "dbo")
@@ -66,19 +66,6 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(Integer cusID, String cusName, String cusEmail, String cusPassword, String cusAddress, String cusPhone, String cusAvatar, Boolean cusStatus) {
-        this.cusID = cusID;
-        this.cusName = cusName;
-        this.cusEmail = cusEmail;
-        this.cusPassword = cusPassword;
-        this.cusAddress = cusAddress;
-        this.cusPhone = cusPhone;
-        this.cusAvatar = cusAvatar;
-        this.cusStatus = cusStatus;
-    }
-
-    
-    
     public Customer(Integer cusID) {
         this.cusID = cusID;
     }

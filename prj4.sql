@@ -39,12 +39,8 @@ create table category(
 	catID varchar(20) primary key,
 	catName varchar(20)
 )
-drop table if exists imgStog
-create table imgStog (
-	imgID int identity primary key,
-	img_name varchar(255),
-	proID varchar(10) foreign key REFERENCES product(proID)
-)
+
+
 
 
 drop table if exists tbTag
@@ -54,6 +50,12 @@ create table tbTag(
 	tag varchar(255)
 )
 go
+drop table if exists imgStog
+create table imgStog (
+	imgID int identity primary key,
+	img_name varchar(255),
+
+)
 Drop table if exists product
 go
 create table product(
@@ -66,10 +68,14 @@ create table product(
 	proStatus bit,
 	tags varchar(255),
 	catID varchar(20) foreign key REFERENCES category(catID),
-	imgID int foreign key REFERENCES imgStog(imgID)
+	
 )
 go
-
+drop table if exists ProImgtb
+create table ProImgtb (
+	proID varchar(10) foreign key REFERENCES product(proID),
+	imgID int foreign key REFERENCES imgStog(imgID)
+)
 Drop table if exists purchaseItem
 go
 create table purchaseItem(

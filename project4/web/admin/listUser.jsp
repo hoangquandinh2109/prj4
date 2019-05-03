@@ -6,11 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<!DOCTYPE html>
+
 <html>
     <html>
         <head>
@@ -22,7 +18,7 @@
                 <div class="app-title">
                     <div>
                         <h1><i class="fa fa-edit"></i> Form Samples</h1>
-                        <p>Sample forms</p>
+                        <p>Sample forms ${dit}</p>
                     </div>
                     <ul class="app-breadcrumb breadcrumb">
                         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -33,7 +29,7 @@
                 <div class="row">
                 <%-- <p>SOME THING CHANGE </p> --%>
 
-
+                
                 <div class="container">
                     <div class="row col-md-6 col-md-offset-2 custyle">
                         <form action="listUserServlet" method="POST">

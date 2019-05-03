@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 
-package entity;
+package models;
 
+import entity.Customer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author USER
+ * @author bemap
  */
 @Stateless
 public class CustomerFacade extends AbstractFacade<Customer> implements CustomerFacadeLocal {

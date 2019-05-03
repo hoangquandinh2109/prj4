@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 
-package entity;
+package models;
 
+import entity.Customer;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author USER
+ * @author bemap
  */
 @Local
 public interface CustomerFacadeLocal {

@@ -6,12 +6,8 @@
 
 package Servlet;
 
-import entity.Customer;
-import entity.CustomerFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,20 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author USER
+ * @author bemap
  */
-public class listUserServlet extends HttpServlet {
-    @EJB
-    private CustomerFacadeLocal customerFacade;
-    
+public class testServlet extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            List<Customer> list = customerFacade.findAll();
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("listUser.jsp").forward(request, response);
-
+            request.setAttribute("dit", "ditme");
+             request.getRequestDispatcher("/admin/listUser.jsp").forward(
+                request, response);
         }
     }
 

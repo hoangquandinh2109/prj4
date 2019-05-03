@@ -68,7 +68,7 @@
               </header>
               <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../img/userAvatar/adminAvatar.jpg" width="48px" height="48px" alt="User Image">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${pageContext.request.contextPath}/img/userAvatar/adminAvatar.jpg" width="48px" height="48px" alt="User Image">
         <div>
           <p class="app-sidebar__user-name">Mr ??</p>
           <p class="app-sidebar__user-designation">CCC's Developer</p>
@@ -101,7 +101,7 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user fa-lg"></i><span class="app-menu__label">User</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="../listUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
+            <li><a class="treeview-item" href="../testServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
             

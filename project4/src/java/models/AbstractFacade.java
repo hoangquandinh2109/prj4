@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 
-package entity;
+package models;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
  *
- * @author USER
+ * @author bemap
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
