@@ -101,7 +101,7 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user fa-lg"></i><span class="app-menu__label">User</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>User List</a></li>
+            <li><a class="treeview-item" href="../listUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
             
