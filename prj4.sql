@@ -75,6 +75,7 @@ create table product(
 go
 drop table if exists ProImgtb
 create table ProImgtb (
+	Code int primary key identity,
 	proID varchar(10) foreign key REFERENCES product(proID),
 	imgID int foreign key REFERENCES imgStog(imgID)
 )
@@ -82,7 +83,7 @@ create table ProImgtb (
 Drop table if exists purchase
 go
 create table purchase (
-	purID int identity primary key,
+	purID varchar(20) primary key,
 	cusID int foreign key REFERENCES customer(cusID),
 	total_price int,
 	purchaseStatus tinyint,
@@ -94,10 +95,10 @@ create table purchase (
 Drop table if exists purchaseItem
 go
 create table purchaseItem(
-	purItemID varchar(20) primary key,
+	purItemID int identity primary key,
 	proID varchar(10) foreign key REFERENCES product(proID),
 	quantity int,
-	purID int foreign key REFERENCES purchase(purID)
+	purID varchar(20) foreign key REFERENCES purchase(purID)
 	
 )
 go
