@@ -506,7 +506,52 @@ body{
             transition: 0.3s ease;
             .clickdetrove{
                 right: 0;
+                opacity: 0;
                 transition: 0.3s ease;
+            }
+            .clickdetrove.havemodal{
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background-color: #0000005c;
+                z-index: 100000;
+                opacity:1;
+            }
+            .modal-form{
+                padding: 20px;
+                width: 500px;
+                background-color: #fff;
+                position: fixed;
+                @include center-in-both-dimen();
+                z-index: 100001;
+                .form-in-modal{
+                    padding: 10px 18px;
+                    margin-bottom: 20px;
+                    display: block;
+                    width: 100%;    
+                }
+                .label-form-modal{
+                    margin-bottom: 5px;
+                    display: block;
+                }
+                a.db-tac{
+                    margin-bottom: 5px;
+                }
+                .db-tac{
+                    display: block;
+                    text-align: center;
+                }
+                button{
+                    padding: 5px;
+                    background-color: $color-blue;
+                    border: 1px solid $color-blue;
+                    color: #fff;
+                    width: max-content;
+                    margin: 0 auto;
+                    &:hover{
+                        background-color: #fff;
+                        color: $color-blue;
+                    }
+                }
             }
         }
         .content.vao{
@@ -516,6 +561,7 @@ body{
                 top: 0; left: 0; right: 250px; bottom: 0;
                 background-color: #0000005c;
                 z-index: 100000;
+                opacity: 1;
             }
         }
         .cart{
@@ -698,3 +744,36 @@ body{
         float: right;
     }
 }
+
+@-webkit-keyframes fadeInDownModal {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+      transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0) translate(-50%, -50%);
+      transform: translate3d(0, 0, 0) translate(-50%, -50%);
+    }
+  }
+  
+  @keyframes fadeInDownModal {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+      transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0) translate(-50%, -50%);
+      transform: translate3d(0, 0, 0) translate(-50%, -50%);
+    }
+  }
+  
+  .fadeInDownModal {
+    -webkit-animation-name: fadeInDownModal;
+    animation-name: fadeInDownModal;
+  }

@@ -8,7 +8,7 @@
 <div class="top-nav">
     <div class="container">
         <div class="top-nav-welcome">
-            <div>Welcome visitor you can <a href="">Login</a> and <a href="">create an account</a> </div>
+            <div>Welcome visitor you can <a class="login-link" href="">Login</a> and <a class="create-acc-link" href="">create an account</a> </div>
         </div>
         <div class="top-nav-tools">
             <ul>
