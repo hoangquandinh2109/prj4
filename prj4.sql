@@ -1,3 +1,5 @@
+use master
+go
 Drop database if exists projectSem4
 go
 create database projectSem4
@@ -76,21 +78,12 @@ create table ProImgtb (
 	proID varchar(10) foreign key REFERENCES product(proID),
 	imgID int foreign key REFERENCES imgStog(imgID)
 )
-Drop table if exists purchaseItem
-go
-create table purchaseItem(
-	purItemID varchar(20) primary key,
-	proID varchar(10) foreign key REFERENCES product(proID),
-	quantity int
-	
-)
-go
+
 Drop table if exists purchase
 go
 create table purchase (
 	purID int identity primary key,
 	cusID int foreign key REFERENCES customer(cusID),
-	purItemID varchar(20) foreign key REFERENCES purchaseItem(purItemID),
 	total_price int,
 	purchaseStatus tinyint,
 	date_order_placed date,
@@ -98,6 +91,16 @@ create table purchase (
 
 
 )
+Drop table if exists purchaseItem
+go
+create table purchaseItem(
+	purItemID varchar(20) primary key,
+	proID varchar(10) foreign key REFERENCES product(proID),
+	quantity int,
+	purID int foreign key REFERENCES purchase(purID)
+	
+)
+go
 drop table if exists feedback
 go
 create table feedback(
