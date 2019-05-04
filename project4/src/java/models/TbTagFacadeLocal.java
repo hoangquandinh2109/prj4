@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.TbTag;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface CustomerFacadeLocal {
+public interface TbTagFacadeLocal {
 
-    void create(Customer customer);
+    void create(TbTag tbTag);
 
-    void edit(Customer customer);
+    void edit(TbTag tbTag);
 
-    void remove(Customer customer);
+    void remove(TbTag tbTag);
 
-    Customer find(Object id);
+    TbTag find(Object id);
 
-    List<Customer> findAll();
+    List<TbTag> findAll();
 
-    List<Customer> findRange(int[] range);
+    List<TbTag> findRange(int[] range);
 
     int count();
     

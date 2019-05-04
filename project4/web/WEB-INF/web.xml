@@ -12,6 +12,14 @@
         <servlet-name>testServlet</servlet-name>
         <servlet-class>Servlet.testServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertProductServlet</servlet-name>
+        <servlet-class>Servlet.InsertProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showProductServlet</servlet-name>
+        <servlet-class>Servlet.showProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
         <url-pattern>/testServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertProductServlet</servlet-name>
+        <url-pattern>/InsertProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showProductServlet</servlet-name>
+        <url-pattern>/showProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.Mailbox;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Asus
  */
 @Stateless
-public class CustomerFacade extends AbstractFacade<Customer> implements CustomerFacadeLocal {
+public class MailboxFacade extends AbstractFacade<Mailbox> implements MailboxFacadeLocal {
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -25,8 +25,8 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
         return em;
     }
 
-    public CustomerFacade() {
-        super(Customer.class);
+    public MailboxFacade() {
+        super(Mailbox.class);
     }
     
 }

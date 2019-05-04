@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.Category;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface CustomerFacadeLocal {
+public interface CategoryFacadeLocal {
 
-    void create(Customer customer);
+    void create(Category category);
 
-    void edit(Customer customer);
+    void edit(Category category);
 
-    void remove(Customer customer);
+    void remove(Category category);
 
-    Customer find(Object id);
+    Category find(Object id);
 
-    List<Customer> findAll();
+    List<Category> findAll();
 
-    List<Customer> findRange(int[] range);
+    List<Category> findRange(int[] range);
 
     int count();
     
