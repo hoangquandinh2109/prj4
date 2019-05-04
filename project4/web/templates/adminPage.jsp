@@ -6,8 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-  
-            <header class="app-header"><a class="app-header__logo" href="index.jsp">Cang cu Cot</a>
+ <header class="app-header"><a class="app-header__logo" href="index.jsp">Cang cu Cot</a>
                 <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
                 <!-- Navbar Right Menu-->
                 <ul class="app-nav">
@@ -87,7 +86,7 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Product</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="inserPro.jsp"><i class="icon far fa-dot-circle"></i>Create new Product</a></li>
+            <li><a class="treeview-item" href="insertPro.jsp"><i class="icon far fa-dot-circle"></i>Create new Product</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>List Product</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Order Management</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>List Order</a></li>
@@ -110,6 +109,7 @@
       </ul>
     </aside>
    
+    
     
     <!-- The javascript plugin to display page loading on top-->
    
