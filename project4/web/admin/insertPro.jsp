@@ -18,6 +18,7 @@
         <c:import url="../templates/adminHead.jsp"></c:import>
         </head>
         <body>
+        <body class="app sidebar-mini rtl">
         <c:import url="../templates/adminPage.jsp"></c:import>
         <main class="app-content">
             <div class="app-title">
@@ -98,7 +99,7 @@
                                     <div class="row">
                                         <div class="col-md-8 col-md-offset-3">
                                             <input type="submit" class="btn btn-primary" value="Ok" />
-                                         <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
+                                            <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
                                         </div>
                                     </div>
                                 </div>
