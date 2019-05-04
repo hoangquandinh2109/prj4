@@ -7,6 +7,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap/css/bootstrap-4.min.css">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/via_admin/main.css">
+
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/via_admin/css/main.css">
 <title>CANG CU COT ADMIN V.</title>

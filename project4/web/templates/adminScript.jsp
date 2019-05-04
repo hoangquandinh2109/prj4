@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-  <script src="${pageContext.request.contextPath}/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/plugin/pace.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/library/via_admin/mainAdmin.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/library/via_admin/popper.min.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/jquery-3.2.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/plugins/pace.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/popper.min.js"></script>
+    <script src="../assets/library/via_admin/js/jquery-3.2.1.min.js"></script>
    

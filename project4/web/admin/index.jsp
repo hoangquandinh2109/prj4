@@ -11,7 +11,7 @@
      <head>
         <c:import url="../templates/adminHead.jsp"></c:import>
     </head>
-    <body>
+    <body class="app sidebar-mini rtl">
     <c:import url="../templates/adminPage.jsp"></c:import>
     <main class="app-content">
             <div class="app-title">
