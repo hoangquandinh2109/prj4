@@ -6,7 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
- <header class="app-header"><a class="app-header__logo" href="index.jsp">Cang cu Cot</a>
+  
+            <header class="app-header"><a class="app-header__logo" href="index.jsp">Cang cu Cot</a>
                 <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
                 <!-- Navbar Right Menu-->
                 <ul class="app-nav">
@@ -109,7 +110,6 @@
       </ul>
     </aside>
    
-    
     
     <!-- The javascript plugin to display page loading on top-->
    
