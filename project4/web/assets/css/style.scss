@@ -533,8 +533,12 @@ body{
                     margin-bottom: 5px;
                     display: block;
                 }
+                div>a{
+                    color: $color-blue;
+                }
                 a.db-tac{
                     margin-bottom: 5px;
+                    color: $color-blue;
                 }
                 .db-tac{
                     display: block;

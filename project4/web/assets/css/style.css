@@ -662,8 +662,13 @@ body .content-n-cart .content .modal-form .label-form-modal {
   display: block;
 }
 
+body .content-n-cart .content .modal-form div > a {
+  color: #76c4ce;
+}
+
 body .content-n-cart .content .modal-form a.db-tac {
   margin-bottom: 5px;
+  color: #76c4ce;
 }
 
 body .content-n-cart .content .modal-form .db-tac {

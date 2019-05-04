@@ -4,11 +4,17 @@
     Author     : johnn
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="top-nav">
     <div class="container">
         <div class="top-nav-welcome">
-            <div>Welcome visitor you can <a class="login-link" href="">Login</a> and <a class="create-acc-link" href="">create an account</a> </div>
+            <c:if test="${not empty sessionname}">
+                <div>Welcome ${sessionname}</div>
+            </c:if>
+            <c:if test="${empty sessionname}">
+                <div>Welcome visitor you can <a class="login-link" href="">Login</a> and <a class="create-acc-link" href="">create an account</a> </div>
+            </c:if>
         </div>
         <div class="top-nav-tools">
             <ul>
