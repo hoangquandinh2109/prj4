@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.TbTag;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Asus
  */
 @Stateless
-public class CustomerFacade extends AbstractFacade<Customer> implements CustomerFacadeLocal {
+public class TbTagFacade extends AbstractFacade<TbTag> implements TbTagFacadeLocal {
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -25,8 +25,8 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
         return em;
     }
 
-    public CustomerFacade() {
-        super(Customer.class);
+    public TbTagFacade() {
+        super(TbTag.class);
     }
     
 }

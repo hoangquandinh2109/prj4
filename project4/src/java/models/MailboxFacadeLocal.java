@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.Mailbox;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface CustomerFacadeLocal {
+public interface MailboxFacadeLocal {
 
-    void create(Customer customer);
+    void create(Mailbox mailbox);
 
-    void edit(Customer customer);
+    void edit(Mailbox mailbox);
 
-    void remove(Customer customer);
+    void remove(Mailbox mailbox);
 
-    Customer find(Object id);
+    Mailbox find(Object id);
 
-    List<Customer> findAll();
+    List<Mailbox> findAll();
 
-    List<Customer> findRange(int[] range);
+    List<Mailbox> findRange(int[] range);
 
     int count();
     
