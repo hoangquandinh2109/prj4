@@ -20,4 +20,5 @@
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="prj4JNDI" object-type="user" pool-name="microsoft_sql_saPool"/>
+    <jdbc-resource enabled="true" jndi-name="pjJNDI" object-type="user" pool-name="microsoft_sql_projectSem4_saPool"/>
 </resources>

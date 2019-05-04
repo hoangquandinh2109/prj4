@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.Feedback;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface CustomerFacadeLocal {
+public interface FeedbackFacadeLocal {
 
-    void create(Customer customer);
+    void create(Feedback feedback);
 
-    void edit(Customer customer);
+    void edit(Feedback feedback);
 
-    void remove(Customer customer);
+    void remove(Feedback feedback);
 
-    Customer find(Object id);
+    Feedback find(Object id);
 
-    List<Customer> findAll();
+    List<Feedback> findAll();
 
-    List<Customer> findRange(int[] range);
+    List<Feedback> findRange(int[] range);
 
     int count();
     

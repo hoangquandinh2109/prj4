@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.ImgStog;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface CustomerFacadeLocal {
+public interface ImgStogFacadeLocal {
 
-    void create(Customer customer);
+    void create(ImgStog imgStog);
 
-    void edit(Customer customer);
+    void edit(ImgStog imgStog);
 
-    void remove(Customer customer);
+    void remove(ImgStog imgStog);
 
-    Customer find(Object id);
+    ImgStog find(Object id);
 
-    List<Customer> findAll();
+    List<ImgStog> findAll();
 
-    List<Customer> findRange(int[] range);
+    List<ImgStog> findRange(int[] range);
 
     int count();
     

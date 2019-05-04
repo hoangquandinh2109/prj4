@@ -7,20 +7,23 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bemap
+ * @author Asus
  */
 @Entity
 @Table(name = "customer", catalog = "projectSem4", schema = "dbo")
@@ -62,6 +65,12 @@ public class Customer implements Serializable {
     private String cusAvatar;
     @Column(name = "cusStatus")
     private Boolean cusStatus;
+    @OneToMany(mappedBy = "sender")
+    private Collection<Feedback> feedbackCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Mailbox> mailboxCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Purchase> purchaseCollection;
 
     public Customer() {
     }
@@ -132,6 +141,33 @@ public class Customer implements Serializable {
 
     public void setCusStatus(Boolean cusStatus) {
         this.cusStatus = cusStatus;
+    }
+
+    @XmlTransient
+    public Collection<Feedback> getFeedbackCollection() {
+        return feedbackCollection;
+    }
+
+    public void setFeedbackCollection(Collection<Feedback> feedbackCollection) {
+        this.feedbackCollection = feedbackCollection;
+    }
+
+    @XmlTransient
+    public Collection<Mailbox> getMailboxCollection() {
+        return mailboxCollection;
+    }
+
+    public void setMailboxCollection(Collection<Mailbox> mailboxCollection) {
+        this.mailboxCollection = mailboxCollection;
+    }
+
+    @XmlTransient
+    public Collection<Purchase> getPurchaseCollection() {
+        return purchaseCollection;
+    }
+
+    public void setPurchaseCollection(Collection<Purchase> purchaseCollection) {
+        this.purchaseCollection = purchaseCollection;
     }
 
     @Override

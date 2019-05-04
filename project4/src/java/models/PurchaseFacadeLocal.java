@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Customer;
+import entity.Purchase;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface CustomerFacadeLocal {
+public interface PurchaseFacadeLocal {
 
-    void create(Customer customer);
+    void create(Purchase purchase);
 
-    void edit(Customer customer);
+    void edit(Purchase purchase);
 
-    void remove(Customer customer);
+    void remove(Purchase purchase);
 
-    Customer find(Object id);
+    Purchase find(Object id);
 
-    List<Customer> findAll();
+    List<Purchase> findAll();
 
-    List<Customer> findRange(int[] range);
+    List<Purchase> findRange(int[] range);
 
     int count();
     
