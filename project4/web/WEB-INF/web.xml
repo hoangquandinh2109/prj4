@@ -28,6 +28,10 @@
         <servlet-name>InsertStaffServlet</servlet-name>
         <servlet-class>Servlet.InsertStaffServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showStaffServlet</servlet-name>
+        <servlet-class>Servlet.showStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>InsertStaffServlet</servlet-name>
         <url-pattern>/InsertStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showStaffServlet</servlet-name>
+        <url-pattern>/showStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

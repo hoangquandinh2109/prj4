@@ -9,6 +9,7 @@ package Servlet;
 import entity.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,27 +21,18 @@ import models.StaffFacadeLocal;
  *
  * @author USER
  */
-public class InsertStaffServlet extends HttpServlet {
+public class showStaffServlet extends HttpServlet {
     @EJB
     private StaffFacadeLocal staffFacade;
-    
+
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("id");
-            String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            String pass = request.getParameter("pass");
-            String role = request.getParameter("role");
-            boolean status = Boolean.parseBoolean(request.getParameter("status"))==true?true:false;
-            Staff staff = new Staff(pass, name, phone, email, address, pass, Short.MIN_VALUE, status);
-            staffFacade.create(staff);
-            request.getRequestDispatcher("showStaffServlet").forward(request, response);
-
+            List<Staff> listStaff = staffFacade.findAll();
+            request.setAttribute("list", listStaff);
+            request.getRequestDispatcher("admin/listStaff.jsp").forward(request, response);
         }
     }
 
