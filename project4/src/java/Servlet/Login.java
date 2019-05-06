@@ -9,6 +9,9 @@ package Servlet;
 import entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.CustomerFacadeLocal;
+import models.PurchaseFacadeLocal;
 
 /**
  *
@@ -29,6 +33,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -40,6 +45,7 @@ public class Login extends HttpServlet {
         Customer thisCus = db.login(email, password);
         if(thisCus != null){
             session.setAttribute("sessionname", thisCus.getCusName());  
+            session.setAttribute("sessionid", thisCus.getCusID());  
             out.println("<a href=\"http://localhost:8080/project4/\">okay</a>");
         }else{
             out.println("<a href=\"http://localhost:8080/project4/\">not okay</a>");

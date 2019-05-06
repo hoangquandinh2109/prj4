@@ -12,11 +12,13 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.ProductFacadeLocal;
 
 /**
  *
@@ -24,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ProductDetail", urlPatterns = {"/product"})
 public class Product extends HttpServlet {
+    @EJB
+    private ProductFacadeLocal productDB;
 
 
     @Override
@@ -43,7 +47,8 @@ public class Product extends HttpServlet {
         if(id != null){
             getServletContext().getRequestDispatcher("/proDetails.jsp").forward(req, resp);
         }else{
-            getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
+            req.setAttribute("listP", productDB.findAll());
+            getServletContext().getRequestDispatcher("/testpurchase.jsp").forward(req, resp);
         }
         
     }
