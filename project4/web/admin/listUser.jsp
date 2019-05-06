@@ -58,7 +58,7 @@
                                         <td>${p.cusPassword}</td>
                                         <td>${p.cusAddress}</td>
                                         <td>${p.cusPhone}</td>
-                                        <td><img src="image/userAvatar/${p.cusAvatar}" width="150" height="150"/></td>
+                                        <td><img src="${pageContext.request.contextPath}/${p.cusAvatar}" width="150" height="150"/></td>
                                         <td>${p.cusStatus}</td>                                      
                                         <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> 
                                         <td class="text-center"><a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Block</a></td>     

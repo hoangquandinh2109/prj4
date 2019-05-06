@@ -41,7 +41,7 @@ public class loginStafftServlet extends HttpServlet {
                     if (pwd.equals(staff.getStaffPassword().toString())) {
                         mess = staff.getStaffEmail();
                         request.setAttribute("mess", mess);
-                        session.setAttribute("name", staff.getStaffName().toString());
+                        session.setAttribute("staff_name", staff.getStaffName().toString());
                         session.setAttribute("role", staff.getRole().toString());
                         request.getRequestDispatcher("admin/index.jsp").forward(request, response);
                     }

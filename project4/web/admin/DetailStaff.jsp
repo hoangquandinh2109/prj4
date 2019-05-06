@@ -31,11 +31,11 @@
                 <div class="tile">
                   <h3 class="tile-title">Register</h3>
                   <div class="tile-body">
-                      <form action="../InsertStaffServlet" class="form-horizontal" method="POST">
+                      <form action="../profileServlet" class="form-horizontal" method="POST">
                       <div class="form-group row">
                         <label class="control-label col-md-3">ID</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="text" placeholder="Enter full name" name="id">
+                            <input value="${p.staffID}" class="form-control" type="hidden" placeholder="Enter full name" name="id">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -65,7 +65,7 @@
                       <div class="form-group row">
                         <label class="control-label col-md-3">Password</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-8" type="password"  name="password">
+                            <input value="${p.staffPassword}" class="form-control col-md-8" type="hidden"  name="password">
                         </div>
                       </div>
 <!--                      <div class="form-group row">
