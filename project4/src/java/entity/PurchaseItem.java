@@ -7,7 +7,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,16 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Asus
+ * @author johnn
  */
 @Entity
 @Table(name = "purchaseItem", catalog = "projectSem4", schema = "dbo")
@@ -39,29 +35,29 @@ public class PurchaseItem implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "purItemID", nullable = false, length = 20)
-    private String purItemID;
+    @Column(name = "purItemID", nullable = false)
+    private Integer purItemID;
     @Column(name = "quantity")
     private Integer quantity;
-    @OneToMany(mappedBy = "purItemID")
-    private Collection<Purchase> purchaseCollection;
     @JoinColumn(name = "proID", referencedColumnName = "proID")
     @ManyToOne
     private Product proID;
+    @JoinColumn(name = "purID", referencedColumnName = "purID")
+    @ManyToOne
+    private Purchase purID;
 
     public PurchaseItem() {
     }
 
-    public PurchaseItem(String purItemID) {
+    public PurchaseItem(Integer purItemID) {
         this.purItemID = purItemID;
     }
 
-    public String getPurItemID() {
+    public Integer getPurItemID() {
         return purItemID;
     }
 
-    public void setPurItemID(String purItemID) {
+    public void setPurItemID(Integer purItemID) {
         this.purItemID = purItemID;
     }
 
@@ -73,21 +69,20 @@ public class PurchaseItem implements Serializable {
         this.quantity = quantity;
     }
 
-    @XmlTransient
-    public Collection<Purchase> getPurchaseCollection() {
-        return purchaseCollection;
-    }
-
-    public void setPurchaseCollection(Collection<Purchase> purchaseCollection) {
-        this.purchaseCollection = purchaseCollection;
-    }
-
     public Product getProID() {
         return proID;
     }
 
     public void setProID(Product proID) {
         this.proID = proID;
+    }
+
+    public Purchase getPurID() {
+        return purID;
+    }
+
+    public void setPurID(Purchase purID) {
+        this.purID = purID;
     }
 
     @Override

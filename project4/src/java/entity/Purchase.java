@@ -7,6 +7,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,14 +17,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Asus
+ * @author johnn
  */
 @Entity
 @Table(name = "purchase", catalog = "projectSem4", schema = "dbo")
@@ -39,37 +45,37 @@ public class Purchase implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "purID", nullable = false)
-    private Integer purID;
+    @Size(min = 1, max = 20)
+    @Column(name = "purID", nullable = false, length = 20)
+    private String purID;
     @Column(name = "total_price")
     private Integer totalPrice;
     @Column(name = "purchaseStatus")
     private Short purchaseStatus;
-    @Size(max = 10)
-    @Column(name = "date_order_placed", length = 10)
-    private String dateOrderPlaced;
-    @Size(max = 10)
-    @Column(name = "date_order_paid", length = 10)
-    private String dateOrderPaid;
+    @Column(name = "date_order_placed")
+    @Temporal(TemporalType.DATE)
+    private Date dateOrderPlaced;
+    @Column(name = "date_order_paid")
+    @Temporal(TemporalType.DATE)
+    private Date dateOrderPaid;
     @JoinColumn(name = "cusID", referencedColumnName = "cusID")
     @ManyToOne
     private Customer cusID;
-    @JoinColumn(name = "purItemID", referencedColumnName = "purItemID")
-    @ManyToOne
-    private PurchaseItem purItemID;
+    @OneToMany(mappedBy = "purID")
+    private Collection<PurchaseItem> purchaseItemCollection;
 
     public Purchase() {
     }
 
-    public Purchase(Integer purID) {
+    public Purchase(String purID) {
         this.purID = purID;
     }
 
-    public Integer getPurID() {
+    public String getPurID() {
         return purID;
     }
 
-    public void setPurID(Integer purID) {
+    public void setPurID(String purID) {
         this.purID = purID;
     }
 
@@ -89,19 +95,19 @@ public class Purchase implements Serializable {
         this.purchaseStatus = purchaseStatus;
     }
 
-    public String getDateOrderPlaced() {
+    public Date getDateOrderPlaced() {
         return dateOrderPlaced;
     }
 
-    public void setDateOrderPlaced(String dateOrderPlaced) {
+    public void setDateOrderPlaced(Date dateOrderPlaced) {
         this.dateOrderPlaced = dateOrderPlaced;
     }
 
-    public String getDateOrderPaid() {
+    public Date getDateOrderPaid() {
         return dateOrderPaid;
     }
 
-    public void setDateOrderPaid(String dateOrderPaid) {
+    public void setDateOrderPaid(Date dateOrderPaid) {
         this.dateOrderPaid = dateOrderPaid;
     }
 
@@ -113,12 +119,13 @@ public class Purchase implements Serializable {
         this.cusID = cusID;
     }
 
-    public PurchaseItem getPurItemID() {
-        return purItemID;
+    @XmlTransient
+    public Collection<PurchaseItem> getPurchaseItemCollection() {
+        return purchaseItemCollection;
     }
 
-    public void setPurItemID(PurchaseItem purItemID) {
-        this.purItemID = purItemID;
+    public void setPurchaseItemCollection(Collection<PurchaseItem> purchaseItemCollection) {
+        this.purchaseItemCollection = purchaseItemCollection;
     }
 
     @Override

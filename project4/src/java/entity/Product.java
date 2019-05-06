@@ -45,6 +45,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByProStatus", query = "SELECT p FROM Product p WHERE p.proStatus = :proStatus"),
     @NamedQuery(name = "Product.findByTags", query = "SELECT p FROM Product p WHERE p.tags = :tags")})
 public class Product implements Serializable {
+    @OneToMany(mappedBy = "proID")
+    private Collection<ProImgtb> proImgtbCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -214,6 +216,15 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "entity.Product[ proID=" + proID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<ProImgtb> getProImgtbCollection() {
+        return proImgtbCollection;
+    }
+
+    public void setProImgtbCollection(Collection<ProImgtb> proImgtbCollection) {
+        this.proImgtbCollection = proImgtbCollection;
     }
     
 }

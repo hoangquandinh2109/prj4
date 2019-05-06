@@ -19,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ImgStog.findByImgID", query = "SELECT i FROM ImgStog i WHERE i.imgID = :imgID"),
     @NamedQuery(name = "ImgStog.findByImgName", query = "SELECT i FROM ImgStog i WHERE i.imgName = :imgName")})
 public class ImgStog implements Serializable {
+    @OneToMany(mappedBy = "imgID")
+    private Collection<ProImgtb> proImgtbCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false) 
@@ -113,6 +116,15 @@ public class ImgStog implements Serializable {
     @Override
     public String toString() {
         return "entity.ImgStog[ imgID=" + imgID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<ProImgtb> getProImgtbCollection() {
+        return proImgtbCollection;
+    }
+
+    public void setProImgtbCollection(Collection<ProImgtb> proImgtbCollection) {
+        this.proImgtbCollection = proImgtbCollection;
     }
     
 }

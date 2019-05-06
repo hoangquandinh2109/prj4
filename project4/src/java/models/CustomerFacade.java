@@ -10,8 +10,6 @@ import entity.Customer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TemporalType;
-import javax.ws.rs.NotFoundException;
 
 /**
  *
@@ -29,7 +27,7 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
     public CustomerFacade() {
         super(Customer.class);
     }
-
+    
     @Override
     public Customer login(String email, String password) {
         try {
