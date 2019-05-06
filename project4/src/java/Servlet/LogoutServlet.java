@@ -6,41 +6,46 @@
 
 package Servlet;
 
-import entity.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.StaffFacadeLocal;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author USER
  */
-public class InsertStaffServlet extends HttpServlet {
-    @EJB
-    private StaffFacadeLocal staffFacade;
-    
-    
+public class LogoutServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("id");
-            String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            String pass = request.getParameter("pass");
-         
-          
-            Staff staff = new Staff(id, name, phone, email, address, pass);
-            staffFacade.create(staff);
-            request.getRequestDispatcher("showStaffServlet").forward(request, response);
-
+             
+             HttpSession session = request.getSession(); 
+              
+         request.getSession().invalidate();
+         //session.invalidate();
+         //session.removeAttribute("staff_name");
+        request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
+            
+            
+//            HttpSession session = request.getSession(false);
+//            if(session != null)
+//            session.invalidate();
+//            request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request,response);
         }
     }
 

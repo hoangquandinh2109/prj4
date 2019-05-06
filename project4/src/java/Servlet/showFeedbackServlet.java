@@ -6,41 +6,34 @@
 
 package Servlet;
 
-import entity.Staff;
+
+import entity.Feedback;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.StaffFacadeLocal;
+import models.FeedbackFacadeLocal;
 
 /**
  *
  * @author USER
  */
-public class InsertStaffServlet extends HttpServlet {
+public class showFeedbackServlet extends HttpServlet {
     @EJB
-    private StaffFacadeLocal staffFacade;
-    
+    private FeedbackFacadeLocal feedbackFacade;
+
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("id");
-            String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            String pass = request.getParameter("pass");
-         
-          
-            Staff staff = new Staff(id, name, phone, email, address, pass);
-            staffFacade.create(staff);
-            request.getRequestDispatcher("showStaffServlet").forward(request, response);
-
+            List<Feedback> listfeed = feedbackFacade.findAll();
+            request.setAttribute("list", listfeed);
+            request.getRequestDispatcher("admin/listFeed.jsp").forward(request, response);
         }
     }
 

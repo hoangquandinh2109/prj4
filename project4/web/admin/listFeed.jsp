@@ -23,7 +23,7 @@
                     <ul class="app-breadcrumb breadcrumb">
                         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                         <li class="breadcrumb-item">Forms</li>
-                        <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
+                        <li class="breadcrumb-item"><a href="#">Forms List FeedBack</a></li>
                     </ul>
                 </div>
                 <div class="row">
@@ -35,16 +35,13 @@
                         <form>
                             <table class="table table-striped custab">
                                 <thead>
-                                <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>
+<!--                                <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    <th>Password</th>
-                                    <th>Role</th>                                   
-                                    <th>Status</th>
+                                    <th>FeedId</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>ReceivedDate</th>
+                                    <th>Sender</th>                                  
                                     <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
@@ -52,16 +49,13 @@
                                 <%-- <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> --%>      
                                 <c:forEach items="${list}" var="p">
                                     <tr>
-                                        <td>${p.staffID}</td>
-                                        <td>${p.staffName}</td>
-                                        <td>${p.staffPhone}</td>
-                                        <td>${p.staffEmail}</td>
-                                        <td>${p.staffAddress}</td>
-                                        <td>${p.staffPassword}</td>
-                                        <td>${p.role}</td>
-                                        <td>${p.staffStatus}</td>                                      
-                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> 
-                                        <td class="text-center"><a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Block</a></td>     
+                                        <td>${p.feedId}</td>
+                                        <td>${p.subject}</td>
+                                        <td>${p.message}</td>
+                                        <td>${p.receivedDate}</td>
+                                        <td>${p.sender}</td>                                                                           
+<!--                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                                        <td class="text-center"><a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Block</a></td>     -->
                                     </tr>
                                 </c:forEach>          
                             </table>

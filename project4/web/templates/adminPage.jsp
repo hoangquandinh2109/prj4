@@ -4,6 +4,7 @@
     Author     : bemap
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
  <header class="app-header"><a class="app-header__logo" href="index.jsp">Cang cu Cot</a>
@@ -60,17 +61,33 @@
                     <ul class="dropdown-menu settings-menu dropdown-menu-right">
                       <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
                       <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-                      <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                      <li><a class="dropdown-item" href="${pageContext.request.contextPath}/LogoutServlet"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
                     </ul>
                   </li>
                 </ul>
               </header>
               <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${pageContext.request.contextPath}/img/userAvatar/adminAvatar.jpg" width="48px" height="48px" alt="User Image">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${pageContext.request.contextPath}/img/userAvatar/adminAvatar.jpg" width="75px" height="75px" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">Hello, Mr <%=session.getAttribute("name")%></p>
-          <%--<p class="app-sidebar__user-designation">CCC's Developer</p> --%>
+          <p class="app-sidebar__user-name">Hello, Mr ${staff_name}</p>
+          <c:if test="${role == 1}">         
+          <li class="dropdown"><a  data-toggle="dropdown" aria-label="Open Profile Menu">Staff</a>
+                    <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                      
+                      
+                    </ul>
+                  </li>
+          </c:if>
+          <c:if test="${role == 2}">
+              <li class="dropdown"><a  data-toggle="dropdown" aria-label="Open Profile Menu">Employee</a>
+                    <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                      
+                      
+                    </ul>
+                  </li>
+<!--          <p class="app-sidebar__user-designation"  >Employee</p>-->
+          </c:if>
         </div>
       </div>
       <ul class="app-menu">
@@ -80,7 +97,7 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Staff</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="admin/insertStaff.jsp"><i class="icon far fa-dot-circle"></i>Create Staff</a></li>
-            <li><a class="treeview-item" href="../showStaffServlet" target="_blank" rel="noopener"><i class="icon far fa-dot-circle"></i>Staff Management</a></li>
+            <li><a class="treeview-item" href="${pageContext.request.contextPath}/showStaffServlet" target="_blank" rel="noopener"><i class="icon far fa-dot-circle"></i>Staff Management</a></li>
 
           </ul>
         </li>
@@ -100,8 +117,8 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user fa-lg"></i><span class="app-menu__label">User</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="../ShowUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
+            <li><a class="treeview-item" href="${pageContext.request.contextPath}/showUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
+            <li><a class="treeview-item" href="${pageContext.request.contextPath}/showFeedbackServlet"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
             
           </ul>
