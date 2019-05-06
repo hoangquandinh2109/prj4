@@ -30,5 +30,7 @@ public interface PurchaseFacadeLocal {
     List<Purchase> findRange(int[] range);
 
     int count();
+
+    String getLastPurchaseID();
     
 }

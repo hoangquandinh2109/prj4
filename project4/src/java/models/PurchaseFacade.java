@@ -7,6 +7,7 @@
 package models;
 
 import entity.Purchase;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,13 @@ public class PurchaseFacade extends AbstractFacade<Purchase> implements Purchase
 
     public PurchaseFacade() {
         super(Purchase.class);
+    }
+
+    @Override
+    public String getLastPurchaseID() {
+        List<Purchase> list = em.createQuery("SELECT p FROM Purchase p ORDER BY p.purID DESC").getResultList();
+        return list.get(0).getPurID();
+        
     }
     
 }
