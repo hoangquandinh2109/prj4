@@ -41,22 +41,18 @@ create table category(
 	catID varchar(20) primary key,
 	catName varchar(20)
 )
-
-
-
-
 drop table if exists tbTag
 go
 create table tbTag(
 	tagID int identity primary key,
-	tag varchar(255)
+	tag varchar(255),
+	tag_description varchar(255)
 )
 go
 drop table if exists imgStog
 create table imgStog (
 	imgID int identity primary key,
 	img_name varchar(255),
-
 )
 Drop table if exists product
 go
@@ -70,7 +66,6 @@ create table product(
 	proStatus bit,
 	tags varchar(255),
 	catID varchar(20) foreign key REFERENCES category(catID),
-	
 )
 go
 drop table if exists ProImgtb
@@ -79,7 +74,6 @@ create table ProImgtb (
 	proID varchar(10) foreign key REFERENCES product(proID),
 	imgID int foreign key REFERENCES imgStog(imgID)
 )
-
 Drop table if exists purchase
 go
 create table purchase (
@@ -89,8 +83,6 @@ create table purchase (
 	purchaseStatus tinyint,
 	date_order_placed date,
 	date_order_paid date,
-
-
 )
 Drop table if exists purchaseItem
 go
@@ -99,7 +91,6 @@ create table purchaseItem(
 	proID varchar(10) foreign key REFERENCES product(proID),
 	quantity int,
 	purID varchar(20) foreign key REFERENCES purchase(purID)
-	
 )
 go
 drop table if exists feedback
@@ -109,8 +100,8 @@ create table feedback(
 	[Subject] varchar(500),
 	[Message]	text,
 	ReceivedDate datetime,
-	sender int foreign key REFERENCES customer(cusID)
-	
+	sender int foreign key REFERENCES customer(cusID),
+	rating int
 )
 go
 drop table if exists mailbox
@@ -125,5 +116,36 @@ create table mailbox(
 	replyDate datetime,
 	staffID varchar(10)  foreign key REFERENCES staff(staffID)
 )
+drop table if exists rating
+go
+create table review(
+	rateID int identity primary key,
+	reviewContent text,
+	star int,
+	cusID int foreign key REFERENCES customer(cusID),
+	proID varchar(10) foreign key REFERENCES product(proID)
+)
+go
+drop table if exists whislist
+go
+drop table if exists comment
+go
+create table commentItem(
+	id int identity primary key,
+	content text,
+	[date] datetime
+)
+-- 
+drop table if exists viewComment
+go
+create table viewComment(
+	commentID int identity primary key,
+	comItem int foreign key REFERENCES commentItem(id),
+	cusID int foreign key REFERENCES customer(cusID),
+	proID varchar(10) foreign key REFERENCES product(proID),
+	[like] int
+)
+go
+
 
 
