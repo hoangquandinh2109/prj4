@@ -66,6 +66,7 @@ create table product(
 	proStatus bit,
 	tags varchar(255),
 	catID varchar(20) foreign key REFERENCES category(catID),
+	starAVG float
 )
 go
 drop table if exists ProImgtb
@@ -129,15 +130,12 @@ go
 drop table if exists whislist
 go
 drop table if exists comment
-go
 create table commentItem(
 	id int identity primary key,
 	content text,
 	[date] datetime
 )
 -- 
-drop table if exists viewComment
-go
 create table viewComment(
 	commentID int identity primary key,
 	comItem int foreign key REFERENCES commentItem(id),
