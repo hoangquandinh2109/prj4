@@ -38,7 +38,7 @@ go
 drop table if exists category
 go
 create table category(
-	catID varchar(20) primary key,
+	catID int identity primary key,
 	catName varchar(20)
 )
 drop table if exists tbTag
@@ -73,7 +73,7 @@ create table product(
 
 	tags varchar(255),
 	catID varchar(20) foreign key REFERENCES category(catID),
-	typeID varchar(20) foreign key REFERENCES productType(typeID),
+	typeID int foreign key REFERENCES productType(typeID),
 	starAVG float
 )
 go
