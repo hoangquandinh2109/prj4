@@ -72,7 +72,7 @@ create table product(
 	proStatus bit,
 
 	tags varchar(255),
-	catID varchar(20) foreign key REFERENCES category(catID),
+	catID int foreign key REFERENCES category(catID),
 	typeID int foreign key REFERENCES productType(typeID),
 	starAVG float
 )
