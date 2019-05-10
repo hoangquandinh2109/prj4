@@ -15,4 +15,5 @@
     <script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/main.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
    

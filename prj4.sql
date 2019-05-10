@@ -54,6 +54,12 @@ create table imgStog (
 	imgID int identity primary key,
 	img_name varchar(255),
 )
+Drop table if exists productType
+go
+create table productType(
+	typeID int identity primary key,
+	typeName varchar(20)
+)
 Drop table if exists product
 go
 create table product(
@@ -64,8 +70,10 @@ create table product(
 	quantity int,
 	DateRelease date,
 	proStatus bit,
+
 	tags varchar(255),
 	catID varchar(20) foreign key REFERENCES category(catID),
+	typeID varchar(20) foreign key REFERENCES productType(typeID),
 	starAVG float
 )
 go

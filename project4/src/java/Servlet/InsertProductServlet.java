@@ -7,6 +7,7 @@ package Servlet;
 
 import entity.Category;
 import entity.ImgStog;
+import entity.ProImgtb;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,10 +28,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import models.CategoryFacadeLocal;
 import models.ImgStogFacadeLocal;
+import models.ProImgtbFacadeLocal;
 import models.ProductFacadeLocal;
 
 @MultipartConfig
 public class InsertProductServlet extends HttpServlet {
+    @EJB
+    private ProImgtbFacadeLocal proImgtbFacade;
 
     @EJB
     private ImgStogFacadeLocal imgStogFacade;
@@ -47,8 +51,7 @@ public class InsertProductServlet extends HttpServlet {
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String proid = request.getParameter("id");
+ String proid = request.getParameter("id");
             String name = request.getParameter("name");
             String details = request.getParameter("details");
             int price = Integer.parseInt(request.getParameter("price"));
@@ -56,8 +59,10 @@ public class InsertProductServlet extends HttpServlet {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             String date1 = request.getParameter("datepicker");
             Date dateRe = sdf.parse(date1);
-            String tags = request.getParameter("tags");
-            String catID = request.getParameter("catID");
+            String tags = request.getParameter("tags");  
+        //    String catID = request.getParameter("catID");
+         
+            String cboCate = request.getParameter("cboCategory");
             path = uploadFile(request);
             entity.Product product = new entity.Product();
             product.setProID(proid);
@@ -69,17 +74,20 @@ public class InsertProductServlet extends HttpServlet {
             product.setQuantity(quantity);
             product.setTags(tags);
             //find catID 
-            Category categoryid = categoryFacade.find(catID);
+            Category categoryid = categoryFacade.find(cboCate);
             product.setCatID(categoryid);
             productFacade.create(product);
 //            //sau khi insert ta tim kiem id cua product 
 //            entity.Product proIDD = productFacade.find(proid);
+            entity.Product proIDD = productFacade.find(proid); 
             ImgStog imgtog = new ImgStog();
             imgtog.setImgName(path);
-
             imgStogFacade.create(imgtog);
+            ProImgtb proimg = new ProImgtb();
+            proimg.setImgID(imgtog);
+            proimg.setProID(proIDD);
+            proImgtbFacade.create(proimg);        
             request.getRequestDispatcher("showProductServlet").forward(request, response);
-
         }
     }
 

@@ -48,6 +48,10 @@
         <servlet-name>profileServlet</servlet-name>
         <servlet-class>Servlet.profileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showCatServlet</servlet-name>
+        <servlet-class>Servlet.showCatServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>profileServlet</servlet-name>
         <url-pattern>/profileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showCatServlet</servlet-name>
+        <url-pattern>/showCatServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

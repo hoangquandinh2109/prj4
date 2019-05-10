@@ -6,8 +6,7 @@
 
 package Servlet;
 
-import entity.ImgStog;
-import entity.ProImgtb;
+import entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -16,27 +15,32 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.ImgStogFacadeLocal;
-import models.ProImgtbFacadeLocal;
+import models.CategoryFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class showProductServlet extends HttpServlet {
+public class showCatServlet extends HttpServlet {
     @EJB
-    private ProImgtbFacadeLocal proImgtbFacade;
-    @EJB
-    private ImgStogFacadeLocal imgStogFacade;
+    private CategoryFacadeLocal categoryFacade;
 
-  
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           List<ProImgtb> list = proImgtbFacade.findAll();
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("admin/listProducts.jsp").forward(request, response);
+             List<Category> listCate = categoryFacade.findAll();
+          request.setAttribute("listCat", listCate);
+          request.getRequestDispatcher("admin/insertPro.jsp").forward(request, response);
         }
     }
 

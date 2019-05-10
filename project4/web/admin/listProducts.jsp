@@ -6,13 +6,17 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
         <c:import url="../templates/adminHead.jsp"></c:import>
         </head>
+
         <body>
         <c:import url="../templates/adminPage.jsp"></c:import>
+
         <main class="app-content">
             <div class="app-title">
                 <div>
@@ -24,50 +28,51 @@
                     <li class="breadcrumb-item">Forms</li>
                     <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
                 </ul>
-            </div>
-            <div class="row">
-                <div class="col-md"></div>
-                <div class="col-md-12 col-sm-12">
-                    <div class="tile">
-                        <h3 class="tile-title">Show List</h3>
-                        <div class="tile-body">
-                            <form class="form-horizontal">
-                                <table class="table" border="1">
-                                    <tr>
-                                        <th>img id||</th>
-                                        <th>img des||</th>
-                                        <th>image||</th>
-                                        <th>pro id||</th>
-                                        <th>pro name||</th>
-                                        <th>pro details||</th>
-                                        <th>pro price||</th>
-                                        <th>pro DateRelease||</th>
-                                        <th>pro Status||</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                <c:forEach items="${list}" var="s">
-                                    <tr> 
-                                        <td>${s.imgID}</td>                      
-                                        <td><img src="uploadDir/${s.imgName}" width="200px"></td>
-                                             <td>${s.proID}</td>
-                                         <!--      <td>$/{s.productCollection.proName}</td>
-                                              <td>$/{s.productCollection.proDetails}</td>
-                                              <td>$/{s.productCollection.proPrice}</td>
-                                              <td> <fmt:formatDate value="$/{s.productCollection.dateRelease}" pattern="yyyy-MM-dd" /></td>
-                                          <td>$/{s.productCollection.proStatus}</td>-->
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                        </form>
-                    </div>
-
+            </div>   
+            <div id="wrap">
+                <div class="container">
+                    <div class="row col-md-12 col-md-offset-2 custyle">
+                        <table id="example" class="datatable table table-striped table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>ProImgTb Code</th>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Product Details</th>
+                                    <th>Product Price</th>
+                                    <th>Quantity</th>
+                                    <th>Date Release</th>
+                                    <th>Status</th>
+                                    <th>Tags</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                        <c:forEach items="${list}" var="s">
+                            <tr>  
+                                <td>${s.code}</td>                 
+                                <td><img src="uploadDir/${s.imgID.imgName}" alt="pets" width="150px" height="150px"></td>
+                                <td>${s.proID.proName}</td>
+                                <td>${s.proID.proDetails}</td>
+                                <td>${s.proID.proPrice}</td>
+                                <td>${s.proID.quantity}</td>
+                                <td> <fmt:formatDate value="${s.proID.dateRelease}" pattern="yyyy-MM-dd" /></td>
+                                <td>${s.proID.proStatus}</td> 
+                                <td>${s.proID.tags}</td>     
+                                <td>${s.proID.catID.catName}</td> 
+                            </tr>
+                        </c:forEach>
+                    </table>  
                 </div>
+                <div class="clearix"></div>
+                <div class="col-md"></div>
             </div>
-            <div class="clearix"></div>
-            <div class="col-md"></div>
         </div>
-
     </main>
     <c:import url="../templates/adminScript.jsp"></c:import>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 </body>
 </html>
