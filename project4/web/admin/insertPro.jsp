@@ -98,7 +98,11 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Image Product</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" onclick="chooseProductImage">
+                                    <input class="form-control" id="fileElem" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" style="display:none" onchange="handleFiles(this.files)">
+                                    <a href="#" id="fileSelect">Select some files</a> 
+                                    <div id="fileList">
+                                        <p>No files selected!</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tile-footer">
@@ -117,6 +121,46 @@
             <div class="col-md"></div>
         </div>
     </main>       
+        <script>
+            window.URL = window.URL || window.webkitURL;
+
+const fileSelect = document.getElementById("fileSelect"),
+    fileElem = document.getElementById("fileElem"),
+    fileList = document.getElementById("fileList");
+
+fileSelect.addEventListener("click", function (e) {
+  if (fileElem) {
+    fileElem.click();
+  }
+  e.preventDefault(); // prevent navigation to "#"
+}, false);
+
+function handleFiles(files) {
+  if (!files.length) {
+    fileList.innerHTML = "<p>No files selected!</p>";
+  } else {
+    fileList.innerHTML = "";
+    const list = document.createElement("ul");
+    fileList.appendChild(list);
+    for (let i = 0; i < files.length; i++) {
+      const li = document.createElement("li");
+      list.appendChild(li);
+      
+      const img = document.createElement("img");
+      img.src = window.URL.createObjectURL(files[i]);
+      img.height = 60;
+      img.onload = function() {
+        window.URL.revokeObjectURL(this.src);
+      }
+      li.appendChild(img);
+      const info = document.createElement("span");
+      info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
+      li.appendChild(info);
+    }
+  }
+}
+
+        </script>
     <script>
         $('#datepicker').datepicker({
             uiLibrary: 'bootstrap4', maxDate: new Date, minDate: new Date(2018, 10, 12)});
