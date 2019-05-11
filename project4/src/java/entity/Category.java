@@ -11,6 +11,8 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,37 +35,34 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Category.findByCatID", query = "SELECT c FROM Category c WHERE c.catID = :catID"),
     @NamedQuery(name = "Category.findByCatName", query = "SELECT c FROM Category c WHERE c.catName = :catName")})
 public class Category implements Serializable {
+    @OneToMany(mappedBy = "catID")
+    private Collection<Product> productCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "catID", nullable = false, length = 20)
-    private String catID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "catID", nullable = false)
+    private Integer catID;
     @Size(max = 20)
     @Column(name = "catName", length = 20)
     private String catName;
-    @OneToMany(mappedBy = "catID")
-    private Collection<Product> productCollection;
 
     public Category() {
     }
 
-    public Category(String catID, String catName, Collection<Product> productCollection) {
-        this.catID = catID;
+    public Category( String catName) {
         this.catName = catName;
-        this.productCollection = productCollection;
     }
 
-    public Category(String catID) {
+    public Category(Integer catID) {
         this.catID = catID;
     }
 
-    public String getCatID() {
+    public Integer getCatID() {
         return catID;
     }
 
-    public void setCatID(String catID) {
+    public void setCatID(Integer catID) {
         this.catID = catID;
     }
 
@@ -73,15 +72,6 @@ public class Category implements Serializable {
 
     public void setCatName(String catName) {
         this.catName = catName;
-    }
-
-    @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
-    }
-
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
     }
 
     @Override
@@ -107,6 +97,15 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return "entity.Category[ catID=" + catID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Product> getProductCollection() {
+        return productCollection;
+    }
+
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
     }
     
 }

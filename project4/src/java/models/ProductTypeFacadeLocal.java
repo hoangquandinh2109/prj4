@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.ProImgtb;
+import entity.ProductType;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface ProImgtbFacadeLocal {
+public interface ProductTypeFacadeLocal {
 
-    void create(ProImgtb proImgtb);
+    void create(ProductType productType);
 
-    void edit(ProImgtb proImgtb);
+    void edit(ProductType productType);
 
-    void remove(ProImgtb proImgtb);
+    void remove(ProductType productType);
 
-    ProImgtb find(Object id);
+    ProductType find(Object id);
 
-    List<ProImgtb> findAll();
+    List<ProductType> findAll();
 
-    List<ProImgtb> findRange(int[] range);
+    List<ProductType> findRange(int[] range);
 
     int count();
     

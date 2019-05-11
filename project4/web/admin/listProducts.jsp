@@ -35,7 +35,6 @@
                         <table id="example" class="datatable table table-striped table-bordered display">
                             <thead>
                                 <tr>
-                                    <th>ProImgTb Code</th>
                                     <th>Image</th>
                                     <th>Product Name</th>
                                     <th>Product Details</th>
@@ -45,11 +44,11 @@
                                     <th>Status</th>
                                     <th>Tags</th>
                                     <th>Category</th>
+                                    <th>Type</th>
                                 </tr>
                             </thead>
                         <c:forEach items="${list}" var="s">
-                            <tr>  
-                                <td>${s.code}</td>                 
+                            <tr>           
                                 <td><img src="uploadDir/${s.imgID.imgName}" alt="pets" width="150px" height="150px"></td>
                                 <td>${s.proID.proName}</td>
                                 <td>${s.proID.proDetails}</td>
@@ -58,7 +57,8 @@
                                 <td> <fmt:formatDate value="${s.proID.dateRelease}" pattern="yyyy-MM-dd" /></td>
                                 <td>${s.proID.proStatus}</td> 
                                 <td>${s.proID.tags}</td>     
-                                <td>${s.proID.catID.catName}</td> 
+                                <td>${s.proID.catID.catName}</td>
+                                <td>${s.proID.typeID.typeName}</td> 
                             </tr>
                         </c:forEach>
                     </table>  

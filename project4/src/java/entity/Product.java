@@ -45,6 +45,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByProStatus", query = "SELECT p FROM Product p WHERE p.proStatus = :proStatus"),
     @NamedQuery(name = "Product.findByTags", query = "SELECT p FROM Product p WHERE p.tags = :tags")})
 public class Product implements Serializable {
+    
+    @Column(name = "DateRelease")
+    @Temporal(TemporalType.DATE)
+    private Date dateRelease;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "starAVG", precision = 53)
+    private Double starAVG;
+    @JoinColumn(name = "typeID", referencedColumnName = "typeID")
+    @ManyToOne
+    private ProductType typeID;
+    @OneToMany(mappedBy = "proID")
+    private Collection<Review> reviewCollection;
+    @OneToMany(mappedBy = "proID")
+    private Collection<ViewComment> viewCommentCollection;
     @OneToMany(mappedBy = "proID")
     private Collection<ProImgtb> proImgtbCollection;
     private static final long serialVersionUID = 1L;
@@ -65,10 +79,6 @@ public class Product implements Serializable {
     private Integer proPrice;
     @Column(name = "quantity")
     private Integer quantity;
-    
-    @Column(name = "DateRelease")
-    @Temporal(TemporalType.DATE)
-    private Date dateRelease;
     @Column(name = "proStatus")
     private Boolean proStatus;
     @Size(max = 255)
@@ -85,13 +95,18 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String proID, String proName, String proDetails, Integer proPrice, Integer quantity, Date dateRelease, Boolean proStatus, String tags, Collection<ImgStog> imgStogCollection, Category catID, Collection<PurchaseItem> purchaseItemCollection) {
+    public Product(Date dateRelease, Double starAVG, ProductType typeID, Collection<Review> reviewCollection, Collection<ViewComment> viewCommentCollection, Collection<ProImgtb> proImgtbCollection, String proID, String proName, String proDetails, Integer proPrice, Integer quantity, Boolean proStatus, String tags, Collection<ImgStog> imgStogCollection, Category catID, Collection<PurchaseItem> purchaseItemCollection) {
+        this.dateRelease = dateRelease;
+        this.starAVG = starAVG;
+        this.typeID = typeID;
+        this.reviewCollection = reviewCollection;
+        this.viewCommentCollection = viewCommentCollection;
+        this.proImgtbCollection = proImgtbCollection;
         this.proID = proID;
         this.proName = proName;
         this.proDetails = proDetails;
         this.proPrice = proPrice;
         this.quantity = quantity;
-        this.dateRelease = dateRelease;
         this.proStatus = proStatus;
         this.tags = tags;
         this.imgStogCollection = imgStogCollection;
@@ -141,14 +156,6 @@ public class Product implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Date getDateRelease() {
-        return dateRelease;
-    }
-
-    public void setDateRelease(Date dateRelease) {
-        this.dateRelease = dateRelease;
     }
 
     public Boolean getProStatus() {
@@ -225,6 +232,48 @@ public class Product implements Serializable {
 
     public void setProImgtbCollection(Collection<ProImgtb> proImgtbCollection) {
         this.proImgtbCollection = proImgtbCollection;
+    }
+
+    public Double getStarAVG() {
+        return starAVG;
+    }
+
+    public void setStarAVG(Double starAVG) {
+        this.starAVG = starAVG;
+    }
+
+    public ProductType getTypeID() {
+        return typeID;
+    }
+
+    public void setTypeID(ProductType typeID) {
+        this.typeID = typeID;
+    }
+
+    @XmlTransient
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
+    }
+
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
+    }
+
+    @XmlTransient
+    public Collection<ViewComment> getViewCommentCollection() {
+        return viewCommentCollection;
+    }
+
+    public void setViewCommentCollection(Collection<ViewComment> viewCommentCollection) {
+        this.viewCommentCollection = viewCommentCollection;
+    }
+
+    public Date getDateRelease() {
+        return dateRelease;
+    }
+
+    public void setDateRelease(Date dateRelease) {
+        this.dateRelease = dateRelease;
     }
     
 }

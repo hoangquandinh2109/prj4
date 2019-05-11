@@ -39,7 +39,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product ID </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text"  name="id" placeholder="Enter product ID">
+                                        <input class="form-control" type="text"  name="id" placeholder="Enter product ID" required maxlength="20">
                                     </div>
                                 </div>
 
@@ -87,12 +87,18 @@
                                         <c:forEach var="c" items="${listCat}">
                                             <option value="${c.catID}">${c.catName}</option>
                                         </c:forEach>
-                                    </select>
-                                    <!--        
+                                    </select>    
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Type</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="catID" placeholder="Enter product tags">
-                                    </div>
-                                    -->  
+                                        <select name="cboType" class="form-control">
+                                            <option>Select Type</option>
+                                        <c:forEach var="c" items="${listType}">
+                                            <option value="${c.typeID}">${c.typeName}</option>
+                                        </c:forEach>
+                                    </select>    
                                 </div>
                             </div>
                             <div class="form-group row">

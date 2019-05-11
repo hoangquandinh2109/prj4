@@ -10,6 +10,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,19 +30,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "TbTag.findAll", query = "SELECT t FROM TbTag t"),
     @NamedQuery(name = "TbTag.findByTagID", query = "SELECT t FROM TbTag t WHERE t.tagID = :tagID"),
-    @NamedQuery(name = "TbTag.findByTag", query = "SELECT t FROM TbTag t WHERE t.tag = :tag")})
+    @NamedQuery(name = "TbTag.findByTag", query = "SELECT t FROM TbTag t WHERE t.tag = :tag"),
+    @NamedQuery(name = "TbTag.findByTagDescription", query = "SELECT t FROM TbTag t WHERE t.tagDescription = :tagDescription")})
 public class TbTag implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tagID", nullable = false)
     private Integer tagID;
     @Size(max = 255)
     @Column(name = "tag", length = 255)
     private String tag;
+    @Size(max = 255)
+    @Column(name = "tag_description", length = 255)
+    private String tagDescription;
 
     public TbTag() {
+    }
+
+    public TbTag( String tag, String tagDescription) {
+        this.tag = tag;
+        this.tagDescription = tagDescription;
     }
 
     public TbTag(Integer tagID) {
@@ -61,6 +72,14 @@ public class TbTag implements Serializable {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getTagDescription() {
+        return tagDescription;
+    }
+
+    public void setTagDescription(String tagDescription) {
+        this.tagDescription = tagDescription;
     }
 
     @Override

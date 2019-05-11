@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Entity
 @Table(name = "ProImgtb", catalog = "projectSem4", schema = "dbo")
@@ -35,7 +35,6 @@ public class ProImgtb implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-   // @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Code", nullable = false)
     private Integer code;
@@ -49,8 +48,7 @@ public class ProImgtb implements Serializable {
     public ProImgtb() {
     }
 
-    public ProImgtb( ImgStog imgID, Product proID) {
-       
+    public ProImgtb( ImgStog imgID, Product proID) { 
         this.imgID = imgID;
         this.proID = proID;
     }
