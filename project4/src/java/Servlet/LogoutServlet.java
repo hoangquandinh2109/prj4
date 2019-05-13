@@ -34,12 +34,10 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
              
-             HttpSession session = request.getSession(); 
-              
-         request.getSession().invalidate();
-         //session.invalidate();
-         //session.removeAttribute("staff_name");
-        request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
+        HttpSession session=request.getSession();
+        session.invalidate();
+        response.sendRedirect("admin/LoginStaff.jsp");
+        //request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
             
             
 //            HttpSession session = request.getSession(false);

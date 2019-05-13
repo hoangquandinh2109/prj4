@@ -42,6 +42,7 @@ public class loginStafftServlet extends HttpServlet {
                         mess = staff.getStaffEmail();
                         request.setAttribute("mess", mess);
                         session.setAttribute("staff_name", staff.getStaffName().toString());
+                        session.setAttribute("staff_id", staff.getStaffID().toString());
                         session.setAttribute("role", staff.getRole().toString());
                         request.getRequestDispatcher("admin/index.jsp").forward(request, response);
                     }

@@ -18,9 +18,9 @@ import models.StaffFacadeLocal;
 
 /**
  *
- * @author USER
+ * @author USE
  */
-public class profileServlet extends HttpServlet {
+public class changPassServlet extends HttpServlet {
 
     @EJB
     private StaffFacadeLocal staffFacade;
@@ -30,49 +30,44 @@ public class profileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
+            String currentPassword = request.getParameter("currentPassword");
+            String newPassword = request.getParameter("newPassword");
+            String retypePass = request.getParameter("retypePassword");
+
             HttpSession session = request.getSession();
-            String staff_id = (String) session.getAttribute("staff_id");
-            Staff staff = staffFacade.find(staff_id);
-            String action = request.getParameter("action");
-            if (action.equals("profile")) {
-                if (staff != null) {
-                    Staff stf = new Staff();
-                    stf.setStaffID(staff_id);
-                    stf.setStaffName(staff.getStaffName());
-                    stf.setStaffEmail(staff.getStaffEmail());
-                    stf.setStaffAddress(staff.getStaffAddress());
-                    stf.setStaffPhone(staff.getStaffPhone());
-                    stf.setStaffPassword(staff.getStaffPassword());
-                    session.setAttribute("staff", stf);
-                    response.sendRedirect("admin/profile.jsp");
+
+            String id = (String) session.getAttribute("staff_id");
+
+            Staff list = staffFacade.find(id);
+            if (id != null) {
+                if (list.getStaffPassword().equals(currentPassword)) {
+                    if (newPassword.equals(retypePass)) {
+                        Staff staff = new Staff();
+                        staff.setStaffID(id);
+                        staff.setStaffName(list.getStaffName());
+                        staff.setStaffAddress(list.getStaffAddress());
+                        staff.setStaffPhone(list.getStaffPhone());
+                        staff.setStaffEmail(list.getStaffEmail());
+                        staff.setStaffPassword(newPassword);
+                        staff.setRole(list.getRole());
+                        staffFacade.edit(staff);
+                        session.setAttribute("msg", true);
+//                        response.sendRedirect("admin/profile.jsp");
+                        request.getRequestDispatcher("profileServlet?action=profile").forward(request, response);
+                        return;
+                    } else {
+                        session.setAttribute("msg", true);
+                        response.sendRedirect("admin/changepassword.jsp");
+                        return;
+
+                    }
+
+                    //  session.invalidate();
+                    //session.setAttribute("id", id);
                 }
+                session.setAttribute("err1", true);
+                response.sendRedirect("admin/changepassword.jsp");
             }
-
-            if (action.equals("Update")) {
-                String name = request.getParameter("name");
-                String email = request.getParameter("email");
-                String address = request.getParameter("address");
-                String phone = request.getParameter("phone");
-                String role = request.getParameter("role");
-   
-                Staff st = new Staff();
-                st.setStaffID(staff_id);
-                st.setStaffName(name);
-                st.setStaffEmail(email);
-                st.setStaffAddress(address);
-                st.setStaffPhone(phone);
-                st.setStaffPassword(staff.getStaffPassword());
-                 st.setStaffStatus(staff.getStaffStatus());
-                st.setRole(staff.getRole());
- 
-
-                staffFacade.edit(st);
-                session.setAttribute("staff", st);
-                response.sendRedirect("admin/profile.jsp");
-            }
-//                        session.setAttribute("id", staff.getStaffID().toString());
-//                        session.setAttribute("staff_name", staff.getStaffName().toString());
-//                        request.getRequestDispatcher("admin/DetailStaff.jsp").forward(request, response);
 
         }
     }
