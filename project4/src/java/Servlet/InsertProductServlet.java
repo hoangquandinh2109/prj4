@@ -8,6 +8,7 @@ package Servlet;
 import entity.Category;
 import entity.ImgStog;
 import entity.ProImgtb;
+import entity.ProductType;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,12 +31,14 @@ import models.CategoryFacadeLocal;
 import models.ImgStogFacadeLocal;
 import models.ProImgtbFacadeLocal;
 import models.ProductFacadeLocal;
+import models.ProductTypeFacadeLocal;
 
 @MultipartConfig
 public class InsertProductServlet extends HttpServlet {
     @EJB
+    private ProductTypeFacadeLocal productTypeFacade;
+    @EJB
     private ProImgtbFacadeLocal proImgtbFacade;
-
     @EJB
     private ImgStogFacadeLocal imgStogFacade;
     @EJB
@@ -60,9 +63,8 @@ public class InsertProductServlet extends HttpServlet {
             String date1 = request.getParameter("datepicker");
             Date dateRe = sdf.parse(date1);
             String tags = request.getParameter("tags");  
-        //    String catID = request.getParameter("catID");
-         
-            String cboCate = request.getParameter("cboCategory");
+            int cboCate = Integer.parseInt(request.getParameter("cboCategory"));
+            int cboType = Integer.parseInt(request.getParameter("cboType"));
             path = uploadFile(request);
             entity.Product product = new entity.Product();
             product.setProID(proid);
@@ -76,9 +78,9 @@ public class InsertProductServlet extends HttpServlet {
             //find catID 
             Category categoryid = categoryFacade.find(cboCate);
             product.setCatID(categoryid);
+            ProductType typeID = productTypeFacade.find(cboType);
+            product.setTypeID(typeID);
             productFacade.create(product);
-//            //sau khi insert ta tim kiem id cua product 
-//            entity.Product proIDD = productFacade.find(proid);
             entity.Product proIDD = productFacade.find(proid); 
             ImgStog imgtog = new ImgStog();
             imgtog.setImgName(path);

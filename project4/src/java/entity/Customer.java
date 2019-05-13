@@ -39,6 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Customer.findByCusAvatar", query = "SELECT c FROM Customer c WHERE c.cusAvatar = :cusAvatar"),
     @NamedQuery(name = "Customer.findByCusStatus", query = "SELECT c FROM Customer c WHERE c.cusStatus = :cusStatus")})
 public class Customer implements Serializable {
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Review> reviewCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<ViewComment> viewCommentCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -193,6 +197,24 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "entity.Customer[ cusID=" + cusID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
+    }
+
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
+    }
+
+    @XmlTransient
+    public Collection<ViewComment> getViewCommentCollection() {
+        return viewCommentCollection;
+    }
+
+    public void setViewCommentCollection(Collection<ViewComment> viewCommentCollection) {
+        this.viewCommentCollection = viewCommentCollection;
     }
     
 }
