@@ -44,20 +44,21 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException { 
         session=request.getSession();
         String email = (String) session.getAttribute("sessionname");
-        if(email == null){
-            response.sendRedirect(request.getContextPath()+"/login");
+        if(email != null){
+//     if == null       response.sendRedirect(request.getContextPath()+"/login");
+            response.setContentType("text/html;charset=UTF-8");
+            out = response.getWriter();
+            List<Cart> cart = getAllCartItems();
+            int price = 0;
+            for(Cart c : cart){
+                out.print(c.getProduct().getProName()+" "+c.getQuantity()+"<br>");
+                price += c.getQuantity() * c.getProduct().getProPrice();
+            }
+            out.print("Total: "+price+"<br>");
+            session.setAttribute("totalPrice", price);
+            System.out.println(price);
+    //        out.println(form);
         }
-        response.setContentType("text/html;charset=UTF-8");
-        out = response.getWriter();
-        List<Cart> cart = getAllCartItems();
-        int price = 0;
-        for(Cart c : cart){
-            out.println(c.getProduct().getProName()+" "+c.getQuantity());
-            price += c.getQuantity() * c.getProduct().getProPrice();
-        }
-        session.setAttribute("totalPrice", price);
-        System.out.println(price);
-        out.println(form);
     }
 
     @Override

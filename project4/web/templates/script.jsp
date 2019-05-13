@@ -12,3 +12,4 @@
 <script src="assets/library/wowjs/wow.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/library/wowjs/infinite-scroll-docs.min.js"></script>
+<script src="assets/js/ajax/product-ajax.js"></script>

@@ -20,11 +20,11 @@
             <p><span>Ten san pham: </span>${vip.proName}</p>
             <p><span>Gia: </span>${vip.proPrice}</p>
             <p><span>Con lai: </span>${vip.quantity} san pham</p>
-            <form action="cart" method="post">
-                <input type="hidden" name="proID" value="${vip.proID}">
-                <button type="submit">Purchase</button>
-            </form>
+            <input id="proID-to-cart" type="hidden" name="proID" value="${vip.proID}">
+            <button class="btn-add-to-cart">Purchase</button>
         </div>
     </c:forEach>
+        <div id="results"></div>
+        <c:import url="templates/script.jsp"></c:import>
     </body>
 </html>
