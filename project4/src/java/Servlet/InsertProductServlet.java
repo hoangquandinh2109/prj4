@@ -90,6 +90,7 @@ public class InsertProductServlet extends HttpServlet {
             proimg.setProID(proIDD);
             proImgtbFacade.create(proimg);        
             request.getRequestDispatcher("showProductServlet").forward(request, response);
+           
         }
     }
 
@@ -121,9 +122,6 @@ public class InsertProductServlet extends HttpServlet {
                 while ((read = inputStream.read(bytes)) != -1) {
                     outputStream.write(bytes, 0, read);
                 }
-//                request.setAttribute("msg", SAVE_DIRECTORY + "/" + fileName);
-//                request.setAttribute("message",
-//                        "Upload has been done successfully >>" + SAVE_DIRECTORY + "/" + fileName);
             } catch (Exception e) {
                 e.printStackTrace();
                 fileName = "";

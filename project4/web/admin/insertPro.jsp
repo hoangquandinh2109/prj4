@@ -9,11 +9,11 @@
 <html>
     <head>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <c:import url="../templates/adminHead.jsp"></c:import>
+
+
         </head>
         <body class="app sidebar-mini rtl">
         <c:import url="../templates/adminPage.jsp"></c:import>
@@ -35,18 +35,18 @@
                     <div class="tile">
                         <h3 class="tile-title">Insert new product</h3>
                         <div class="tile-body">
-                            <form class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data">
+                            <form id="fileForm" class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product ID </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text"  name="id" placeholder="Enter product ID" required maxlength="20">
+                                        <input id="txtID" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Name </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="name" placeholder="Enter product name">
+                                        <input class="form-control" type="text" id="txtName" name="name" placeholder="Enter product name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -58,13 +58,13 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Price </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="price" placeholder="Enter product price">
+                                        <input class="form-control" type="number" name="price" placeholder="Enter product price">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Quantity</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="quantity" placeholder="Enter product quantity">
+                                        <input class="form-control" type="number" name="quantity" placeholder="Enter product quantity">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -90,11 +90,11 @@
                                     </select>    
                                 </div>
                             </div>
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Type</label>
-                                    <div class="col-md-8">
-                                        <select name="cboType" class="form-control">
-                                            <option>Select Type</option>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Type</label>
+                                <div class="col-md-8">
+                                    <select name="cboType" class="form-control">
+                                        <option>Select Type</option>
                                         <c:forEach var="c" items="${listType}">
                                             <option value="${c.typeID}">${c.typeName}</option>
                                         </c:forEach>
@@ -104,11 +104,14 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Image Product</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" id="fileElem" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" style="display:none" onchange="handleFiles(this.files)">
+                                    <input class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
                                     <a href="#" id="fileSelect">Select some files</a> 
                                     <div id="fileList">
                                         <p>No files selected!</p>
                                     </div>
+                                <!--
+                                
+                                -->    
                                 </div>
                             </div>
                             <div class="tile-footer">
@@ -126,52 +129,82 @@
             <div class="clearix"></div>
             <div class="col-md"></div>
         </div>
-    </main>       
-        <script>
-            window.URL = window.URL || window.webkitURL;
+    </main>  
+   <script>
+                //SHOW IMAGE
+                window.URL = window.URL || window.webkitURL;
+                const fileSelect = document.getElementById("fileSelect"),
+                fileElem = document.getElementById("fileElem"),
+                fileList = document.getElementById("fileList");
+                fileSelect.addEventListener("click", function (e) {
+                if (fileElem) {
+                fileElem.click();
+                }
+                e.preventDefault(); // prevent navigation to "#"
+                }, false);
+                function handleFiles(files) {
+                if (!files.length) {
+                fileList.innerHTML = "<p>No files selected!</p>";
+                } else {
+                fileList.innerHTML = "";
+                        const list = document.createElement("ul");
+                        fileList.appendChild(list);
+                        for (let i = 0; i < files.length; i++) {
+                const li = document.createElement("li");
+                        list.appendChild(li);
+                              const img = document.createElement("img");
+                              img.src = window.URL.createObjectURL(files[i]);
+                              img.height = 60;
+                              img.onload = function() {
+                        window.URL.revokeObjectURL(this.src);
+                              }
+                      li.appendChild(img);
+                              const info = document.createElement("span");
+                              info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
+                              li.appendChild(info);
+                    }
+                  }
+                }
+    </script>
 
-const fileSelect = document.getElementById("fileSelect"),
-    fileElem = document.getElementById("fileElem"),
-    fileList = document.getElementById("fileList");
-
-fileSelect.addEventListener("click", function (e) {
-  if (fileElem) {
-    fileElem.click();
-  }
-  e.preventDefault(); // prevent navigation to "#"
-}, false);
-
-function handleFiles(files) {
-  if (!files.length) {
-    fileList.innerHTML = "<p>No files selected!</p>";
-  } else {
-    fileList.innerHTML = "";
-    const list = document.createElement("ul");
-    fileList.appendChild(list);
-    for (let i = 0; i < files.length; i++) {
-      const li = document.createElement("li");
-      list.appendChild(li);
-      
-      const img = document.createElement("img");
-      img.src = window.URL.createObjectURL(files[i]);
-      img.height = 60;
-      img.onload = function() {
-        window.URL.revokeObjectURL(this.src);
-      }
-      li.appendChild(img);
-      const info = document.createElement("span");
-      info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
-      li.appendChild(info);
-    }
-  }
-}
-
-        </script>
     <script>
         $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4', maxDate: new Date, minDate: new Date(2018, 10, 12)});
+        uiLibrary: 'bootstrap4', maxDate: new Date, minDate: new Date(2018, 10, 12)});
     </script>
     <c:import url="../templates/adminScript.jsp"></c:import>
 </body>
 
 </html>
+<!-- script imgae
+        $("#fileElem").change(function() {
+
+        var val = $(this).val();
+                switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+        case 'gif': case 'jpg': case 'png':
+                alert("an image");
+                break;
+                default:
+                $(this).val('');
+                // error message here
+                alert("not an image");
+                $("#fileList").val('');
+                break;
+                }
+        });
+        <script>
+            
+                $("#elem1").validate({
+        rules: {
+                "txtID": {
+                required: true,
+                minlength: 2
+        },
+                "txtName": {
+                required: true,
+                        rangelength: [6, 30]
+                }
+                
+        }
+        });   
+        </script>
+-->
