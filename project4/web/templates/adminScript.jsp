@@ -10,10 +10,14 @@
     <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/plugins/pace.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/main.js"></script>
     <script src="${pageContext.request.contextPath}/assets/library/via_admin/js/popper.min.js"></script>
-    -->
-    <script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/jquery-3.2.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/main.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-   
+-->
+<script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/library/testAdmin/source/js/main.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<!--Hung-->
+<script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/library/jquery/js/dataTables.bootstrap4.min.js"></script>
+<!--Hung-->
+
