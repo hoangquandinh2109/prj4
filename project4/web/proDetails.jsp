@@ -203,6 +203,7 @@
                  </div>
                  <c:import url="templates/footer.jsp"></c:import>
             </div>
+            <c:import url="templates/cart-modal.jsp"></c:import>
         </div>
             
               <c:import url="templates/script.jsp"></c:import>
