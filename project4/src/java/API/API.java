@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package API;
 
 import com.google.gson.Gson;
@@ -34,6 +33,7 @@ import java.text.SimpleDateFormat;
  */
 @WebServlet(name = "API", urlPatterns = {"/api/*"})
 public class API extends HttpServlet {
+
     @EJB
     private ProductFacadeLocal productFacade;
     @EJB
@@ -45,39 +45,50 @@ public class API extends HttpServlet {
 //        try {
 //            String[] uris = req.getPathInfo().substring(1).split("/");
 //            model = uris[0];
-//            System.out.println("quan vip model: "+model);
-//            id = uris[1];
-//            System.out.println("quan vip id: "+id);
+//            System.out.println("quan vip model: " + model);
+//            try {
+//                id = uris[1];
+//                System.out.println("quan vip id: " + id);
+//            } catch (Exception e) {
+//            }
 //        } catch (Exception e) {
 //            model = "";
 //            id = "";
 //        }
+        resp.setContentType("application/json");
+        resp.setHeader("Access-Control-Allow-Origin","*");
+        resp.setHeader("Access-Control-Allow-Methods", "*");
+        resp.setHeader("Access-Control-Allow-Headers", "*");
+        resp.setStatus(HttpServletResponse.SC_OK);
         PrintWriter o = resp.getWriter();
         o.print(johnnys(productFacade.findAll()));
-      
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
-    public JsonArray johnnys(List<Product> lp){
+
+    public JsonArray johnnys(List<Product> lp) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
-        for(entity.Product p : lp){
-                jab.add(johnny(p));
+        for (entity.Product p : lp) {
+            jab.add(johnny(p));
         }
         return jab.build();
-                
+
     }
-    public JsonObject johnny(Product p){
-        
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                String strDate = dateFormat.format(p.getDateRelease());
+
+    public JsonObject johnny(Product p) {
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate = dateFormat.format(p.getDateRelease());
         return Json.createObjectBuilder()
                 .add("proID", p.getProID())
                 .add("proName", p.getProName())
                 .add("proPrice", p.getProPrice())
                 .add("date", strDate)
+                .add("type", p.getTypeID().getTypeName())
                 .build();
     }
-    
+
 }

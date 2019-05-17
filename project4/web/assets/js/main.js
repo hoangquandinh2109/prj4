@@ -32,6 +32,26 @@ $(document).ready(function(){
         $(".modal-form").load("templates/register.html");
     });   
 
+
+    $('.cart-quantity > input').on('keydown keyup', function(e){
+        if ($(this).val() < 1 
+            && e.keyCode !== 46 // keycode for delete
+            && e.keyCode !== 8 // keycode for backspace
+           ) {
+           e.preventDefault();
+           $(this).val(1);
+           $(this).change();
+        }
+        if ($(this).val() > 50 
+            && e.keyCode !== 46 // keycode for delete
+            && e.keyCode !== 8 // keycode for backspace
+           ) {
+           e.preventDefault();
+           $(this).val(50);
+           $(this).change();
+        }
+    });
+
 });
 
 new WOW().init();
