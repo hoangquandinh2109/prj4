@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import static Servlet.InsertProductServlet.SAVE_DIRECTORY;
 import entity.Category;
 import entity.ImgStog;
 import entity.ProImgtb;
@@ -33,19 +34,23 @@ import models.ProImgtbFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
 
+/**
+ *
+ * @author Asus
+ */
 @MultipartConfig
-public class InsertProductServlet extends HttpServlet {
+public class updateProductServlet extends HttpServlet {
 
-    @EJB
-    private ProductTypeFacadeLocal productTypeFacade;
-    @EJB
-    private ProImgtbFacadeLocal proImgtbFacade;
     @EJB
     private ImgStogFacadeLocal imgStogFacade;
     @EJB
-    private CategoryFacadeLocal categoryFacade;
+    private ProductTypeFacadeLocal productTypeFacade;
     @EJB
     private ProductFacadeLocal productFacade;
+    @EJB
+    private ProImgtbFacadeLocal proImgtbFacade;
+    @EJB
+    private CategoryFacadeLocal categoryFacade;
 
     private static final long serialVersionUID = 1L;
     private String path = "";
@@ -64,6 +69,13 @@ public class InsertProductServlet extends HttpServlet {
             String date1 = request.getParameter("datepicker");
             Date dateRe = sdf.parse(date1);
             String tags = request.getParameter("tags");
+            int imgID = Integer.parseInt(request.getParameter("imgID"));
+            boolean status;
+            if ("Active".equals(request.getParameter("status"))) {
+                status = true;
+            } else{
+                status=false;
+            }
             int cboCate = Integer.parseInt(request.getParameter("cboCategory"));
             int cboType = Integer.parseInt(request.getParameter("cboType"));
             path = uploadFile(request);
@@ -76,22 +88,24 @@ public class InsertProductServlet extends HttpServlet {
             product.setDateRelease(dateRe);
             product.setQuantity(quantity);
             product.setTags(tags);
+            product.setProStatus(status);
+
             //find catID 
-            Category categoryid = categoryFacade.find(cboCate);
-            product.setCatID(categoryid);
+            Category cateID = categoryFacade.find(cboCate);
+            product.setCatID(cateID);
             ProductType typeID = productTypeFacade.find(cboType);
             product.setTypeID(typeID);
-            productFacade.create(product);
+            productFacade.edit(product);
             entity.Product proIDD = productFacade.find(proid);
             ImgStog imgtog = new ImgStog();
+            imgtog.setImgID(imgID);
             imgtog.setImgName(path);
-            imgStogFacade.create(imgtog);
+            imgStogFacade.edit(imgtog);
             ProImgtb proimg = new ProImgtb();
             proimg.setImgID(imgtog);
             proimg.setProID(proIDD);
-            proImgtbFacade.create(proimg);
+            proImgtbFacade.edit(proimg);
             request.getRequestDispatcher("showProductServlet").forward(request, response);
-
         }
     }
 
@@ -167,7 +181,7 @@ public class InsertProductServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(InsertProductServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updateProductServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -177,10 +191,15 @@ public class InsertProductServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(InsertProductServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updateProductServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

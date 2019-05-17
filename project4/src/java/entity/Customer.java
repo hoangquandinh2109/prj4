@@ -39,6 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Customer.findByCusAvatar", query = "SELECT c FROM Customer c WHERE c.cusAvatar = :cusAvatar"),
     @NamedQuery(name = "Customer.findByCusStatus", query = "SELECT c FROM Customer c WHERE c.cusStatus = :cusStatus")})
 public class Customer implements Serializable {
+    @Column(name = "gender")
+    private Boolean gender;
     @OneToMany(mappedBy = "cusID")
     private Collection<Review> reviewCollection;
     @OneToMany(mappedBy = "cusID")
@@ -215,6 +217,14 @@ public class Customer implements Serializable {
 
     public void setViewCommentCollection(Collection<ViewComment> viewCommentCollection) {
         this.viewCommentCollection = viewCommentCollection;
+    }
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
     }
     
 }
