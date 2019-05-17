@@ -12,7 +12,7 @@
         
        
     <c:import url="templates/head.jsp"></c:import>
-    <link rel="stylesheet" href="assets/css/product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
     <body>
         <div class="content-n-cart clearfix">

@@ -16,8 +16,8 @@ create table customer(
 	cusAddress nvarchar(255),
 	cusPhone varchar(255),
 	cusAvatar varchar(255),
-	cusStatus bit
-	
+	cusStatus bit,
+	cusGender bit
 )
 go
 Drop table if exists staff
@@ -135,22 +135,42 @@ create table review(
 )
 go
 drop table if exists whislist
+create table whislist(
+ whislistID int identity primary key,
+ quantity int,
+ cusID int foreign key REFERENCES customer(cusID),
+ proID varchar(10) foreign key REFERENCES product(proID)
+)
 go
+drop table if exists Feature
+create table Feature(
+	FeatureID int identity primary key,
+	Fname varchar(50),
+	Fdescription varchar(255),
+	[date] date
+)
+
+drop table if exists f_Product
+go
+create table f_Product(
+	id int identity primary key,
+	proID varchar(10) foreign key REFERENCES product(proID),
+	FeatureID int foreign key REFERENCES Feature(FeatureID),
+)
 drop table if exists comment
-create table commentItem(
+create table comment(
 	id int identity primary key,
 	content text,
 	[date] datetime
 )
--- 
+ drop table if exists viewComment
 create table viewComment(
 	commentID int identity primary key,
-	comItem int foreign key REFERENCES commentItem(id),
+	comItem int foreign key REFERENCES comment(id),
 	cusID int foreign key REFERENCES customer(cusID),
 	proID varchar(10) foreign key REFERENCES product(proID),
 	[like] int
 )
 go
-
 
 

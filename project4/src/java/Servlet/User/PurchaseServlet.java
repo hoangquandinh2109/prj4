@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package Servlet;
+package Servlet.User;
 
+import Servlet.User.CartFacade;
 import entity.Cart;
 import entity.Purchase;
 import entity.PurchaseItem;
@@ -58,25 +59,27 @@ public class PurchaseServlet extends HttpServlet {
 	String purId= dateFormat.format(now);
         String lastId = purchaseFacade.getLastPurchaseID();
         int baso;
-        System.out.println("so sanh: "+ purId +" va" +lastId.substring(0,8));
-        if(purId.equals(lastId.substring(0,8))){
-            System.out.println("cong binh thuong");
-            baso = Integer.parseInt(lastId.substring(8))+1;
-        } else{
-            System.out.println("reset");
-            lastId = "000";
-            baso = Integer.parseInt(lastId)+1;
-        }
-        System.out.println("baso: "+baso);
-        if(baso>=10 && baso <=99){
-            System.out.println("0");
-            purId= dateFormat.format(now)+"0"+baso;
-        } else if(baso<10){
-            System.out.println("00");
-            purId= dateFormat.format(now)+"00"+baso;
-        } else{
-            purId= dateFormat.format(now)+baso;
-        }
+        if(lastId != null){
+            System.out.println("so sanh: "+ purId +" va" +lastId.substring(0,8));
+            if(purId.equals(lastId.substring(0,8))){
+                System.out.println("cong binh thuong");
+                baso = Integer.parseInt(lastId.substring(8))+1;
+            }else{
+                System.out.println("reset");
+                lastId = "000";
+                baso = Integer.parseInt(lastId)+1;
+            }
+            System.out.println("baso: "+baso);
+            if(baso>=10 && baso <=99){
+                System.out.println("0");
+                purId= dateFormat.format(now)+"0"+baso;
+            } else if(baso<10){
+                System.out.println("00");
+                purId= dateFormat.format(now)+"00"+baso;
+            } else{
+                purId= dateFormat.format(now)+baso;
+            }
+        } else purId= dateFormat.format(now)+"001";
         System.out.println(purId);
         int totalPrice = (int) session.getAttribute("totalPrice");
         if(payment != null && "payment".equals(payment)){
