@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Servlet;
+package Servlet.User;
 
 import entity.Cart;
 import java.util.ArrayList;
