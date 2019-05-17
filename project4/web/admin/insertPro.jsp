@@ -106,10 +106,7 @@
                                     <a href="#" id="fileSelect">Select some files</a> 
                                     <div id="fileList">
                                         <p>No files selected!</p>
-                                    </div>
-                                <!--
-                                
-                                -->    
+                                    </div>            
                                 </div>
                             </div>
                             <div class="tile-footer">
