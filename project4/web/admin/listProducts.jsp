@@ -44,7 +44,7 @@
                     <tbody>
                     <c:forEach items="${list}" var="s">
                         <tr>           
-                            <td><img src="uploadDir/${s.imgID.imgName}" alt="pets" width="150px" height="150px"></td>
+                            <td><img src="productImage/${s.imgID.imgName}" alt="pets" width="150px" height="150px"></td>
                             <td>${s.proID.proName}</td>
                             <td>${s.proID.proDetails}</td>
                             <td>${s.proID.proPrice}</td>
@@ -54,7 +54,9 @@
                             <td>${s.proID.tags}</td>     
                             <td>${s.proID.catID.catName}</td>
                             <td>${s.proID.typeID.typeName}</td>
-                            <td></td>
+                            <td>
+                            <a href="getDetailsProductServlet?code=${s.code}">Update</a>
+                        </td>
                         </tr>
                     </c:forEach>
                 </tbody>

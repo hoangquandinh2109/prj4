@@ -56,6 +56,14 @@
         <servlet-name>changPassServlet</servlet-name>
         <servlet-class>Servlet.changPassServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getDetailsProductServlet</servlet-name>
+        <servlet-class>Servlet.getDetailsProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateProductServlet</servlet-name>
+        <servlet-class>Servlet.updateProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>changPassServlet</servlet-name>
         <url-pattern>/changePassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getDetailsProductServlet</servlet-name>
+        <url-pattern>/getDetailsProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateProductServlet</servlet-name>
+        <url-pattern>/updateProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

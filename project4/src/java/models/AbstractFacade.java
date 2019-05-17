@@ -7,12 +7,14 @@
 package models;
 
 import java.util.List;
+import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 
 /**
  *
  * @author Asus
  */
+
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
 
@@ -20,8 +22,8 @@ public abstract class AbstractFacade<T> {
         this.entityClass = entityClass;
     }
 
-    protected abstract EntityManager getEntityManager();
-
+    protected abstract EntityManager getEntityManager();   
+    
     public void create(T entity) {
         getEntityManager().persist(entity);
     }

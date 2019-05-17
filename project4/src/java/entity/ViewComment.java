@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ViewComment.findAll", query = "SELECT v FROM ViewComment v"),
     @NamedQuery(name = "ViewComment.findByCommentID", query = "SELECT v FROM ViewComment v WHERE v.commentID = :commentID"),
-    @NamedQuery(name = "ViewComment.findByLike", query = "SELECT v FROM ViewComment v WHERE v.like = :like")})
+    @NamedQuery(name = "ViewComment.findByLikes", query = "SELECT v FROM ViewComment v WHERE v.likes = :likes")})
 public class ViewComment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,8 +37,8 @@ public class ViewComment implements Serializable {
     @NotNull
     @Column(name = "commentID", nullable = false)
     private Integer commentID;
-    @Column(name = "like")
-    private Integer like;
+    @Column(name = "likes")
+    private Integer likes;
     @JoinColumn(name = "comItem", referencedColumnName = "id")
     @ManyToOne
     private CommentItem comItem;
@@ -64,12 +64,12 @@ public class ViewComment implements Serializable {
         this.commentID = commentID;
     }
 
-    public Integer getLike() {
-        return like;
+    public Integer getLikes() {
+        return likes;
     }
 
-    public void setLike(Integer like) {
-        this.like = like;
+    public void setLikes(Integer likes) {
+        this.likes = likes;
     }
 
     public CommentItem getComItem() {

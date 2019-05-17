@@ -58,10 +58,8 @@ public class ImgStog implements Serializable {
     public ImgStog() {
     }
 
-    public ImgStog(Integer imgID, String imgName, Collection<Product> productCollection) {
-        this.imgID = imgID;
+    public ImgStog( String imgName) {
         this.imgName = imgName;
-        this.productCollection = productCollection;
     }
 
     public ImgStog(Integer imgID) {
