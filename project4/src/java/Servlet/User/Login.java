@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Servlet;
+package Servlet.User;
 
 import entity.Customer;
 import java.io.IOException;
@@ -31,10 +31,6 @@ public class Login extends HttpServlet {
     @EJB
     private CustomerFacadeLocal db;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,11 +40,12 @@ public class Login extends HttpServlet {
         PrintWriter out = resp.getWriter();
         Customer thisCus = db.login(email, password);
         if(thisCus != null){
+            resp.setStatus(HttpServletResponse.SC_OK);
             session.setAttribute("sessionname", thisCus.getCusName());  
-            session.setAttribute("sessionid", thisCus.getCusID());  
-            out.println("<a href=\"http://localhost:8080/project4/\">okay</a>");
+            session.setAttribute("sessionid", thisCus.getCusID()); 
+//            resp.setContentType("application/json");
         }else{
-            out.println("<a href=\"http://localhost:8080/project4/\">not okay</a>");
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         
         

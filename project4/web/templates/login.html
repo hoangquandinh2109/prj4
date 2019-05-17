@@ -1,10 +1,39 @@
 <h3>Login</h3>
 <form id="form-in-modal" method="post" action="login">
     <span class="label-form-modal">Email</span>
-    <input type="text" name="email" class="form-in-modal">
+    <input value="quanvip@gmail.com " type="text" name="email" id="email" class="form-in-modal">
     <span class="label-form-modal">Password</span>
-    <input type="password" name="password" class="form-in-modal">
+    <input value="123" type="password" name="password" id="password" class="form-in-modal">
     <a class="db-tac" href="">Forgot your Password?</a>
-    <button class="db-tac" type="submit">SIGN IN</button>
+    <button id="login-button" class="db-tac" type="submit">SIGN IN</button>
     <a class="db-tac modal-create-acc" href="">Create account</a>
 </form>
+<script>
+           $('#login-button').click(function() {
+                event.preventDefault();
+              var email=$("#email").val();
+              var password=$("#password").val();
+              $(".error-form").remove();
+                $.ajax({
+                    type:"POST",
+                   data:{"email":email,"password":password},
+                   url: "login",
+                   success: function(data) {
+                       console.log("success");
+                       location.reload();
+                   },
+                   error:function(){
+                       console.log("error");
+                       $("#password").after("<span class=\"error-form\" style=\"color: red;\">Login unsuccessful!</span>");
+                   },
+                });
+            });
+            
+            
+    $('a.modal-create-acc').click(function(event) {
+        event.preventDefault();
+        $(".modal-form").remove();
+        $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
+        $(".modal-form").load("templates/register.html");
+    });   
+        </script>

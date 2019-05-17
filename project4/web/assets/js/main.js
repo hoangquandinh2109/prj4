@@ -12,11 +12,13 @@ $(document).ready(function(){
         $(".cart").removeClass("ra");
         $(this).removeClass("havemodal");
         $(".modal-form").remove();
+        $("body").removeClass("square");
     });
 
     $('a.login-link').click(function(event) {
         event.preventDefault();
         $(".clickdetrove").addClass("havemodal");
+        $("body").addClass("square");
         $(".modal-form").remove();
         $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
         $(".modal-form").load("templates/login.html");
@@ -24,6 +26,7 @@ $(document).ready(function(){
     $('a.create-acc-link').click(function(event) {
         event.preventDefault();
         $(".clickdetrove").addClass("havemodal");
+        $("body").addClass("square");
         $(".modal-form").remove();
         $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
         $(".modal-form").load("templates/register.html");

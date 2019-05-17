@@ -39,6 +39,19 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
             return null;
         }
     }
+
+    @Override
+    public boolean checkIfEmailExisted(String email) {
+        try {
+           Customer abc = (Customer) em.createQuery("SELECT c FROM Customer c WHERE c.cusEmail = :email")
+                .setParameter("email", email)
+                .getSingleResult();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
         
     
 }
