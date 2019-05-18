@@ -175,7 +175,7 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
                                                         <span class="tool-title">Addtocart</span>
                                                     </div>

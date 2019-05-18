@@ -581,100 +581,31 @@ body{
             width: 330px;
             height: 100%;
             background-color: #fff;
-            .list-cart-items{
-                padding-top: 30px;
-                padding-bottom: 30px;
-                border-bottom: 3px solid #ccc;
-                border-top: 1px solid #ccc;
-                .cart-item{ 
-                    /*display: block;*/
-                    .cart-photo{
-                        float: left;
-                        width: 33.3333333%;
-                        img{
-                            width: 100%;
-                        }
-                    }
-                    .cart-info{
-                        float: left;
-                        width: 66.666666%;
-                        .cart-proName{
-                            font-family: 'MerriweatherSans';
-                            font-size: 12px;
-                        }
-                        .cart-tools{
-                            /*display: block;*/
-                            .cart-quantity{
-                                display: inline-block;
-                                position: relative;
-                                >input{
-                                    width: 40px;
-                                    text-align: center;
-                                    margin-right: 25px;
-                                    border: 1px solid #ccc;
-                                    border-right: 0px;
-                                    height: 30px;
-                                    &:focus{
-                                        outline: none;
-                                    }
-                                }
-                                input[type=number]::-webkit-inner-spin-button, 
-                                input[type=number]::-webkit-outer-spin-button { 
-                                    -webkit-appearance: none; 
-                                    margin: 0; 
-                                }
-                                .cart-quan-plus{
-                                    position: absolute;
-                                    line-height: 13px;
-                                    height: 15px;
-                                    width: 25px;
-                                    top: 0;
-                                    right: 0;
-                                    border: 1px solid #ccc;
-                                    background: transparent;
-                                    span{
-                                        font-size: 16px;
-                                        font-family: 'MerriweatherSans';
-                                    }
-                                    &:focus{
-                                        outline: none;
-                                    }
-                                }
-                                .cart-quan-minus{
-                                    position: absolute;
-                                    line-height: 13px;
-                                    height: 15px;
-                                    bottom: 0;
-                                    width: 25px;
-                                    right: 0;
-                                    border: 1px solid #ccc;
-                                    background: transparent;
-                                    border-top: 0px;
-                                    &:focus{
-                                        outline: none;
-                                    }
-                                    span{
-                                        font-size: 16px;
-                                        font-family: 'MerriweatherSans';
-                                    }
-                                }
-                            }
-                            .cart-items-remove{
-                                float: right;
-                                border: 0;
-                                margin-right: 30px;
-                                background: 0;
-                                &:focus{
-                                    outline: none;
-                                }
-                            }
-                        }
-                        .cart-price{
-                            font-family: 'MerriweatherSans';
-                            font-size: 13px;
-                        }
-                    }
+            padding: 0 10px;
+            >h2{
+                margin: 0;
+                padding: 15px 0;
+                font-family: 'MerriweatherSans';
+                font-size: 25px;
+            }
+            #toCart, #Checkout{
+                color: #000;
+                font-family: 'MerriweatherSans';
+                display: block;
+                padding: 15px;
+                text-align: center;
+                border: 1px solid #ededed;
+                &:hover{
+                    background-color: $color-blue;
+                    text-decoration: none;
+                    color: #fff;
                 }
+            }
+            #toCart{
+                margin-bottom: 5px;
+            }
+            #Checkout{
+                font-size: 16px;   
             }
         }
         .cart.ra{

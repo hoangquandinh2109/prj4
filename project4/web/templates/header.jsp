@@ -45,7 +45,7 @@
                 </div>
                 <div style="animation-delay: .5s;" class="wow fadeInDown pull-left clearfix">
                     <div class="box-icon">
-                            <i class="fas fa-undo-alt"></i>
+                        <i class="fas fa-undo-alt"></i>
                     </div>
                     <div class="media-body">
                         <h4>Free Return</h4>
@@ -64,13 +64,15 @@
             </div>
         </div>
         <div style="animation-delay: 1.5s;" class="wow fadeInDown header-cart">
-            <div class="title-cart">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-            <div class="cart-inner">
-                <span class="cart-title">Shopping cart</span>
-                <span id="CartCount">0</span> <span>items</span>
-                <span id="CartCost"> - <span class="money">$0.00</span></span>
+            <div class="showcartajax">
+                <div class="title-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="cart-inner">
+                    <span class="cart-title">Shopping cart</span>
+                    <span id="CartCount">0</span> <span>items</span>
+                    <span id="CartCost"> - <span class="money">$0.00</span></span>
+                </div>
             </div>
         </div>
     </div>
