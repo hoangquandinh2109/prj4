@@ -28,14 +28,15 @@ public class Home extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<String> list = new ArrayList<>();
         list.add("hello");
-        list.add("sdfdsf");
-        list.add("hsdfdellddo");
-        list.add("hesssllo");
-        list.add("heddfdllo");
-        list.add("hesddddfdfllo");
-        list.add("hedfsdfllo");
-        list.add("helxcjgjghdlo");
+        list.add("minh");
+        list.add("tuan");
+        list.add("an an");
+        list.add("nguyen");
+        list.add("ao do di ngoai duong");
+        list.add("ao xanh cua tuan");
+        list.add("kinh tren mat minh");
         req.setAttribute("list", list);
+        req.setAttribute("pagename", "Home");
         HttpSession session=req.getSession();
         req.setAttribute("sessionname", session.getAttribute("sessionname"));
         getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);

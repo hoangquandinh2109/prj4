@@ -13,4 +13,4 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/animatecss/animate.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cart.css">
-<title>CANG CU COT</title>
+<title>Gift Shop - ${pagename}</title>

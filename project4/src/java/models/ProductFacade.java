@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Asus
+ * @author johnn
  */
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> implements ProductFacadeLocal {

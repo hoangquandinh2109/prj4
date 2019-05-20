@@ -41,22 +41,21 @@ public class API extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String model, id;
+//        String model = "", id = "";
+//        String[] uris = new String[]{};
 //        try {
-//            String[] uris = req.getPathInfo().substring(1).split("/");
+//            uris = req.getPathInfo().substring(1).split("/");
 //            model = uris[0];
-//            System.out.println("quan vip model: " + model);
 //            try {
 //                id = uris[1];
-//                System.out.println("quan vip id: " + id);
 //            } catch (Exception e) {
+//                id = "";
 //            }
 //        } catch (Exception e) {
 //            model = "";
-//            id = "";
 //        }
         resp.setContentType("application/json");
-        resp.setHeader("Access-Control-Allow-Origin","*");
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "*");
         resp.setHeader("Access-Control-Allow-Headers", "*");
         resp.setStatus(HttpServletResponse.SC_OK);

@@ -13,12 +13,13 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Asus
+ * @author johnn
  */
 @Stateless
 public class CustomerFacade extends AbstractFacade<Customer> implements CustomerFacadeLocal {
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -37,7 +38,7 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
                 .getSingleResult();
         } catch (Exception e) {
             return null;
-        }
+}
     }
 
     @Override
