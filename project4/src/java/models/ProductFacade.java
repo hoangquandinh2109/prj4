@@ -6,7 +6,10 @@
 
 package models;
 
+import entity.Category;
 import entity.Product;
+import entity.ProductType;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +30,28 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
 
     public ProductFacade() {
         super(Product.class);
+    }
+
+    @Override
+    public List<Product> getProductByType(ProductType productType) {
+        try {
+            return em.createQuery("SELECT p FROM Product p WHERE p.typeID = :typeID")
+                .setParameter("catID", productType)
+                .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Product> getProductByCategory(Category category) {
+        try {
+            return em.createQuery("SELECT p FROM Product p WHERE p.catID = :catID")
+                .setParameter("catID", category)
+                .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }
