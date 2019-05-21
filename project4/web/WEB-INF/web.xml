@@ -64,6 +64,10 @@
         <servlet-name>updateProductServlet</servlet-name>
         <servlet-class>Servlet.updateProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>insertCatTyServlet</servlet-name>
+        <servlet-class>Servlet.insertCatTyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>updateProductServlet</servlet-name>
         <url-pattern>/updateProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertCatTyServlet</servlet-name>
+        <url-pattern>/insertCatTyServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

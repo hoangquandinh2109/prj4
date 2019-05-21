@@ -105,8 +105,13 @@
             <li><a class="treeview-item" href="${pageContext.request.contextPath}/showCatServlet"><i class="icon far fa-dot-circle"></i>Create new Product</a></li>
             <li><a class="treeview-item" href="${pageContext.request.contextPath}/showProductServlet"><i class="icon far fa-dot-circle"></i>List Product</a></li>
             <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Order Management</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Category</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Type</a></li>
+          </ul>
+        </li>
+           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Category & Type</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="admin/insertCatvType.jsp"><i class="icon far fa-dot-circle"></i>Create new Category</a></li>
+            <li><a class="treeview-item" href="admin/insertCatvType.jsp"><i class="icon far fa-dot-circle"></i>Create new Type</a></li>
+            <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>List Category and Type</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon far fa-gift"></i><span class="app-menu__label">Event</span><i class="treeview-indicator fa fa-angle-right"></i></a>
