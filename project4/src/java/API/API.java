@@ -36,31 +36,18 @@ public class API extends HttpServlet {
 
     @EJB
     private ProductFacadeLocal productFacade;
-    @EJB
-    private TbTagFacadeLocal tbTagFacade;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String model = "", id = "";
-//        String[] uris = new String[]{};
-//        try {
-//            uris = req.getPathInfo().substring(1).split("/");
-//            model = uris[0];
-//            try {
-//                id = uris[1];
-//            } catch (Exception e) {
-//                id = "";
-//            }
-//        } catch (Exception e) {
-//            model = "";
-//        }
-        resp.setContentType("application/json");
-        resp.setHeader("Access-Control-Allow-Origin", "*");
-        resp.setHeader("Access-Control-Allow-Methods", "*");
-        resp.setHeader("Access-Control-Allow-Headers", "*");
-        resp.setStatus(HttpServletResponse.SC_OK);
-        PrintWriter o = resp.getWriter();
-        o.print(johnnys(productFacade.findAll()));
+        String[] uris = new String[]{};
+        try {
+            if(!uris[2].isEmpty()){
+                if(uris[0].equals("product")){
+                    FilterProduct fp = new FilterProduct(uris, req, resp);
+                }
+            }
+        } catch (Exception e) {
+        }
 
     }
 
@@ -68,26 +55,5 @@ public class API extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
 
-    public JsonArray johnnys(List<Product> lp) {
-        JsonArrayBuilder jab = Json.createArrayBuilder();
-        for (entity.Product p : lp) {
-            jab.add(johnny(p));
-        }
-        return jab.build();
-
-    }
-
-    public JsonObject johnny(Product p) {
-
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String strDate = dateFormat.format(p.getDateRelease());
-        return Json.createObjectBuilder()
-                .add("proID", p.getProID())
-                .add("proName", p.getProName())
-                .add("proPrice", p.getProPrice())
-                .add("date", strDate)
-                .add("type", p.getTypeID().getTypeName())
-                .build();
-    }
 
 }

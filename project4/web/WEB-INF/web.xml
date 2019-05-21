@@ -144,4 +144,16 @@
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
+    <ejb-local-ref>
+        <ejb-ref-name>ProductTypeFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>models.ProductTypeFacadeLocal</local>
+        <ejb-link>#ProductTypeFacade</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>CategoryFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>models.CategoryFacadeLocal</local>
+        <ejb-link>#CategoryFacade</ejb-link>
+    </ejb-local-ref>
 </web-app>

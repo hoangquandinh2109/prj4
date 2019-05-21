@@ -6,7 +6,9 @@
 
 package models;
 
+import entity.Category;
 import entity.Product;
+import entity.ProductType;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +32,9 @@ public interface ProductFacadeLocal {
     List<Product> findRange(int[] range);
 
     int count();
+    
+    List<Product> getProductByType(ProductType productType);
+    
+    List<Product> getProductByCategory(Category category);
     
 }
