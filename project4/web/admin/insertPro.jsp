@@ -37,44 +37,45 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product ID </label>
                                     <div class="col-md-8">
-                                        <input id="txtID" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
+                                        <input id="txtID" class="form-control" autocomplete="off" type="text" name="id" required oninvalid="this.setCustomValidity('Please Enter Product ID minLength is 3')"
+                                               oninput="setCustomValidity('')" placeholder="Enter product ID" minlength="3">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Name </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="txtName" name="name" placeholder="Enter product name">
+                                        <input class="form-control" required type="text" id="txtName" name="name" placeholder="Enter product name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Details</label>
                                     <div class="col-md-8">
-                                        <textarea class="form-control" rows="4" name="details" placeholder="Enter product details"></textarea>
+                                        <textarea class="form-control" rows="4" name="details" placeholder="Enter product details" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Price </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" name="price" placeholder="Enter product price">
+                                        <input class="form-control" type="number" name="price" placeholder="Enter product price" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Quantity</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" name="quantity" placeholder="Enter product quantity">
+                                        <input class="form-control" type="number" name="quantity" placeholder="Enter product quantity" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Date Release </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="datepicker" id="datepicker" placeholder="Enter product DateRelease">
+                                        <input class="form-control" type="text" name="datepicker" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
                                     </div>
                                 </div> 
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Tags </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="tags" placeholder="Enter product tags">
+                                        <input class="form-control" type="text" name="tags" placeholder="Enter product tags" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -91,7 +92,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Type</label>
                                 <div class="col-md-8">
-                                    <select name="cboType" class="form-control">
+                                    <select required name="cboType" class="form-control">
                                         <option>Select Type</option>
                                         <c:forEach var="c" items="${listType}">
                                             <option value="${c.typeID}">${c.typeName}</option>
@@ -102,7 +103,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Image Product</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
+                                    <input required class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
                                     <a href="#" id="fileSelect">Select some files</a> 
                                     <div id="fileList">
                                         <p>No files selected!</p>
