@@ -12,4 +12,5 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/owlcarousel/css/owl.carousel.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/animatecss/animate.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-<title>CANG CU COT</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cart.css">
+<title>Gift Shop - ${pagename}</title>

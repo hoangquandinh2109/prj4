@@ -6,20 +6,18 @@
 
 package models;
 
-import entity.Category;
-import java.util.ArrayList;
-import java.util.List;
+import entity.Customer;
+import entity.Review;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author johnn
  */
 @Stateless
-public class CategoryFacade extends AbstractFacade<Category> implements CategoryFacadeLocal {
+public class ReviewFacade extends AbstractFacade<Review> implements ReviewFacadeLocal {
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -28,16 +26,18 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
         return em;
     }
 
-    public CategoryFacade() {
-        super(Category.class);
+    public ReviewFacade() {
+        super(Review.class);
     }
-
     @Override
-    public List<Category> showCategory() {
-        List<Category> list = new ArrayList<>();
-        Query q = em.createNamedQuery("select DISTINCT catName from category");
-        list =q.getResultList();
-        return list;
+    public boolean checkIfCusRating(Customer cusID){
+        try {
+           Review abc = (Review) em.createQuery("SELECT r FROM Review r WHERE r.cusID = :cusID")
+                .setParameter("cusID", cusID)
+                .getSingleResult();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-    
 }

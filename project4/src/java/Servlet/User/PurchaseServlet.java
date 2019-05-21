@@ -6,7 +6,7 @@
 
 package Servlet.User;
 
-import Servlet.User.CartFacade;
+import models.CartFacade;
 import entity.Cart;
 import entity.Purchase;
 import entity.PurchaseItem;

@@ -26,7 +26,7 @@
        if(pass == "") {
             $("#password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
             error++;
-      } else if(pass.length<7 || pass.length>22){
+      } else if(pass.length<6 || pass.length>22){
            $(this).after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
             error++;
        } else if(pass != $('#re-password').val()){
@@ -42,7 +42,7 @@
        if(pass == "") {
             $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
             error++;
-      }else if(pass.length<7 || pass.length>22){
+      }else if(pass.length<6 || pass.length>22){
            $(this).after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
             error++;
        }  else if(pass != $('#password').val()){
@@ -63,7 +63,7 @@
           var name=$("#name").val();
           var address=$("#address").val();
           var phone=$("#phone").val();
-          console.log(password+" va "+repassword);
+          error = 0;
           if(password == "") {
                 $("#password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
                 error++;

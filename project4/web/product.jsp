@@ -1,8 +1,9 @@
 <%-- 
-    Document   : home
-    Created on : Apr 13, 2019, 10:52:19 AM
+    Document   : product
+    Created on : May 20, 2019, 1:18:28 PM
     Author     : johnn
 --%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -121,22 +122,6 @@
 
 
                             <div class="right-column">
-                                <div class="slide-banner-tu">
-                                    <div class="owl-carousel">
-                                        <div class="slide-banner-tu-item">
-                                            <div class="image-slide-banner-tu"><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/slideshow_image_1_89c664fb-9af7-4a2a-ad6d-7dd12524551d_1600x.jpg" alt=""></div>
-                                            <div class="title-slide-banner-tu"></div>
-                                        </div>
-                                        <div class="slide-banner-tu-item">
-                                            <div class="image-slide-banner-tu"><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/slideshow_image_3_58f48138-fe7b-4263-ac5e-3577589da0b7_1600x.jpg" alt=""></div>
-                                            <div class="title-slide-banner-tu"></div>
-                                        </div>
-                                        <div class="slide-banner-tu-item">
-                                            <div class="image-slide-banner-tu"><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/slideshow_image_2_1_1600x.jpg" alt=""></div>
-                                            <div class="title-slide-banner-tu"></div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="event">
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
                                 </div>

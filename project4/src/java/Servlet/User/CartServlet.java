@@ -6,6 +6,7 @@
 
 package Servlet.User;
 
+import models.CartFacade;
 import entity.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +34,7 @@ public class CartServlet extends HttpServlet {
     private HttpServletRequest req;
     private HttpServletResponse res;
     private PrintWriter out;
+    private CartFacade c;
     
     String form = "<form action=\"purchase\" method=\"post\">" +
 "                <input type=\"hidden\" name=\"payment\" value=\"payment\">" +
@@ -42,20 +44,20 @@ public class CartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException { 
         session=request.getSession();
+        c = new CartFacade(session);
         String name = (String) session.getAttribute("sessionname");
         if(name != null){
 //     if == null       response.sendRedirect(request.getContextPath()+"/login");
             response.setContentType("text/html;charset=UTF-8");
             out = response.getWriter();
-            List<Cart> cart = getAllCartItems();
+            List<Cart> cart = c.getAllCartItems();
             int price = 0;
             for(Cart c : cart){
-                out.print(c.getProduct().getProName()+" "+c.getQuantity()+"<br>");
+                out.print(c.getId()+" "+c.getProduct().getProName()+" "+c.getQuantity()+"<br>");
                 price += c.getQuantity() * c.getProduct().getProPrice();
             }
             out.print("Total: "+price+"<br>");
             session.setAttribute("totalPrice", price);
-            System.out.println(price);
             out.println(form);
         }
     }
@@ -64,47 +66,23 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         session=request.getSession(); 
+        c = new CartFacade(session);
         String name = (String) session.getAttribute("sessionname");
         if(name != null){
             response.setContentType("text/html;charset=UTF-8");
             out = response.getWriter();
             String proID = request.getParameter("proID");
             Product p = productFacade.find(proID);
-            addToCart(p);
+            c.addToCart(p);
             int price = 0;
-            for(Cart c : getAllCartItems()){
+            for(Cart c : c.getAllCartItems()){
                 out.println(c.getProduct().getProName()+" "+c.getQuantity());
                 price += c.getQuantity() * c.getProduct().getProPrice();
             }
             session.setAttribute("totalPrice", price);
-            System.out.println(price);
             out.println(form);
         }
     }
-    private void addToCart(Product product){
-        List<Cart> cart;
-        if (session.getAttribute("cart") != null) {
-            cart = (List<Cart>) session.getAttribute("cart");
-        }else{
-            session.setAttribute("cart", new ArrayList<>());
-            cart = (List<Cart>) session.getAttribute("cart");
-        }
-        int index = -1;
-        for(Cart c : cart){
-            if(product.getProID() == c.getProduct().getProID()){
-                index = cart.indexOf(c);
-            }
-        }
-        if (index != -1 ) {
-            cart.get(index).setQuantity(cart.get(index).getQuantity() + 1);
-            session.setAttribute("cart", cart);
-        } else{
-            cart.add(new Cart(product, 1));
-            session.setAttribute("cart", cart);
-        }
-    }
-    private List<Cart> getAllCartItems(){
-        return (session.getAttribute("cart") != null)? (List<Cart>)session.getAttribute("cart") : new ArrayList<>();
-    }
+    
 
 }

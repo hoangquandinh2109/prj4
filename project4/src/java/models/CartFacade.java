@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Servlet.User;
+package models;
 
 import entity.Cart;
 import java.util.ArrayList;
@@ -21,7 +21,24 @@ public class CartFacade {
     public CartFacade(HttpSession session) {
         this.session = session;
     }
-    
+    public void deletefromCart(int id){
+        List<Cart> cart = getAllCartItems();
+        for(Cart c: cart){
+            if(c.getId() == id){
+                cart.remove(c);
+            }
+        }
+        session.setAttribute("cart", cart);
+    }
+    public void updateQuantityCart(int id, int quantity){
+        List<Cart> cart = getAllCartItems();
+        for(Cart c: cart){
+            if(c.getId() == id){
+                c.setQuantity(quantity);
+            }
+        }
+        session.setAttribute("cart", cart);
+    }
     public void addToCart(entity.Product product){
         List<Cart> cart;
         if (session.getAttribute("cart") != null) {
@@ -40,7 +57,8 @@ public class CartFacade {
             cart.get(index).setQuantity(cart.get(index).getQuantity() + 1);
             session.setAttribute("cart", cart);
         } else{
-            cart.add(new Cart(product, 1));
+            int lastid = cart.size();
+            cart.add(new Cart(lastid+1, product, 1));
             session.setAttribute("cart", cart);
         }
     }

@@ -36,32 +36,54 @@ public class Product extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> list = new ArrayList<>();
-        list.add("hello");
-        list.add("sdfdsf");
-        list.add("hsdfdellddo");
-        list.add("hesssllo");
-        list.add("heddfdllo");
-        list.add("hesddddfdfllo");
-        list.add("hedfsdfllo");
-        list.add("helxcjgjghdlo");
-        req.setAttribute("list", list);
-        String id;
+        String model = "", id = "";
+        String[] uris = new String[]{};
         try {
-            id = req.getPathInfo().substring(1);
-            System.out.println("quan vip: "+id);
+            uris = req.getPathInfo().substring(1).split("/");
+            model = uris[0];
+            try {
+                id = uris[1];
+            } catch (Exception e) {
+                id = "";
+            }
         } catch (Exception e) {
-            id = "";
+            model = "";
         }
-        if (!id.isEmpty()) {
-            getServletContext().getRequestDispatcher("/proDetails.jsp").forward(req, resp);
-        } else {
+        PrintWriter out = resp.getWriter();
+        switch (model) {
+            case "type":
+            req.setAttribute("pagename", "Type");
+            if(!id.isEmpty()){
+            }else{
+                //trang type
+                getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
+            }
+                break;
+            case "category":
+            req.setAttribute("pagename", "Category");
+            if(!id.isEmpty()){
+            }else{
+                //trang category
+                getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
+            }
+                break;
+            case "v":
+                
+            if(!id.isEmpty()){
+                getServletContext().getRequestDispatcher("/proDetails.jsp").forward(req, resp);
+            } else{
+                resp.setStatus(404);/// tam thoi, sau nay se tao trang 404
+            }
+                break;
+            case "":
+                req.setAttribute("listP", productDB.findAll());
+                req.setAttribute("pagename", "Product");
+                getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+            default:
+                resp.setStatus(404);
+        }
 //                PrintWriter out = resp.getWriter();
 //                out.println(johnnys(productDB.findAll()));
-            req.setAttribute("listP", productDB.findAll());
-            getServletContext().getRequestDispatcher("/testpurchase.jsp").forward(req, resp);
-        }
-
     }
 
     @Override
