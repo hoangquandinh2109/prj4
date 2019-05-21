@@ -812,3 +812,28 @@ body{
     -webkit-animation-name: fadeInDownModal;
     animation-name: fadeInDownModal;
 }
+.pagination>li>a, .pagination>li>span{
+    background-color: transparent;
+    border-color: transparent;
+    color: #333!important;
+    font-family: 'MerriweatherSans';
+
+}
+.pagination>.disabled>a,
+ .pagination>.disabled>a:focus,
+  .pagination>.disabled>a:hover,
+   .pagination>.disabled>span,
+    .pagination>.disabled>span:focus,
+     .pagination>.disabled>span:hover{
+         background-color: transparent;
+         border-color: transparent;
+     }
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover{
+    background-color: transparent;
+    border-color: #ddd;
+}

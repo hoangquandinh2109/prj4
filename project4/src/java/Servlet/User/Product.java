@@ -6,6 +6,8 @@
 package Servlet.User;
 
 import com.sun.xml.ws.transport.tcp.io.OutputWriter;
+import entity.Category;
+import entity.ProductType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -22,7 +24,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jdk.nashorn.internal.parser.JSONParser;
+import models.CategoryFacadeLocal;
 import models.ProductFacadeLocal;
+import models.ProductTypeFacadeLocal;
 
 /**
  *
@@ -30,6 +34,10 @@ import models.ProductFacadeLocal;
  */
 @WebServlet(name = "ProductDetail", urlPatterns = {"/product/*"})
 public class Product extends HttpServlet {
+    @EJB
+    private CategoryFacadeLocal proCat;
+    @EJB
+    private ProductTypeFacadeLocal proType;
 
     @EJB
     private ProductFacadeLocal productDB;
@@ -50,21 +58,86 @@ public class Product extends HttpServlet {
             model = "";
         }
         PrintWriter out = resp.getWriter();
+        int pageno = 1;
+        
+        
         switch (model) {
+            case "api":
+                break;
             case "type":
-            req.setAttribute("pagename", "Type");
-            if(!id.isEmpty()){
+            req.setAttribute("pagename", "Type"+((!id.isEmpty() && !id.equals("page"))?" - "+id:""));
+            if(!id.isEmpty() && (!id.equals("page") && !id.equals("api"))){
+                
+                getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             }else{
                 //trang type
-                getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
+                try {
+                    pageno = Integer.parseInt(uris[2]);
+                } catch (Exception e) {
+                    pageno = 1;
+                }
+                List<String[]> listPT = new ArrayList<>();
+                int pagenum = 0, count = 0, countlist = 0, skip = (pageno-1) * 3;
+                
+                for(ProductType pt: proType.findAll()){
+                    if(countlist>=skip){
+                        if(count < 3){
+                            listPT.add(new String[]{String.valueOf(pt.getTypeID()),pt.getTypeName()});
+                            count++;
+                        }
+                        
+                    }
+                    countlist++;
+                    if(countlist % 3 == 0) pagenum++;
+                }
+                if (countlist % 3  > 0 && countlist % 3 < 3 ) pagenum++;
+                if(!id.equals("api")){
+                    req.setAttribute("listCollections", listPT);
+                    req.setAttribute("h3name", "Types");
+                    req.setAttribute("link", "type");
+                    req.setAttribute("pagenum", pagenum);
+                    req.setAttribute("currPage", pageno);
+                    getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
+                } else{
+                    out.println(API.Collections.getTypeThings(listPT, pagenum, pageno));
+                }
             }
                 break;
             case "category":
-            req.setAttribute("pagename", "Category");
-            if(!id.isEmpty()){
+            req.setAttribute("pagename", "Category"+((!id.isEmpty() && !id.equals("page"))?" - "+id:""));
+            if(!id.isEmpty() && !id.equals("page") && !id.equals("api")){
+                getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             }else{
                 //trang category
-                getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
+                try {
+                    pageno = Integer.parseInt(uris[2]);
+                } catch (Exception e) {
+                    pageno = 1;
+                }
+                List<String[]> listPT = new ArrayList<>();
+                int pagenum = 0, count = 0, countlist = 0, skip = (pageno-1) * 3;
+                
+                for(Category pt: proCat.findAll()){
+                    if(countlist>=skip){
+                        if(count < 3){
+                            listPT.add(new String[]{String.valueOf(pt.getCatID()),pt.getCatName()});
+                            count++;
+                        }
+                    }
+                    countlist++;
+                    if(countlist % 3 == 0) {pagenum++;}
+                }
+                if (countlist % 3  > 0 && countlist % 3 < 3 ) pagenum++;
+                if(!id.equals("api")){
+                    req.setAttribute("listCollections", listPT);
+                req.setAttribute("h3name", "Categories");
+                req.setAttribute("link", "category");
+                req.setAttribute("pagenum", pagenum);
+                req.setAttribute("currPage", pageno);
+                    getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
+                } else{
+                    out.println(API.Collections.getTypeThings(listPT, pagenum, pageno));
+                }
             }
                 break;
             case "v":
@@ -75,34 +148,13 @@ public class Product extends HttpServlet {
                 resp.setStatus(404);/// tam thoi, sau nay se tao trang 404
             }
                 break;
-            case "":
-                req.setAttribute("listP", productDB.findAll());
-                req.setAttribute("pagename", "Product");
-                getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             default:
-                resp.setStatus(404);
+                resp.setStatus(404);/// tam thoi, sau nay se tao trang 404
         }
-//                PrintWriter out = resp.getWriter();
-//                out.println(johnnys(productDB.findAll()));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
-//    public JsonArray johnnys(List<entity.Product> lp){
-//        JsonArrayBuilder jab = Json.createArrayBuilder();
-//        for(entity.Product p : lp){
-//                jab.add(johnny(p));
-//        }
-//        return jab.build();
-//                
-//    }
-//    public JsonObject johnny(entity.Product p){
-//        return Json.createObjectBuilder()
-//                .add("proID", p.getProID())
-//                .add("proName", p.getProName())
-//                .add("proPrice", p.getProPrice())
-//                .build();
-//    }
-
+    
 }
