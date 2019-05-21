@@ -55,7 +55,7 @@ public class InsertProductServlet extends HttpServlet {
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String proid = request.getParameter("id");
+            // String proid = request.getParameter("id");
             String name = request.getParameter("name");
             String details = request.getParameter("details");
             int price = Integer.parseInt(request.getParameter("price"));
@@ -67,8 +67,23 @@ public class InsertProductServlet extends HttpServlet {
             int cboCate = Integer.parseInt(request.getParameter("cboCategory"));
             int cboType = Integer.parseInt(request.getParameter("cboType"));
             path = uploadFile(request);
+            String proID = "";
+            Integer numOfProducts = Integer.valueOf(productFacade.count() + 1);
+            switch (numOfProducts.toString().length()) {
+                case 1: // '\001'
+                    proID = (new StringBuilder()).append("PR00").append(numOfProducts).toString();
+                    break;
+
+                case 2: // '\002'
+                    proID = (new StringBuilder()).append("PR0").append(numOfProducts).toString();
+                    break;
+
+                case 3: // '\003'
+                    proID = (new StringBuilder()).append("PR").append(numOfProducts).toString();
+                    break;
+            }
             entity.Product product = new entity.Product();
-            product.setProID(proid);
+            product.setProID(proID);
             product.setProName(name);
             product.setProDetails(details);
             product.setProPrice(price);
@@ -82,7 +97,7 @@ public class InsertProductServlet extends HttpServlet {
             ProductType typeID = productTypeFacade.find(cboType);
             product.setTypeID(typeID);
             productFacade.create(product);
-            entity.Product proIDD = productFacade.find(proid);
+            entity.Product proIDD = productFacade.find(proID);
             ImgStog imgtog = new ImgStog();
             imgtog.setImgName(path);
             imgStogFacade.create(imgtog);

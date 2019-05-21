@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlet;
 
 import entity.Category;
 import entity.ProductType;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,21 +21,41 @@ import models.ProductTypeFacadeLocal;
  *
  * @author Asus
  */
-public class showCatServlet extends HttpServlet {
+public class insertCatTyServlet extends HttpServlet {
+
     @EJB
     private ProductTypeFacadeLocal productTypeFacade;
     @EJB
     private CategoryFacadeLocal categoryFacade;
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             List<Category> listCate = categoryFacade.findAll();
-             List<ProductType> listTyp = productTypeFacade.findAll();
-          request.setAttribute("listCat", listCate);
-          request.setAttribute("listType", listTyp);
-          request.getRequestDispatcher("admin/insertPro.jsp").forward(request, response);
+            String action = request.getParameter("action");
+            if (action.equals("Insert Category")) {
+                String name = request.getParameter("catName");
+                Category cate = new Category(name);
+                categoryFacade.create(cate);
+
+                request.getRequestDispatcher("admin/insertCatvType.jsp").forward(request, response);
+            } else if (action.equals("Insert Type")) {
+                String typeName = request.getParameter("typeName");
+                ProductType type = new ProductType();
+                type.setTypeName(typeName);
+                productTypeFacade.create(type);
+
+                request.getRequestDispatcher("admin/insertCatvType.jsp").forward(request, response);
+            }
         }
     }
 

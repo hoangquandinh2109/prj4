@@ -50,13 +50,21 @@
                             <td>${s.proID.proPrice}</td>
                             <td>${s.proID.quantity}</td>
                             <td> <fmt:formatDate value="${s.proID.dateRelease}" pattern="yyyy-MM-dd" /></td>
-                            <td>${s.proID.proStatus}</td> 
+                           
+                            <td><c:choose>
+                                    <c:when test="${s.proID.proStatus==true}">
+                                        <input type="checkbox" checked onclick="return false;" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="checkbox" onclick="return false;" />
+                                    </c:otherwise>
+                                </c:choose></td>
                             <td>${s.proID.tags}</td>     
                             <td>${s.proID.catID.catName}</td>
                             <td>${s.proID.typeID.typeName}</td>
                             <td>
-                            <a href="getDetailsProductServlet?code=${s.code}">Update</a>
-                        </td>
+                                <a href="getDetailsProductServlet?code=${s.code}">Update</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
