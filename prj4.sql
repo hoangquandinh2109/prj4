@@ -147,30 +147,8 @@ create table Feature(
 	FeatureID int identity primary key,
 	Fname varchar(50),
 	Fdescription varchar(255),
-	[date] date
+	proID varchar(10) foreign key REFERENCES product(proID)
 )
 
-drop table if exists f_Product
-go
-create table f_Product(
-	id int identity primary key,
-	proID varchar(10) foreign key REFERENCES product(proID),
-	FeatureID int foreign key REFERENCES Feature(FeatureID),
-)
-drop table if exists comment
-create table comment(
-	id int identity primary key,
-	content text,
-	[date] datetime
-)
- drop table if exists viewComment
-create table viewComment(
-	commentID int identity primary key,
-	comItem int foreign key REFERENCES comment(id),
-	cusID int foreign key REFERENCES customer(cusID),
-	proID varchar(10) foreign key REFERENCES product(proID),
-	[like] int
-)
-go
 
 
