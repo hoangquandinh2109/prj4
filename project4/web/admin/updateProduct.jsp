@@ -42,6 +42,12 @@
                                         <input readonly value="${product.proID.proID}" id="txtID" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">PROIMGID ID </label>
+                                <div class="col-md-8">
+                                    <input readonly value="${product.code}" id="txtID" name="proImgid" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Name </label>
@@ -84,7 +90,7 @@
                                 <label class="control-label col-md-3">Category</label>
                                 <div class="col-md-8">
                                     <select name="cboCategory" class="form-control">
-                                        
+
                                         <c:forEach var="c1" items="${listCat}">
                                             <option value="${c1.catID}">${c1.catName}</option>
                                         </c:forEach>
@@ -95,7 +101,7 @@
                                 <label class="control-label col-md-3">Type</label>
                                 <div class="col-md-8">
                                     <select name="cboType" class="form-control">
-                                        
+
                                         <c:forEach var="c" items="${listType}">
                                             <option value="${c.typeID}">${c.typeName}</option>
                                         </c:forEach>
@@ -105,8 +111,8 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Image Product</label>
                                 <div class="col-md-8">
-                                    <input type="hidden" value="${product.imgID.imgID}" name="imgID"/>
-                                    <input  class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
+                                    <input type="text" value="${product.imgID.imgID}" name="imgID" readonly/>
+                                    <input class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
                                     <a href="#" id="fileSelect">Change image</a> 
                                     <div id="fileList">
                                         <p><img src="productImage/${product.imgID.imgName}" alt="pets" width="150px" height="150px" ></p>

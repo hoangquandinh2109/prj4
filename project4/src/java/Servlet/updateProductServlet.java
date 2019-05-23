@@ -70,6 +70,7 @@ public class updateProductServlet extends HttpServlet {
             Date dateRe = sdf.parse(date1);
             String tags = request.getParameter("tags");
             int imgID = Integer.parseInt(request.getParameter("imgID"));
+             int proImgID = Integer.parseInt(request.getParameter("proImgid"));
             boolean status;
             if ("Active".equals(request.getParameter("status"))) {
                 status = true;
@@ -97,11 +98,13 @@ public class updateProductServlet extends HttpServlet {
             product.setTypeID(typeID);
             productFacade.edit(product);
             entity.Product proIDD = productFacade.find(proid);
+            
             ImgStog imgtog = new ImgStog();
             imgtog.setImgID(imgID);
             imgtog.setImgName(path);
             imgStogFacade.edit(imgtog);
             ProImgtb proimg = new ProImgtb();
+           proimg.setCode(proImgID);
             proimg.setImgID(imgtog);
             proimg.setProID(proIDD);
             proImgtbFacade.edit(proimg);
