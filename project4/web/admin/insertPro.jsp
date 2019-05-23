@@ -35,14 +35,6 @@
                         <div class="tile-body">
                             <form id="fileForm" class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Product ID </label>
-                                    <div class="col-md-8">
-                                        <input id="txtID" class="form-control" autocomplete="off" type="text" name="id" required oninvalid="this.setCustomValidity('Please Enter Product ID minLength is 3')"
-                                               oninput="setCustomValidity('')" placeholder="Enter product ID" minlength="3">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="control-label col-md-3">Product Name </label>
                                     <div class="col-md-8">
                                         <input class="form-control" required type="text" id="txtName" name="name" placeholder="Enter product name" autocomplete="off">
