@@ -66,6 +66,14 @@ public class testanything extends HttpServlet {
 //            System.out.println(ex.getMessage());
 //        }
             ////////////////du lieu product
+        
+        ////goi y name
+//        PrintWriter out = resp.getWriter();
+//        for(String s : productFacade.getAllName()){
+//            if(s.contains("ip")){
+//                out.println(s);
+//            }
+//        }
     }
     
 

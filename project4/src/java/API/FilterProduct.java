@@ -7,7 +7,9 @@ package API;
 
 import static API.Collections.getTypeJson;
 import static API.Collections.getTypesJson;
+import entity.Category;
 import entity.Product;
+import entity.ProductType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -38,9 +40,19 @@ public class FilterProduct {
 
     public FilterProduct(String[] uri, HttpServletRequest req, HttpServletResponse resp,ProductFacadeLocal db, CategoryFacadeLocal dbCat,ProductTypeFacadeLocal dbType) {
             System.out.println(uri[1]+ " "+uri[2]);
-        if (uri[1].equals("type")) {
+        if (uri[1].equals("type")) {//type/2/
+            List<Product> lp;
+            ProductType thisType = dbType.find(Integer.parseInt(uri[2]));
+            /// neu co from to
+            try {
+                int from = Integer.parseInt(req.getParameter("from"));
+                int to = Integer.parseInt(req.getParameter("to"));
+                lp = db.filtTypeProductByPrice(thisType, from, to);
+            } catch (Exception e) {
+                lp = db.getProductByType(thisType);
+            }
+            ///////////////////////
             System.out.println("ok");
-            List<Product> lp = db.getProductByType(dbType.find(Integer.parseInt(uri[2])));
             if (lp != null) {
                 int currPage;
                 try {
@@ -71,7 +83,18 @@ public class FilterProduct {
             }
         } else if (uri[1].equals("category")) {
             System.out.println("ok");
-            List<Product> lp = db.getProductByCategory(dbCat.find(Integer.parseInt(uri[2])));
+            
+            List<Product> lp;
+            Category thisCat = dbCat.find(Integer.parseInt(uri[2]));
+            /// neu co from to
+            try {
+                int from = Integer.parseInt(req.getParameter("from"));
+                int to = Integer.parseInt(req.getParameter("to"));
+                lp = db.filtCategoryProductByPrice(thisCat, from, to);
+            } catch (Exception e) {
+                lp = db.getProductByCategory(thisCat);
+            }
+            ///////////////////////
             if (lp != null) {
                 int currPage;
                 try {

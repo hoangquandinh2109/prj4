@@ -2,12 +2,40 @@
  
 product.controller('proPagination', function($scope, $http) {
    $scope.numpage = 0;
+   $scope.numrow = 3;
+   var loc = 0; //loc hay chua
    var collVal = $("#collVal").text();
    var nameColl = $("#nameColl").text();
+   $scope.minPrice = 0;
+    $scope.maxPrice = 1000;
+    
+    var minPrice = 100;
+    var maxPrice = 300;
+
+  $("#min").text(minPrice);
+    $("#max").text(maxPrice);
+    
+    $("#price-filter").slider({
+        max: 500, 
+        range:true, 
+        values:[100, 300],
+        slide: function( event, ui ) {
+            minPrice= ui.values[0];
+            maxPrice= ui.values[1];
+
+            $("#min").text(minPrice);
+            $("#max").text(maxPrice);
+        }
+    });
+    $("#button-n-number>button").click(function (){
+        filtbyprice(1);
+        loc = 1;
+     });
    loadPage(1);
+   
+   
   
    
-   $scope.numrow = 3;
    $scope.addtocart = function(){
        showcartajax();
    }
@@ -43,8 +71,13 @@ product.controller('proPagination', function($scope, $http) {
        }
    }
    $scope.switchpage = function(n){
-       loadPage(n);
-       console.log($scope.listPro.length);
+       if(loc == 1){
+           alert("loc");
+           filtbyprice(n);
+       }else{
+           alert("load");
+            loadPage(n);
+        }
    }
    $scope.disableleft = function(){
        if(1 == $scope.currPage) {
@@ -64,6 +97,16 @@ product.controller('proPagination', function($scope, $http) {
        return $http.get(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page)
        .then(function(response) {
            $scope.listPro = response.data.listPro;
+           
+           $scope.numpage = response.data.numofpage;
+           $scope.currPage = response.data.currPage;
+       });
+   }
+   function filtbyprice(page){
+       return $http.get(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page+"?from="+minPrice+"&to="+maxPrice)
+       .then(function(response) {
+           $scope.listPro = response.data.listPro;
+           
            $scope.numpage = response.data.numofpage;
            $scope.currPage = response.data.currPage;
        });
@@ -74,6 +117,7 @@ product.controller('proPagination', function($scope, $http) {
          }
    }
 }); 
+
 
 $(document).ready(function(){
     $("#info").click(function(){
@@ -104,4 +148,6 @@ $(document).ready(function(){
         $(".tabs").hide();
         $("#commentTab").show();
     });
+
+    
 });

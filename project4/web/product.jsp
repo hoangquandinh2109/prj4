@@ -11,6 +11,7 @@
 <html>
     <head>
         <c:import url="templates/head.jsp"></c:import>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
     <body>
         <div class="content-n-cart clearfix">
@@ -64,6 +65,15 @@
                                 </div>
                                 <div>
                                     <div class="title-row">REFINE <span>BY</span></div>
+                                    <div id="refine-by">
+                                        <div id="filter-by-price">
+                                            <div id="price-filter"></div>
+                                            <div id="button-n-number">
+                                                <button>FILTER</button>
+                                                Price: $<span id="min"></span> - $<span id="max"></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="event">
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/sidebar_bannertwo_278x189.png?v=1507087021"  alt=""></a>
@@ -154,7 +164,12 @@
         </div>
         <c:import url="templates/script.jsp"></c:import>
               <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
+              <script
+                    src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+                    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+                    crossorigin="anonymous"></script>
               <script src="${pageContext.request.contextPath}/assets/js/product.js"></script>
+              <script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js"></script>
     </body>
 
 </html>

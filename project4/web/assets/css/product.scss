@@ -157,3 +157,44 @@ a.button-dhq-mk{
         }
     }
 }
+#refine-by{
+    #filter-by-price{
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+
+        #price-filter {
+            height: 2px;
+            background: #ccc;
+            position: relative;
+            //o giua
+            
+            .ui-slider-range {
+                position: absolute;
+                z-index: 1;
+                border: 0;
+                top: 0;
+                height: 100%;
+                z-index: 1;
+                background-color: $color-pink;
+            }
+            //hai num
+            .ui-slider-handle{
+                background: white;
+                border-radius: 50%;
+                position: absolute;
+                width: 16px;
+                z-index: 2;
+                height: 16px;
+                border: 2px $color-pink solid;
+                top: -7px;
+                margin-left: -8px;
+                &:focus{
+                    outline: none;
+                }
+            }
+            .ui-slider-handle + .ui-slider-handle{
+                background-color: $color-pink;
+            }
+        }
+    }
+}

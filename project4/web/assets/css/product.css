@@ -198,4 +198,45 @@ a.button-dhq-mk#wishlist:hover {
 .tab-for-somthing .tab-things {
   border: 1px solid #e5e5e5;
 }
+
+#refine-by #filter-by-price {
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+#refine-by #filter-by-price #price-filter {
+  height: 2px;
+  background: #ccc;
+  position: relative;
+}
+
+#refine-by #filter-by-price #price-filter .ui-slider-range {
+  position: absolute;
+  z-index: 1;
+  border: 0;
+  top: 0;
+  height: 100%;
+  z-index: 1;
+  background-color: #ee6c92;
+}
+
+#refine-by #filter-by-price #price-filter .ui-slider-handle {
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  width: 16px;
+  z-index: 2;
+  height: 16px;
+  border: 2px #ee6c92 solid;
+  top: -7px;
+  margin-left: -8px;
+}
+
+#refine-by #filter-by-price #price-filter .ui-slider-handle:focus {
+  outline: none;
+}
+
+#refine-by #filter-by-price #price-filter .ui-slider-handle + .ui-slider-handle {
+  background-color: #ee6c92;
+}
 /*# sourceMappingURL=product.css.map */

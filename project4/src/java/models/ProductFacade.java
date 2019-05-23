@@ -64,6 +64,58 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
             return null;
         }
     }
+
+    @Override
+    public List<Product> filtCategoryProductByPrice(Category category, int from, int to) {
+        try {
+            return em.createQuery("SELECT p FROM Product p WHERE p.catID = :catID AND p.proStatus = :proStatus AND p.proPrice >= :from AND p.proPrice <= :to")
+                .setParameter("catID", category)
+                .setParameter("from", from)
+                .setParameter("to", to)
+                .setParameter("proStatus", true)
+                .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Product> filtTypeProductByPrice(ProductType producttype, int from, int to) {
+        try {
+            return em.createQuery("SELECT p FROM Product p WHERE p.typeID = :typeID AND p.proStatus = :proStatus AND p.proPrice >= :from AND p.proPrice <= :to")
+                .setParameter("typeID", producttype)
+                .setParameter("from", from)
+                .setParameter("to", to)
+                .setParameter("proStatus", true)
+                .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    @Override
+    public List<String> getAllName(){
+        try {
+            return em.createQuery("SELECT p.proName FROM Product p WHERE p.proStatus = :proStatus")
+                .setParameter("proStatus", true)
+                .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Product> searchByName(String name){
+        try {
+            return em.createQuery("SELECT p FROM Product p WHERE p.proName = :name")
+                .setParameter("name", name)
+                .setParameter("proStatus", true)
+                .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
     
     
 }

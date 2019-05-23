@@ -38,5 +38,13 @@ public interface ProductFacadeLocal {
     List<Product> getProductByCategory(Category category);
 
     Product getSingleProduct(String id);
+
+    List<Product> filtCategoryProductByPrice(Category category, int from, int to);
+    
+    List<Product> filtTypeProductByPrice(ProductType type, int from, int to);
+    
+    List<String> getAllName();
+    
+    List<Product> searchByName(String name);
     
 }
