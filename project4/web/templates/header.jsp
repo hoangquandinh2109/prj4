@@ -10,7 +10,7 @@
     <div class="container">
         <div class="top-nav-welcome">
             <c:if test="${not empty sessionname}">
-                <div>Welcome ${sessionname}</div>
+                <div>Welcome <span id="name">${sessionname}</span>, <a href="${pageContext.request.contextPath}/logout">logout</a></div>
             </c:if>
             <c:if test="${empty sessionname}">
                 <div>Welcome visitor you can <a class="login-link" href="">Login</a> and <a class="create-acc-link" href="">create an account</a> </div>
@@ -83,7 +83,13 @@
             <li><a href="">Home</a></li>
             <li><a href="">About</a></li>
             <li><a href="">Contact</a></li>
-            <li><a href="product">Product</a></li>
+            <li>
+                <a>Product</a>
+                <ul>
+                    <li><a href="${pageContext.request.contextPath}/product/category">Category</a></li>
+                    <li><a href="${pageContext.request.contextPath}/product/type">Type</a></li>
+                </ul>
+            </li>
             <li><a href="">News</a></li>
         </ul>
         <form method="post">

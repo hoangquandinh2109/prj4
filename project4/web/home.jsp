@@ -177,7 +177,7 @@
                                                 <div class="button-tu clearfix">
                                                     <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
@@ -224,9 +224,9 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
@@ -267,9 +267,9 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
@@ -310,9 +310,9 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>

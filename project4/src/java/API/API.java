@@ -24,6 +24,8 @@ import models.TbTagFacadeLocal;
 import entity.Product;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import models.CategoryFacadeLocal;
+import models.ProductTypeFacadeLocal;
 
 /**
  *
@@ -31,6 +33,10 @@ import java.text.SimpleDateFormat;
  */
 @WebServlet(name = "API", urlPatterns = {"/api/*"})
 public class API extends HttpServlet {
+    @EJB
+    private ProductTypeFacadeLocal productTypeFacade;
+    @EJB
+    private CategoryFacadeLocal categoryFacade;
 
     @EJB
     private ProductFacadeLocal productFacade;
@@ -39,9 +45,12 @@ public class API extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] uris = new String[]{};
         try {
+            uris = req.getPathInfo().substring(1).split("/");
             if(!uris[2].isEmpty()){
+                System.out.println(uris[2]);
                 if(uris[0].equals("product")){
-                    FilterProduct fp = new FilterProduct(uris, req, resp);
+                    System.out.println(uris[0]);
+                    FilterProduct fp = new FilterProduct(uris, req, resp, productFacade, categoryFacade, productTypeFacade);
                 }
             }
         } catch (Exception e) {

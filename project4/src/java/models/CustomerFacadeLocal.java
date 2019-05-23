@@ -34,5 +34,7 @@ public interface CustomerFacadeLocal {
     Customer login(String email, String password);
 
     boolean checkIfEmailExisted(String email);
-    
+
+    boolean register(Customer customer);
+
 }

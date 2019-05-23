@@ -24,7 +24,7 @@
                     <!--codehere-->
                     <h3 id="h3name" class="text-center">${h3name}</h3>
                     <div class="row">
-                        <div ng-repeat="co in listCo" class="col-xs-12 col-md-4 col-sm-4">
+                        <div ng-repeat="co in listCo" class="wow fadeIn col-xs-12 col-md-4 col-sm-4">
                             <div class="collection-grid-item">
                                 <div class="collection-image">
                                     <a href="${pageContext.request.contextPath}/product/${link}/{{co.coID}}" class="collection-grid-item__link">
@@ -78,7 +78,7 @@
     <span id='linkvip' style='display: none;'>${link}</span>
         
     <c:import url="templates/script.jsp"></c:import>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/collections.js"></script>
 </body>
 

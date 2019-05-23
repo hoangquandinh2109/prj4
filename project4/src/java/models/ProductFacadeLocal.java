@@ -36,5 +36,7 @@ public interface ProductFacadeLocal {
     List<Product> getProductByType(ProductType productType);
     
     List<Product> getProductByCategory(Category category);
+
+    Product getSingleProduct(String id);
     
 }

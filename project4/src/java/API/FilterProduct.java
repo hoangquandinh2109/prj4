@@ -10,6 +10,7 @@ import static API.Collections.getTypesJson;
 import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,50 +35,100 @@ import models.ProductTypeFacadeLocal;
  */
 public class FilterProduct {
 
-    @EJB
-    private ProductFacadeLocal db;
-    @EJB
-    private ProductTypeFacadeLocal dbType;
-    @EJB
-    private CategoryFacadeLocal dbCat;
 
-    public FilterProduct(String[] uri, HttpServletRequest req, HttpServletResponse resp) {
+    public FilterProduct(String[] uri, HttpServletRequest req, HttpServletResponse resp,ProductFacadeLocal db, CategoryFacadeLocal dbCat,ProductTypeFacadeLocal dbType) {
+            System.out.println(uri[1]+ " "+uri[2]);
         if (uri[1].equals("type")) {
+            System.out.println("ok");
             List<Product> lp = db.getProductByType(dbType.find(Integer.parseInt(uri[2])));
             if (lp != null) {
+                int currPage;
+                try {
+                    currPage = Integer.parseInt(uri[3]);
+                } catch (Exception e) {
+                    currPage = 1;
+                }
+                int numPage = 0, countlist = 0, count12 = 0, skip = 12 * (currPage-1);
+                List<String[]> listPT = new ArrayList<>();
+                JsonArrayBuilder listPTJAB = Json.createArrayBuilder();
+                for(Product p : lp){
+                    if(countlist>=skip){
+                        if(count12<12){
+                            listPTJAB.add(getSingleResult(p));
+                            count12++;
+                        }
+                    }
+                    countlist++;
+                    if(countlist % 12 == 0) numPage++;
+                }
+                if (countlist % 12  > 0 && countlist % 12 < 12 ) numPage++;
                 try {
                     PrintWriter out = resp.getWriter();
-                    out.println(getResultThingsJson(lp));
+                    out.println(getResultThingsJson(listPTJAB.build(), numPage, currPage));
                 } catch (IOException ex) {
                     Logger.getLogger(FilterProduct.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else if (uri[1].equals("category")) {
-
+            System.out.println("ok");
+            List<Product> lp = db.getProductByCategory(dbCat.find(Integer.parseInt(uri[2])));
+            if (lp != null) {
+                int currPage;
+                try {
+                    currPage = Integer.parseInt(uri[3]);
+                } catch (Exception e) {
+                    currPage = 1;
+                }
+                int numPage = 0, countlist = 0, count12 = 0, skip = 12 * (currPage-1);
+                List<String[]> listPT = new ArrayList<>();
+                JsonArrayBuilder listPTJAB = Json.createArrayBuilder();
+                for(Product p : lp){
+                    if(countlist>=skip){
+                        if(count12<12){
+                            listPTJAB.add(getSingleResult(p));
+                            count12++;
+                        }
+                    }
+                    countlist++;
+                    if(countlist % 12 == 0) numPage++;
+                }
+                if (countlist % 12  > 0 && countlist % 12 < 12 ) numPage++;
+                try {
+                    PrintWriter out = resp.getWriter();
+                    out.println(getResultThingsJson(listPTJAB.build(), numPage, currPage));
+                } catch (IOException ex) {
+                    Logger.getLogger(FilterProduct.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 
-    private JsonArray getResultJson(List<Product> lp) {
-        JsonArrayBuilder jab = Json.createArrayBuilder();
-        for(Product p : lp){
-                jab.add(getSingleReulst(p));
-        }
-        return jab.build();
-        
-    }
+ 
 
-    private JsonObject getResultThingsJson(List<Product> lp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private JsonObject getSingleReulst(Product p) {
+    private JsonObject getResultThingsJson(JsonArray lp, int numofpage, int currPage) {
         return Json.createObjectBuilder()
-                .add("proID", p.getProID())
-                .add("proName", p.getProName())
-                .add("proPrice", p.getProPrice())
-                .add("starAVG", p.getStarAVG())
-                .add("proDetails", p.getProDetails())
+                .add("listPro", lp)
+                .add("numofpage", numofpage)
+                .add("currPage", currPage)
                 .build();
+    }
+
+    private JsonObject getSingleResult(Product p) {
+        System.out.println("name: "+p.getProName()+" star: "+p.getStarAVG());
+        return Json.createObjectBuilder()
+                .add("proID", ifNull(p.getProID()))
+                .add("proName", ifNull(p.getProName()))
+                .add("proPrice", ifNull(p.getProPrice()))
+                .add("starAVG", ifNull(p.getStarAVG()))
+                .add("proDetails", ifNull(p.getProDetails()))
+                .build();
+    }
+    private String ifNull(Object i){
+        if(i != null){
+            return i+"";
+        }else{
+            return "null";
+        }
     }
 
 }

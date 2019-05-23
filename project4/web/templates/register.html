@@ -1,13 +1,24 @@
 <h3>Register</h3>
-<form id="form-in-modal" method="post" action="login">
+<form id="form-in-modal" method="post">
     <span class="label-form-modal">Email</span>
-    <input id="email" type="text" name="email" class="form-in-modal check-blank">
+    <input id="email" type="text" name="email" value="sdfsdf@sdfsd.sd" class="form-in-modal check-blank">
     <span class="label-form-modal">Password</span>
-    <input id="password" type="password" name="password" class="form-in-modal check-blank">
+    <input id="password" type="password" name="password" value="" class="form-in-modal check-blank">
     <span class="label-form-modal">Re-enter Password</span>
     <input id="re-password" type="password" name="re-password" class="form-in-modal check-blank">
     <span class="label-form-modal">Name</span>
     <input id="name" type="text" name="name" class="form-in-modal">
+    <span class="label-form-modal">Gender</span>
+    <div class="form-in-modal">
+        <label>
+            <input id="male" checked value="male" name="gender" type="radio">
+            <i class="far fa-male"></i> <span>Male</span>
+        </label>
+        <label style="margin-left: 18px;">
+            <input id="female" value="female" name="gender" type="radio">
+            <i class="far fa-female"></i> <span>Female</span>
+        </label>
+    </div>
     <span class="label-form-modal">Address</span>
     <input id="address" type="text" name="address" class="form-in-modal">
     <span class="label-form-modal">Phone</span>
@@ -17,6 +28,60 @@
 </form>
 <script>
     var error = 0;
+    var  gender = $('input[type=radio][name=gender]').val();
+    $('input[type=radio][name=gender]').change(function(){
+        gender = $(this).val();
+    });
+    
+   function validatePhone(){
+       var phone = $("#phone").val();
+       $("#phone").next('.error-form').remove();
+       if(phone == ""){
+           $("#phone").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+           error++;
+       }
+   }
+   function validateName(){
+        var name = $("#name").val();
+        $("#name").next('.error-form').remove();
+       if(name == ""){
+           $("#name").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+           error++;
+       }
+   }
+   function validateAddress(){
+       var address = $("#address").val();
+       $("#address").next('.error-form').remove();
+       if(address == ""){
+           $("#address").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+           error++;
+       }
+   }
+   function validateInfo(){
+       error = 0;
+       validatePhone();
+       validateName();
+       validateAddress();
+   }
+   
+   $("#name").focusin(function(){
+       $(this).next('.error-form').remove();
+   });
+   $("#phone").focusin(function(){
+       $(this).next('.error-form').remove();
+   });
+   $("#address").focusin(function(){
+       $(this).next('.error-form').remove();
+   });
+   $("#name").focusout(function(){
+       validateName();
+   });
+   $("#phone").focusout(function(){
+       validatePhone();
+   });
+   $("#address").focusout(function(){
+       validateAddress();
+   });
    $("#email").focusout(function(){
        validateEmail($(this).val());
    });
@@ -77,21 +142,19 @@
                 $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">Password not match!</span>");
                 error++;
           } 
-          console.log("error: "+error);
-          if(error = 0){
-              console.log("dk");
+          validateInfo();
+          
+          if(error == 0){
                 $.ajax({
                     type:"POST",
-                   data:{"email":email,"password":password,"name":name,"address":address,"phone":phone},
-                   url: "register",
+                   data:{"email":email,"password":password,"name":name,"address":address,"phone":phone,"gender":gender},
+                   url: "http://localhost:8080/project4/register",
                    success: function(data) {
                        console.log("success");
                        location.reload();
                    },
                    error:function(){
                        console.log("error");
-//                       $("#error2").text("Login unsuccessful!");
-//                       $("#error2").show();
                    },
                 });
             }
@@ -101,7 +164,7 @@
         event.preventDefault();
         $(".modal-form").remove();
         $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
-        $(".modal-form").load("templates/login.html");
+        $(".modal-form").load("http://localhost:8080/project4/templates/login.html");
     });  
     
     function checkEmail(email) {
@@ -123,7 +186,7 @@
                   $.ajax({
                     type:"GET",
                     data:{"email":email},
-                    url: "register",
+                    url: "http://localhost:8080/project4/register",
                     error: function(){
                           $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is existed!</span>");
                           error++;

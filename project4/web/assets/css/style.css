@@ -109,6 +109,10 @@ body .top-nav .top-nav-welcome {
   font-family: 'MerriweatherSans';
 }
 
+body .top-nav .top-nav-welcome #name {
+  color: #fff;
+}
+
 body .top-nav .top-nav-tools {
   padding: 7px 0;
   float: right;
@@ -292,6 +296,23 @@ body .navigation ul li a {
 
 body .navigation ul li a:hover {
   background-color: #aaa;
+}
+
+body .navigation ul li:hover ul {
+  z-index: 100000000;
+  opacity: 1;
+}
+
+body .navigation ul li ul {
+  position: absolute;
+  opacity: 0;
+  z-index: -100000000;
+  width: 200px;
+}
+
+body .navigation ul li ul li {
+  float: unset;
+  background-color: #e5e5e5;
 }
 
 body .web-body {
@@ -553,7 +574,7 @@ body .web-body .product-block {
   border: 1px solid #e5e5e5;
 }
 
-body .web-body .product-block > .row:not(:last-child) .product-item:before {
+body .web-body .product-block > .row + .row .product-item:before {
   content: '';
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
@@ -562,7 +583,7 @@ body .web-body .product-block > .row:not(:last-child) .product-item:before {
   width: calc(100% - 30px);
   position: absolute;
   height: 1px;
-  bottom: 0px;
+  top: 0px;
 }
 
 body .web-body .product-block > .row .product-item {
@@ -663,6 +684,34 @@ body .content-n-cart .content .modal-form .form-in-modal {
   width: 100%;
 }
 
+body .content-n-cart .content .modal-form div.form-in-modal input {
+  visibility: hidden;
+  position: absolute;
+}
+
+body .content-n-cart .content .modal-form div.form-in-modal input:checked ~ i.fa-female {
+  color: #ee6c92;
+}
+
+body .content-n-cart .content .modal-form div.form-in-modal input:checked ~ i.fa-male {
+  color: #76c4ce;
+}
+
+body .content-n-cart .content .modal-form div.form-in-modal input:checked ~ span {
+  font-weight: bold;
+  color: #000;
+}
+
+body .content-n-cart .content .modal-form div.form-in-modal i {
+  color: #ccc;
+  font-size: 20px;
+}
+
+body .content-n-cart .content .modal-form div.form-in-modal span {
+  font-weight: normal;
+  color: #ccc;
+}
+
 body .content-n-cart .content .modal-form .label-form-modal {
   margin-bottom: 5px;
   display: block;
@@ -672,9 +721,17 @@ body .content-n-cart .content .modal-form div > a {
   color: #76c4ce;
 }
 
+body .content-n-cart .content .modal-form div > a:hover {
+  color: #a8e5ec;
+}
+
 body .content-n-cart .content .modal-form a.db-tac {
   margin-bottom: 5px;
   color: #76c4ce;
+}
+
+body .content-n-cart .content .modal-form a.db-tac:hover {
+  color: #a8e5ec;
 }
 
 body .content-n-cart .content .modal-form .db-tac {

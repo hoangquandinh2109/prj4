@@ -1,5 +1,12 @@
 @charset "UTF-8";
 @font-face {
+  font-family: 'Brandon';
+  src: url("../fonts/Brandon/Brandon_reg.otf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Font Awesome 5 Brands";
   font-style: normal;
   font-weight: normal;
@@ -85,6 +92,8 @@
 
 .web-body .details {
   padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #fff;
 }
 
 .web-body .more-product .event {
@@ -97,6 +106,26 @@
 
 .details-block .review-tu {
   width: 170px;
+}
+
+.details-block .price {
+  font-size: 24px;
+  color: #31a8d2;
+  font-family: 'Brandon';
+  font-weight: bold;
+}
+
+.details-block .old-price {
+  font-size: 12px;
+  color: #999;
+  font-family: 'MerriweatherSans';
+  text-decoration: line-through;
+}
+
+.details-block .availability {
+  color: #72c13d;
+  font-size: 13px;
+  font-family: 'MerriweatherSans';
 }
 
 a.button-dhq-mk {
@@ -112,5 +141,61 @@ a.button-dhq-mk:hover {
   background-color: #76c4ce;
   text-decoration: none;
   color: #fff;
+}
+
+a.button-dhq-mk:focus {
+  text-decoration: none;
+}
+
+a.button-dhq-mk#wishlist:hover {
+  background-color: #ee6c92;
+}
+
+.tab-for-somthing {
+  position: relative;
+  margin-top: 70px;
+}
+
+.tab-for-somthing .button-tab {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  bottom: calc(100% - 1px);
+}
+
+.tab-for-somthing .button-tab li {
+  display: inline-block;
+  padding-top: 6px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.tab-for-somthing .button-tab li a {
+  color: #777;
+  font-family: 'MerriweatherSans';
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  display: block;
+  background-color: #f5f5f5;
+}
+
+.tab-for-somthing .button-tab li a:hover, .tab-for-somthing .button-tab li a:focus {
+  text-decoration: none;
+}
+
+.tab-for-somthing .button-tab li.active {
+  border: 1px solid #e5e5e5;
+  border-bottom-color: white;
+  background-color: #fff;
+}
+
+.tab-for-somthing .button-tab li.active a {
+  background-color: #fff;
+}
+
+.tab-for-somthing .tab-things {
+  border: 1px solid #e5e5e5;
 }
 /*# sourceMappingURL=product.css.map */

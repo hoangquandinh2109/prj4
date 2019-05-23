@@ -35,8 +35,9 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     @Override
     public List<Product> getProductByType(ProductType productType) {
         try {
-            return em.createQuery("SELECT p FROM Product p WHERE p.typeID = :typeID")
-                .setParameter("catID", productType)
+            return em.createQuery("SELECT p FROM Product p WHERE p.typeID = :typeID AND p.proStatus = :proStatus")
+                .setParameter("typeID", productType)
+                .setParameter("proStatus", true)
                 .getResultList();
         } catch (Exception e) {
             return null;
@@ -46,12 +47,23 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     @Override
     public List<Product> getProductByCategory(Category category) {
         try {
-            return em.createQuery("SELECT p FROM Product p WHERE p.catID = :catID")
+            return em.createQuery("SELECT p FROM Product p WHERE p.catID = :catID AND p.proStatus = :proStatus")
                 .setParameter("catID", category)
+                .setParameter("proStatus", true)
                 .getResultList();
         } catch (Exception e) {
             return null;
         }
     }
+
+    @Override
+    public Product getSingleProduct(String id) {
+        try {
+            return em.find(Product.class, id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
     
 }

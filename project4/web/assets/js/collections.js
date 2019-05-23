@@ -6,7 +6,7 @@
             var link = $("#linkvip").text();
             
             function getColl(page){
-                return $http.get("http://localhost:8080/project4/product/"+link+"/api/"+page)
+                return $http.get(linkpage+"product/"+link+"/api/"+page)
                 .then(function(response) {
                     $scope.pagenum = response.data.pagenum;
                     $scope.currPage = response.data.currPage;
@@ -31,7 +31,7 @@
             }
             $scope.switchpage = function(n){
                 getColl(n).then(function(){
-                    window.history.pushState("Details", "Title", "http://localhost:8080/project4/product/type/page/"+n);
+                    window.history.pushState("Details", "Title", linkpage+"product/type/page/"+n);
                 });
             }
             $scope.disableleft = function(){

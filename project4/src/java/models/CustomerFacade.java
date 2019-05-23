@@ -47,12 +47,25 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
            Customer abc = (Customer) em.createQuery("SELECT c FROM Customer c WHERE c.cusEmail = :email")
                 .setParameter("email", email)
                 .getSingleResult();
+            System.out.println(abc.getCusName());
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
+
+    @Override
+    public boolean register(Customer customer) {
+        try {
+           em.persist(customer);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     
-        
     
 }

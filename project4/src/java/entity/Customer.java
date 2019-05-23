@@ -7,23 +7,22 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Asus
+ * @author johnn
  */
 @Entity
 @Table(name = "customer", catalog = "projectSem4", schema = "dbo")
@@ -37,18 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Customer.findByCusAddress", query = "SELECT c FROM Customer c WHERE c.cusAddress = :cusAddress"),
     @NamedQuery(name = "Customer.findByCusPhone", query = "SELECT c FROM Customer c WHERE c.cusPhone = :cusPhone"),
     @NamedQuery(name = "Customer.findByCusAvatar", query = "SELECT c FROM Customer c WHERE c.cusAvatar = :cusAvatar"),
-    @NamedQuery(name = "Customer.findByCusStatus", query = "SELECT c FROM Customer c WHERE c.cusStatus = :cusStatus")})
+    @NamedQuery(name = "Customer.findByCusStatus", query = "SELECT c FROM Customer c WHERE c.cusStatus = :cusStatus"),
+    @NamedQuery(name = "Customer.findByCusGender", query = "SELECT c FROM Customer c WHERE c.cusGender = :cusGender")})
 public class Customer implements Serializable {
-    @Column(name = "gender")
-    private Boolean gender;
-    @OneToMany(mappedBy = "cusID")
-    private Collection<Review> reviewCollection;
-    @OneToMany(mappedBy = "cusID")
-    private Collection<ViewComment> viewCommentCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cusID", nullable = false)
     private Integer cusID;
     @Size(max = 255)
@@ -71,15 +65,22 @@ public class Customer implements Serializable {
     private String cusAvatar;
     @Column(name = "cusStatus")
     private Boolean cusStatus;
-    @OneToMany(mappedBy = "sender")
-    private Collection<Feedback> feedbackCollection;
-    @OneToMany(mappedBy = "cusID")
-    private Collection<Mailbox> mailboxCollection;
-    @OneToMany(mappedBy = "cusID")
-    private Collection<Purchase> purchaseCollection;
+    @Column(name = "cusGender")
+    private Boolean cusGender;
 
     public Customer() {
     }
+
+    public Customer(String cusName, String cusEmail, String cusPassword, String cusAddress, String cusPhone, Boolean cusStatus, Boolean cusGender) {
+        this.cusName = cusName;
+        this.cusEmail = cusEmail;
+        this.cusPassword = cusPassword;
+        this.cusAddress = cusAddress;
+        this.cusPhone = cusPhone;
+        this.cusStatus = cusStatus;
+        this.cusGender = cusGender;
+    }
+    
 
     public Customer(Integer cusID) {
         this.cusID = cusID;
@@ -149,31 +150,12 @@ public class Customer implements Serializable {
         this.cusStatus = cusStatus;
     }
 
-    @XmlTransient
-    public Collection<Feedback> getFeedbackCollection() {
-        return feedbackCollection;
+    public Boolean getCusGender() {
+        return cusGender;
     }
 
-    public void setFeedbackCollection(Collection<Feedback> feedbackCollection) {
-        this.feedbackCollection = feedbackCollection;
-    }
-
-    @XmlTransient
-    public Collection<Mailbox> getMailboxCollection() {
-        return mailboxCollection;
-    }
-
-    public void setMailboxCollection(Collection<Mailbox> mailboxCollection) {
-        this.mailboxCollection = mailboxCollection;
-    }
-
-    @XmlTransient
-    public Collection<Purchase> getPurchaseCollection() {
-        return purchaseCollection;
-    }
-
-    public void setPurchaseCollection(Collection<Purchase> purchaseCollection) {
-        this.purchaseCollection = purchaseCollection;
+    public void setCusGender(Boolean cusGender) {
+        this.cusGender = cusGender;
     }
 
     @Override
@@ -199,32 +181,6 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "entity.Customer[ cusID=" + cusID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Review> getReviewCollection() {
-        return reviewCollection;
-    }
-
-    public void setReviewCollection(Collection<Review> reviewCollection) {
-        this.reviewCollection = reviewCollection;
-    }
-
-    @XmlTransient
-    public Collection<ViewComment> getViewCommentCollection() {
-        return viewCommentCollection;
-    }
-
-    public void setViewCommentCollection(Collection<ViewComment> viewCommentCollection) {
-        this.viewCommentCollection = viewCommentCollection;
-    }
-
-    public Boolean getGender() {
-        return gender;
-    }
-
-    public void setGender(Boolean gender) {
-        this.gender = gender;
     }
     
 }
