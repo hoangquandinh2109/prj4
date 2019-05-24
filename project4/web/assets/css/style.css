@@ -245,6 +245,7 @@ body .navigation .container {
 body .navigation form {
   position: absolute;
   right: 25px;
+  z-index: 100000;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   top: 50%;
@@ -273,6 +274,17 @@ body .navigation form button {
 
 body .navigation form button:focus {
   outline: none;
+}
+
+body .navigation form #result-suggest {
+  position: absolute;
+  top: 100%;
+  right: -1px;
+  left: -1px;
+  padding-left: 10px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-top: 0;
 }
 
 body .navigation ul {
@@ -1057,5 +1069,25 @@ body .content-n-cart .cart.ra {
 .pagination > .active > span:hover {
   background-color: transparent;
   border-color: #ddd;
+}
+
+.pt20 {
+  padding-top: 20px;
+}
+
+.pb20 {
+  padding-bottom: 20px;
+}
+
+.fz11 {
+  font-size: 11px;
+}
+
+.fz13 {
+  font-size: 13px;
+}
+
+.fz15 {
+  font-size: 15px;
 }
 /*# sourceMappingURL=style.css.map */

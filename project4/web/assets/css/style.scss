@@ -190,6 +190,7 @@ body{
         form{
             position: absolute;
             right: 25px;
+            z-index: 100000;
             @include center-in-vertical();
             input{
                 border: none;
@@ -210,6 +211,16 @@ body{
                 &:focus{
                     outline: none;
                 }
+            }
+            #result-suggest{
+                position: absolute;
+                top: 100%;
+                right: -1px;
+                left: -1px;
+                padding-left: 10px;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                border-top: 0;
             }
         }
         ul{
@@ -884,3 +895,7 @@ body{
     background-color: transparent;
     border-color: #ddd;
 }
+.pt20{padding-top: 20px;}.pb20{padding-bottom: 20px;}
+.fz11{font-size: 11px;}.fz13{font-size: 13px;}.fz15{font-size: 15px;}
+
+

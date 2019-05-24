@@ -122,3 +122,83 @@
         }
     }
 }
+
+.button-in-cart-page{
+    background-color: #76c4ce;
+    color: #fff;
+    font-family: 'MerriweatherSans';
+    display: inline-block;
+    padding: 15px;
+    text-align: center;
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+    border: 1px solid #ededed;
+}
+
+.button-in-cart-page:hover{
+    background-color: #ee6c92;
+    text-decoration: none;
+}
+#btn-remove-cart:hover{
+    background-color: #fff;
+    text-decoration: none;
+    color: #bbe6eb;
+    border: 1px solid #bbe6eb;
+}
+.cart-block{
+    background-color: #fff;
+    padding: 15px;
+    .cart-table{
+        font-family: 'MerriweatherSans';
+        width: 100%;
+        border: 1px solid #eaeaea;
+        tr{
+            border: 1px solid #eaeaea;
+            .r1{
+                padding: 20px 10px;
+                a{
+                    color: #000;
+                    font-size: 13px;
+                    &:hover{
+                        color: #76c4ce;
+                    }
+                }
+            }
+            .r11{
+                width: 100px;
+            }
+            .r2, .r3, .r4,.r5{
+                padding: 20px 10px;
+                text-align: center;
+                width: 147px;
+                border-left: 1px solid #eaeaea;
+            }
+        }
+        .cart-table-title{
+            // border-bottom: 0;
+        }
+        .cart-table-item{
+        }
+    }
+    .cart-footer{
+        font-family: 'MerriweatherSans';
+        margin-top: 50px;
+        .button-in-cart-page{
+            display: inline-block;
+            &:hover{
+                background-color: #fff;
+                text-decoration: none;
+                color: #bbe6eb;
+                border: 1px solid #bbe6eb;
+            }
+        }
+        #cf-subtotal{
+            width: 150px;
+            padding-left: 50px;
+        }
+    }
+}
+#h2yourcart{
+    font-family: 'MerriweatherSans';
+}

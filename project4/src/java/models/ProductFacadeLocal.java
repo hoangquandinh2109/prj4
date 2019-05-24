@@ -43,7 +43,6 @@ public interface ProductFacadeLocal {
     
     List<Product> filtTypeProductByPrice(ProductType type, int from, int to);
     
-    List<String> getAllName();
     
     List<Product> searchByName(String name);
     

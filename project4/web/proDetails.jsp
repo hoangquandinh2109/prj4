@@ -205,7 +205,6 @@
             </div>
 
               <c:import url="templates/script.jsp"></c:import>
-              <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
               <script src="${pageContext.request.contextPath}/assets/js/product.js"></script>
     </body>
 </html>

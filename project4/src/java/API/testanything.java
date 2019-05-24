@@ -17,6 +17,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +45,8 @@ public class testanything extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        
             ////////////////////ngôi sao
 //        double star = Double.parseDouble(req.getParameter("pro"));
 //        String id = req.getParameter("id");
@@ -67,13 +73,23 @@ public class testanything extends HttpServlet {
 //        }
             ////////////////du lieu product
         
-        ////goi y name
-//        PrintWriter out = resp.getWriter();
-//        for(String s : productFacade.getAllName()){
-//            if(s.contains("ip")){
-//                out.println(s);
-//            }
-//        }
+        //goi y name
+        PrintWriter out = resp.getWriter();
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        for(Product p : productFacade.findAll()){
+            jab.add(getJsonbyName(p.getProName()));
+        }
+        out.println(getArrayName(jab.build()));
+    }
+    public static JsonObject getJsonbyName(String name){
+        return Json.createObjectBuilder()
+                .add("proName", name)
+                .build();
+    }
+    public static JsonObject getArrayName(JsonArray arrayname){
+        return Json.createObjectBuilder()
+                .add("listName", arrayname)
+                .build();
     }
     
 

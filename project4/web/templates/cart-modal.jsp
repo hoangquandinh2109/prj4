@@ -53,5 +53,5 @@
         </div>
     </div>
     <a id="toCart" href="">Go to Cart</a>
-    <a id="Checkout" href="">Check out →</a>
+    <a id="Checkout" href="">Check out <i class="fal fa-long-arrow-right"></i></a>
 </div>

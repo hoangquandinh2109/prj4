@@ -92,16 +92,6 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
             return null;
         }
     }
-    @Override
-    public List<String> getAllName(){
-        try {
-            return em.createQuery("SELECT p.proName FROM Product p WHERE p.proStatus = :proStatus")
-                .setParameter("proStatus", true)
-                .getResultList();
-        } catch (Exception e) {
-            return null;
-        }
-    }
     
     @Override
     public List<Product> searchByName(String name){
