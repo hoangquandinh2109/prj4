@@ -118,8 +118,7 @@ public class InsertProductServlet extends HttpServlet {
             // fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
             fileName = (String) getFileName(filePart);
             String basePath = getServletContext().getRealPath("") + File.separator + SAVE_DIRECTORY + File.separator;
-            //      String warFile = basePath.substring(0, basePath.length() - 74) + "\\KTBPerfumeProject-war\\web\\images" + File.separator + SAVE_DIRECTORY + File.separator;
-
+          
             File uploadDir = new File(basePath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();

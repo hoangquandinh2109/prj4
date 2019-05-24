@@ -42,12 +42,8 @@
                                         <input readonly value="${product.proID.proID}" id="txtID" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">PROIMGID ID </label>
-                                <div class="col-md-8">
-                                    <input readonly value="${product.code}" id="txtID" name="proImgid" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
-                                </div>
-                            </div>
+                                    <input value="${product.code}" id="txtID" name="proImgid" class="form-control" type="hidden">
+                            
 
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Name </label>

@@ -33,7 +33,7 @@
                     <div class="tile">
                         <h3 class="tile-title">Insert new product</h3>
                         <div class="tile-body">
-                            <form id="fileForm" class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data">
+                            <form id="fileForm" class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data" onsubmit="return Validate(this);">
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Name </label>
                                     <div class="col-md-8">
@@ -43,7 +43,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Details</label>
                                     <div class="col-md-8">
-                                        <textarea class="form-control" rows="4" name="details" placeholder="Enter product details" autocomplete="off"></textarea>
+                                        <textarea class="form-control" required rows="4" name="details" placeholder="Enter product details" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -61,7 +61,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Date Release </label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="datepicker" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
+                                        <input class="form-control" type="text" required="" name="datepicker" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
                                     </div>
                                 </div> 
                                 <div class="form-group row">
@@ -73,8 +73,8 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Category</label>
                                     <div class="col-md-8">
-                                        <select name="cboCategory" class="form-control">
-                                            <option>Select Category</option>
+                                        <select name="cboCategory"  required class="form-control">
+                                            <option value="">Select Category</option>
                                         <c:forEach var="c" items="${listCat}">
                                             <option value="${c.catID}">${c.catName}</option>
                                         </c:forEach>
@@ -85,7 +85,7 @@
                                 <label class="control-label col-md-3">Type</label>
                                 <div class="col-md-8">
                                     <select required name="cboType" class="form-control">
-                                        <option>Select Type</option>
+                                        <option value="">Select Type</option>
                                         <c:forEach var="c" items="${listType}">
                                             <option value="${c.typeID}">${c.typeName}</option>
                                         </c:forEach>
@@ -106,6 +106,7 @@
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">
                                         <input type="submit" class="btn btn-primary" value="Ok" />
+                                        <input type="reset" class="btn btn-secondary" value="Cancel" />
                                         <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
                                     </div>
                                 </div>
@@ -117,10 +118,39 @@
             <div class="clearix"></div>
             <div class="col-md"></div>
         </div>
-    </main>  
-   <script>
-                //SHOW IMAGE
-                window.URL = window.URL || window.webkitURL;
+    </main>
+    <script>
+                var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".png"];
+                function Validate(oForm) {
+                var arrInputs = oForm.getElementsByTagName("input");
+                        for (var i = 0; i < arrInputs.length; i++) {
+                var oInput = arrInputs[i];
+                        if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                        if (sFileName.length > 0) {
+                var blnValid = false;
+                        for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                blnValid = true;
+                        break;
+                }
+                }
+
+                if (!blnValid) {
+                alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                        return false;
+                }
+                }
+                }
+                }
+
+                return true;
+                }
+    </script>
+    <script>
+        //SHOW IMAGE
+        window.URL = window.URL || window.webkitURL;
                 const fileSelect = document.getElementById("fileSelect"),
                 fileElem = document.getElementById("fileElem"),
                 fileList = document.getElementById("fileList");
