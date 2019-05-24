@@ -13,12 +13,12 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
-    <body>
+    <body ng-app="cangcucot">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>
                 <c:import url="templates/header.jsp"></c:import>
-                <div class="web-body" ng-app="product">
+                <div class="web-body" >
                     <div class="container">
                         <div class="row">
                             <div class="left-column">
@@ -163,13 +163,7 @@
             <c:import url="templates/cart-modal.jsp"></c:import>
         </div>
         <c:import url="templates/script.jsp"></c:import>
-              <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
-              <script
-                    src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-                    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-                    crossorigin="anonymous"></script>
-              <script src="${pageContext.request.contextPath}/assets/js/product.js"></script>
-              <script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js"></script>
+              <script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery-ui.js"></script>
     </body>
 
 </html>

@@ -14,7 +14,7 @@
     <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
-    <body>
+    <body ng-app="cangcucot">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>

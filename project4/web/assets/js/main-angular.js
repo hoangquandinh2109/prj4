@@ -1,6 +1,37 @@
- var product = angular.module('product', []);
+ var app = angular.module('cangcucot', []);
  
-product.controller('proPagination', function($scope, $http) {
+
+//////////////////////////////////////////////////////////////////////////////////////Search Suggestion
+
+app.controller('suggest', function($scope, $http) {
+    $http.get(linkpage+"abc")
+    .then(function(response) {
+        $scope.listName = response.data.listName;
+    });
+    $scope.suggest = function(n){
+//        console.log(e);
+        $scope.listSuggest = [];
+        var count = 0;
+        $.each($scope.listName,function(index){
+            if(n != "" && n != " "){
+                if($scope.listName[index].proName.toLowerCase().includes(n)){
+                    if(count<5){
+                        $scope.listSuggest.push($scope.listName[index].proName);
+                        count++;
+                    }
+                }
+            }
+        });
+    }
+    $scope.search = function(n){
+        alert(n);
+    }
+});
+
+
+//////////////////////////////////////////////////////////////////////////////////////Filter Pagination
+ 
+app.controller('proPagination', function($scope, $http) {
    $scope.numpage = 0;
    $scope.numrow = 3;
    var loc = 0; //loc hay chua
@@ -118,36 +149,60 @@ product.controller('proPagination', function($scope, $http) {
    }
 }); 
 
+//////////////////////////////////////////////////////////////////////////////////////////Collection pagination
+app.controller('pagination', function($scope, $http) {
+            var crrPage = $("#crrPage").text();
+            var link = $("#linkvip").text();
+            
+            function getColl(page){
+                return $http.get(linkpage+"product/"+link+"/api/"+page)
+                .then(function(response) {
+                    $scope.pagenum = response.data.pagenum;
+                    $scope.currPage = response.data.currPage;
+                    $scope.listCo = response.data.listCo;
+                });
+            }
+            getColl(crrPage);
+            $scope.range = function(min, max, step) {
+                step = step || 1;
+                var input = [];
+                for (var i = min; i <= max; i += step) {
+                    input.push(i);
+                }
+                return input;
+            };
+            $scope.active = function(n){
+                if(n == $scope.currPage) {
+                    return "active";
+                } else {
+                    return "";
+                }
+            }
+            $scope.switchpage = function(n){
+                getColl(n).then(function(){
+                    window.history.pushState("Details", "Title", linkpage+"product/type/page/"+n);
+                });
+            }
+            $scope.disableleft = function(){
+                if(1 == $scope.currPage) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            $scope.disableright = function(n){
+                if($scope.pagenum == $scope.currPage) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }); 
 
-$(document).ready(function(){
-    $("#info").click(function(){
-        event.preventDefault();
-        $(".button-tab>li").removeClass("active");
-        $(this).parent().addClass("active");
-        $(".tabs").hide();
-        $("#infoTab").show();
-    });
-    $("#faq").click(function(){
-        event.preventDefault();
-        $(".button-tab>li").removeClass("active");
-        $(this).parent().addClass("active");
-        $(".tabs").hide();
-        $("#faqTab").show();
-    });
-    $("#review").click(function(){
-        event.preventDefault();
-        $(".button-tab>li").removeClass("active");
-        $(this).parent().addClass("active");
-        $(".tabs").hide();
-        $("#reviewTab").show();
-    });
-    $("#comment").click(function(){
-        event.preventDefault();
-        $(".button-tab>li").removeClass("active");
-        $(this).parent().addClass("active");
-        $(".tabs").hide();
-        $("#commentTab").show();
-    });
 
-    
-});
+
+
+
+
+
+

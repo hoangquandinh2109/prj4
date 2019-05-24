@@ -11,7 +11,7 @@
     <head>
         <c:import url="templates/head.jsp"></c:import>
     </head>
-    <body>
+    <body ng-app="cangcucot">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>

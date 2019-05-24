@@ -13,3 +13,5 @@
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/assets/library/wowjs/infinite-scroll-docs.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/ajax/product-ajax.js"></script>
+<script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main-angular.js"></script>

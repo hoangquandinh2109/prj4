@@ -148,7 +148,7 @@
                 $.ajax({
                     type:"POST",
                    data:{"email":email,"password":password,"name":name,"address":address,"phone":phone,"gender":gender},
-                   url: "http://localhost:8080/project4/register",
+                   url: "/project4/register",
                    success: function(data) {
                        console.log("success");
                        location.reload();
@@ -164,7 +164,7 @@
         event.preventDefault();
         $(".modal-form").remove();
         $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
-        $(".modal-form").load("http://localhost:8080/project4/templates/login.html");
+        $(".modal-form").load("/project4/templates/login.html");
     });  
     
     function checkEmail(email) {

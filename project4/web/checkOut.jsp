@@ -13,7 +13,7 @@
             <link rel="stylesheet" href="assets/css/listProduct.css">
 
         </head>
-        <body>
+        <body ng-app="cangcucot">
             <div class="content-n-cart clearfix">
                 <div class="content">
                     <div class="clickdetrove"></div>

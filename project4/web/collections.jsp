@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/collections.css">
 </head>
 
-<body>
+<body ng-app="cangcucot">
     <div class="content-n-cart clearfix">
         <div class="content">
             <div class="clickdetrove"></div>
             <c:import url="templates/header.jsp"></c:import>
-            <div class="web-body" ng-app="collections" ng-controller="pagination">
+            <div class="web-body" ng-controller="pagination" >
                 <div class="container">
                     <!--codehere-->
                     <h3 id="h3name" class="text-center">${h3name}</h3>
@@ -78,8 +78,8 @@
     <span id='linkvip' style='display: none;'>${link}</span>
         
     <c:import url="templates/script.jsp"></c:import>
-    <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/collections.js"></script>
+<!--    <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/collections.js"></script>-->
 </body>
 
 </html>

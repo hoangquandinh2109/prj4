@@ -1,4 +1,4 @@
-var linkpage = "http://localhost:8080/project4/";
+var linkpage = "/project4/";
 $(document).ready(function(){
     $(".addtocart").click(function(){
 //        alert("mua gì");
@@ -58,7 +58,38 @@ $(document).ready(function(){
            $(this).change();
         }
     });
+//////////////////////////////////////////////////////////////////////////////////////Jquery product detail
 
+    $("#info").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#infoTab").show();
+    });
+    $("#faq").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#faqTab").show();
+    });
+    $("#review").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#reviewTab").show();
+    });
+    $("#comment").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#commentTab").show();
+    });
+
+    
 });
 
 new WOW().init();
