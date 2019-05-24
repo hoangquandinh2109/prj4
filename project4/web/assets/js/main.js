@@ -1,17 +1,17 @@
+var linkpage = "/project4/";
 $(document).ready(function(){
     $(".addtocart").click(function(){
 //        alert("mua gì");
         event.preventDefault();
-        $(".content").addClass("vao");
-        $(".cart").addClass("ra");
+        showcartajax();
     });
     $(".showcartajax").click(function(){
 //        alert("mua gì");
         event.preventDefault();
-        $(".content").addClass("vao");
-        $(".cart").addClass("ra");
+        showcartajax();
     });
     $(".btn-love").click(function(){
+        event.preventDefault();
         alert("yêu thương mẹ gì");
     });
     $(".clickdetrove").click(function(){
@@ -28,7 +28,7 @@ $(document).ready(function(){
         $("body").addClass("square");
         $(".modal-form").remove();
         $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
-        $(".modal-form").load("http://localhost:8080/project4/templates/login.html");
+        $(".modal-form").load(linkpage+"templates/login.html");
     });    
     $('a.create-acc-link').click(function(event) {
         event.preventDefault();
@@ -36,7 +36,7 @@ $(document).ready(function(){
         $("body").addClass("square");
         $(".modal-form").remove();
         $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
-        $(".modal-form").load("http://localhost:8080/project4/templates/register.html");
+        $(".modal-form").load(linkpage+"templates/register.html");
     });   
 
 
@@ -58,7 +58,43 @@ $(document).ready(function(){
            $(this).change();
         }
     });
+//////////////////////////////////////////////////////////////////////////////////////Jquery product detail
 
+    $("#info").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#infoTab").show();
+    });
+    $("#faq").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#faqTab").show();
+    });
+    $("#review").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#reviewTab").show();
+    });
+    $("#comment").click(function(){
+        event.preventDefault();
+        $(".button-tab>li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(".tabs").hide();
+        $("#commentTab").show();
+    });
+
+    
 });
 
 new WOW().init();
+
+function showcartajax(){
+    $(".content").addClass("vao");
+    $(".cart").addClass("ra");
+}

@@ -32,5 +32,7 @@ public interface CategoryFacadeLocal {
     int count();
 
     List<Category> showCategory();
+
+    String getCategoryName(int id);
     
 }

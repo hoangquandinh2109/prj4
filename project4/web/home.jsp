@@ -11,7 +11,7 @@
     <head>
         <c:import url="templates/head.jsp"></c:import>
     </head>
-    <body>
+    <body ng-app="cangcucot">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>
@@ -177,7 +177,7 @@
                                                 <div class="button-tu clearfix">
                                                     <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
@@ -224,9 +224,9 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
@@ -267,9 +267,9 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
@@ -310,9 +310,9 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
                                                     <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>

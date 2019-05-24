@@ -7,6 +7,7 @@
 package models;
 
 import entity.Category;
+import entity.ProductType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -38,6 +39,16 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
         Query q = em.createNamedQuery("select DISTINCT catName from category");
         list =q.getResultList();
         return list;
+    }
+
+    @Override
+    public String getCategoryName(int id) {
+        
+        try {
+            return em.find(Category.class, id).getCatName();
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }

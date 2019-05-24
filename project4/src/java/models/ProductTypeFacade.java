@@ -28,5 +28,14 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> implements Pr
     public ProductTypeFacade() {
         super(ProductType.class);
     }
+
+    @Override
+    public String getNameType(int id) {
+        try {
+            return em.find(ProductType.class, id).getTypeName();
+        } catch (Exception e) {
+            return null;
+        }
+    }
     
 }

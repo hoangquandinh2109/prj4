@@ -65,12 +65,15 @@ public class Product extends HttpServlet {
             case "api":
                 break;
             case "type":
-            req.setAttribute("pagename", "Type"+((!id.isEmpty() && !id.equals("page"))?" - "+id:""));
             if(!id.isEmpty() && (!id.equals("page") && !id.equals("api"))){
                 
+                req.setAttribute("pagename", proType.getNameType(Integer.parseInt(id)));
+                req.setAttribute("collVal", id);
+                req.setAttribute("nameColl", "type");
                 getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             }else{
                 //trang type
+                req.setAttribute("pagename", "Type");
                 try {
                     pageno = Integer.parseInt(uris[2]);
                 } catch (Exception e) {
@@ -104,11 +107,14 @@ public class Product extends HttpServlet {
             }
                 break;
             case "category":
-            req.setAttribute("pagename", "Category"+((!id.isEmpty() && !id.equals("page"))?" - "+id:""));
             if(!id.isEmpty() && !id.equals("page") && !id.equals("api")){
+                req.setAttribute("pagename", proCat.getCategoryName(Integer.parseInt(id)));
+                req.setAttribute("collVal", id);
+                req.setAttribute("nameColl", "category");
                 getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             }else{
                 //trang category
+                req.setAttribute("pagename", "Category");
                 try {
                     pageno = Integer.parseInt(uris[2]);
                 } catch (Exception e) {
@@ -141,15 +147,20 @@ public class Product extends HttpServlet {
             }
                 break;
             case "v":
-                
             if(!id.isEmpty()){
-                getServletContext().getRequestDispatcher("/proDetails.jsp").forward(req, resp);
+                entity.Product p = productDB.getSingleProduct(id);
+                if(p != null){
+                    
+                    getServletContext().getRequestDispatcher("/proDetails.jsp").forward(req, resp);
+                }else{
+                    getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
+                }
             } else{
-                resp.setStatus(404);/// tam thoi, sau nay se tao trang 404
+                getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
             }
                 break;
             default:
-                resp.setStatus(404);/// tam thoi, sau nay se tao trang 404
+                getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
         }
     }
 

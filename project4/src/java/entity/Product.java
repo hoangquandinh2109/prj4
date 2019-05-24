@@ -96,13 +96,10 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(Date dateRelease, Double starAVG, ProductType typeID, Collection<Review> reviewCollection, Collection<ViewComment> viewCommentCollection, Collection<ProImgtb> proImgtbCollection, String proID, String proName, String proDetails, Integer proPrice, Integer quantity, Boolean proStatus, String tags, Collection<ImgStog> imgStogCollection, Category catID, Collection<PurchaseItem> purchaseItemCollection) {
+    public Product(Date dateRelease, Double starAVG, ProductType typeID, String proID, String proName, String proDetails, Integer proPrice, Integer quantity, Boolean proStatus, String tags, Category catID) {
         this.dateRelease = dateRelease;
         this.starAVG = starAVG;
         this.typeID = typeID;
-        this.reviewCollection = reviewCollection;
-        this.viewCommentCollection = viewCommentCollection;
-        this.proImgtbCollection = proImgtbCollection;
         this.proID = proID;
         this.proName = proName;
         this.proDetails = proDetails;
@@ -110,9 +107,7 @@ public class Product implements Serializable {
         this.quantity = quantity;
         this.proStatus = proStatus;
         this.tags = tags;
-        this.imgStogCollection = imgStogCollection;
         this.catID = catID;
-        this.purchaseItemCollection = purchaseItemCollection;
     }
 
     public Product(String proID) {

@@ -14,13 +14,13 @@
     <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
-    <body>
+    <body ng-app="cangcucot">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>
                 <c:import url="templates/header.jsp"></c:import>
                     <div class="web-body">
-                        <div class="container">
+                        <div class="container"  >
                             <div class="path">
                                 <span>Home</span>
                                 <span>New product</span>
@@ -28,7 +28,7 @@
 
                             </div>
                             <div class="row details">
-                                <div class="col-md-5" style="background-color: #fff;height: 500px">
+                                <div class="col-md-5" >
                                     <div class="img">
                                         <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-14_5179a0ce-9afc-43e1-908a-94081cf070cc.png?v=1504667513" alt="">
                                         <div class="small-img">
@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-7 pro-details" style="background-color:#fff;height: 500px">
+                                <div class="col-md-7 pro-details" >
                                     <div class="details-block">
                                         <h1>CANON F1S</h1>
                                         <div class="review-tu clearfix">
@@ -59,41 +59,45 @@
                                         <p>Vendor:Women's shirts</p>
                                         <p>THIS IS YOUR FIRST TIME</p>
                                         <hr>
-                                        <p style="color:green">AVAILABLE</p>
-                                        <p class="price">$250.00</p>
+                                        <p class="availability">AVAILABLE</p>
+                                        <p><span class="price">$250.00</span> <span class="old-price">$400.00</span></p>
                                         <hr>
                                         <div class="cart-quantity">
                                             <input type="number" min="1" max="50">
                                             <button class="cart-quan-plus"><span>+</span></button>
                                             <button class="cart-quan-minus"><span>-</span></button>
                                         </div><br>
-                                        <a href="" class="button-dhq-mk addtocart">Add to cart</a>
+                                        <div style="padding-top: 20px">
+                                            <a href="" class="button-dhq-mk addtocart"><i class="fal fa-cart-plus"></i> Add to cart</a>
+                                            <a href="" id="wishlist" class="button-dhq-mk btn-love"><i class="far fa-heart-square"></i> Add to Wishlist</a>
+                                        </div>
                                         <hr>
 
                                     </div>
-                                    <div class="more-block">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a data-toggle="tab" href="#home">More Details</a></li>
-                                            <li><a data-toggle="tab" href="#menu1">FAQs</a></li>
-                                            <li><a data-toggle="tab" href="#menu2">Reviews</a></li>
-                                            <li><a data-toggle="tab" href="#menu3">Comment</a></li>
+                                    <div class="tab-for-somthing">
+                                        <ul class="button-tab">
+                                            <li class="active"><a href="" id="info">More Details</a></li>
+                                            <li><a href="" id="faq">FAQs</a></li>
+                                            <li><a href="" id="review">Reviews</a></li>
+                                            <li><a href="" id="comment">Comment</a></li>
                                         </ul>
-                                        <div class="tab-content">
-                                            <div id="home" class="tab-pane fade in active">
-                                                <h3>This is new or no</h3>
-                                                <p>This is no or nope</p>
+                                        <div class="tab-things">
+                                            <div id="infoTab" class="tabs">
+                                                info
                                             </div>
-                                            <div id="menu1" class="tab-pane fade">
-                                                <h3>This is new or no</h3>
-                                                <p>This is no or nope</p>
+                                            <div style="display: none;" id="faqTab" class="tabs">
+                                                faq
                                             </div>
-                                            <div id="menu2" class="tab-pane fade">
-                                                <h3>This is new or no</h3>
-                                                <p>This is no or nope</p>
+                                            <div style="display: none;" id="reviewTab" class="tabs">
+                                                review<br>
+                                                review<br>
+                                                review<br>
+                                                review<br>
+                                                review<br>
+                                                review<br>
                                             </div>
-                                            <div id="menu3" class="tab-pane fade">
-                                                <h3>This is new or no</h3>
-                                                <p>This is no or nope</p>
+                                            <div style="display: none;" id="commentTab" class="tabs">
+                                                comment
                                             </div>
                                         </div>
                                     </div>
@@ -201,5 +205,6 @@
             </div>
 
               <c:import url="templates/script.jsp"></c:import>
+              <script src="${pageContext.request.contextPath}/assets/js/product.js"></script>
     </body>
 </html>

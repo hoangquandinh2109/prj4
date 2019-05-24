@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="assets/library/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/library/owlcarousel/css/owl.carousel.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/cart.css">
         <title>Document</title>
     </head>
     <body>
@@ -93,665 +94,96 @@
                 </nav>
                 <div class="web-body">
                     <div class="container">
-                        <div class="row">
-                            <div class="left-column">
-                                <div class="categories">
-                                    <h4 class="title-bar-categories"><i class="far fa-list"></i>Categories</h4>
-                                    <ul>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fa fa-gamepad"></i>Game &amp; Software</span>
-                                                <span class="categories-desc">Proin gravida nibh vel velit auctor aliquet</span></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="far fa-robot"></i>Mobile &amp; Computers</span>
-                                                <span class="categories-desc">Aenean sollicitudin, lorem quis bibendum auctor</span></span><i class="fas fa-caret-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fa fa-male"></i>Fashion</span>
-                                                <span class="categories-desc">Duis sed odio sit amet nibh vulputate</span></span><i class="fas fa-caret-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fa fa-book"></i>Books &amp; Audio</span>
-                                                <span class="categories-desc">Morbi accumsan ipsum velit. Nam nec tellus</span></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fa fa-trophy"></i>Kids &amp; Toy</span>
-                                                <span class="categories-desc">Sed non  mauris vitae erat consequat auctor eu in elit</span></span><i class="fas fa-caret-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="far fa-tennis-ball"></i>Sports</span>
-                                                <span class="categories-desc">Class aptent taciti sociosqu ad litora</span></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="right-column">
-                                <div class="slide-banner-tu">
-                                    <div class="owl-carousel">
-                                        <div class="slide-banner-tu-item">
-                                            <div class="image-slide-banner-tu"><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/slideshow_image_1_89c664fb-9af7-4a2a-ad6d-7dd12524551d_1600x.jpg" alt=""></div>
-                                            <div class="title-slide-banner-tu"></div>
+                        <h2 class="text-center" id="h2yourcart">Your cart</h2>
+                        <!-- CART EMPTY -->
+                        <!-- <p class="text-center">Your cart is currently empty.</p> -->
+                        <!-- <a href="" class="button-in-cart-page">CONTINUE SHOPING <i class="fal fa-long-arrow-right"></i></a> -->
+                        <!-- CART EMPTY -->
+                        <div class="cart-block">
+                            <table class="cart-table">
+                                <tr class="cart-table-title">
+                                    <td colspan="2" class="r1">Product</td>
+                                    <td class="r2">Price</td>
+                                    <td class="r3">Quantity</td>
+                                    <td class="r4">Total</td>
+                                    <td class="r5">Remove</td>
+                                </tr>
+                                <!-- foreach -->
+                                <tr class="cart-table-item">
+                                    <td class="r1 r11">
+                                        <a href=""></a><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" width="75" height="75"></a>
+                                    </td>
+                                    <td class="r1">
+                                        <a href="">Name product vIp pro</a>
+                                    </td>
+                                    <td class="r2 fz13">$100.00</td>
+                                    <td class="r3">
+                                        <div class="cart-quantity">
+                                            <input type="number" min="1" max="50">
+                                            <button class="cart-quan-plus"><span>+</span></button>
+                                            <button class="cart-quan-minus"><span>-</span></button>
                                         </div>
-                                        <div class="slide-banner-tu-item">
-                                            <div class="image-slide-banner-tu"><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/slideshow_image_3_58f48138-fe7b-4263-ac5e-3577589da0b7_1600x.jpg" alt=""></div>
-                                            <div class="title-slide-banner-tu"></div>
-                                        </div>
-                                        <div class="slide-banner-tu-item">
-                                            <div class="image-slide-banner-tu"><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/slideshow_image_2_1_1600x.jpg" alt=""></div>
-                                            <div class="title-slide-banner-tu"></div>
-                                        </div>
-                                    </div>
+                                    </td>
+                                    <td class="r4 fz13">$100.00</td>
+                                    <td class="r5"><a href="" class="button-in-cart-page fz13" id="btn-remove-cart">Remove</a></td>
+                                </tr>
+                                <!-- end foreach -->
+                            </table>
+                            <div class="cart-footer">
+                                <div class="text-right">
+                                    <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">$174.99</span>
                                 </div>
-                                <div class="event">
-                                    <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
-                                </div>
-                                <div class="title-row">News <span>Product</span></div>
-                                <div class="product-block">
-                                    <div class="row">
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="row">
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="row">
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="row">
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="product-item">
-                                            <div class="image-product">
-                                                <a href=""><img class="m0-auto" src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                            </div>
-                                            <div class="product-info">
-                                                <p>ello moto vip pro</p>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
-                                            </div>
-                                            <div class="review-n-button-tu">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <span class="quantity-review">No reviews</span>
-                                                </div>
-                                                <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart clearfix">
-                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
-                                                    </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="event">
-                                    <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannercenter_873x160.png?v=1507088526" alt=""></a>
-                                </div>
+                                <div class="pt20 pb20 text-right fz11"><i>Shipping & taxes calculated at checkout</i></div>
+                                <div class="text-right"><a href="" class="button-in-cart-page fz13">CHECK OUT</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="footer"></div>
+                <div class="footer">
+                    <div class="footer-tu">
+                        <div class="container">
+                            <div class="footer-about col-md-3 col-sm-12 col-xs-12">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/files/shop_images_footer_e552736b-324e-47c1-90f3-23538bcc9f66_190x30.png?v=1507887912" alt="">
+                                <p>Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae
+                        Cerat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                            </div>
+                            <div class="footer-account col-md-2 col-sm-12 col-xs-12">
+                                <h3>Account</h3>
+                                <ul>
+                                    <li><a>Wishlist</a></li>
+                                    <li><a>Your cart</a></li>
+                                    <li><a>Checkout</a></li>
+                                    <li><a>Login</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-information col-md-2 col-sm-12 col-xs-12">
+                                    <h3>Information</h3>
+                                    <ul>
+                                        <li><a>About us</a></li>
+                                        <li><a>Jobs</a></li>
+                                        <li><a>Sitemap</a></li>
+                                        <li><a>Contact</a></li>
+                                    </ul>
+                            </div>
+                            <div class="footer-quicklink col-md-2 col-sm-12 col-xs-12">
+                                <h3>QUICK LINKS</h3>
+                                <ul>
+                                    <li><a>Search</a></li>
+                                    <li><a>Delivery Information</a></li>
+                                    <li><a>Privacy Policy</a></li>
+                                    <li><a>Terms & Conditions</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-bip col-md-3 col-sm-12 col-xs-12">
+                                <p>BIP DAY DMMM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copyright">
+                        <span>&copy; Copyright 2019 CANGCUCOT v2 PRJ4.</span>
+                        <span>Powered by Thầy Nguyên</span>
+                    </div>
+                </div>
             </div>
             <div class="cart">
                 dkfsjdlkfjdsl<br>
