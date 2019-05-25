@@ -140,7 +140,7 @@
                                 <div class="event">
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
                                 </div>
-                                <div class="title-row">News <span>Product</span></div>
+                                <div class="title-row">Features <span>Product</span></div>
                                 <div class="product-block">
                                     <c:set var="i" value="0" />
                                 <c:forEach items="${list}" var="sd">
@@ -279,7 +279,7 @@
                                     </div>
                                 </div>
                                 <div class="block-title-n-slide">
-                                    <div class="title-row">FOR <span>HER</span></div>
+                                    <div class="title-row">FOR <span>KIDS</span></div>
                                     <div class="owl-carousel product-slide nothing" >
                                         <c:forEach items="${list}" var="ssd">
                                         <div class="product-item wow fadeIn">

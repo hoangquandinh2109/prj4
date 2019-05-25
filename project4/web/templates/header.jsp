@@ -90,15 +90,12 @@
                     <li><a href="${pageContext.request.contextPath}/product/type">Type</a></li>
                 </ul>
             </li>
-            <li><a href="">News</a></li>
+            <li><a href="">Blog</a></li>
         </ul>
-<!--        <form method="post">
-            <input type="text"><button><i class="fas fa-search"></i></button>
-        </form>-->
                  <form method="post" ng-controller="suggest">
-            <input ng-keyup="suggest($event.target.value)" id="search-input" type="text"><button id="search-button"><i class="fas fa-search"></i></button>
-            <div id="result-suggest">
-                <p ng-repeat="n in listSuggest" ng-click="search(n)" ng-blur="blur()">{{n}}</p>
+            <input ng-keyup="inputkeyup($event)" ng-model="mysearch" id="search-input" type="text"><button id="search-button"><i class="fas fa-search"></i></button>
+            <div id="result-suggest" ng-hide="hide">
+                <p ng-repeat="n in listSuggest" ng-click="auto(n)">{{n}}</p>
             </div>
         </form>
     </div>

@@ -190,7 +190,7 @@ body{
         form{
             position: absolute;
             right: 25px;
-            z-index: 100000;
+            z-index: 99994;
             @include center-in-vertical();
             input{
                 border: none;
@@ -217,10 +217,16 @@ body{
                 top: 100%;
                 right: -1px;
                 left: -1px;
-                padding-left: 10px;
                 background-color: #fff;
                 border: 1px solid #e5e5e5;
                 border-top: 0;
+                p{
+                    margin: 0;
+                    padding: 10px;
+                }
+                >p:hover{
+                    background-color: #e5e5e5;
+                }
             }
         }
         ul{
@@ -899,3 +905,17 @@ body{
 .fz11{font-size: 11px;}.fz13{font-size: 13px;}.fz15{font-size: 15px;}
 
 
+#abcxyz{
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: $color-pink;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    i{
+        position: absolute;
+        color: #fff;
+        @include center-in-both-dimen();
+    }
+}
