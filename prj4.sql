@@ -28,7 +28,6 @@ create table staff(
 	staffPhone varchar(10),
 	staffEmail varchar(50),
 	staffAddress varchar(255),
-
 	staffPassword nvarchar(255),
 	[role] tinyint,
 	staffStatus bit
@@ -39,7 +38,8 @@ drop table if exists category
 go
 create table category(
 	catID int identity primary key,
-	catName varchar(20)
+	catName varchar(20),
+	statusCategory bit
 )
 drop table if exists tbTag
 go
@@ -49,16 +49,13 @@ create table tbTag(
 	tag_description varchar(255)
 )
 go
-drop table if exists imgStog
-create table imgStog (
-	imgID int identity primary key,
-	img_name varchar(255),
-)
+
 Drop table if exists productType
 go
 create table productType(
 	typeID int identity primary key,
-	typeName varchar(20)
+	typeName varchar(20),
+	statusType bit
 )
 Drop table if exists product
 go
@@ -76,11 +73,11 @@ create table product(
 	starAVG float
 )
 go
-drop table if exists ProImgtb
-create table ProImgtb (
-	Code int primary key identity,
-	proID varchar(10) foreign key REFERENCES product(proID),
-	imgID int foreign key REFERENCES imgStog(imgID)
+drop table if exists imgStog
+create table imgStog (
+	imgID int identity primary key,
+	img_name varchar(255),
+	proID varchar(10) foreign key REFERENCES product(proID)
 )
 Drop table if exists purchase
 go
