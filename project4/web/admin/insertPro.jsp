@@ -3,6 +3,7 @@
     Created on : Apr 28, 2019, 6:07:36 PM
     Author     : bemap
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,6 +13,11 @@
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <c:import url="../templates/adminHead.jsp"></c:import>
+            <style type="text/css">
+                .required {
+                    color: red;
+                }
+            </style>
         </head>
         <body class="app sidebar-mini rtl">
         <c:import url="../templates/adminPage.jsp"></c:import>
@@ -35,43 +41,43 @@
                         <div class="tile-body">
                             <form id="fileForm" class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data" onsubmit="return Validate(this);">
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Product Name </label>
+                                    <label class="control-label col-md-3">Product Name<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" required type="text" id="txtName" name="name" placeholder="Enter product name" autocomplete="off">
+                                        <input class="form-control" required type="text" name="name" placeholder="Enter product name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Product Details</label>
+                                    <label class="control-label col-md-3">Product Details<span class="required">*</span></label>
                                     <div class="col-md-8">
                                         <textarea class="form-control" required rows="4" name="details" placeholder="Enter product details" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Product Price </label>
+                                    <label class="control-label col-md-3">Product Price<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" name="price" placeholder="Enter product price" autocomplete="off">
+                                        <input class="form-control" type="number" name="price" placeholder="Enter product price" min="0"  max="99999" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Quantity</label>
+                                    <label class="control-label col-md-3">Quantity<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" name="quantity" placeholder="Enter product quantity" autocomplete="off">
+                                        <input class="form-control" type="number" name="quantity" data-error-msg="Must enter your name?" placeholder="Enter product quantity" min="0" max="99999" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Date Release </label>
+                                    <label class="control-label col-md-3">Date Release<span class="required">*</span></label>
                                     <div class="col-md-8">
                                         <input class="form-control" type="text" required="" name="datepicker" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
                                     </div>
                                 </div> 
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Product Tags </label>
+                                    <label class="control-label col-md-3">Product Tags<span class="required">*</span></label>
                                     <div class="col-md-8">
                                         <input class="form-control" type="text" name="tags" placeholder="Enter product tags" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Category</label>
+                                    <label class="control-label col-md-3">Category<span class="required">*</span></label>
                                     <div class="col-md-8">
                                         <select name="cboCategory"  required class="form-control">
                                             <option value="">Select Category</option>
@@ -82,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Type</label>
+                                <label class="control-label col-md-3">Type<span class="required">*</span></label>
                                 <div class="col-md-8">
                                     <select required name="cboType" class="form-control">
                                         <option value="">Select Type</option>
@@ -93,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Image Product</label>
+                                <label class="control-label col-md-3">Image Product<span class="required">*</span></label>
                                 <div class="col-md-8">
                                     <input required class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
                                     <a href="#" id="fileSelect">Select some files</a> 

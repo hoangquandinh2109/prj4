@@ -68,6 +68,18 @@
         <servlet-name>insertCatTyServlet</servlet-name>
         <servlet-class>Servlet.insertCatTyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>listCatServlet</servlet-name>
+        <servlet-class>Servlet.listCatServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CatvTypeSevlet</servlet-name>
+        <servlet-class>Servlet.CatvTypeSevlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>disableProductServlet</servlet-name>
+        <servlet-class>Servlet.disableProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -136,6 +148,18 @@
         <servlet-name>insertCatTyServlet</servlet-name>
         <url-pattern>/insertCatTyServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listCatServlet</servlet-name>
+        <url-pattern>/listCatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CatvTypeSevlet</servlet-name>
+        <url-pattern>/CatvTypeSevlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>disableProductServlet</servlet-name>
+        <url-pattern>/disableProductServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -144,5 +168,4 @@
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
-   
 </web-app>

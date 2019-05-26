@@ -27,57 +27,59 @@
                         <h3 class="tile-title">Insert new Category</h3>
                         <div class="tile-body">
                             <form id="fileForm" class="form-horizontal" action="${pageContext.request.contextPath}/insertCatTyServlet" method="post">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Category Name </label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" required type="text" id="txtName" name="catName" placeholder="Enter category name" autocomplete="off">
-                                    </div>
-                                </div>                           
-                                <div class="tile-footer">
-                                    <div class="row">
-                                        <div class="col-md-8 col-md-offset-3">
-                                            <input type="submit" class="btn btn-primary" value="Insert Category" name="action" />
-                                            <input type="reset" class="btn btn-secondary" value="Cancel" />
-                                            <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
-                                        </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Category Name </label>
+                                <div class="col-md-8">
+                                    <input class="form-control" required type="text" id="txtName" name="catName" placeholder="Enter category name" autocomplete="off">
+                                </div>
+                            </div>                           
+                            <div class="tile-footer">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-3">
+                                        <input type="submit" class="btn btn-primary" value="Insert Category" name="action" />
+                                        <input type="reset" class="btn btn-secondary" value="Cancel" />
+                                        <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="clearix"></div>
-                <div class="col-md"></div>
             </div>
-            <div class="row">
-                <div class="col-md"></div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="tile">
-                        <h3 class="tile-title">Insert new type</h3>
-                        <div class="tile-body">
-                            <form id="fileForm" class="form-horizontal" action="${pageContext.request.contextPath}/insertCatTyServlet" method="post">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Type Name </label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" required type="text" id="txtName" name="typeName" placeholder="Enter type name" autocomplete="off">
-                                    </div>
-                                </div>    
-                                <div class="tile-footer">
-                                    <div class="row">
-                                        <div class="col-md-8 col-md-offset-3">
-                                            <input type="submit" class="btn btn-primary" value="Insert Type" name="action"/>
-                                            <input type="reset" class="btn btn-secondary" value="Cancel" />
-                                        </div>
+            <div class="clearix"></div>
+            <div class="col-md"></div>
+        </div>
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md-6 col-sm-12">
+                <div class="tile">
+                    <h3 class="tile-title">Insert new type</h3>
+                    <div class="tile-body">
+                        <form id="fileForm" class="form-horizontal" action="${pageContext.request.contextPath}/insertCatTyServlet" method="post">
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Type Name </label>
+                                <div class="col-md-8">
+                                    <input class="form-control" required type="text" id="txtName" name="typeName" placeholder="Enter type name" autocomplete="off">
+                                </div>
+                            </div>    
+                            <div class="tile-footer">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-3">
+                                        <input type="submit" class="btn btn-primary" value="Insert Type" name="action"/>
+                                        <input type="reset" class="btn btn-secondary" value="Cancel" />
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="clearix"></div>
-                <div class="col-md"></div>
             </div>
-        </main>  
+            <div class="clearix"></div>
+            <div class="col-md"></div>
+           
+        </div>
+
+    </main>  
     <c:import url="../templates/adminScript.jsp"></c:import>
 </body>
 </html>

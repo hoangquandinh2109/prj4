@@ -29,6 +29,7 @@
                     <thead>
                         <tr>
                             <th>Image</th>
+                              <th>ImageOD</th>
                             <th>Product Name</th>
                             <th>Product Details</th>
                             <th>Product Price</th>
@@ -39,6 +40,7 @@
                             <th>Category</th>
                             <th>Type</th>
                             <th>Actions</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -46,11 +48,12 @@
                         <tr>           
                             <td><img src="productImage/${s.imgID.imgName}" alt="pets" width="150px" height="150px"></td>
                             <td>${s.proID.proName}</td>
+                                 <td>${s.imgID.imgID}</td>
                             <td>${s.proID.proDetails}</td>
                             <td>${s.proID.proPrice}</td>
                             <td>${s.proID.quantity}</td>
                             <td> <fmt:formatDate value="${s.proID.dateRelease}" pattern="yyyy-MM-dd" /></td>
-                           
+
                             <td><c:choose>
                                     <c:when test="${s.proID.proStatus==true}">
                                         <input type="checkbox" checked onclick="return false;" />
@@ -63,7 +66,16 @@
                             <td>${s.proID.catID.catName}</td>
                             <td>${s.proID.typeID.typeName}</td>
                             <td>
-                                <a href="getDetailsProductServlet?code=${s.code}">Update</a>
+                                <a class="btn btn-primary btn-sm" href="getDetailsProductServlet?code=${s.code}">Update</a>  
+                                <br/><br/>
+                                <input type="hidden" value="${s.proID.proID}" name="id"/>     
+                                <c:if test="${s.proID.proStatus==true}">
+                                    <a class="btn btn-danger btn-sm" onclick="disable('disableProductServlet', '${s.proID.proID}', '${s.proID.proStatus}')">Disable</a>
+                                </c:if>
+                                <c:if test="${s.proID.proStatus==false}">
+                                    <a class="btn btn-primary btn-sm" onclick="disable('disableProductServlet', '${s.proID.proID}', '${s.proID.proStatus}')">Activate</a>
+                                </c:if>
+
                             </td>
                         </tr>
                     </c:forEach>
@@ -81,6 +93,27 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+    </script>
+    <script type="text/javascript">
+        function disable(pageName, id, status) {
+            swal({
+                title: "Are you sure?",
+                text: "This will be disabled if you click on [Yes] button",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, let do it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false,
+                closeOnCancel: false},
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location = pageName + "?action=disable&id=" + id + "&status=" + status;
+                } else {
+                    swal("Cancelled", "You cancel the action", "error");
+                }
+            });
+        }
     </script>
 </body>
 </html>
