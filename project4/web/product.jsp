@@ -64,15 +64,27 @@
                                     </ul>
                                 </div>
                                 <div>
-                                    <div class="title-row">REFINE <span>BY</span></div>
+                                    <div class="title-row">PRICE <span>FILTER</span></div>
                                     <div id="refine-by">
                                         <div id="filter-by-price">
                                             <div id="price-filter"></div>
                                             <div id="button-n-number">
                                                 <button>FILTER</button>
-                                                Price: $<span id="min"></span> - $<span id="max"></span>
+                                                <div>Price: $<span id="min"></span> - $<span id="max"></span></div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="title-row">REFINE BY <span>TYPE</span></div>
+                                    <div id="filt-type">
+                                        <ul>
+                                            <li><a href="sdf"><span class="tick"></span>Clock</a> <span class="quantity">3</span></li>
+                                            <li><a href=""><span class="tick"></span>PC</a> <span class="quantity">2</span></li>
+                                            <li><a href=""><span class="tick"></span>Desktop</a> <span class="quantity">7</span></li>
+                                            <li><a href=""><span class="tick"></span>Laptop</a> <span class="quantity">11</span></li>
+                                            <li><a href=""><span class="tick"></span>Tablet</a> <span class="quantity">8</span></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="event">

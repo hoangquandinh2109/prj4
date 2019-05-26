@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/library/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/account.css">
+</head>
+
+<body>
+    <div class="ui clearfix">
+        <div id="switcher">
+            <div id="dashboard" class="active"><i class="fas fa-tachometer-alt-fastest"></i></div>
+            <div id="account"><i class="fas fa-user"></i></div>
+            <div id="wishlist"><i class="fas fa-heart-square"></i></div>
+            <div id="orders"><i class="fal fa-clipboard-list"></i></div>
+        </div>
+        <div class="left-part">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--////////////////////////////////////////////////////////////////////// dashboard block -->
+            <div id="showdashboard" class="everyblock">
+                <div class="block-product">
+                    <h2>Products purchased</h2>
+                    <div class="r list-product">
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-6_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung A8</a>
+                                <span class="pdate">Order date: <span>27-09-2019</span></span>
+                            </div>
+                        </div>
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <span class="pdate">Order date: <span>27-09-2019</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="r list-product">
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-13_979e1434-012b-483d-b3b4-29841771141b_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung A8</a>
+                                <span class="pdate">Order date: <span>27-09-2019</span></span>
+                            </div>
+                        </div>
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <span class="pdate">Order date: <span>27-09-2019</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-product">
+                    <h2>Your wishlist</h2>
+                    <div class="r list-product">
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-12_5676fcc2-14d3-4280-b5dd-9396d2e2b5c1_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung A8</a>
+                                <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
+                            </div>
+                        </div>
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="r list-product">
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung A8</a>
+                                <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
+                            </div>
+                        </div>
+                        <div class="c-05 ">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+<!--////////////////////////////////////////////////////////////////////// account block -->
+
+
+            <div style="display: none;" id="showaccount" class="everyblock form-account">
+                <h2>Update Information</h2>
+                <div class="label-account">Address</div>
+                <input type="text">
+                <div class="label-account">Phone</div>
+                <input type="text">
+                <button class="btn">Update</button>
+                <h2>Change Password</h2>
+                <div class="label-account">Old password</div>
+                <input type="password">
+                <div class="label-account">New password</div>
+                <input type="password">
+                <div class="label-account">Re-enter new password</div>
+                <input type="password">
+                <button class="btn">Change</button>
+
+            </div>
+
+
+
+
+
+
+
+
+
+<!--////////////////////////////////////////////////////////////////////// wishlist block -->
+
+            <div  style="display: none" id="showwishlist" class="table-account everyblock">
+                <h2>Your Wishlist</h2>
+                <div class="list-product">
+                    <div class="r">
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-15_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="r">
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-23_dad2d891-eb69-45a3-b5d5-ab53fb94b51e_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-7_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="r">
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-18_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-10_aed5aef2-1985-474e-9f24-a7deb10b70ab_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="r">
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-21_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-2_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="r">
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-11_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                        <div class="c-05">
+                            <div class="product-item">
+                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-5_552caf6b-9e67-483d-9599-2e0585c40739_160x140.png"
+                                    alt="">
+                                <a href="" class="pname">Samsung Galaxy S7</a>
+                                <div class="wishlist-price">$800.00</div>
+                                <button class="button-remove pbutton-wishlist">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+<!--////////////////////////////////////////////////////////////////////// order block -->
+
+            <div style="display: none" id="showorders" class="everyblock">
+                <!--////////////////////////////////////////////////////////////////////// order list -->
+                <div id="orderslist">
+                    <div  class="table-account">
+                        <h2>Your Order</h2>
+                        <table>
+                            <tr>
+                                <td>Order ID</td>
+                                <td>Date</td>
+                                <td>Items</td>
+                                <td>Total Price</td>
+                                <td>Status</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>20190525029</td>
+                                <td>25/05/2019</td>
+                                <td>2</td>
+                                <td>$230.00</td>
+                                <td>Processing</td>
+                                <td><a href="" class="button-remove">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>20190324036</td>
+                                <td>24/03/2019</td>
+                                <td>1</td>
+                                <td>$234.00</td>
+                                <td>Complete</td>
+                                <td><a href="" class="button-remove">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>2018091243</td>
+                                <td>12/09/2018</td>
+                                <td>1</td>
+                                <td>$143.00</td>
+                                <td>Processing</td>
+                                <td><a href="" class="button-remove">View</a></td>
+                            </tr>
+                        </table>
+                    </div>                    
+                    <div class="block-product">
+                        <h2>Last purchased</h2>
+                        <div class="r list-product">
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-6_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
+                                </div>
+                            </div>
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-18_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="r list-product">
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-10_aed5aef2-1985-474e-9f24-a7deb10b70ab_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
+                                </div>
+                            </div>
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-21_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--////////////////////////////////////////////////////////////////////// order detail -->
+                <div style="display: none;" id="order-detail">
+                    <h2 class="h2f">Order #20182603472<span><a href="" class="fr fz13 dib button-remove">Print</a></span></h2>
+                    <div class="mt70 ml100">
+                        <div class="r mr60i">
+                            <div class="c-05">
+                                <div class="od-box hb">
+                                    <h3>Shipping Information</h3>
+                                    <span>Receiver: <strong>Johnny</strong> </span>
+                                    <span>Address: 123 Cach Mang Thang 8, p10, q4, Tp.HCM</span>
+                                    <span>Phone: 0978382929</span>
+                                    <span>Date: 28/03/2019</span>
+                                    <span>Notes: </span>
+                                </div>
+                            </div>
+                            <div class="c-05">
+                                <div class="od-box hb">
+                                    <h3>Payment Method</h3>
+                                    <span>By: <strong>Paypal</strong> </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-product">
+                        <h2 class="mr60i">Products <span class="dib fr fz13">Total:<span class="pl20 color-pink">$932.00</span></span></h2>
+                        <div class="r list-product">
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-6_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="price-io">$233.00</span>
+                                </div>
+                            </div>
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-18_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="price-io">$233.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="r list-product">
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-10_aed5aef2-1985-474e-9f24-a7deb10b70ab_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="price-io">$233.00</span>
+                                </div>
+                            </div>
+                            <div class="c-05 ">
+                                <div class="product-item">
+                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-21_160x140.png"
+                                        alt="">
+                                    <a href="" class="pname">Samsung A8</a>
+                                    <span class="price-io">$233.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <div class="right-part">
+            <div id="myaccount">
+                <div class="avatar">
+                    <img src="https://2sao.vietnamnetjsc.vn/images/2018/09/01/11/13/shark-Hung-02.jpg" alt="">
+                    <a href=""><i class="fal fa-camera"></i>Upload an avatar</a>
+                </div>
+                <div class="profile">
+                    <p class="profile-name">Shark Hung <a href=""><i class="fal fa-pencil"></i></a></p>
+                    <div class="profile-info">
+                        <span><i class="far fa-map-marker-alt"></i> 172 Ông Ích Khiêm, p15, q11, Tp.Hcm</span>
+                        <span><i class="fal fa-phone"></i> 0978468469</span>
+                        <span><i class="fal fa-envelope"></i> sharkhung@gmail.com</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/library/jquery/js/jquery.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

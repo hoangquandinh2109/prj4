@@ -245,7 +245,7 @@ body .navigation .container {
 body .navigation form {
   position: absolute;
   right: 25px;
-  z-index: 100000;
+  z-index: 99994;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   top: 50%;
@@ -281,10 +281,18 @@ body .navigation form #result-suggest {
   top: 100%;
   right: -1px;
   left: -1px;
-  padding-left: 10px;
   background-color: #fff;
   border: 1px solid #e5e5e5;
   border-top: 0;
+}
+
+body .navigation form #result-suggest p {
+  margin: 0;
+  padding: 10px;
+}
+
+body .navigation form #result-suggest > p:hover {
+  background-color: #e5e5e5;
 }
 
 body .navigation ul {
@@ -1089,5 +1097,24 @@ body .content-n-cart .cart.ra {
 
 .fz15 {
   font-size: 15px;
+}
+
+#abcxyz {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background: #ee6c92;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+#abcxyz i {
+  position: absolute;
+  color: #fff;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
 }
 /*# sourceMappingURL=style.css.map */

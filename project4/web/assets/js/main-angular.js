@@ -8,13 +8,21 @@ app.controller('suggest', function($scope, $http) {
     .then(function(response) {
         $scope.listName = response.data.listName;
     });
+    $scope.inputkeyup = function(n){
+        if(n.keyCode == 38 || n.keyCode == 40){
+            n.preventDefault();
+        }else{
+            $scope.suggest(n.target.value);
+        }
+    }
     $scope.suggest = function(n){
 //        console.log(e);
+        $scope.hide = false;
         $scope.listSuggest = [];
         var count = 0;
         $.each($scope.listName,function(index){
             if(n != "" && n != " "){
-                if($scope.listName[index].proName.toLowerCase().includes(n)){
+                if($scope.listName[index].proName.toLowerCase().includes(n.toLowerCase())){
                     if(count<5){
                         $scope.listSuggest.push($scope.listName[index].proName);
                         count++;
@@ -23,8 +31,9 @@ app.controller('suggest', function($scope, $http) {
             }
         });
     }
-    $scope.search = function(n){
-        alert(n);
+    $scope.auto = function(n){
+        $scope.mysearch = n;
+        $scope.hide = true;
     }
 });
 
@@ -103,10 +112,8 @@ app.controller('proPagination', function($scope, $http) {
    }
    $scope.switchpage = function(n){
        if(loc == 1){
-           alert("loc");
            filtbyprice(n);
        }else{
-           alert("load");
             loadPage(n);
         }
    }

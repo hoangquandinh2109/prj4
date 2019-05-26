@@ -88,8 +88,61 @@ $(document).ready(function(){
         $(".tabs").hide();
         $("#commentTab").show();
     });
+    ///////////////////////////////////////////////////////////////////////////////////////////////account
+    $('#dashboard').click(function(){
+        $("#switcher>div").removeClass("active");
+        $(this).addClass("active");
+        $(".everyblock").hide();
+        $("#showdashboard").show();
+    });
+    $('#account').click(function(){
+        $("#switcher>div").removeClass("active");
+        $(this).addClass("active");
+        $(".everyblock").hide();
+        $("#showaccount").show();
+    });
+    $('#wishlist').click(function(){
+        $("#switcher>div").removeClass("active");
+        $(this).addClass("active");
+        $(".everyblock").hide();
+        $("#showwishlist").show();
+    });
+    $('#orders').click(function(){
+        $("#switcher>div").removeClass("active");
+        $(this).addClass("active");
+        $(".everyblock").hide();
+        $("#order-detail").hide();
+        $("#orderslist").show();
+        $("#showorders").show();
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////account
 
+    $(".button-remove").click(function(){
+        event.preventDefault();
+        var val = $(this).text(); 
+        if(val == "View"){
+            $("#orderslist").hide();
+            $("#order-detail").show();
+            $("html, body").scrollTop(0);
+        }
+    });//temp view bip
     
+    
+    
+    $(window).scroll(function() {
+        var $height = $(window).scrollTop();
+        if($height > 1000) {
+                $("#abcxyz").removeClass("hide");
+        } else {
+                $("#abcxyz").addClass("hide");
+        }
+    });
+
+
+
+    $("#abcxyz").click(function(){
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    });
 });
 
 new WOW().init();

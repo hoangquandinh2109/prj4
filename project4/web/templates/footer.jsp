@@ -41,7 +41,7 @@
                 </ul>
             </div>
             <div class="footer-bip col-md-3 col-sm-12 col-xs-12">
-                <p>BIP DAY DMMM</p>
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffptcorp%2F&tabs=timeline&width=292&height=200&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="292" height="200" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
             </div>
         </div>
     </div>
@@ -49,4 +49,6 @@
         <span>&copy; Copyright 2019 CANGCUCOT v2 PRJ4.</span>
         <span>Powered by Thầy Nguyên</span>
     </div>
+    
+    <div id="abcxyz" class="hide wow fadeIn"><i class="fal fa-chevron-up"></i></div>
 </div>
