@@ -103,11 +103,6 @@ public class updateProductServlet extends HttpServlet {
             imgtog.setImgID(imgID);
             imgtog.setImgName(path);
             imgStogFacade.edit(imgtog);
-            ProImgtb proimg = new ProImgtb();
-           proimg.setCode(proImgID);
-            proimg.setImgID(imgtog);
-            proimg.setProID(proIDD);
-            proImgtbFacade.edit(proimg);
             request.getRequestDispatcher("showProductServlet").forward(request, response);
         }
     }

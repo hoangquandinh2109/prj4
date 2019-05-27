@@ -80,6 +80,26 @@
         <servlet-name>disableProductServlet</servlet-name>
         <servlet-class>Servlet.disableProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateCatServlet</servlet-name>
+        <servlet-class>Servlet.updateCatServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getDetailsCatServlet</servlet-name>
+        <servlet-class>Servlet.getDetailsCatServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getDetailsTypeServlet</servlet-name>
+        <servlet-class>Servlet.getDetailsTypeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateTypeServlet</servlet-name>
+        <servlet-class>Servlet.updateTypeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>reportCatServlet</servlet-name>
+        <servlet-class>Servlet.reportCatServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -159,6 +179,26 @@
     <servlet-mapping>
         <servlet-name>disableProductServlet</servlet-name>
         <url-pattern>/disableProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateCatServlet</servlet-name>
+        <url-pattern>/updateCatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getDetailsCatServlet</servlet-name>
+        <url-pattern>/getDetailsCatServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getDetailsTypeServlet</servlet-name>
+        <url-pattern>/getDetailsTypeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateTypeServlet</servlet-name>
+        <url-pattern>/updateTypeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reportCatServlet</servlet-name>
+        <url-pattern>/reportCatServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

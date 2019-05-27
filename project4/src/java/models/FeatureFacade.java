@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.ProImgtb;
+import entity.Feature;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Asus
  */
 @Stateless
-public class ProImgtbFacade extends AbstractFacade<ProImgtb> implements ProImgtbFacadeLocal {
+public class FeatureFacade extends AbstractFacade<Feature> implements FeatureFacadeLocal {
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -25,8 +25,8 @@ public class ProImgtbFacade extends AbstractFacade<ProImgtb> implements ProImgtb
         return em;
     }
 
-    public ProImgtbFacade() {
-        super(ProImgtb.class);
+    public FeatureFacade() {
+        super(Feature.class);
     }
     
 }

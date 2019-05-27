@@ -13,10 +13,11 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Stateless
 public class ProductTypeFacade extends AbstractFacade<ProductType> implements ProductTypeFacadeLocal {
+
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -31,11 +32,11 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> implements Pr
 
     @Override
     public String getNameType(int id) {
-        try {
+         try {
             return em.find(ProductType.class, id).getTypeName();
         } catch (Exception e) {
             return null;
         }
     }
-    
+
 }

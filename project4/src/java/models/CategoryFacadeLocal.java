@@ -12,7 +12,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Local
 public interface CategoryFacadeLocal {
@@ -30,7 +30,7 @@ public interface CategoryFacadeLocal {
     List<Category> findRange(int[] range);
 
     int count();
-
+    
     List<Category> showCategory();
 
     String getCategoryName(int id);

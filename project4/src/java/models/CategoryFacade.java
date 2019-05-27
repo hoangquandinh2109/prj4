@@ -17,7 +17,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Stateless
 public class CategoryFacade extends AbstractFacade<Category> implements CategoryFacadeLocal {
@@ -35,7 +35,7 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
 
     @Override
     public List<Category> showCategory() {
-        List<Category> list = new ArrayList<>();
+       List<Category> list = new ArrayList<>();
         Query q = em.createNamedQuery("select DISTINCT catName from category");
         list =q.getResultList();
         return list;

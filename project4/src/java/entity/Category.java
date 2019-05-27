@@ -33,10 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
     @NamedQuery(name = "Category.findByCatID", query = "SELECT c FROM Category c WHERE c.catID = :catID"),
-    @NamedQuery(name = "Category.findByCatName", query = "SELECT c FROM Category c WHERE c.catName = :catName")})
+    @NamedQuery(name = "Category.findByCatName", query = "SELECT c FROM Category c WHERE c.catName = :catName"),
+    @NamedQuery(name = "Category.findByStatusCategory", query = "SELECT c FROM Category c WHERE c.statusCategory = :statusCategory")})
 public class Category implements Serializable {
-    @OneToMany(mappedBy = "catID")
-    private Collection<Product> productCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -46,12 +45,12 @@ public class Category implements Serializable {
     @Size(max = 20)
     @Column(name = "catName", length = 20)
     private String catName;
+    @Column(name = "statusCategory")
+    private Boolean statusCategory;
+    @OneToMany(mappedBy = "catID")
+    private Collection<Product> productCollection;
 
     public Category() {
-    }
-
-    public Category( String catName) {
-        this.catName = catName;
     }
 
     public Category(Integer catID) {
@@ -72,6 +71,23 @@ public class Category implements Serializable {
 
     public void setCatName(String catName) {
         this.catName = catName;
+    }
+
+    public Boolean getStatusCategory() {
+        return statusCategory;
+    }
+
+    public void setStatusCategory(Boolean statusCategory) {
+        this.statusCategory = statusCategory;
+    }
+
+    @XmlTransient
+    public Collection<Product> getProductCollection() {
+        return productCollection;
+    }
+
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
     }
 
     @Override
@@ -97,15 +113,6 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return "entity.Category[ catID=" + catID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
-    }
-
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
     }
     
 }

@@ -7,9 +7,12 @@
 package models;
 
 import entity.ImgStog;
+import entity.Product;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,13 @@ public class ImgStogFacade extends AbstractFacade<ImgStog> implements ImgStogFac
 
     public ImgStogFacade() {
         super(ImgStog.class);
+    }
+
+    @Override
+    public List<ImgStog> findList(Product proID) {
+        Query q = em.createQuery("SELECT i FROM ImgStog i WHERE i.proID = :proID ");
+         q.setParameter("proID", proID);
+        return q.getResultList();
     }
     
 }
