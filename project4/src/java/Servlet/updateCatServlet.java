@@ -3,45 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlet;
 
-import entity.ImgStog;
-import entity.Product;
+import entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.ImgStogFacadeLocal;
-import models.ProductFacadeLocal;
-
+import models.CategoryFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class showProductServlet extends HttpServlet {
+public class updateCatServlet extends HttpServlet {
+    
     @EJB
-    private ProductFacadeLocal productFacade;
+    private CategoryFacadeLocal categoryFacade;
 
-    @EJB
-    private ImgStogFacadeLocal imgStogFacade;
-
-  
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           List<ImgStog> list = imgStogFacade.findAll();
-           List<Product> listPro = productFacade.findAll();
-           
-            request.setAttribute("list", list);
-             request.setAttribute("listPro", listPro);
-            request.getRequestDispatcher("admin/listProducts.jsp").forward(request, response);
+            String name = request.getParameter("catName");
+            int catID = Integer.parseInt(request.getParameter("catID"));
+            Category cate = new Category();
+            cate.setCatID(catID);
+            cate.setCatName(name);
+            categoryFacade.edit(cate);
+            request.getRequestDispatcher("listCatServlet").forward(request, response);
         }
     }
 

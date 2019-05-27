@@ -3,45 +3,58 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlet;
 
-import entity.ImgStog;
+import entity.Category;
+import entity.CategoryReport;
+import entity.Customer;
 import entity.Product;
+import entity.Purchase;
+import entity.PurchaseItem;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.ImgStogFacadeLocal;
-import models.ProductFacadeLocal;
-
+import models.CategoryFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class showProductServlet extends HttpServlet {
-    @EJB
-    private ProductFacadeLocal productFacade;
+public class reportCatServlet extends HttpServlet {
 
     @EJB
-    private ImgStogFacadeLocal imgStogFacade;
+    private CategoryFacadeLocal categoryFacade;
 
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           List<ImgStog> list = imgStogFacade.findAll();
-           List<Product> listPro = productFacade.findAll();
-           
-            request.setAttribute("list", list);
-             request.setAttribute("listPro", listPro);
-            request.getRequestDispatcher("admin/listProducts.jsp").forward(request, response);
+//            for (PurchaseItem pc : p.getPurchaseItemCollection()) {
+//                        income += pc.getQuantity();
+//                    }
+            ArrayList<CategoryReport> list = new ArrayList<CategoryReport>();
+            double total = 0.0D;
+            for (Category cat : categoryFacade.findAll()) {
+                String category = cat.getCatName();
+                double income = 0.0D;
+                for (Product p : cat.getProductCollection()) {
+                    for (PurchaseItem pc : p.getPurchaseItemCollection()) {
+                        income += pc.getQuantity();
+                    }
+                }
+                CategoryReport cReport = new CategoryReport(category, income);
+                list.add(cReport);
+                total += income;
+                request.setAttribute("total", total);
+
+            }
+            request.setAttribute("list", list);//Luu ten hang doang thu vao bien
+            request.getRequestDispatcher("admin/ReportCat.jsp").forward(request, response);
         }
     }
 

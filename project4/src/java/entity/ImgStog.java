@@ -7,7 +7,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,16 +14,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,28 +34,25 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ImgStog.findByImgID", query = "SELECT i FROM ImgStog i WHERE i.imgID = :imgID"),
     @NamedQuery(name = "ImgStog.findByImgName", query = "SELECT i FROM ImgStog i WHERE i.imgName = :imgName")})
 public class ImgStog implements Serializable {
-    @OneToMany(mappedBy = "imgID")
-    private Collection<ProImgtb> proImgtbCollection;
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false) 
-    @Column(name = "imgID", nullable = false)
+    @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "imgID", nullable = false)
     private Integer imgID;
     @Size(max = 255)
     @Column(name = "img_name", length = 255)
     private String imgName;
-    @JoinTable(name = "ProImgtb", joinColumns = {
-        @JoinColumn(name = "imgID", referencedColumnName = "imgID")}, inverseJoinColumns = {
-        @JoinColumn(name = "proID", referencedColumnName = "proID")})
-    @ManyToMany
-    private Collection<Product> productCollection;
+    @JoinColumn(name = "proID", referencedColumnName = "proID")
+    @ManyToOne
+    private Product proID;
 
     public ImgStog() {
     }
 
-    public ImgStog( String imgName) {
+    public ImgStog( String imgName, Product proID) {
         this.imgName = imgName;
+        this.proID = proID;
     }
 
     public ImgStog(Integer imgID) {
@@ -82,13 +75,12 @@ public class ImgStog implements Serializable {
         this.imgName = imgName;
     }
 
-    @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
+    public Product getProID() {
+        return proID;
     }
 
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
+    public void setProID(Product proID) {
+        this.proID = proID;
     }
 
     @Override
@@ -114,15 +106,6 @@ public class ImgStog implements Serializable {
     @Override
     public String toString() {
         return "entity.ImgStog[ imgID=" + imgID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<ProImgtb> getProImgtbCollection() {
-        return proImgtbCollection;
-    }
-
-    public void setProImgtbCollection(Collection<ProImgtb> proImgtbCollection) {
-        this.proImgtbCollection = proImgtbCollection;
     }
     
 }

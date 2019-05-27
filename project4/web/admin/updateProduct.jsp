@@ -30,56 +30,53 @@
                 </ul>
             </div>
             <div class="row">
-                <div class="col-md"></div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="tile">
-                        <h3 class="tile-title">Insert new product</h3>
+                <div class="col-md-6">
+                     <div class="tile">
+                        <h3 class="tile-title">INFOR OF product</h3>
                         <div class="tile-body">
                             <form id="fileForm" class="form-horizontal" action="updateProductServlet" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product ID </label>
                                     <div class="col-md-8">
-                                        <input readonly value="${product.proID.proID}" id="txtID" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
+                                        <input readonly value="${product.proID}" id="txtID" class="form-control" type="text" name="id" required data-error-msg="Must enter ID?" placeholder="Enter product ID">
                                 </div>
                             </div>
-                                    <input value="${product.code}" id="txtID" name="proImgid" class="form-control" type="hidden">
-                            
 
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Name </label>
                                 <div class="col-md-8">
-                                    <input value="${product.proID.proName}" class="form-control" type="text" id="txtName" name="name" placeholder="Enter product name">
+                                    <input value="${product.proName}" class="form-control" type="text" id="txtName" name="name" placeholder="Enter product name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Details</label>
                                 <div class="col-md-8">
-                                    <textarea  class="form-control" rows="4" name="details" placeholder="Enter product details">${product.proID.proDetails}</textarea>
+                                    <textarea  class="form-control" rows="4" name="details" placeholder="Enter product details">${product.proDetails}</textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Price </label>
                                 <div class="col-md-8">
-                                    <input class="form-control" value="${product.proID.proPrice}" type="number" name="price" placeholder="Enter product price">
+                                    <input class="form-control" value="${product.proPrice}" type="number" name="price" placeholder="Enter product price">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Quantity</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" value="${product.proID.quantity}" type="number" name="quantity" placeholder="Enter product quantity">
+                                    <input class="form-control" value="${product.quantity}" type="number" name="quantity" placeholder="Enter product quantity">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Date Release </label>
                                 <div class="col-md-8">
-                                    <input class="form-control" value="<fmt:formatDate value="${product.proID.dateRelease}" pattern="MM/dd/yyyy"/>" type="text" name="datepicker" id="datepicker" placeholder="Enter product DateRelease">
+                                    <input class="form-control" value="<fmt:formatDate value="${product.dateRelease}" pattern="MM/dd/yyyy"/>" type="text" name="datepicker" id="datepicker" placeholder="Enter product DateRelease">
 
                                 </div>
                             </div> 
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Tags </label>
                                 <div class="col-md-8">
-                                    <input class="form-control" value="${product.proID.tags}" type="text" name="tags" placeholder="Enter product tags">
+                                    <input class="form-control" value="${product.tags}" type="text" name="tags" placeholder="Enter product tags">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -104,36 +101,107 @@
                                     </select>    
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3">Image Product</label>
-                                <div class="col-md-8">
-                                    <input type="text" value="${product.imgID.imgID}" name="imgID" readonly/>
-                                    <input class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
-                                    <a href="#" id="fileSelect">Change image</a> 
-                                    <div id="fileList">
-                                        <p><img src="productImage/${product.imgID.imgName}" alt="pets" width="150px" height="150px" ></p>
-                                    </div>            
-                                </div>
-                            </div>
-                            <div class="form-group row"> 
-                                <label class="control-label col-md-3">Status</label>
-                                <div class="col-md-8 custom-radio">
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input class="custom-control-input" type="radio" name="status" id="status" 
-                                               value="Active" ${product.proID.proStatus=='true'?'checked':''}>
-                                        <label class="custom-control-label" for="status">Active</label>
+
+                         
+
+                            <!--        <div class="form-group row"> 
+                                        <label class="control-label col-md-3">Status</label>
+                                        <div class="col-md-8 custom-radio">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input class="custom-control-input" type="radio" name="status" id="status" 
+                                                       value="Active" $.{product.proID.proStatus=='true'?'checked':''}>
+                                                <label class="custom-control-label" for="status">Active</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input class="custom-control-input" type="radio" name="status" id="status1"
+                                                       value="Disable" $.{product.proID.proStatus=='false'?'checked':''}>
+                                                <label class="custom-control-label" for="status1">Disable</label>
+                                            </div>
+                                        </div> 
                                     </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input class="custom-control-input" type="radio" name="status" id="status1"
-                                               value="Disable" ${product.proID.proStatus=='false'?'checked':''}>
-                                        <label class="custom-control-label" for="status1">Disable</label>
-                                    </div>
-                                </div> 
-                            </div>
+                            -->
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">
-                                        <input type="submit" class="btn btn-primary" value="Ok" />
+                                        <input type="submit" class="btn btn-primary" value="Update" />
+                                        <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="tile">
+                        <h3 class="tile-title">HInah anh 's product</h3>
+                        <div class="tile-body">
+                            <form id="fileForm" class="form-horizontal" action="updateProductServlet" method="post" enctype="multipart/form-data">
+                               
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Category</label>
+                                <div class="col-md-8">
+                                    <select name="cboCategory" class="form-control">
+
+                                        <c:forEach var="c1" items="${listCat}">
+                                            <option value="${c1.catID}">${c1.catName}</option>
+                                        </c:forEach>
+                                    </select>    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Type</label>
+                                <div class="col-md-8">
+                                    <select name="cboType" class="form-control">
+
+                                        <c:forEach var="c" items="${listType}">
+                                            <option value="${c.typeID}">${c.typeName}</option>
+                                        </c:forEach>
+                                    </select>    
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Image Product</label>
+                                <div class="col-md-9">
+                                    <a href="#" id="fileSelect">Change image</a> 
+                                   <div class="row">
+                                    <c:forEach items="${listImg}" var="img">
+                                        <div class="col-md-6">
+                                            
+                                          <input type="hidden" value="${img.imgID}" name="imgID"/>
+                                        <input class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
+                                        
+                                        <div id="fileList">
+                                            <p><img src="productImage/${img.imgName}" alt="pets" width="150px" height="150px" ></p>
+                                        </div>   
+                                        </div>
+                                    </c:forEach>
+                                   </div>
+                                </div>
+                                
+                            </div>
+
+                            <!--        <div class="form-group row"> 
+                                        <label class="control-label col-md-3">Status</label>
+                                        <div class="col-md-8 custom-radio">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input class="custom-control-input" type="radio" name="status" id="status" 
+                                                       value="Active" $.{product.proID.proStatus=='true'?'checked':''}>
+                                                <label class="custom-control-label" for="status">Active</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input class="custom-control-input" type="radio" name="status" id="status1"
+                                                       value="Disable" $.{product.proID.proStatus=='false'?'checked':''}>
+                                                <label class="custom-control-label" for="status1">Disable</label>
+                                            </div>
+                                        </div> 
+                                    </div>
+                            -->
+                            <div class="tile-footer">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-3">
+                                        <input type="submit" class="btn btn-primary" value="Update" />
                                         <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
                                     </div>
                                 </div>

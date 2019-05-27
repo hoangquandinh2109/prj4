@@ -14,7 +14,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Local
 public interface ProductFacadeLocal {

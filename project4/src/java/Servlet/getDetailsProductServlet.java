@@ -1,8 +1,8 @@
-
 package Servlet;
 
 import entity.Category;
-import entity.ProImgtb;
+import entity.ImgStog;
+import entity.Product;
 import entity.ProductType;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.CategoryFacadeLocal;
 import models.ImgStogFacadeLocal;
-import models.ProImgtbFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
 
@@ -23,8 +22,7 @@ import models.ProductTypeFacadeLocal;
  * @author Asus
  */
 public class getDetailsProductServlet extends HttpServlet {
-    @EJB
-    private ProImgtbFacadeLocal proImgtbFacade;
+
     @EJB
     private ImgStogFacadeLocal imgStogFacade;
     @EJB
@@ -38,15 +36,18 @@ public class getDetailsProductServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int code =Integer.parseInt(request.getParameter("code"));
-           // entity.Product product = productFacade.find(code);
-             List<Category> listCate = categoryFacade.findAll();
-             List<ProductType> listTyp = productTypeFacade.findAll();
-            ProImgtb product = proImgtbFacade.find(code);
-          request.setAttribute("listCat", listCate);
-          request.setAttribute("listType", listTyp);
+            String code = request.getParameter("code");
+
+            // entity.Product product = productFacade.find(code);
+            List<Category> listCate = categoryFacade.findAll();
+            List<ProductType> listTyp = productTypeFacade.findAll();
+            Product product = productFacade.find(code);
+            List<ImgStog> img = imgStogFacade.findList(product);
+            request.setAttribute("listCat", listCate);
+            request.setAttribute("listType", listTyp);
+            request.setAttribute("listImg", img);
             //request.setAttribute("product", product);
-          request.setAttribute("product", product);
+            request.setAttribute("product", product);
             request.getRequestDispatcher("admin/updateProduct.jsp").forward(request, response);
         }
     }

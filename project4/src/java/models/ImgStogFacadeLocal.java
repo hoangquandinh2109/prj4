@@ -7,6 +7,7 @@
 package models;
 
 import entity.ImgStog;
+import entity.Product;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +31,7 @@ public interface ImgStogFacadeLocal {
     List<ImgStog> findRange(int[] range);
 
     int count();
+
+    List<ImgStog> findList(Product proID);
     
 }

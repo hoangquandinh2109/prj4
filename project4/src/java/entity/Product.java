@@ -12,12 +12,9 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -45,23 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByQuantity", query = "SELECT p FROM Product p WHERE p.quantity = :quantity"),
     @NamedQuery(name = "Product.findByDateRelease", query = "SELECT p FROM Product p WHERE p.dateRelease = :dateRelease"),
     @NamedQuery(name = "Product.findByProStatus", query = "SELECT p FROM Product p WHERE p.proStatus = :proStatus"),
-    @NamedQuery(name = "Product.findByTags", query = "SELECT p FROM Product p WHERE p.tags = :tags")})
+    @NamedQuery(name = "Product.findByTags", query = "SELECT p FROM Product p WHERE p.tags = :tags"),
+    @NamedQuery(name = "Product.findByStarAVG", query = "SELECT p FROM Product p WHERE p.starAVG = :starAVG")})
 public class Product implements Serializable {
-    @Column(name = "DateRelease")
-    @Temporal(TemporalType.DATE)
-    private Date dateRelease;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "starAVG", precision = 53)
-    private Double starAVG;
-    @JoinColumn(name = "typeID", referencedColumnName = "typeID")
-    @ManyToOne
-    private ProductType typeID;
-    @OneToMany(mappedBy = "proID")
-    private Collection<Review> reviewCollection;
-    @OneToMany(mappedBy = "proID")
-    private Collection<ViewComment> viewCommentCollection;
-    @OneToMany(mappedBy = "proID")
-    private Collection<ProImgtb> proImgtbCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -80,34 +63,44 @@ public class Product implements Serializable {
     private Integer proPrice;
     @Column(name = "quantity")
     private Integer quantity;
+    
+    @Column(name = "DateRelease")
+    @Temporal(TemporalType.DATE)
+    private Date dateRelease;
     @Column(name = "proStatus")
     private Boolean proStatus;
     @Size(max = 255)
     @Column(name = "tags", length = 255)
     private String tags;
-    @ManyToMany(mappedBy = "productCollection")
-    private Collection<ImgStog> imgStogCollection;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "starAVG", precision = 53)
+    private Double starAVG;
     @JoinColumn(name = "catID", referencedColumnName = "catID")
     @ManyToOne
     private Category catID;
+    @JoinColumn(name = "typeID", referencedColumnName = "typeID")
+    @ManyToOne
+    private ProductType typeID;
     @OneToMany(mappedBy = "proID")
-    private Collection<PurchaseItem> purchaseItemCollection;
+    private Collection<Feature> featureCollection;
+    @OneToMany(mappedBy = "proID")
+    private Collection<ImgStog> imgStogCollection;
 
     public Product() {
     }
 
-    public Product(Date dateRelease, Double starAVG, ProductType typeID, String proID, String proName, String proDetails, Integer proPrice, Integer quantity, Boolean proStatus, String tags, Category catID) {
-        this.dateRelease = dateRelease;
-        this.starAVG = starAVG;
-        this.typeID = typeID;
+    public Product(String proID, String proName, String proDetails, Integer proPrice, Integer quantity, Date dateRelease, Boolean proStatus, String tags, Double starAVG, Category catID, ProductType typeID) {
         this.proID = proID;
         this.proName = proName;
         this.proDetails = proDetails;
         this.proPrice = proPrice;
         this.quantity = quantity;
+        this.dateRelease = dateRelease;
         this.proStatus = proStatus;
         this.tags = tags;
+        this.starAVG = starAVG;
         this.catID = catID;
+        this.typeID = typeID;
     }
 
     public Product(String proID) {
@@ -154,6 +147,14 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
+    public Date getDateRelease() {
+        return dateRelease;
+    }
+
+    public void setDateRelease(Date dateRelease) {
+        this.dateRelease = dateRelease;
+    }
+
     public Boolean getProStatus() {
         return proStatus;
     }
@@ -170,13 +171,12 @@ public class Product implements Serializable {
         this.tags = tags;
     }
 
-    @XmlTransient
-    public Collection<ImgStog> getImgStogCollection() {
-        return imgStogCollection;
+    public Double getStarAVG() {
+        return starAVG;
     }
 
-    public void setImgStogCollection(Collection<ImgStog> imgStogCollection) {
-        this.imgStogCollection = imgStogCollection;
+    public void setStarAVG(Double starAVG) {
+        this.starAVG = starAVG;
     }
 
     public Category getCatID() {
@@ -187,13 +187,30 @@ public class Product implements Serializable {
         this.catID = catID;
     }
 
-    @XmlTransient
-    public Collection<PurchaseItem> getPurchaseItemCollection() {
-        return purchaseItemCollection;
+    public ProductType getTypeID() {
+        return typeID;
     }
 
-    public void setPurchaseItemCollection(Collection<PurchaseItem> purchaseItemCollection) {
-        this.purchaseItemCollection = purchaseItemCollection;
+    public void setTypeID(ProductType typeID) {
+        this.typeID = typeID;
+    }
+
+    @XmlTransient
+    public Collection<Feature> getFeatureCollection() {
+        return featureCollection;
+    }
+
+    public void setFeatureCollection(Collection<Feature> featureCollection) {
+        this.featureCollection = featureCollection;
+    }
+
+    @XmlTransient
+    public Collection<ImgStog> getImgStogCollection() {
+        return imgStogCollection;
+    }
+
+    public void setImgStogCollection(Collection<ImgStog> imgStogCollection) {
+        this.imgStogCollection = imgStogCollection;
     }
 
     @Override
@@ -219,57 +236,6 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "entity.Product[ proID=" + proID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<ProImgtb> getProImgtbCollection() {
-        return proImgtbCollection;
-    }
-
-    public void setProImgtbCollection(Collection<ProImgtb> proImgtbCollection) {
-        this.proImgtbCollection = proImgtbCollection;
-    }
-
-    public Double getStarAVG() {
-        return starAVG;
-    }
-
-    public void setStarAVG(Double starAVG) {
-        this.starAVG = starAVG;
-    }
-
-    public ProductType getTypeID() {
-        return typeID;
-    }
-
-    public void setTypeID(ProductType typeID) {
-        this.typeID = typeID;
-    }
-
-    @XmlTransient
-    public Collection<Review> getReviewCollection() {
-        return reviewCollection;
-    }
-
-    public void setReviewCollection(Collection<Review> reviewCollection) {
-        this.reviewCollection = reviewCollection;
-    }
-
-    @XmlTransient
-    public Collection<ViewComment> getViewCommentCollection() {
-        return viewCommentCollection;
-    }
-
-    public void setViewCommentCollection(Collection<ViewComment> viewCommentCollection) {
-        this.viewCommentCollection = viewCommentCollection;
-    }
-
-    public Date getDateRelease() {
-        return dateRelease;
-    }
-
-    public void setDateRelease(Date dateRelease) {
-        this.dateRelease = dateRelease;
     }
     
 }

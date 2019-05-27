@@ -7,6 +7,7 @@
 package models;
 
 import entity.Category;
+import entity.ImgStog;
 import entity.Product;
 import entity.ProductType;
 import java.util.List;
@@ -16,7 +17,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> implements ProductFacadeLocal {
@@ -31,7 +32,7 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     public ProductFacade() {
         super(Product.class);
     }
-
+    
     @Override
     public List<Product> getProductByType(ProductType productType) {
         try {
@@ -41,7 +42,7 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
                 .getResultList();
         } catch (Exception e) {
             return null;
-        }
+}
     }
 
     @Override
@@ -104,8 +105,5 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
             return null;
         }
         
-    }
-    
-    
-    
+    }  
 }

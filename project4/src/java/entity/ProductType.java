@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "ProductType.findAll", query = "SELECT p FROM ProductType p"),
     @NamedQuery(name = "ProductType.findByTypeID", query = "SELECT p FROM ProductType p WHERE p.typeID = :typeID"),
-    @NamedQuery(name = "ProductType.findByTypeName", query = "SELECT p FROM ProductType p WHERE p.typeName = :typeName")})
+    @NamedQuery(name = "ProductType.findByTypeName", query = "SELECT p FROM ProductType p WHERE p.typeName = :typeName"),
+    @NamedQuery(name = "ProductType.findByStatusType", query = "SELECT p FROM ProductType p WHERE p.statusType = :statusType")})
 public class ProductType implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,15 +45,12 @@ public class ProductType implements Serializable {
     @Size(max = 20)
     @Column(name = "typeName", length = 20)
     private String typeName;
+    @Column(name = "statusType")
+    private Boolean statusType;
     @OneToMany(mappedBy = "typeID")
     private Collection<Product> productCollection;
 
     public ProductType() {
-    }
-
-    public ProductType( String typeName, Collection<Product> productCollection) {
-        this.typeName = typeName;
-        this.productCollection = productCollection;
     }
 
     public ProductType(Integer typeID) {
@@ -73,6 +71,14 @@ public class ProductType implements Serializable {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public Boolean getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(Boolean statusType) {
+        this.statusType = statusType;
     }
 
     @XmlTransient

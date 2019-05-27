@@ -43,43 +43,43 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Name<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" required type="text" name="name" placeholder="Enter product name" autocomplete="off">
+                                        <input class="form-control" required type="text" name="0"  placeholder="Enter product name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Details<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <textarea class="form-control" required rows="4" name="details" placeholder="Enter product details" autocomplete="off"></textarea>
+                                        <textarea class="form-control" required rows="4" name="1" id="1" placeholder="Enter product details" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-3">Product Price<span class="required">*</span></label>
+                                    <label class="control-label col-md-3">Product Price (VND)<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" name="price" placeholder="Enter product price" min="0"  max="99999" autocomplete="off">
+                                        <input class="form-control" type="number" required name="2" placeholder="Enter product price" min="0"  max="99999" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Quantity<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" name="quantity" data-error-msg="Must enter your name?" placeholder="Enter product quantity" min="0" max="99999" autocomplete="off">
+                                        <input class="form-control" type="number" required name="3"  placeholder="Enter product quantity" min="0" max="99999" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Date Release<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" required="" name="datepicker" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
+                                        <input class="form-control" type="text" required name="4" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
                                     </div>
                                 </div> 
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Tags<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" name="tags" placeholder="Enter product tags" autocomplete="off">
+                                        <input class="form-control" type="text" required name="5" placeholder="Enter product tags" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Category<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <select name="cboCategory"  required class="form-control">
+                                        <select name="6"  required class="form-control">
                                             <option value="">Select Category</option>
                                         <c:forEach var="c" items="${listCat}">
                                             <option value="${c.catID}">${c.catName}</option>
@@ -90,7 +90,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Type<span class="required">*</span></label>
                                 <div class="col-md-8">
-                                    <select required name="cboType" class="form-control">
+                                    <select required name="7" class="form-control">
                                         <option value="">Select Type</option>
                                         <c:forEach var="c" items="${listType}">
                                             <option value="${c.typeID}">${c.typeName}</option>
@@ -98,21 +98,25 @@
                                     </select>    
                                 </div>
                             </div>
-                            <div class="form-group row">
+                           
+                              <div class="form-group row">
                                 <label class="control-label col-md-3">Image Product<span class="required">*</span></label>
                                 <div class="col-md-8">
-                                    <input required class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
+                                    <input  class="form-control" id="fileElem" required style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
                                     <a href="#" id="fileSelect">Select some files</a> 
                                     <div id="fileList">
                                         <p>No files selected!</p>
                                     </div>            
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <input type="submit" class="btn btn-primary" value="Ok" />
+                                <input type="reset" class="btn btn-secondary" value="Cancel" /> 
+                            </div>
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">
-                                        <input type="submit" class="btn btn-primary" value="Ok" />
-                                        <input type="reset" class="btn btn-secondary" value="Cancel" />
+
                                         <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
                                     </div>
                                 </div>
@@ -121,17 +125,20 @@
                     </div>
                 </div>
             </div>
+            <h1>${message}</h1>
             <div class="clearix"></div>
             <div class="col-md"></div>
         </div>
     </main>
     <script>
+        var biendem=0;
                 var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".png"];
                 function Validate(oForm) {
                 var arrInputs = oForm.getElementsByTagName("input");
                         for (var i = 0; i < arrInputs.length; i++) {
                 var oInput = arrInputs[i];
                         if (oInput.type == "file") {
+                            biendem++;
                 var sFileName = oInput.value;
                         if (sFileName.length > 0) {
                 var blnValid = false;
@@ -142,15 +149,19 @@
                         break;
                 }
                 }
-
+                
                 if (!blnValid) {
-                alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                alert("Sorry, allowed extensions are: " + _validFileExtensions.join(", "));
+                        return false;
+                }
+                else if(arrInputs[5].files.length>5){
+                    alert("File phai it hon 5 ");
                         return false;
                 }
                 }
                 }
                 }
-
+                
                 return true;
                 }
     </script>

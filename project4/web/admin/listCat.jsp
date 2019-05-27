@@ -19,8 +19,8 @@
         <main class="app-content">
             <div class="app-title">
                 <div>
-                    <h1><i class="fa fa-edit"></i> Form Samples</h1>
-                    <p>Sample forms</p>
+                    <h1><i class="fa fa-edit"></i> List Categories And Type</h1>
+                    <p>Category and Type</p>
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -30,6 +30,7 @@
             </div>   
             <div id="wrap">
                 <table id="example" class="table table-striped table-bordered display">
+                    <center>   <span style="color: #00635a;font-size: 200%;font-weight: bold;"> List Categories</span>    </center>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -43,7 +44,7 @@
                             <td>${s.catID}</td>
                             <td>${s.catName}</td>
                             <td>
-                                <a href="getDetailsProductServlet?code=${s.catName}">Update</a>
+                                <a href="getDetailsCatServlet?catID=${s.catID}">Update</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -52,6 +53,7 @@
                 <hr/>
                 <br/>
             <table id="example1" class="table table-striped table-bordered display">
+                  <center>   <span style="color: #00635a;font-size: 200%;font-weight: bold;"> List Type</span> 
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -64,7 +66,10 @@
                         <tr>               
                             <td>${c.typeID}</td>
                             <td>${c.typeName}</td>
-                            <td>C</td>
+                           
+                            <td>
+                                <a href=" getDetailsTypeServlet?typeID=${c.typeID}">Update</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
