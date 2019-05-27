@@ -39,7 +39,7 @@ public class CartFacade {
         }
         session.setAttribute("cart", cart);
     }
-    public void addToCart(entity.Product product){
+    public void addToCart(entity.Product product, int quantity){
         List<Cart> cart;
         if (session.getAttribute("cart") != null) {
             cart = (List<Cart>) session.getAttribute("cart");
@@ -54,11 +54,11 @@ public class CartFacade {
             }
         }
         if (index != -1 ) {
-            cart.get(index).setQuantity(cart.get(index).getQuantity() + 1);
+            cart.get(index).setQuantity(cart.get(index).getQuantity() + quantity);
             session.setAttribute("cart", cart);
         } else{
             int lastid = cart.size();
-            cart.add(new Cart(lastid+1, product, 1));
+            cart.add(new Cart(lastid+1, product, quantity));
             session.setAttribute("cart", cart);
         }
     }

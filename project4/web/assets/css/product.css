@@ -199,6 +199,10 @@ a.button-dhq-mk#wishlist:hover {
   border: 1px solid #e5e5e5;
 }
 
+.tab-for-somthing .tab-things .tabs {
+  padding: 10px;
+}
+
 #refine-by #filter-by-price {
   background-color: #fff;
   border: 1px solid #e5e5e5;

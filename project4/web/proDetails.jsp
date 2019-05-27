@@ -15,18 +15,18 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
     <body ng-app="cangcucot">
-        <div class="content-n-cart clearfix">
+        <div class="content-n-cart clearfix"  ng-controller="cart">
             <div class="content">
                 <div class="clickdetrove"></div>
                 <c:import url="templates/header.jsp"></c:import>
                     <div class="web-body">
                         <div class="container"  >
-                            <div class="path">
+<!--                            <div class="path">
                                 <span>Home</span>
                                 <span>New product</span>
                                 <span>YOUR NAME</span>
 
-                            </div>
+                            </div>-->
                             <div class="row details">
                                 <div class="col-md-5" >
                                     <div class="img">
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-md-7 pro-details" >
                                     <div class="details-block">
-                                        <h1>CANON F1S</h1>
+                                        <h1>${thisP.proName}</h1>
                                         <div class="review-tu clearfix">
                                             <div class="star-review">
                                                 <i class="far fa-star"></i>
@@ -46,7 +46,7 @@
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
-                                                <div class="star-reviewed">
+                                                <div style="width: ${(thisP.starAVG / 5)*100}%" class="star-reviewed">
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
@@ -60,15 +60,15 @@
                                         <p>THIS IS YOUR FIRST TIME</p>
                                         <hr>
                                         <p class="availability">AVAILABLE</p>
-                                        <p><span class="price">$250.00</span> <span class="old-price">$400.00</span></p>
+                                        <p><span class="price">${thisP.proPrice}.00</span> <span class="old-price">$400.00</span></p>
                                         <hr>
                                         <div class="cart-quantity">
-                                            <input type="number" min="1" max="50">
-                                            <button class="cart-quan-plus"><span>+</span></button>
-                                            <button class="cart-quan-minus"><span>-</span></button>
+                                            <input  ng-model="proQuan" type="number" min="1" max="50">
+                                            <button ng-click="incQuanP()" class="cart-quan-plus"><span>+</span></button>
+                                            <button ng-click="descQuanP()" class="cart-quan-minus"><span>-</span></button>
                                         </div><br>
                                         <div style="padding-top: 20px">
-                                            <a href="" class="button-dhq-mk addtocart"><i class="fal fa-cart-plus"></i> Add to cart</a>
+                                            <a ng-click="addThisToCart('${thisP.proID}')" href="" class="button-dhq-mk addtocart"><i class="fal fa-cart-plus"></i> Add to cart</a>
                                             <a href="" id="wishlist" class="button-dhq-mk btn-love"><i class="far fa-heart-square"></i> Add to Wishlist</a>
                                         </div>
                                         <hr>
@@ -83,7 +83,7 @@
                                         </ul>
                                         <div class="tab-things">
                                             <div id="infoTab" class="tabs">
-                                                info
+                                                ${thisP.proDetails}
                                             </div>
                                             <div style="display: none;" id="faqTab" class="tabs">
                                                 faq
@@ -118,7 +118,7 @@
                                                     <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                                 </div>
                                                 <div class="product-info">
-                                                    <p>${ssd}</p>
+                                                    <a href="">${ssd}</a>
                                                     <!-- <span class="price">$234.32</span> -->
                                                     <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
                                                 </div>
@@ -205,6 +205,5 @@
             </div>
 
               <c:import url="templates/script.jsp"></c:import>
-              <script src="${pageContext.request.contextPath}/assets/js/product.js"></script>
     </body>
 </html>

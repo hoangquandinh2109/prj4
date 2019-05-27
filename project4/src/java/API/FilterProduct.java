@@ -5,8 +5,8 @@
  */
 package API;
 
-import static API.Collections.getTypeJson;
-import static API.Collections.getTypesJson;
+import static JSONGen.Collections.getTypeJson;
+import static JSONGen.Collections.getTypesJson;
 import entity.Category;
 import entity.Product;
 import entity.ProductType;

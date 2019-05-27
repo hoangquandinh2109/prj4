@@ -13,4 +13,5 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/animatecss/animate.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cart.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/fav.png">
 <title>GiftStore - ${pagename}</title>

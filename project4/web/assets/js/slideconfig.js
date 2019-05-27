@@ -3,7 +3,7 @@ $(document).ready(function(){
         items: 1,
         nav: true,
         loop: true,
-        autoplay: true,
+        autoplay: false,
         autoplayHoverPause: true,
         dots: false,
         mouseDrag: false,
@@ -16,7 +16,7 @@ $(document).ready(function(){
     $(".owl-carousel.product-slide.nothing").owlCarousel({
         items: 4,
         loop: true,
-        autoplay: true,
+        autoplay: false,
         autoplayHoverPause: true,
         dots: false,
         mouseDrag: true,
@@ -29,7 +29,7 @@ $(document).ready(function(){
     $(".owl-carousel.product-slide.quanvippro").owlCarousel({
         items: 2,
         loop: true,
-        autoplay: true,
+        autoplay: false,
         autoplayHoverPause: true,
         dots: false,
         mouseDrag: true,
@@ -42,7 +42,7 @@ $(document).ready(function(){
     $(".owl-carousel.left-vertical-product-slide").owlCarousel({
         items: 1,
         loop: true,
-        autoplay: true,
+        autoplay: false,
         autoplayHoverPause: true,
         dots: false,
         mouseDrag: true,

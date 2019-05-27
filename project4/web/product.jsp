@@ -105,10 +105,10 @@
                                     <div class="row" ng-repeat="row in range(1,numrow)">
                                         <div class="product-item wow fadeIn" ng-repeat="item in productRow(row)" >
                                             <div class="image-product">
-                                                <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
+                                                <a href="/project4/product/v/{{item.proID}}"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <p>{{item.proName}}</p>
+                                                <a href="/project4/product/v/{{item.proID}}">{{item.proName}}</a>
                                                 <!-- <span class="price">$234.32</span> -->
                                                 <span class="old-price">$2349.00</span> <span class="new-price">{{'$'+item.proPrice}}.00</span>
                                             </div>

@@ -6,6 +6,7 @@
 
 package Servlet.User;
 
+import static JSONGen.Cart.getTypeJson;
 import models.CartFacade;
 import entity.Cart;
 import java.io.IOException;
@@ -21,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.ProductFacadeLocal;
 import entity.Product;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 
 /**
  *
@@ -44,43 +47,45 @@ public class CartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException { 
         session=request.getSession();
+        out = response.getWriter();
         c = new CartFacade(session);
         String name = (String) session.getAttribute("sessionname");
         if(name != null){
-//     if == null       response.sendRedirect(request.getContextPath()+"/login");
-            response.setContentType("text/html;charset=UTF-8");
-            out = response.getWriter();
             List<Cart> cart = c.getAllCartItems();
             int price = 0;
+            JsonArrayBuilder jab = Json.createArrayBuilder();
             for(Cart c : cart){
-                out.print(c.getId()+" "+c.getProduct().getProName()+" "+c.getQuantity()+"<br>");
                 price += c.getQuantity() * c.getProduct().getProPrice();
+                jab.add(JSONGen.Cart.getTypeJson(c));
             }
-            out.print("Total: "+price+"<br>");
-            session.setAttribute("totalPrice", price);
-            out.println(form);
+            out.println(JSONGen.Cart.getTypeThings(jab.build(), price));
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else{
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("hello");
         session=request.getSession(); 
-        c = new CartFacade(session);
         String name = (String) session.getAttribute("sessionname");
+        System.out.println(name);
         if(name != null){
-            response.setContentType("text/html;charset=UTF-8");
-            out = response.getWriter();
-            String proID = request.getParameter("proID");
-            Product p = productFacade.find(proID);
-            c.addToCart(p);
-            int price = 0;
-            for(Cart c : c.getAllCartItems()){
-                out.println(c.getProduct().getProName()+" "+c.getQuantity());
-                price += c.getQuantity() * c.getProduct().getProPrice();
+            try {
+                c = new CartFacade(session);
+                String proID = request.getParameter("proID");
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                System.out.println(proID+quantity);
+                Product p = productFacade.find(proID);
+                c.addToCart(p, quantity);
+                response.setStatus(200);
+            } catch (Exception e) {
+                response.setStatus(404);
             }
-            session.setAttribute("totalPrice", price);
-            out.println(form);
+        } else{
+            response.setStatus(404);
         }
     }
     

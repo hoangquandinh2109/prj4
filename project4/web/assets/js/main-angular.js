@@ -1,6 +1,62 @@
  var app = angular.module('cangcucot', []);
  
 
+//////////////////////////////////////////////////////////////////////////////////////Cart
+
+app.controller('cart', function($scope, $http){
+    /////////////////////////////////////add to cart/////////////////////////////////
+    var self = $scope;
+    var proId = $("#proID").text();
+    $scope.proQuan=1;
+    $scope.addThisToCart = function(id){
+        console.log("proID: "+id+" proQuan: "+$scope.proQuan);
+        $.ajax({
+            url: linkpage+"cart",
+            method: "GET",
+            data: {"proID":id,"quantity":$scope.proQuan},
+            success: function(){
+                alert("ok");
+            },
+            error: function(){
+                alert("not ok");
+            }
+        });
+    }
+    $scope.incQuanP = function(){
+        $scope.proQuan = ($scope.proQuan == 50)?50:$scope.proQuan+1;
+    }
+    $scope.descQuanP = function(){
+        $scope.proQuan = ($scope.proQuan == 1)?1:$scope.proQuan-1;
+    }
+    /////////////////////////////////////add to cart/////////////////////////////////
+    
+    
+    
+    
+    /////////////////////////////////////list cart/////////////////////////////////
+    $scope.listCartItems;
+    /////////////////////////////////////list cart/////////////////////////////////
+    
+    
+    
+    
+    /////////////////////////////////////function ajax/////////////////////////////////
+    function showAllCartItems(){
+        $http.get(linkpage+"cart")
+        .then(function(response) {
+            $scope.listCartItems = response.data.listCI;
+        });
+    }
+    function updateCart(){
+        
+    }
+    function deleteCartItems(){
+        
+    }
+    /////////////////////////////////////function ajax/////////////////////////////////
+});
+
+
 //////////////////////////////////////////////////////////////////////////////////////Search Suggestion
 
 app.controller('suggest', function($scope, $http) {

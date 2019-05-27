@@ -102,7 +102,7 @@ public class Product extends HttpServlet {
                     req.setAttribute("currPage", pageno);
                     getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
                 } else{
-                    out.println(API.Collections.getTypeThings(listPT, pagenum, pageno));
+                    out.println(JSONGen.Collections.getTypeThings(listPT, pagenum, pageno));
                 }
             }
                 break;
@@ -142,7 +142,7 @@ public class Product extends HttpServlet {
                 req.setAttribute("currPage", pageno);
                     getServletContext().getRequestDispatcher("/collections.jsp").forward(req, resp);
                 } else{
-                    out.println(API.Collections.getTypeThings(listPT, pagenum, pageno));
+                    out.println(JSONGen.Collections.getTypeThings(listPT, pagenum, pageno));
                 }
             }
                 break;
@@ -150,7 +150,29 @@ public class Product extends HttpServlet {
             if(!id.isEmpty()){
                 entity.Product p = productDB.getSingleProduct(id);
                 if(p != null){
-                    
+                    List<String> list = new ArrayList<>();
+                    list.add("Vipkien");
+                    list.add("Tunzin 093");
+                    list.add("Iphone 7");
+                    list.add("Samsung 7");
+                    list.add("Kzenton 0392");
+                    list.add("Fovien 830");
+                    list.add("Moutain Dew ");
+                    list.add("Vip 700 S7");
+                    list.add("Black Milktea");
+                    list.add("Aleader Funky");
+                    list.add("Black coil");
+                    list.add("Logitech Mouse");
+            //        list.add("Vippro");
+            //        list.add("Nguoi dung lang im");
+            //        list.add("Monster");
+            //        list.add("Vip bien hoa");
+            //        list.add("Guitar Solo");
+            //        list.add("Bip Na Dang");
+            //        list.add("Sony Z8");
+                    req.setAttribute("list", list);
+                    req.setAttribute("thisP", p);
+                    req.setAttribute("pagename", p.getProName());
                     getServletContext().getRequestDispatcher("/proDetails.jsp").forward(req, resp);
                 }else{
                     getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
