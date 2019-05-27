@@ -40,18 +40,21 @@ $(document).ready(function(){
     });   
 
 
-    $('.cart-quantity > input').on('keydown keyup', function(e){
+    $('.cart-quantity > input').on('keyup', function(e){
         if ($(this).val() < 1 
             && e.keyCode !== 46 // keycode for delete
             && e.keyCode !== 8 // keycode for backspace
+            && e.target.value < 1
            ) {
            e.preventDefault();
+           console.log(e)
            $(this).val(1);
            $(this).change();
         }
         if ($(this).val() > 50 
             && e.keyCode !== 46 // keycode for delete
             && e.keyCode !== 8 // keycode for backspace
+            
            ) {
            e.preventDefault();
            $(this).val(50);
@@ -132,9 +135,9 @@ $(document).ready(function(){
     $(window).scroll(function() {
         var $height = $(window).scrollTop();
         if($height > 1000) {
-                $("#abcxyz").removeClass("hide");
+                $("#abcxyz").addClass("hienlen");
         } else {
-                $("#abcxyz").addClass("hide");
+                $("#abcxyz").removeClass("hienlen");
         }
     });
 

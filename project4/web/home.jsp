@@ -83,7 +83,7 @@
                                                     <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                                 </div>
                                                 <div class="product-info">
-                                                    <p>${ssd}</p>
+                                                    <a href="">${ssd}</a>
                                                     <!-- <span class="price">$234.32</span> -->
                                                     <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
                                                 </div>
@@ -152,7 +152,7 @@
                                                 <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <p>${sd}</p>
+                                                <a href="">${sd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
                                                 <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
                                             </div>
@@ -201,7 +201,7 @@
                                                 <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <p>${ssd}</p>
+                                                <a href="">${ssd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
                                                 <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
                                             </div>
@@ -244,7 +244,7 @@
                                                 <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <p>${ssd}</p>
+                                                <a href="">${ssd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
                                                 <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
                                             </div>
@@ -287,7 +287,7 @@
                                                 <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <p>${ssd}</p>
+                                                <a href="">${ssd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
                                                 <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
                                             </div>

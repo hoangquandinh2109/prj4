@@ -50,5 +50,5 @@
         <span>Powered by Thầy Nguyên</span>
     </div>
     
-    <div id="abcxyz" class="hide wow fadeIn"><i class="fal fa-chevron-up"></i></div>
+    <div id="abcxyz"><i class="fal fa-chevron-up"></i></div>
 </div>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package API;
+package JSONGen;
 
 import java.math.BigDecimal;
 import java.util.List;
