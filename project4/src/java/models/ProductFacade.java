@@ -106,4 +106,9 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
         }
         
     }  
+    
+    @Override
+    public int getMaxPrice() {
+        return (int) em.createQuery("select max(p.proPrice) from Product p").getSingleResult();
+    }
 }

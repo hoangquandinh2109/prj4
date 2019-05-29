@@ -232,4 +232,8 @@
 #h2yourcart {
   font-family: 'MerriweatherSans';
 }
+
+#empty-cart {
+  margin: 100px 0;
+}
 /*# sourceMappingURL=cart.css.map */

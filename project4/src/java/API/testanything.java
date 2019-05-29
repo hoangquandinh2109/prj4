@@ -75,22 +75,7 @@ public class testanything extends HttpServlet {
         
         //goi y name
         PrintWriter out = resp.getWriter();
-        JsonArrayBuilder jab = Json.createArrayBuilder();
-        for(Product p : productFacade.findAll()){
-            jab.add(getJsonbyName(p.getProName()));
-        }
-        out.println(getArrayName(jab.build()));
+        out.println(productFacade.getMaxPrice());
     }
-    public static JsonObject getJsonbyName(String name){
-        return Json.createObjectBuilder()
-                .add("proName", name)
-                .build();
-    }
-    public static JsonObject getArrayName(JsonArray arrayname){
-        return Json.createObjectBuilder()
-                .add("listName", arrayname)
-                .build();
-    }
-    
 
 }

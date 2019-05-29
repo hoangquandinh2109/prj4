@@ -18,10 +18,10 @@
         </div>
         <div class="top-nav-tools">
             <ul>
-                <li><a href=""><i class="far fa-list-alt"></i> Wishlist</a></li>
-                <li><a href=""><i class="fas fa-user-alt"></i> My Account</a></li>
-                <li><a href=""><i class="fas fa-share"></i> Checkout</a></li>
-                <li><div id="tools-setting"><i class="fas fa-cog"></i> Setting <i class="fas fa-caret-down"></i></div></li>
+                <li><a href="${pageContext.request.contextPath}/account/wishlist"><i class="far fa-list-alt"></i> Wishlist</a></li>
+                <li><a href="${pageContext.request.contextPath}/account"><i class="fas fa-user-alt"></i> My Account</a></li>
+                <li><a href="${pageContext.request.contextPath}/cart"><i class="fas fa-share"></i> Checkout</a></li>
+<!--                <li><div id="tools-setting"><i class="fas fa-cog"></i> Setting <i class="fas fa-caret-down"></i></div></li>-->
             </ul>
         </div>
     </div>
@@ -70,8 +70,8 @@
                 </div>
                 <div class="cart-inner">
                     <span class="cart-title">Shopping cart</span>
-                    <span id="CartCount">0</span> <span>items</span>
-                    <span id="CartCost"> - <span class="money">$0.00</span></span>
+                    <span id="CartCount">{{numCart}}</span> <span>items</span>
+                    <span id="CartCost"> - <span class="money">{{"$"+subtotal}}.00</span></span>
                 </div>
             </div>
         </div>
@@ -80,9 +80,9 @@
 <nav class="navigation">
     <div class="container">
         <ul class="row">
-            <li><a href="">Home</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a href="${pageContext.request.contextPath}">Home</a></li>
+            <li><a href="${pageContext.request.contextPath}">About</a></li>
+            <li><a href="${pageContext.request.contextPath}">Contact</a></li>
             <li>
                 <a>Product</a>
                 <ul>
@@ -90,12 +90,12 @@
                     <li><a href="${pageContext.request.contextPath}/product/type">Type</a></li>
                 </ul>
             </li>
-            <li><a href="">Blog</a></li>
+            <li><a href="${pageContext.request.contextPath}">Blog</a></li>
         </ul>
                  <form method="post" ng-controller="suggest">
             <input ng-keyup="inputkeyup($event)" ng-model="mysearch" id="search-input" type="text"><button id="search-button"><i class="fas fa-search"></i></button>
-            <div id="result-suggest" ng-hide="hide">
-                <p ng-repeat="n in listSuggest" ng-click="auto(n)">{{n}}</p>
+            <div id="result-suggest" class="hide" ng-hide="hide">
+                <p ng-repeat="n in listSuggest" ng-click="auto(n)"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png">{{n}}</p>
             </div>
         </form>
     </div>

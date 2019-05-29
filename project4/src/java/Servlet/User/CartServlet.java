@@ -46,11 +46,12 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException { 
-        session=request.getSession();
-        out = response.getWriter();
-        c = new CartFacade(session);
-        String name = (String) session.getAttribute("sessionname");
-        if(name != null){
+        String getJson = request.getParameter("getJson");
+        
+        if(getJson != null){////neu request json thi hien ra json
+            out = response.getWriter();
+            session=request.getSession();
+            c = new CartFacade(session);
             List<Cart> cart = c.getAllCartItems();
             int price = 0;
             JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -60,8 +61,8 @@ public class CartServlet extends HttpServlet {
             }
             out.println(JSONGen.Cart.getTypeThings(jab.build(), price));
             response.setStatus(HttpServletResponse.SC_OK);
-        } else{
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } else{///neu ko thi hien trang cart
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
     }
 
@@ -70,22 +71,57 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("hello");
         session=request.getSession(); 
-        String name = (String) session.getAttribute("sessionname");
-        System.out.println(name);
-        if(name != null){
+//        String name = (String) session.getAttribute("sessionname");
+//        System.out.println(name);
+//        if(name != null){
             try {
                 c = new CartFacade(session);
                 String proID = request.getParameter("proID");
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 System.out.println(proID+quantity);
                 Product p = productFacade.find(proID);
-                c.addToCart(p, quantity);
+                if(!c.addToCart(p, quantity)){
+                    out = response.getWriter();
+                    out.println("You can only put 50 items to your cart!");
+                }
                 response.setStatus(200);
             } catch (Exception e) {
                 response.setStatus(404);
             }
-        } else{
-            response.setStatus(404);
+//        } else{
+//            response.setStatus(404);
+//        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        try{
+            int id = Integer.parseInt(req.getParameter("id"));
+            c = new CartFacade(session);
+            c.deletefromCart(id);
+            System.out.println("ko loi delete");
+            System.out.println(id);
+            resp.setStatus(200);
+//        }catch(Exception e){
+//            System.out.println("Loi delete: "+e.getMessage());
+//            resp.setStatus(400);
+//        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try{
+            int id = Integer.parseInt(req.getParameter("id"));
+            int quantity = Integer.parseInt(req.getParameter("quantity"));
+            c = new CartFacade(session);
+            System.out.println(id+" "+quantity);
+            c.updateQuantityCart(id, quantity);
+            
+            System.out.println("ko loi put");
+            resp.setStatus(200);
+        }catch(Exception e){
+            System.out.println("Loi put: "+e.getMessage());
+            resp.setStatus(400);
         }
     }
     

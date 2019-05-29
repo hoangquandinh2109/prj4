@@ -70,6 +70,7 @@ public class Product extends HttpServlet {
                 req.setAttribute("pagename", proType.getNameType(Integer.parseInt(id)));
                 req.setAttribute("collVal", id);
                 req.setAttribute("nameColl", "type");
+                req.setAttribute("maxPrice", productDB.getMaxPrice());
                 getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             }else{
                 //trang type
@@ -111,6 +112,7 @@ public class Product extends HttpServlet {
                 req.setAttribute("pagename", proCat.getCategoryName(Integer.parseInt(id)));
                 req.setAttribute("collVal", id);
                 req.setAttribute("nameColl", "category");
+                req.setAttribute("maxPrice", productDB.getMaxPrice());
                 getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             }else{
                 //trang category

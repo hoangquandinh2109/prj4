@@ -11,19 +11,24 @@
 
 <head>
 
+
     <c:import url="templates/head.jsp"></c:import>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
 </head>
 
-<body ng-app="cangcucot" ng-controller="cart">
-    <div class="content-n-cart clearfix">
+<body ng-app="cangcucot">
+    <div class="content-n-cart clearfix" ng-controller="cart">
         <div class="content">
             <div class="clickdetrove"></div>
             <c:import url="templates/header.jsp"></c:import>
             <div class="web-body">
-                <div id="fb-root"></div>
-                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
                 <div class="container">
+                    <!--                            <div class="path">
+                                                            <span>Home</span>
+                                                            <span>New product</span>
+                                                            <span>YOUR NAME</span>
+                            
+                                                        </div>-->
                     <div class="row details">
                         <div class="col-md-5">
                             <div class="img">
@@ -66,6 +71,11 @@
                                     <button ng-click="incQuanP()" class="cart-quan-plus"><span>+</span></button>
                                     <button ng-click="descQuanP()" class="cart-quan-minus"><span>-</span></button>
                                 </div><br>
+                                <div class="cart-quantity">
+                                    <input type="number" min="1" max="50">
+                                    <button class="cart-quan-plus"><span>+</span></button>
+                                    <button class="cart-quan-minus"><span>-</span></button>
+                                </div><br>
                                 <div style="padding-top: 20px">
                                     <a ng-click="addThisToCart('${thisP.proID}')" href=""
                                         class="button-dhq-mk addtocart"><i class="fal fa-cart-plus"></i> Add to cart</a>
@@ -87,81 +97,18 @@
                                         ${thisP.proDetails}
                                     </div>
                                     <div style="display: none;" id="faqTab" class="tabs">
-                                        <h4>vip</h4>
-                                        <input  placeholder="Give your review a title" class="review-input"/>    
-                                        <input  placeholder="Give your review a title" class="review-input"/>    
-                                        <input  placeholder="Give your review a title" class="review-input"/>    
-                                        <textarea class="review-input" placeholder="Write your comment here"></textarea>     
-                                        <button id="btn-faq">SUBMIT REVIEW</button>                                          
+                                        faq
                                     </div>
                                     <div style="display: none;" id="reviewTab" class="tabs">
-                                        <h3 class="review-h3">Customer Reviews</h3>  
-                                        <div class="clearfix">
-                                            <span style="float: left">
-                                                    <div class="review-tu clearfix">
-                                                            <div class="star-review">
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                                <i class="far fa-star"></i>
-                                                                <div class="star-reviewed">
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                </div>
-                                                            </div>
-                                                            <span class="span-info quantity-review"> Based on 1 review</span>
-                                                        </div>
-                                            </span>
-                                            <a style="float: right" id="write-review">Write a review</a>
-                                        </div>
-                                        <div id="review-form" class="hide">
-                                            <label for="title-r" class="review-label">Review Title</label>
-                                            <input id="title-r" placeholder="Give your review a title" class="review-input"/>    
-                                                                                        
-                                            <label class="review-label">Rating</label>
-                                            <div id="input-star">
-                                                <div>
-                                                    <a data-numstar="5" href=""></a>
-                                                    <a data-numstar="4" href=""></a>
-                                                    <a data-numstar="3" href=""></a>
-                                                    <a data-numstar="2" href=""></a>
-                                                    <a data-numstar="1" href=""></a>
-                                                </div>
-                                            </div>
-                                            <label for="content-r" class="review-label">Body of Review (1500) characters remaining</label>
-                                            <textarea id="content-r" class="review-input" placeholder="Write your comment here"></textarea>                                               
-                                            <button id="btn-review">SUBMIT REVIEW</button>
-                                        </div>
-                                        <div style="max-height: 320px; overflow-y: auto;">
-                                            <div class="item-review">
-                                                <div class="review-tu clearfix">
-                                                    <div class="star-review">
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <div style="" class="star-reviewed">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h2>San pham cui bap</h2>
-                                                <span class="info-people"><strong>asdfsdfsdf</strong> on <strong>May 21, 2019</strong></span>
-                                                <p>That su thi minh mua thu roi va cam thay rat kho chiu vi su dung san pham dirty</p>                 
-                                            </div>  
-                                        </div>                     
+                                        review<br>
+                                        review<br>
+                                        review<br>
+                                        review<br>
+                                        review<br>
+                                        review<br>
                                     </div>
                                     <div style="display: none;" id="commentTab" class="tabs">
-                                        <div class="fb-comments" data-href="http://localhost:8080/project4/product/category" data-width="" data-numposts="5"></div>
+                                        comment
                                     </div>
                                 </div>
                             </div>
@@ -277,6 +224,8 @@
         </div>
         <c:import url="templates/cart-modal.jsp"></c:import>
     </div>
+
     <c:import url="templates/script.jsp"></c:import>
-    <script src="${pageContext.request.contextPath}/assets/js/ajax/reviewajax.js"></script>
-    </body>
+</body>
+
+</html>

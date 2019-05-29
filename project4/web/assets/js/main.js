@@ -146,6 +146,18 @@ $(document).ready(function(){
     $("#abcxyz").click(function(){
         $("html, body").animate({ scrollTop: 0 }, "slow");
     });
+    //////////////////write a review
+    var modereview = 0;
+    $("#write-review").click(function(){
+        if(modereview == 0){
+            $("#review-form").removeClass("hide");
+            modereview = 1;
+        }else{
+            $("#review-form").addClass("hide");
+            modereview = 0;
+        }
+    });
+    
 });
 
 new WOW().init();

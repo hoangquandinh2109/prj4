@@ -13,7 +13,7 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
-    <body ng-app="cangcucot">
+    <body ng-app="cangcucot" ng-controller="cart">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>
@@ -174,6 +174,7 @@
             </div>
             <c:import url="templates/cart-modal.jsp"></c:import>
         </div>
+        <span id="maxPrice" class="hide">${maxPrice}</span>
         <c:import url="templates/script.jsp"></c:import>
               <script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery-ui.js"></script>
     </body>

@@ -262,3 +262,129 @@ a.button-dhq-mk{
         @include center-in-vertical();
     }
 }
+.review-input{
+    padding: 6px 10px;
+    border: 1px solid #e5e5e5;
+    width: 100%;
+    font-family: "MerriweatherSans";
+}
+.review-label{
+    font-size: 13px;
+    font-family: "MerriweatherSans";
+    font-weight: normal;
+    line-height: 20px;
+    height: 20px;
+    margin-bottom: 6px;
+}
+.review-h3{
+    font-size: 13px;
+    font-weight: bold;
+    font-family: "MerriweatherSans";
+    margin: 0px;
+    height: 30px;
+    line-height: 30px;
+}
+#title-r{
+    margin-bottom: 15px;
+}
+#content-r{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 160px;
+    max-height: 160px;
+    resize: none;
+}
+#btn-review{
+    padding: 16px 10px;
+    color: #fff;
+    background-color: #31a8d2;
+    font-family: "MerriweatherSans";
+    text-transform: uppercase;
+    border: 1px solid #2a99c0;
+    width: max-content;
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    &:hover{
+        background-color: #fff;
+        color: #2a99c0;
+    }
+}
+.span-info{
+    padding-left: 20px;
+    font-size: 13px;
+    font-family: "MerriweatherSans";
+    line-height: 20px;
+}
+#write-review{
+    cursor: pointer;
+    font-family: "MerriweatherSans";
+    padding: 10px 0;
+    color: #777;
+    &:hover{
+        color: #2a99c0;
+    }
+}
+.item-review{
+    font-family: "MerriweatherSans";
+    h2{
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0;
+        font-weight: bold;
+    }
+    .info-people{
+        margin-bottom: 13px;
+        opacity: 0.5;
+        display: inline-block;
+    }
+    p{
+        margin: 0;padding: 0;
+    }
+    &+ .item-review{
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid #e5e5e5;
+    }
+}
+#reviewTab> div + div{
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e5e5;
+}
+#input-star{
+    margin-bottom: 15px;
+    >div{
+        display: inline-block;
+        transform: rotateY(180deg);
+    }
+    a{
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 400;
+        color: #fc0;
+        &:after{
+            content: '\f005';
+        }
+        &:active, &:focus{
+            text-decoration: none;
+        }
+        &:hover{
+            color: #ff7800;
+            font-weight: 900;
+            text-decoration: none;
+            ~a{
+                font-weight: 900;
+            }
+        }
+        &.selected{
+            color: #ffcc00;
+            font-weight: 900;
+            ~a{
+                font-weight: 900;
+                &:hover{
+                    color: #ffcc00;
+                }
+            }
+        }
+    }
+}

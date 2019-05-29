@@ -10,20 +10,28 @@
 <html>
     <head>
         <c:import url="templates/head.jsp"></c:import>
+        <style>
+            body .content-n-cart .content.kovao{
+                left: 0!important;
+            }
+            body .content-n-cart .content.kovao .clickdetrove{
+                display:none!important;
+            }
+        </style>
     </head>
-    <body ng-app="cangcucot">
+    <body ng-app="cangcucot" ng-controller="cart">
         <div class="content-n-cart clearfix">
-            <div class="content">
+            <div class="content kovao">
                 <div class="clickdetrove"></div>
                 <c:import url="templates/header.jsp"></c:import>
                 <div class="web-body">
                     <div class="container">
-                        <h2 class="text-center" id="h2yourcart">Your cart</h2>
-                        <!-- CART EMPTY -->
-                        <!-- <p class="text-center">Your cart is currently empty.</p> -->
-                        <!-- <a href="" class="button-in-cart-page">CONTINUE SHOPING <i class="fal fa-long-arrow-right"></i></a> -->
-                        <!-- CART EMPTY -->
-                        <div class="cart-block">
+                        <div ng-if="numCart == 0" id="empty-cart">
+                            <p class="text-center">Your cart is currently empty.</p> 
+                            <a href="${pageContext.request.contextPath}" class="button-in-cart-page">CONTINUE SHOPPING <i class="fal fa-long-arrow-right"></i></a> 
+                        </div>
+                        <h2 ng-if="numCart != 0" class="text-center" id="h2yourcart">Your cart</h2>
+                        <div class="cart-block" ng-if="numCart != 0">
                             <table class="cart-table">
                                 <tr class="cart-table-title">
                                     <td colspan="2" class="r1">Product</td>
@@ -33,29 +41,30 @@
                                     <td class="r5">Remove</td>
                                 </tr>
                                 <!-- foreach -->
-                                <tr class="cart-table-item">
+                                <tr class="cart-table-item"  ng-repeat="ci in listCartItems">
                                     <td class="r1 r11">
                                         <a href=""></a><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" width="75" height="75"></a>
                                     </td>
                                     <td class="r1">
-                                        <a href="">Name product vIp pro</a>
+                                        <a href="">{{ci.proName}}</a>
                                     </td>
-                                    <td class="r2 fz13">$100.00</td>
+                                    <td class="r2 fz13">{{"$"+ci.proPrice}}.00</td>
                                     <td class="r3">
-                                        <div class="cart-quantity">
-                                            <input type="number" min="1" max="50">
-                                            <button class="cart-quan-plus"><span>+</span></button>
-                                            <button class="cart-quan-minus"><span>-</span></button>
+                                       <div class="cart-quantity" id="asdkkfjasfd">
+                                            <!--$event de lay quantity validate-->
+                                            <input ng-keyup="ci.quantity = updateQuantity(ci.ID,$event)" ng-model="ci.quantity" type="number" min="1" max="50">
+                                            <button ng-click="ci.quantity = inc(ci.ID,ci.quantity)" class="cart-quan-plus"><span>+</span></button>
+                                            <button ng-click="ci.quantity = desc(ci.ID,ci.quantity)" class="cart-quan-minus"><span>-</span></button>
                                         </div>
                                     </td>
-                                    <td class="r4 fz13">$100.00</td>
-                                    <td class="r5"><a href="" class="button-in-cart-page fz13" id="btn-remove-cart">Remove</a></td>
+                                    <td class="r4 fz13">{{"$"+(ci.proPrice*ci.quantity)}}.00</td>
+                                    <td class="r5"><a href="" ng-click="deleteItem(ci.ID)" class="button-in-cart-page fz13" id="btn-remove-cart">Remove</a></td>
                                 </tr>
                                 <!-- end foreach -->
                             </table>
                             <div class="cart-footer">
                                 <div class="text-right">
-                                    <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">$174.99</span>
+                                    <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">{{"$"+subtotal}}.00</span>
                                 </div>
                                 <div class="pt20 pb20 text-right fz11"><i>Shipping & taxes calculated at checkout</i></div>
                                 <div class="text-right"><a href="" class="button-in-cart-page fz13">CHECK OUT</a></div>

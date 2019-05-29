@@ -23,6 +23,7 @@ public class Cart {
                 .add("ID",cart.getId())
                 .add("quantity", cart.getQuantity())
                 .add("proID", cart.getProduct().getProID())
+                .add("proName", cart.getProduct().getProName())
                 .add("proPrice", cart.getProduct().getProPrice())
                 .build();
     }

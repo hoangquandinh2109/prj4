@@ -45,6 +45,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByTags", query = "SELECT p FROM Product p WHERE p.tags = :tags"),
     @NamedQuery(name = "Product.findByStarAVG", query = "SELECT p FROM Product p WHERE p.starAVG = :starAVG")})
 public class Product implements Serializable {
+    @OneToMany(mappedBy = "proID")
+    private Collection<Review> reviewCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -236,6 +238,15 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "entity.Product[ proID=" + proID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
+    }
+
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
     }
     
 }
