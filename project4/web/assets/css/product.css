@@ -257,6 +257,28 @@ a.button-dhq-mk#wishlist:hover {
   border: 1px solid #ee6c92;
   color: #ee6c92;
   border-radius: 21px;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+#button-n-number button:focus {
+  outline: none;
+}
+
+#button-n-number button:hover {
+  background-color: #ee6c92;
+  color: #fff;
+  -webkit-box-shadow: 4px 4px 4px #00000020;
+          box-shadow: 4px 4px 4px #00000020;
+  -webkit-transform: translate(-2px, -2px);
+          transform: translate(-2px, -2px);
+}
+
+#button-n-number button:active {
+  -webkit-box-shadow: 0 0;
+          box-shadow: 0 0;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
 }
 
 #button-n-number div {
@@ -473,5 +495,11 @@ a.button-dhq-mk#wishlist:hover {
 
 #input-star a.selected ~ a:hover {
   color: #ffcc00;
+}
+
+#thankyou {
+  font-family: "MerriweatherSans";
+  padding: 10px 0;
+  float: right;
 }
 /*# sourceMappingURL=product.css.map */

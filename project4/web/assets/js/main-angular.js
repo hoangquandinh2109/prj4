@@ -30,6 +30,9 @@ app.controller('cart', function($scope, $http){
                 }
                 $scope.proQuan = 1;
                 showAllCartItems();
+                
+                $(".content").addClass("vao");
+                $(".cart").addClass("ra");
             },
             error: function(){
                 console.log("cannot add to cart at product detail page");
@@ -212,15 +215,16 @@ app.controller('proPagination', function($scope, $http) {
     $("#button-n-number>button").click(function (){
         filtbyprice(1);
         loc = 1;
+            ////filter to product list
+        $('html, body').animate({
+            scrollTop: $("#product-filter-element").offset().top
+        }, 1000);
      });
    loadPage(1);
    
    
   
    
-   $scope.addtocart = function(){
-       showcartajax();
-   }
    $scope.productRow = function(n){
        var skiprow = 4 * (n-1);
        var list = [];

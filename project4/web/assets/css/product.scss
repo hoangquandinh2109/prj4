@@ -209,6 +209,20 @@ a.button-dhq-mk{
         border: 1px solid $color-pink;
         color: $color-pink;
         border-radius: 21px;
+        transition: 0.3s ease-in-out;
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            background-color: $color-pink;
+            color: #fff;
+            box-shadow: 4px 4px 4px #00000020;
+            transform: translate(-2px, -2px);
+        }
+        &:active{
+            box-shadow: 0 0;
+            transform: translate(0, 0);
+        }
     }
     div{
         display: inline-block;
@@ -387,4 +401,9 @@ a.button-dhq-mk{
             }
         }
     }
+}
+#thankyou{
+    font-family: "MerriweatherSans";
+    padding: 10px 0;
+    float: right;
 }

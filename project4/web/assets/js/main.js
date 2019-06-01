@@ -1,7 +1,7 @@
 var linkpage = "/project4/";
 $(document).ready(function(){
     $(".addtocart").click(function(){
-//        alert("mua gì");
+        alert("mua gì");
         event.preventDefault();
         showcartajax();
     });
@@ -146,18 +146,14 @@ $(document).ready(function(){
     $("#abcxyz").click(function(){
         $("html, body").animate({ scrollTop: 0 }, "slow");
     });
-    //////////////////write a review
-    var modereview = 0;
-    $("#write-review").click(function(){
-        if(modereview == 0){
-            $("#review-form").removeClass("hide");
-            modereview = 1;
-        }else{
-            $("#review-form").addClass("hide");
-            modereview = 0;
-        }
-    });
-    
+    var thistext = $("#product-filter-element").data("thistext").split(" ");
+    var therest = "<span> ";
+    for(var ii = 1; ii<thistext.length;ii++){
+        therest += thistext[ii]+" ";
+    }
+    therest += "</span>";
+    $("#product-filter-element").text(thistext[0]);
+    $("#product-filter-element").append(therest);
 });
 
 new WOW().init();

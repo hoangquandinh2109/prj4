@@ -21,6 +21,13 @@ public class CartFacade {
     public CartFacade(HttpSession session) {
         this.session = session;
     }
+    public int getTotalPrice(){
+        int totalprice = 0;
+        for (Cart c : getAllCartItems()){
+            totalprice += c.getQuantity()*c.getProduct().getProPrice();
+        }
+        return totalprice;
+    }
     public void deletefromCart(int id){
         List<Cart> cart = getAllCartItems();
         int i = 0, j=0;

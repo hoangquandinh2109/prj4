@@ -9,8 +9,9 @@
 <div class="cart">
     <h2>YOUR CART</h2>
     <div class="cart-list-total">
-        <div class="list-cart-items" ng-repeat="ci in listCartItems">
-            <div class="cart-item clearfix" >
+        <div class="list-cart-items" >
+            <span ng-if="numCart == 0" style="display: block;" class="text-center">No item</span>
+            <div class="cart-item clearfix" ng-repeat="ci in listCartItems">
                 <div class="cart-photo">
                     <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
                         alt="">

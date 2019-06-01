@@ -100,7 +100,7 @@
                                 <div class="event">
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
                                 </div>
-                                <div class="title-row">News <span>Product</span></div>
+                                <div class="title-row" id="product-filter-element" data-thistext="${pagename}"></div>
                                 <div class="product-block"  ng-controller="proPagination">
                                     <div class="row" ng-repeat="row in range(1,numrow)">
                                         <div class="product-item wow fadeIn" ng-repeat="item in productRow(row)" >
@@ -131,7 +131,7 @@
                                                     <span class="quantity-review">No reviews</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div ng-click="addtocart()" class="btn-addtocart clearfix">
+                                                    <div ng-click="addThisToCart(item.proID)" class="btn-addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
                                                         <span class="tool-title">Add to cart</span>
                                                     </div>

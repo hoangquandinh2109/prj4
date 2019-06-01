@@ -7,6 +7,7 @@
 package models;
 
 import entity.Customer;
+import entity.Product;
 import entity.Review;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,13 +31,16 @@ public class ReviewFacade extends AbstractFacade<Review> implements ReviewFacade
         super(Review.class);
     }
     @Override
-    public boolean checkIfCusRating(Customer cusID){
+    public boolean checkIfCusRatingThis(Customer cusID, Product proID){
         try {
-           Review abc = (Review) em.createQuery("SELECT r FROM Review r WHERE r.cusID = :cusID")
+           Review abc = (Review) em.createQuery("SELECT r FROM Review r WHERE r.cusID = :cusID AND r.proID = :proID")
                 .setParameter("cusID", cusID)
-                .getSingleResult();
+                .setParameter("proID", proID)
+                .getSingleResult(); 
+            System.out.println(abc.getReviewTitle());
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }

@@ -137,7 +137,6 @@ public class FilterProduct {
     }
 
     private JsonObject getSingleResult(Product p) {
-        System.out.println("name: "+p.getProName()+" star: "+p.getStarAVG());
         return Json.createObjectBuilder()
                 .add("proID", ifNull(p.getProID()))
                 .add("proName", ifNull(p.getProName()))
