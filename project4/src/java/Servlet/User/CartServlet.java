@@ -57,7 +57,7 @@ public class CartServlet extends HttpServlet {
             JsonArrayBuilder jab = Json.createArrayBuilder();
             for(Cart c : cart){
                 price += c.getQuantity() * c.getProduct().getProPrice();
-                jab.add(JSONGen.Cart.getTypeJson(c));
+                jab.add(JSONGen.Cart.getTypeJson(c, productFacade.imageOf(c.getProduct())));
             }
             out.println(JSONGen.Cart.getTypeThings(jab.build(), price));
             response.setStatus(HttpServletResponse.SC_OK);

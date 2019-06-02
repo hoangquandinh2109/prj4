@@ -407,3 +407,10 @@ a.button-dhq-mk{
     padding: 10px 0;
     float: right;
 }
+.img{
+    img{
+        width: 100%;
+        object-fit: scale-down;
+        height: 380px;
+    }
+}

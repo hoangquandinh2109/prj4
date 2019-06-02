@@ -24,7 +24,8 @@
                     <!--codehere-->
                     <h3 id="h3name" class="text-center">${h3name}</h3>
                     <div class="row">
-                        <div ng-repeat="co in listCo" class="wow fadeIn col-xs-12 col-md-4 col-sm-4">
+                        <p class="text-center" style="font-size: 25px;opacity: 0.5;font-family: 'MerriweatherSans';margin: 53px 0;" ng-if="listCo.length == 0">no items</p>
+                        <div ng-if="listCo.length != 0" ng-repeat="co in listCo" class="wow fadeIn col-xs-12 col-md-4 col-sm-4">
                             <div class="collection-grid-item">
                                 <div class="collection-image">
                                     <a href="${pageContext.request.contextPath}/product/${link}/{{co.coID}}" class="collection-grid-item__link">
@@ -37,7 +38,7 @@
                                     <h3 class="collection-grid-item__title">
                                         <a href="${pageContext.request.contextPath}/product/${link}/{{co.coID}}">{{co.coName}}</a>
                                     </h3>
-                                    <span class="count_items">11 Items</span>
+                                    <span class="count_items">{{co.coQuan}} Items</span>
                                     <div class="">
                                         <a class="btn button-collections" href="${pageContext.request.contextPath}/product/${link}/{{co.coID}}">
                                             Shop the collection
@@ -47,8 +48,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <div id="pagination" class="clearfix">
+                    <div ng-if="listCo.length != 0" class="text-center">
+                        <div  id="pagination" class="clearfix">
                             <ul class="pagination">
                                 <li ng-if='!disableleft()'>
                                     <a ng-click="switchpage(currPage-1)" title="« Previous">

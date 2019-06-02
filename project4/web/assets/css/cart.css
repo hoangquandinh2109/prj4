@@ -83,9 +83,13 @@
 .cart-list-total .list-cart-items .cart-item .cart-photo {
   float: left;
   width: 33.3333333%;
+  padding-right: 10px;
 }
 
 .cart-list-total .list-cart-items .cart-item .cart-photo img {
+  height: 90px;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
   width: 100%;
 }
 

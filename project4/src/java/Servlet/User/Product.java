@@ -91,7 +91,7 @@ public class Product extends HttpServlet {
                 }
             }else{
                 //trang type
-                req.setAttribute("pagename", "Type");
+                req.setAttribute("pagename", "Types");
                 try {
                     pageno = Integer.parseInt(uris[2]);
                 } catch (Exception e) {
@@ -99,11 +99,10 @@ public class Product extends HttpServlet {
                 }
                 List<String[]> listPT = new ArrayList<>();
                 int pagenum = 0, count = 0, countlist = 0, skip = (pageno-1) * 3;
-                
                 for(ProductType pt: proType.findAll()){
                     if(countlist>=skip){
                         if(count < 3){
-                            listPT.add(new String[]{String.valueOf(pt.getTypeID()),pt.getTypeName()});
+                            listPT.add(new String[]{String.valueOf(pt.getTypeID()),pt.getTypeName(),proType.getQuanType(pt)+""});
                             count++;
                         }
                         
@@ -144,7 +143,7 @@ public class Product extends HttpServlet {
                 }
             }else{
                 //trang category
-                req.setAttribute("pagename", "Category");
+                req.setAttribute("pagename", "Categories");
                 try {
                     pageno = Integer.parseInt(uris[2]);
                 } catch (Exception e) {
@@ -156,7 +155,7 @@ public class Product extends HttpServlet {
                 for(Category pt: proCat.findAll()){
                     if(countlist>=skip){
                         if(count < 3){
-                            listPT.add(new String[]{String.valueOf(pt.getCatID()),pt.getCatName()});
+                            listPT.add(new String[]{String.valueOf(pt.getCatID()),pt.getCatName(), proCat.getCatQuan(pt)+""});
                             count++;
                         }
                     }
@@ -202,6 +201,7 @@ public class Product extends HttpServlet {
             //        list.add("Sony Z8");
                     req.setAttribute("list", list);
                     req.setAttribute("thisP", p);
+                    req.setAttribute("thisImg", productDB.imageOf(p));
                     req.setAttribute("pagename", p.getProName());
                     req.setAttribute("url", req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/v/"+id);
                     HttpSession session = req.getSession();

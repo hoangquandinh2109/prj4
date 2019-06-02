@@ -11,7 +11,7 @@ loadAll();
             $(".clickdetrove").addClass("havemodal");
             $("body").addClass("square");
             $(".modal-form").remove();
-            $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
+            $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
             $(".modal-form").load(linkpage+"templates/login.html");
         }
         else if(modereview == 0){

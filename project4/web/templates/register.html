@@ -148,7 +148,7 @@
                 $.ajax({
                     type:"POST",
                    data:{"email":email,"password":password,"name":name,"address":address,"phone":phone,"gender":gender},
-                   url: "/project4/register",
+                   url: linkpage+"register",
                    success: function(data) {
                        console.log("success");
                        location.reload();
@@ -163,7 +163,7 @@
     $('a.modal-login').click(function(event) {
         event.preventDefault();
         $(".modal-form").remove();
-        $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
         $(".modal-form").load("/project4/templates/login.html");
     });  
     
@@ -186,7 +186,7 @@
                   $.ajax({
                     type:"GET",
                     data:{"email":email},
-                    url: "http://localhost:8080/project4/register",
+                    url: linkpage+"register",
                     error: function(){
                           $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is existed!</span>");
                           error++;

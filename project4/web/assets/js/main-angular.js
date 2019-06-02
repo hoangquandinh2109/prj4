@@ -1,15 +1,15 @@
- var app = angular.module('cangcucot', []);
+var app = angular.module('cangcucot', []);
  
 
 //////////////////////////////////////////////////////////////////////////////////////Cart
 
-app.controller('cart', function($scope, $http){
-    /////////////////////////////////////add to cart/////////////////////////////////
+    app.controller('cart', function($scope, $http){
+    /////////////////////////////////////add to cart////////////////////////////////
     var self = $scope;
     var proId = $("#proID").text();
     showAllCartItems();
     $scope.proQuan=1;
-    
+
     $scope.addThisToCart = function(id){
         console.log("proID: "+id+" proQuan: "+$scope.proQuan);
 //        $http.get(linkpage+"cart?proID=&quatity")
@@ -21,12 +21,13 @@ app.controller('cart', function($scope, $http){
             method: "POST",
             data: {"proID":id,"quantity":$scope.proQuan},
             success: function(data){
+                alert(data);
                 if(data!=""){
-                    $(".clickdetrove").addClass("havemodal");
+                  $(".clickdetrove").addClass("havemodal");
                     $("body").addClass("square");
                     $(".modal-form").remove();
-                    $(".content").append("<div class=\"modal-form wow fadeInDownModal\">"+data+"</div>");
-                    $(".modal-form").delay(2000).fadeOut(200);
+                    $(".content").append("<div class=\"modal-form text-center fadeInDownMsg\">"+data+"</div>");
+                    $(".modal-form").delay(4000).fadeOut(200);
                 }
                 $scope.proQuan = 1;
                 showAllCartItems();
@@ -193,7 +194,6 @@ app.controller('proPagination', function($scope, $http) {
    var nameColl = $("#nameColl").text();
 //   $scope.minPrice = 0;
 //    $scope.maxPrice = $("#maxPrice").text();
-    
     var minPrice = 0;
     var maxPrice = $("#maxPrice").text();
 
@@ -262,6 +262,9 @@ app.controller('proPagination', function($scope, $http) {
        }else{
             loadPage(n);
         }
+        $('html, body').animate({
+            scrollTop: $("#product-filter-element").offset().top
+        }, 1000);
    }
    $scope.disableleft = function(){
        if(1 == $scope.currPage) {
@@ -287,6 +290,7 @@ app.controller('proPagination', function($scope, $http) {
        });
    }
    function filtbyprice(page){
+       console.log("filtprice");
        return $http.get(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page+"?from="+minPrice+"&to="+maxPrice)
        .then(function(response) {
            $scope.listPro = response.data.listPro;
@@ -303,6 +307,91 @@ app.controller('proPagination', function($scope, $http) {
            "width" : (avg/5)*100+"%"
          }
    }
+   $scope.classnumRev = function(numrv){
+        if(numrv == 0.0 || numrv == "null"){
+            return  "";
+        }else{
+            return "numrv";
+        }
+    }
+    $scope.numRV = function(numrv){
+        if(numrv == 0.0 || numrv == "null"){
+            $scope.numRev = "";
+            return "No review";
+        }else{
+            $scope.numRev = "numrv";
+            return "("+numrv+")";
+        }
+    }
+    /************************************************************************************************************************************************/
+    /***************************WISHLIST*************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /*******/                                                                                              /*******/        
+    $scope.addedClass = function(n){
+        
+        if(n){
+            return "added";
+        }
+        return "";
+    }
+    var sessionid = $("#sessionid").val();
+    $scope.btnWishlist = function(id,dfdf){
+        
+        if(sessionid != null && sessionid != ""){
+            $.ajax({
+                url: linkpage+"wishlist",
+                method: 'POST',
+                data: {"proID": id},
+                success: function(){
+//                    $(".clickdetrove").addClass("havemodal");
+//                    $("body").addClass("square");
+//                    $(".modal-form").remove();
+//                    $(".content").append("<div class=\"modal-form text-center fadeInDownMsg\">This is added to you wishlist</div>");
+//                    $(".modal-form").delay(2000).fadeOut(200);
+//                    setTimeout(function(){
+//                        $(".clickdetrove").css("opacity","0");
+//                            setTimeout(function(){
+//                            $(".clickdetrove").removeClass("havemodal");
+//                            $("body").removeClass("square");
+//                            $(".clickdetrove").removeAttr('style');
+//                            },300);
+//                    },2000);
+                },
+                error: function(){
+//                    $(".clickdetrove").addClass("havemodal");
+//                    $("body").addClass("square");
+//                    $(".modal-form").remove();
+//                    $(".content").append("<div class=\"modal-form text-center text-danger fadeInDownMsg\">This is removed from you wishlist</div>");
+//                    $(".modal-form").delay(2000).fadeOut(200);
+//                    setTimeout(function(){
+//                        $(".clickdetrove").css("opacity","0");
+//                            setTimeout(function(){
+//                            $(".clickdetrove").removeClass("havemodal");
+//                            $("body").removeClass("square");
+//                            $(".clickdetrove").removeAttr('style');
+//                            },300);
+//                    },2000);
+                }
+            });
+            return !dfdf;
+        } else{
+            $(".clickdetrove").addClass("havemodal");
+            $("body").addClass("square");
+            $(".modal-form").remove();
+            $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+            $(".modal-form").load(linkpage+"templates/login.html");
+            return dfdf;
+        }
+    }                     
+    function fadeMsgDown(msg){
+    }
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    
+    
 }); 
 
 //////////////////////////////////////////////////////////////////////////////////////////Collection pagination

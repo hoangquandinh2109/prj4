@@ -32,5 +32,7 @@ public interface ProductTypeFacadeLocal {
     int count();
 
     String getNameType(int id);
+
+    int getQuanType(ProductType Pt);
     
 }

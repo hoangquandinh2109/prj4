@@ -10,9 +10,11 @@ import static JSONGen.Collections.getTypesJson;
 import entity.Category;
 import entity.Product;
 import entity.ProductType;
+import entity.Whislist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.CategoryFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
@@ -36,9 +39,10 @@ import models.ProductTypeFacadeLocal;
  * @author johnn
  */
 public class FilterProduct {
-
+    HttpSession session;
 
     public FilterProduct(String[] uri, HttpServletRequest req, HttpServletResponse resp,ProductFacadeLocal db, CategoryFacadeLocal dbCat,ProductTypeFacadeLocal dbType) {
+            session=req.getSession();  
             System.out.println(uri[1]+ " "+uri[2]);
         if (uri[1].equals("type")) {//type/2/
             List<Product> lp;
@@ -66,7 +70,7 @@ public class FilterProduct {
                 for(Product p : lp){
                     if(countlist>=skip){
                         if(count12<12){
-                            listPTJAB.add(getSingleResult(p));
+                            listPTJAB.add(getSingleResult(p,db.imageOf(p)));
                             count12++;
                         }
                     }
@@ -108,7 +112,7 @@ public class FilterProduct {
                 for(Product p : lp){
                     if(countlist>=skip){
                         if(count12<12){
-                            listPTJAB.add(getSingleResult(p));
+                            listPTJAB.add(getSingleResult(p, db.imageOf(p)));
                             count12++;
                         }
                     }
@@ -136,13 +140,16 @@ public class FilterProduct {
                 .build();
     }
 
-    private JsonObject getSingleResult(Product p) {
+    private JsonObject getSingleResult(Product p, String img) {
         return Json.createObjectBuilder()
                 .add("proID", ifNull(p.getProID()))
                 .add("proName", ifNull(p.getProName()))
                 .add("proPrice", ifNull(p.getProPrice()))
+                .add("onWishlist", onWoC(p.getWhislistCollection()))
                 .add("starAVG", ifNull(p.getStarAVG()))
                 .add("proDetails", ifNull(p.getProDetails()))
+                .add("proImg", ifNull(img))
+                .add("numReview", ifNull(p.getReviewCollection().size()))
                 .build();
     }
     private String ifNull(Object i){
@@ -150,6 +157,20 @@ public class FilterProduct {
             return i+"";
         }else{
             return "null";
+        }
+    }
+    ///Product on Wishlist of Customer
+    private boolean onWoC(Collection<Whislist> cw) {
+        try {
+            int cusid = (int) session.getAttribute("sessionid");
+            for(Whislist wh : cw){
+                if(wh.getCusID().getCusID() == cusid){
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
         }
     }
 

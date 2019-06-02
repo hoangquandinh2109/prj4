@@ -17,6 +17,7 @@ import models.ProductFacadeLocal;
 import models.ReviewFacadeLocal;
 import entity.Product;
 import entity.Review;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -77,12 +78,27 @@ public class ReviewAndRatin extends HttpServlet {
         System.out.println(title+" "+content+" "+star+" "+cusid+" "+product);
         
         Review r = new Review();
-        r.setProID(productFacade.find(product));
+        Product p = productFacade.find(product);
+        r.setProID(p);
         r.setCusID(customerFacade.find(cusid));
         r.setReviewContent(content);
         r.setReviewTitle(title);
         r.setStar(star);
-        reviewFacade.create(r);
+        
+        Collection<Review> cr = p.getReviewCollection();
+        cr.add(r);
+        p.setReviewCollection(cr);
+        System.out.println("number of stars: "+cr.size());
+        double newavg = 0.0D;
+        for(Review rv : cr){
+            newavg += rv.getStar();
+        }
+        newavg = newavg/cr.size();
+        System.out.println("new avgstar : "+newavg);
+        p.setStarAVG(newavg);
+        
+        productFacade.edit(p);
+        
 
     }
 }

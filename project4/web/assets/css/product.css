@@ -502,4 +502,11 @@ a.button-dhq-mk#wishlist:hover {
   padding: 10px 0;
   float: right;
 }
+
+.img img {
+  width: 100%;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+  height: 380px;
+}
 /*# sourceMappingURL=product.css.map */

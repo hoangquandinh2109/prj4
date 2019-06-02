@@ -43,7 +43,7 @@
                                 <!-- foreach -->
                                 <tr class="cart-table-item"  ng-repeat="ci in listCartItems">
                                     <td class="r1 r11">
-                                        <a href=""></a><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" width="75" height="75"></a>
+                                        <a href=""></a><img src="/project4/productImage/{{ci.proImg}}" width="75" height="75"></a>
                                     </td>
                                     <td class="r1">
                                         <a href="">{{ci.proName}}</a>

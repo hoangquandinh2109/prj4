@@ -29,7 +29,7 @@
                     <div class="row details">
                         <div class="col-md-5">
                             <div class="img">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-14_5179a0ce-9afc-43e1-908a-94081cf070cc.png?v=1504667513"
+                                <img src="/project4/productImage/${thisImg}"
                                     alt="">
                                 <div class="small-img">
 
@@ -54,7 +54,12 @@
                                             <i class="fas fa-star"></i>
                                         </div>
                                     </div>
-                                    <span class="quantity-review">No reviews</span>
+                                    <c:if test="${thisP.starAVG == 0 || thisP.starAVG == null}">
+                                    <span class="quantity-review">No review</span>
+                                    </c:if>        
+                                    <c:if test="${thisP.starAVG != 0.0 && thisP.starAVG != null}">
+                                    <span class="numrv quantity-review">(${thisP.reviewCollection.size()})</span>
+                                    </c:if>        
                                 </div>
                                 <p>Vendor:Women's shirts</p>
                                 <p>THIS IS YOUR FIRST TIME</p>

@@ -10,10 +10,6 @@ $(document).ready(function(){
         event.preventDefault();
         showcartajax();
     });
-    $(".btn-love").click(function(){
-        event.preventDefault();
-        alert("yêu thương mẹ gì");
-    });
     $(".clickdetrove").click(function(){
         $(".content").removeClass("vao");
         $(".cart").removeClass("ra");
@@ -27,7 +23,7 @@ $(document).ready(function(){
         $(".clickdetrove").addClass("havemodal");
         $("body").addClass("square");
         $(".modal-form").remove();
-        $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
         $(".modal-form").load(linkpage+"templates/login.html");
     });    
     $('a.create-acc-link').click(function(event) {
@@ -35,7 +31,7 @@ $(document).ready(function(){
         $(".clickdetrove").addClass("havemodal");
         $("body").addClass("square");
         $(".modal-form").remove();
-        $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
         $(".modal-form").load(linkpage+"templates/register.html");
     });   
 

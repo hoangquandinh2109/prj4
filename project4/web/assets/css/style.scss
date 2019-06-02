@@ -485,6 +485,7 @@ body{
                 .product-item{
                     float: left;
                     width: 25%;
+                    background-color: #fff;
                     padding: 30px 20px;
                     position: relative;
 
@@ -685,6 +686,9 @@ body{
         img{
             display: block;
             margin: 0 auto;
+            object-fit: scale-down;
+            width: 160px;
+            height: 140px;
         }
     }
     .product-info{
@@ -758,10 +762,18 @@ body{
                     display: inline-block;
                 }
             }
+            .btn-love.added{
+                span{
+                    box-shadow: inset 0px 0px 4px #db195261;
+                    i {
+                        color: #db1952; 
+                    }
+                }
+            }
             .btn-love{
                 float: left;
                 border: 1px solid #e5e5e5;
-                border-left: 0px;
+                border-left: 0px;   
                 cursor: pointer;
                 width: 30px;
                 span{
@@ -883,6 +895,12 @@ body{
     -webkit-animation-name: fadeInDownModal;
     animation-name: fadeInDownModal;
 }
+.fadeInDownMsg {
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: fadeInDownModal;
+    animation-name: fadeInDownModal;
+}
 .pagination>li>a, .pagination>li>span{
     background-color: transparent;
     border-color: transparent;
@@ -939,4 +957,8 @@ body{
     &:active{
         box-shadow: 0px 0px;
     }
+}
+.review-tu .quantity-review.numrv{
+    float: left;
+    padding-left: 10px;
 }
