@@ -63,7 +63,8 @@ create table product(
 	proID varchar(10) primary key,
 	proName nvarchar(255),
 	proDetails text,
-	proPrice int,
+	proPrice float,
+	discount int,
 	quantity int,
 	DateRelease date,
 	proStatus bit,
@@ -76,6 +77,7 @@ go
 drop table if exists imgStog
 create table imgStog (
 	imgID int identity primary key,
+	thumbnail bit,
 	img_name varchar(255),
 	proID varchar(10) foreign key REFERENCES product(proID)
 )
@@ -126,6 +128,7 @@ go
 create table review(
 	rateID int identity primary key,
 	reviewContent text,
+	reviewTitle varchar(100),
 	star int,
 	cusID int foreign key REFERENCES customer(cusID),
 	proID varchar(10) foreign key REFERENCES product(proID)
