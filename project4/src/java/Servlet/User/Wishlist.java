@@ -90,9 +90,5 @@ public class Wishlist extends HttpServlet{
            
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-    }
     
 }

@@ -59,13 +59,13 @@
                                     </c:if>        
                                     <c:if test="${thisP.starAVG != 0.0 && thisP.starAVG != null}">
                                     <span class="numrv quantity-review">(${thisP.reviewCollection.size()})</span>
-                                    </c:if>        
+                                    </c:if>
                                 </div>
                                 <p>Vendor:Women's shirts</p>
                                 <p>THIS IS YOUR FIRST TIME</p>
                                 <hr>
                                 <p class="availability">AVAILABLE</p>
-                                <p><span class="price">${thisP.proPrice}.00</span> <span
+                                <p><span class="price">&#36;${thisP.proPrice}.00</span> <span
                                         class="old-price">$400.00</span></p>
                                 <hr>
                                 <div class="cart-quantity">

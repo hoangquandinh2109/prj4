@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Customer;
 import entity.Product;
 import entity.Whislist;
 import java.util.List;
@@ -31,4 +32,6 @@ public interface WhislistFacadeLocal {
     List<Whislist> findRange(int[] range);
 
     int count();
+
+    List<Whislist> getWishtlistOfMe(Customer me);
 }

@@ -21,7 +21,6 @@ var app = angular.module('cangcucot', []);
             method: "POST",
             data: {"proID":id,"quantity":$scope.proQuan},
             success: function(data){
-                alert(data);
                 if(data!=""){
                   $(".clickdetrove").addClass("havemodal");
                     $("body").addClass("square");
