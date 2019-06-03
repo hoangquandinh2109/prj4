@@ -45,12 +45,6 @@ public class InsertProductServlet extends HttpServlet {
     @EJB
     private CategoryFacadeLocal categoryFacade;
 
-//    @EJB
-//    private ProductTypeFacadeLocal productTypeFacade;
-//    @EJB
-//    private ImgStogFacadeLocal imgStogFacade;
-//    @EJB
-//    private CategoryFacadeLocal categoryFacade;
     @EJB
     private ProductFacadeLocal productFacade;
     private static final long serialVersionUID = 1L;
@@ -98,7 +92,6 @@ public class InsertProductServlet extends HttpServlet {
                         proID = (new StringBuilder()).append("PR").append(numOfProducts).toString();
                         break;
                 }
-
                 String proName = multiparts.get(0).getString();
                 String details = multiparts.get(1).getString();
                 Double price = Double.parseDouble(multiparts.get(2).getString());
@@ -106,8 +99,6 @@ public class InsertProductServlet extends HttpServlet {
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                 String date1 = multiparts.get(4).getString();
                 Date dateRe = sdf.parse(date1);
-//                String tags = multiparts.get(5).getString();
-                //Find cat ID
                 int cboCategory = Integer.parseInt(multiparts.get(5).getString());
                 Category categoryid = categoryFacade.find(cboCategory);
                 int cboType = Integer.parseInt(multiparts.get(6).getString());
@@ -127,9 +118,6 @@ public class InsertProductServlet extends HttpServlet {
                 product.setFeatureID(feaID);
                 productFacade.create(product);
 
-                /*
-                 TODO CODE HERE
-                 */
                 for (FileItem item : multiparts) {
                     if (!item.isFormField()) {
                         String name = new File(item.getName()).getName();
