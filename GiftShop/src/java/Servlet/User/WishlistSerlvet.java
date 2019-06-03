@@ -6,31 +6,30 @@
 
 package Servlet.User;
 
-import com.sun.xml.bind.util.Which;
+import entity.Wishlist;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import entity.Whislist;
-import java.io.PrintWriter;
-import java.util.Collection;
-import javax.ejb.EJB;
 import javax.servlet.http.HttpSession;
 import models.CustomerFacadeLocal;
 import models.ProductFacadeLocal;
-import models.WhislistFacade;
-import models.WhislistFacadeLocal;
+import models.WishlistFacadeLocal;
 
 /**
  *
  * @author johnn
  */
-@WebServlet(name = "WishList", urlPatterns = {"/wishlist"})
-public class Wishlist extends HttpServlet{
+@WebServlet(name = "WishlistSerlvet", urlPatterns = {"/wishlist"})
+public class WishlistSerlvet extends HttpServlet {
+    
     @EJB
-    private WhislistFacadeLocal db;
+    private WishlistFacadeLocal db;
     @EJB
     private ProductFacadeLocal product;
     
@@ -45,7 +44,7 @@ public class Wishlist extends HttpServlet{
            int cusid = (int) session.getAttribute("sessionid");
            
            ////initialize a wishlist
-           Whislist newItem = new Whislist();
+           Wishlist newItem = new Wishlist();
            newItem.setQuantity(1);
                      
             entity.Customer c = customer.find(cusid);
@@ -55,10 +54,10 @@ public class Wishlist extends HttpServlet{
            newItem.setCusID(c);
            newItem.setProID(p);
            
-           Collection<Whislist> cwP = p.getWhislistCollection();
-           Whislist toR = null;
+           Collection<Wishlist> cwP = p.getWishlistCollection();
+           Wishlist toR = null;
            int error = 0;
-           for(Whislist wl : cwP){
+           for(Wishlist wl : cwP){
                if(wl.getCusID().getCusName().equals(c.getCusName())){
                    toR = wl;
                     error = 1;
@@ -68,7 +67,7 @@ public class Wishlist extends HttpServlet{
            }
            if(toR != null){
                cwP.remove(toR);
-                p.setWhislistCollection(cwP);
+                p.setWishlistCollection(cwP);
                 product.edit(p);
                 db.remove(toR);
                 System.out.println("404");
@@ -79,7 +78,7 @@ public class Wishlist extends HttpServlet{
                
                 ///add wishlist to collections
                 cwP.add(newItem);
-                p.setWhislistCollection(cwP);
+                p.setWishlistCollection(cwP);
                 ///add wishlist
 //                db.create(newItem);
                 product.edit(p);

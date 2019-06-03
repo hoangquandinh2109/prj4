@@ -6,7 +6,9 @@
 
 package models;
 
+import entity.Customer;
 import entity.Wishlist;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,10 @@ public class WishlistFacade extends AbstractFacade<Wishlist> implements Wishlist
     public WishlistFacade() {
         super(Wishlist.class);
     }
-    
+    @Override
+    public List<Wishlist> getWishlistOfMe(Customer me) {
+        return em.createQuery("SELECT w FROM Whislist w WHERE w.cusID = :me")
+                .setParameter("me", me)
+                .getResultList();
+    }
 }

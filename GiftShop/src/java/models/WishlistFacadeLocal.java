@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Customer;
 import entity.Wishlist;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,5 +31,7 @@ public interface WishlistFacadeLocal {
     List<Wishlist> findRange(int[] range);
 
     int count();
+    
+    List<Wishlist> getWishlistOfMe(Customer me);
     
 }

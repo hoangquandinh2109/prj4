@@ -7,7 +7,7 @@
 package Servlet.User;
 
 import entity.Customer;
-import entity.Whislist;
+import entity.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.CustomerFacadeLocal;
-import models.WhislistFacadeLocal;
+import models.WishlistFacadeLocal;
 
 /**
  *
@@ -28,7 +28,7 @@ import models.WhislistFacadeLocal;
 @WebServlet(name = "Account", urlPatterns = {"/account/*"})
 public class Account extends HttpServlet {
     @EJB
-    private WhislistFacadeLocal whislist;
+    private WishlistFacadeLocal whislist;
     @EJB
     private CustomerFacadeLocal customer;
 
@@ -81,7 +81,7 @@ public class Account extends HttpServlet {
 
 
 
-                List<Whislist> lw = whislist.getWishtlistOfMe(me);
+                List<Wishlist> lw = whislist.getWishlistOfMe(me);
                 req.setAttribute("myWishlist", lw);
 
                 //if no.0 
