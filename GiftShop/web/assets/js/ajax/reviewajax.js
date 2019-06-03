@@ -71,7 +71,7 @@ $("#input-star a").click(function() {
 function loadAll(){
     var code = "";
     $.ajax({
-        url:"http://localhost:8080/project4/review?proID="+proid,
+        url: linkpage+"review?proID="+proid,
         method: "GET",
         dataType: 'json',
         contentType: 'application/json',

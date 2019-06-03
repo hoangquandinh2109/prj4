@@ -186,7 +186,7 @@
                                 <a href="${pageContext.request.contextPath}/product/v/${lw.proID.proID}"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
                                     alt=""></a>
                                 <a href="${pageContext.request.contextPath}/product/v/${lw.proID.proID}" class="pname">${lw.proID.proName}</a>
-                                <div class="wishlist-price">&#36;${lw.proID.proPrice}.00</div>
+                                <div class="wishlist-price">&#36;${lw.proID.proPrice}</div>
                                 <button class="button-remove pbutton-wishlist">Remove</button>
                             </div>
                         </div>
@@ -232,7 +232,7 @@
                                 <td>20190525029</td>
                                 <td>25/05/2019</td>
                                 <td>2</td>
-                                <td>$230.00</td>
+                                <td>$230</td>
                                 <td>Processing</td>
                                 <td><a href="" class="button-remove">View</a></td>
                             </tr>
@@ -240,7 +240,7 @@
                                 <td>20190324036</td>
                                 <td>24/03/2019</td>
                                 <td>1</td>
-                                <td>$234.00</td>
+                                <td>$234</td>
                                 <td>Complete</td>
                                 <td><a href="" class="button-remove">View</a></td>
                             </tr>
@@ -248,7 +248,7 @@
                                 <td>2018091243</td>
                                 <td>12/09/2018</td>
                                 <td>1</td>
-                                <td>$143.00</td>
+                                <td>$143</td>
                                 <td>Processing</td>
                                 <td><a href="" class="button-remove">View</a></td>
                             </tr>
@@ -320,14 +320,14 @@
                         </div>
                     </div>
                     <div class="block-product">
-                        <h2 class="mr60i">Products <span class="dib fr fz13">Total:<span class="pl20 color-pink">$932.00</span></span></h2>
+                        <h2 class="mr60i">Products <span class="dib fr fz13">Total:<span class="pl20 color-pink">$932</span></span></h2>
                         <div class="r list-product">
                             <div class="c-05 ">
                                 <div class="product-item">
                                     <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-6_160x140.png"
                                         alt="">
                                     <a href="" class="pname">Samsung A8</a>
-                                    <span class="price-io">$233.00</span>
+                                    <span class="price-io">$233</span>
                                 </div>
                             </div>
                             <div class="c-05 ">
@@ -335,7 +335,7 @@
                                     <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-18_160x140.png"
                                         alt="">
                                     <a href="" class="pname">Samsung A8</a>
-                                    <span class="price-io">$233.00</span>
+                                    <span class="price-io">$233</span>
                                 </div>
                             </div>
                         </div>
@@ -345,7 +345,7 @@
                                     <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-10_aed5aef2-1985-474e-9f24-a7deb10b70ab_160x140.png"
                                         alt="">
                                     <a href="" class="pname">Samsung A8</a>
-                                    <span class="price-io">$233.00</span>
+                                    <span class="price-io">$233</span>
                                 </div>
                             </div>
                             <div class="c-05 ">
@@ -353,7 +353,7 @@
                                     <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-21_160x140.png"
                                         alt="">
                                     <a href="" class="pname">Samsung A8</a>
-                                    <span class="price-io">$233.00</span>
+                                    <span class="price-io">$233</span>
                                 </div>
                             </div>
                         </div>

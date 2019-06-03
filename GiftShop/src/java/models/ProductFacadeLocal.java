@@ -46,7 +46,7 @@ public interface ProductFacadeLocal {
     
     List<Product> searchByName(String name);
     
-    int getMaxPrice();
+    Double getMaxPrice();
 
     String imageOf(Product p);
     

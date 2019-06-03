@@ -41,11 +41,17 @@ public class PurchaseServlet extends HttpServlet {
     private PurchaseItemFacadeLocal purchaseItemFacade;
     @EJB
     private PurchaseFacadeLocal purchaseFacade;
-
+    
+    String form = "<form action=\"purchase\" method=\"post\">" +
+"                <input type=\"hidden\" name=\"payment\" value=\"payment\">" +
+"                <button type=\"submit\">Purchase</button>" +
+"            </form>";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("purchase.jsp").forward(request, response);
+//        request.getRequestDispatcher("purchase.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().println(form);
     }
 
     @Override

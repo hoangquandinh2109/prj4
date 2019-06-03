@@ -88,7 +88,7 @@
                                                     <div class="product-info">
                                                         <p>${ssd}</p>
                                                         <!-- <span class="price">$234.32</span> -->
-                                                        <span class="old-price">$2349.00</span> <span class="new-price">$2349.00</span>
+                                                        <span class="old-price">$2349</span> <span class="new-price">$2349</span>
                                                     </div>
                                                     <div class="review-n-button-tu">
                                                         <div class="review-tu clearfix">

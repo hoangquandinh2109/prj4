@@ -63,8 +63,8 @@
                                 <p>THIS IS YOUR FIRST TIME</p>
                                 <hr>
                                 <p class="availability">AVAILABLE</p>
-                                <p><span class="price">${thisP.proPrice}.00</span> <span
-                                        class="old-price">$400.00</span></p>
+                                <p><span class="price">${thisP.proPrice}</span> <span
+                                        class="old-price">$400</span></p>
                                 <hr>
                                 <div class="cart-quantity">
                                     <input ng-model="proQuan" type="number" min="1" max="50">
@@ -135,8 +135,8 @@
                                             <div class="product-info">
                                                 <a href="">${ssd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span
-                                                    class="new-price">$2349.00</span>
+                                                <span class="old-price">$2349</span> <span
+                                                    class="new-price">$2349</span>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">
@@ -182,8 +182,8 @@
                                             <div class="product-info">
                                                 <a href="">${ssd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span
-                                                    class="new-price">$2349.00</span>
+                                                <span class="old-price">$2349</span> <span
+                                                    class="new-price">$2349</span>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">

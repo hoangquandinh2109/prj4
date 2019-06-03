@@ -43,12 +43,12 @@
                                 <!-- foreach -->
                                 <tr class="cart-table-item"  ng-repeat="ci in listCartItems">
                                     <td class="r1 r11">
-                                        <a href=""></a><img src="/project4/productImage/{{ci.proImg}}" width="75" height="75"></a>
+                                        <a href=""></a><img src="${pageContext.request.contextPath}/productImage/{{ci.proImg}}" width="75" height="75"></a>
                                     </td>
                                     <td class="r1">
                                         <a href="">{{ci.proName}}</a>
                                     </td>
-                                    <td class="r2 fz13">{{"$"+ci.proPrice}}.00</td>
+                                    <td class="r2 fz13">{{"$"+ci.proPrice}}</td>
                                     <td class="r3">
                                        <div class="cart-quantity" id="asdkkfjasfd">
                                             <!--$event de lay quantity validate-->
@@ -57,14 +57,14 @@
                                             <button ng-click="ci.quantity = desc(ci.ID,ci.quantity)" class="cart-quan-minus"><span>-</span></button>
                                         </div>
                                     </td>
-                                    <td class="r4 fz13">{{"$"+(ci.proPrice*ci.quantity)}}.00</td>
+                                    <td class="r4 fz13">{{"$"+(ci.proPrice*ci.quantity)}}</td>
                                     <td class="r5"><a href="" ng-click="deleteItem(ci.ID)" class="button-in-cart-page fz13" id="btn-remove-cart">Remove</a></td>
                                 </tr>
                                 <!-- end foreach -->
                             </table>
                             <div class="cart-footer">
                                 <div class="text-right">
-                                    <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">{{"$"+subtotal}}.00</span>
+                                    <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">{{"$"+subtotal}}</span>
                                 </div>
                                 <div class="pt20 pb20 text-right fz11"><i>Shipping & taxes calculated at checkout</i></div>
                                 <div class="text-right"><a href="" class="button-in-cart-page fz13">CHECK OUT</a></div>

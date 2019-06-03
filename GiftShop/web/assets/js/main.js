@@ -1,4 +1,4 @@
-var linkpage = "/project4/";
+var linkpage = "/GiftShop/";
 $(document).ready(function(){
     $(".addtocart").click(function(){
         alert("mua gì");
@@ -37,13 +37,13 @@ $(document).ready(function(){
 
 
     $('.cart-quantity > input').on('keyup', function(e){
+           console.log(e)
         if ($(this).val() < 1 
             && e.keyCode !== 46 // keycode for delete
             && e.keyCode !== 8 // keycode for backspace
             && e.target.value < 1
            ) {
            e.preventDefault();
-           console.log(e)
            $(this).val(1);
            $(this).change();
         }

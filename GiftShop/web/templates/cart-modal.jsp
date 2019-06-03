@@ -26,13 +26,13 @@
                         </div>
                         <button ng-click="deleteItem(ci.ID)" class="cart-items-remove"><i class="fal fa-trash-alt"></i></button>
                     </div>
-                    <div class="cart-price">x {{"$"+ci.proPrice}}.00 = {{"$"+(ci.proPrice*ci.quantity)}}.00</div>
+                    <div class="cart-price">x {{"$"+ci.proPrice}}.00 = {{"$"+(ci.proPrice*ci.quantity)}}</div>
                 </div>
             </div>
         </div>
         <div class="total-price">
             <span id="t-title">SUBTOTAL</span>  
-            <span id="t-price">{{"$"+subtotal}}.00</span>
+            <span id="t-price">{{"$"+subtotal}}</span>
         </div>
     </div>
     <a id="toCart" href="${pageContext.request.contextPath}/cart">Go to Cart</a>

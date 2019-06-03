@@ -29,7 +29,7 @@
                     <div class="row details">
                         <div class="col-md-5">
                             <div class="img">
-                                <img src="/project4/productImage/${thisImg}"
+                                <img src="${pageContext.request.contextPath}/productImage/${thisImg}"
                                     alt="">
                                 <div class="small-img">
 
@@ -65,8 +65,8 @@
                                 <p>THIS IS YOUR FIRST TIME</p>
                                 <hr>
                                 <p class="availability">AVAILABLE</p>
-                                <p><span class="price">&#36;${thisP.proPrice}.00</span> <span
-                                        class="old-price">$400.00</span></p>
+                                <p><span class="price">&#36;${thisP.proPrice}</span> <span
+                                        class="old-price">$400</span></p>
                                 <hr>
                                 <div class="cart-quantity">
                                     <input ng-model="proQuan" type="number" min="1" max="50">
@@ -178,8 +178,8 @@
                                             <div class="product-info">
                                                 <a href="">${ssd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span
-                                                    class="new-price">$2349.00</span>
+                                                <span class="old-price">$2349</span> <span
+                                                    class="new-price">$2349</span>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">
@@ -225,8 +225,8 @@
                                             <div class="product-info">
                                                 <a href="">${ssd}</a>
                                                 <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span
-                                                    class="new-price">$2349.00</span>
+                                                <span class="old-price">$2349</span> <span
+                                                    class="new-price">$2349</span>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">

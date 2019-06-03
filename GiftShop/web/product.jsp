@@ -107,12 +107,12 @@
                                     <div class="row" ng-repeat="row in range(1,numrow)">
                                         <div class="product-item wow fadeIn" ng-repeat="item in productRow(row)" >
                                             <div class="image-product">
-                                                <a href="/project4/product/v/{{item.proID}}"><img src="/project4/productImage/{{item.proImg}}" alt=""></a>
+                                                <a href="${pageContext.request.contextPath}/product/v/{{item.proID}}"><img src="${pageContext.request.contextPath}/productImage/{{item.proImg}}" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <a href="/project4/product/v/{{item.proID}}">{{item.proName}}</a>
+                                                <a href="${pageContext.request.contextPath}/product/v/{{item.proID}}">{{item.proName}}</a>
                                                 <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349.00</span> <span class="new-price">{{'$'+item.proPrice}}.00</span>
+                                                <span class="old-price">$2349</span> <span class="new-price">{{'$'+item.proPrice}}</span>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">

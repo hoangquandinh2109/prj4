@@ -40,7 +40,7 @@
                     </div>
                     <div class="media-body">
                         <h4>Free Shipping</h4>
-                        <p><em>on order over $100.00</em></p>
+                        <p><em>on order over $100</em></p>
                     </div>
                 </div>
                 <div style="animation-delay: .5s;" class="wow fadeInDown pull-left clearfix">
@@ -71,7 +71,7 @@
                 <div class="cart-inner">
                     <span class="cart-title">Shopping cart</span>
                     <span id="CartCount">{{numCart}}</span> <span>items</span>
-                    <span id="CartCost"> - <span class="money">{{"$"+subtotal}}.00</span></span>
+                    <span id="CartCost"> - <span class="money">{{"$"+subtotal}}</span></span>
                 </div>
             </div>
         </div>

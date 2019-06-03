@@ -25,7 +25,7 @@
                     </div>
                     <p>Contact Information</p>
                     <div id="conInf-ca">
-                        <div id="img-coninfca"><img src="http://localhost:8080/project4/img/blankava.png" alt=""></div>
+                        <div id="img-coninfca"><img src="${pageContext.request.contextPath}/img/blankava.png" alt=""></div>
                         <div id="ifo-conifi">
                             <p>Vip Pro (vippro@gmail.com) </p>
                             <p><a href="">Log out</a></p>
