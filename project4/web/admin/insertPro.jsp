@@ -33,13 +33,13 @@
                     <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
                 </ul>
             </div>
-            <div class="row">
+            <div class="row">        
                 <div class="col-md"></div>
                 <div class="col-md-6 col-sm-12">
                     <div class="tile">
                         <h3 class="tile-title">Insert new product</h3>
                         <div class="tile-body">
-                            <form id="fileForm" class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data" onsubmit="return Validate(this);">
+                            <form class="form-horizontal" action="InsertProductServlet" method="post" enctype="multipart/form-data" onsubmit="return Validate(this);">
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Name<span class="required">*</span></label>
                                     <div class="col-md-8">
@@ -69,12 +69,6 @@
                                     <div class="col-md-8">
                                         <input class="form-control" type="text" required name="4" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
                                     </div>
-                                </div> 
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Product Tags<span class="required">*</span></label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" type="text" required name="5" placeholder="Enter product tags" autocomplete="off">
-                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Category<span class="required">*</span></label>
@@ -98,26 +92,23 @@
                                     </select>    
                                 </div>
                             </div>
-                           
-                              <div class="form-group row">
+
+                            <div class="form-group row">
                                 <label class="control-label col-md-3">Image Product<span class="required">*</span></label>
                                 <div class="col-md-8">
-                                    <input  class="form-control" id="fileElem" required style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp" multiple="true" >
+                                    <input class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp,.jpeg" multiple="true" >
                                     <a href="#" id="fileSelect">Select some files</a> 
                                     <div id="fileList">
                                         <p>No files selected!</p>
                                     </div>            
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <input type="submit" class="btn btn-primary" value="Ok" />
-                                <input type="reset" class="btn btn-secondary" value="Cancel" /> 
-                            </div>
+
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">
-
-                                        <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
+                                        <input type="submit" class="btn btn-primary" value="Ok" />
+                                        <input type="reset" class="btn btn-secondary" value="Cancel" /> 
                                     </div>
                                 </div>
                             </div>
@@ -125,22 +116,24 @@
                     </div>
                 </div>
             </div>
-            <h1>${message}</h1>
+
             <div class="clearix"></div>
             <div class="col-md"></div>
         </div>
     </main>
     <script>
-        var biendem=0;
-                var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".png"];
+                var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
                 function Validate(oForm) {
                 var arrInputs = oForm.getElementsByTagName("input");
                         for (var i = 0; i < arrInputs.length; i++) {
                 var oInput = arrInputs[i];
                         if (oInput.type == "file") {
-                            biendem++;
                 var sFileName = oInput.value;
-                        if (sFileName.length > 0) {
+                        if (sFileName.length == 0){
+                alert("Vui long chon hinh anh !");
+                        return false;
+                }
+                if (sFileName.length > 0) {
                 var blnValid = false;
                         for (var j = 0; j < _validFileExtensions.length; j++) {
                 var sCurExtension = _validFileExtensions[j];
@@ -149,22 +142,27 @@
                         break;
                 }
                 }
-                
                 if (!blnValid) {
-                alert("Sorry, allowed extensions are: " + _validFileExtensions.join(", "));
+                alert("Sorry,your file is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
                         return false;
                 }
-                else if(arrInputs[5].files.length>5){
-                    alert("File phai it hon 5 ");
+                if (arrInputs[i].files.length <= 3) {
+                alert("File phai la 4 hinh ");
                         return false;
                 }
+                if (arrInputs[i].files.length >= 5){
+                alert("Chon qua 4 hinh roi ");
+                        return false;
+                }
+
                 }
                 }
                 }
-                
-                return true;
+                alert("Insert OKE ")
+                        return true;
                 }
     </script>
+
     <script>
         //SHOW IMAGE
         window.URL = window.URL || window.webkitURL;
@@ -204,7 +202,7 @@
 
     <script>
         $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap4', maxDate: new Date, minDate: new Date(2018, 10, 12)});
+        uiLibrary: 'bootstrap4', maxDate: new Date, minDate: new Date(2019, 01, 01)});
     </script>
     <c:import url="../templates/adminScript.jsp"></c:import>
 </body>

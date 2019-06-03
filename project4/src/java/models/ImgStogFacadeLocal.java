@@ -31,7 +31,7 @@ public interface ImgStogFacadeLocal {
     List<ImgStog> findRange(int[] range);
 
     int count();
-
+    
     List<ImgStog> findList(Product proID);
     
 }

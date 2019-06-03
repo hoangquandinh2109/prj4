@@ -30,9 +30,15 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Category Name </label>
                                 <div class="col-md-8">
-                                    <input class="form-control" required type="text" id="txtName" name="catName" placeholder="Enter category name" autocomplete="off">
+                                    <input class="form-control" required type="text" id="txtName" name="catName" placeholder="Enter Category name" autocomplete="off">
                                 </div>
-                            </div>                           
+                            </div>     
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Category Desception </label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" required rows="4" name="catDes" placeholder="Enter Category Desception" autocomplete="off"></textarea>
+                                </div>
+                            </div>    
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">
@@ -59,7 +65,13 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Type Name </label>
                                 <div class="col-md-8">
-                                    <input class="form-control" required type="text" id="txtName" name="typeName" placeholder="Enter type name" autocomplete="off">
+                                    <input class="form-control" required type="text" name="typeName" placeholder="Enter type name" autocomplete="off">
+                                </div>
+                            </div>   
+                               <div class="form-group row">
+                                <label class="control-label col-md-3">Type Desception </label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" required rows="4" name="typeDes" placeholder="Enter Type Desception" autocomplete="off"></textarea>
                                 </div>
                             </div>    
                             <div class="tile-footer">
@@ -76,7 +88,7 @@
             </div>
             <div class="clearix"></div>
             <div class="col-md"></div>
-           
+
         </div>
 
     </main>  

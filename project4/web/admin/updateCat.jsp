@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <c:import url="../templates/adminHead.jsp"></c:import>
+        <c:import url="../templates/adminHead.jsp"></c:import>
         </head>
         <body class="app sidebar-mini rtl">
         <c:import url="../templates/adminPage.jsp"></c:import>
@@ -34,23 +34,28 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Category ID </label>
                                 <div class="col-md-8">
-                                     <input class="form-control" type="text" name="catID" readonly value="${cat.catID}">
-                                   
+                                    <input class="form-control" type="text" name="catID" readonly value="${cat.catID}">
+                                    <input type="text" readonly name="status" value="${cat.statusCategory}">
+
                                 </div>
                             </div>   
-                                  <div class="form-group row">
+                            <div class="form-group row">
                                 <label class="control-label col-md-3">Category Name </label>
                                 <div class="col-md-8">
                                     <input class="form-control" required type="text" name="catName" placeholder="Enter category name" value="${cat.catName}" autocomplete="off">
                                 </div>
+                            </div>  
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Category Description </label>
+                                <div class="col-md-8">
+                                    <input class="form-control" required type="text" name="catDes" placeholder="Enter category description" value="${cat.cateDescription}" autocomplete="off">
+                                </div>
                             </div>   
-                                 
+
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">
                                         <input type="submit" class="btn btn-primary" value="Update Category" />
-                  
-                                        <!--   <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Ok</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>-->
                                     </div>
                                 </div>
                             </div>
@@ -61,9 +66,9 @@
             <div class="clearix"></div>
             <div class="col-md"></div>
         </div>
-      
+
 
     </main>  
     <c:import url="../templates/adminScript.jsp"></c:import>
-    </body>
+</body>
 </html>

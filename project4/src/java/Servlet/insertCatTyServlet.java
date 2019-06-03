@@ -22,7 +22,7 @@ import models.ProductTypeFacadeLocal;
  * @author Asus
  */
 public class insertCatTyServlet extends HttpServlet {
-
+    
     @EJB
     private ProductTypeFacadeLocal productTypeFacade;
     @EJB
@@ -44,16 +44,22 @@ public class insertCatTyServlet extends HttpServlet {
             String action = request.getParameter("action");
             if (action.equals("Insert Category")) {
                 String name = request.getParameter("catName");
-                Category cate = new Category(name);
+                String des = request.getParameter("catDes");
+                Category cate = new Category(des, name, Boolean.TRUE);
+//                cate.setCatName(name);
+//                cate.setCateDescription(des);
+//                cate.setStatusCategory(true);
                 categoryFacade.create(cate);
-
                 request.getRequestDispatcher("admin/insertCatvType.jsp").forward(request, response);
             } else if (action.equals("Insert Type")) {
                 String typeName = request.getParameter("typeName");
+                String typeDes = request.getParameter("typeDes");
                 ProductType type = new ProductType();
                 type.setTypeName(typeName);
+                type.setTypeDescription(typeDes);
+                type.setStatusType(true);
                 productTypeFacade.create(type);
-
+                
                 request.getRequestDispatcher("admin/insertCatvType.jsp").forward(request, response);
             }
         }

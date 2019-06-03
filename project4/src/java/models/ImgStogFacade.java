@@ -31,12 +31,12 @@ public class ImgStogFacade extends AbstractFacade<ImgStog> implements ImgStogFac
     public ImgStogFacade() {
         super(ImgStog.class);
     }
-
+    
     @Override
     public List<ImgStog> findList(Product proID) {
         Query q = em.createQuery("SELECT i FROM ImgStog i WHERE i.proID = :proID ");
          q.setParameter("proID", proID);
         return q.getResultList();
-    }
+}
     
 }

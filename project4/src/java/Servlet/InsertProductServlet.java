@@ -7,6 +7,7 @@ package Servlet;
 
 import com.sun.jmx.snmp.BerDecoder;
 import entity.Category;
+import entity.Feature;
 import entity.ImgStog;
 import entity.Product;
 import entity.ProductType;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.CategoryFacadeLocal;
+import models.FeatureFacadeLocal;
 import models.ImgStogFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
@@ -30,6 +32,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class InsertProductServlet extends HttpServlet {
+
+    @EJB
+    private FeatureFacadeLocal featureFacade;
 
     @EJB
     private ImgStogFacadeLocal imgStogFacade;
@@ -78,15 +83,6 @@ public class InsertProductServlet extends HttpServlet {
         if (ServletFileUpload.isMultipartContent(request)) {
             try {
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-                System.out.println("NAME: " + multiparts.get(0).getString());
-                System.out.println("detais: " + multiparts.get(1).getString());
-                System.out.println("price: " + multiparts.get(2).getString());
-                System.out.println("Quan: " + multiparts.get(3).getString());
-                System.out.println("Date: " + multiparts.get(4).getString());
-                System.out.println("tags : " + multiparts.get(5).getString());
-                System.out.println("Ccate : " + multiparts.get(6).getString());
-                System.out.println("type ID : " + multiparts.get(7).getString());
-
                 String proID = "";
                 Integer numOfProducts = Integer.valueOf(productFacade.count() + 1);
                 switch (numOfProducts.toString().length()) {
@@ -105,17 +101,18 @@ public class InsertProductServlet extends HttpServlet {
 
                 String proName = multiparts.get(0).getString();
                 String details = multiparts.get(1).getString();
-                int price = Integer.parseInt(multiparts.get(2).getString());
+                Double price = Double.parseDouble(multiparts.get(2).getString());
                 int quantity = Integer.parseInt(multiparts.get(3).getString());
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                 String date1 = multiparts.get(4).getString();
                 Date dateRe = sdf.parse(date1);
-                String tags = multiparts.get(5).getString();
+//                String tags = multiparts.get(5).getString();
                 //Find cat ID
-                int cboCategory = Integer.parseInt(multiparts.get(6).getString());
+                int cboCategory = Integer.parseInt(multiparts.get(5).getString());
                 Category categoryid = categoryFacade.find(cboCategory);
-                int cboType = Integer.parseInt(multiparts.get(7).getString());
+                int cboType = Integer.parseInt(multiparts.get(6).getString());
                 ProductType typeID = productTypeFacade.find(cboType);
+                Feature feaID = featureFacade.find(1);
                 Product product = new Product();
                 product.setProID(proID);
                 product.setProName(proName);
@@ -123,10 +120,11 @@ public class InsertProductServlet extends HttpServlet {
                 product.setProPrice(price);
                 product.setQuantity(quantity);
                 product.setDateRelease(dateRe);
-                product.setTags(tags);
+                product.setTags(null);
                 product.setProStatus(true);
                 product.setCatID(categoryid);
                 product.setTypeID(typeID);
+                product.setFeatureID(feaID);
                 productFacade.create(product);
 
                 /*
@@ -136,25 +134,21 @@ public class InsertProductServlet extends HttpServlet {
                     if (!item.isFormField()) {
                         String name = new File(item.getName()).getName();
                         item.write(new File(getServletContext().getRealPath("") + File.separator + SAVE_DIRECTORY + File.separator + name));
-
                         Product PID = productFacade.find(proID);
-//                        System.out.println("FILE " + name);
-//                        
                         ImgStog is = new ImgStog(name, PID);
-
                         imgStogFacade.create(is);
 
                     }
 
                 }
-                request.setAttribute("message", "File uploaded successfully.");
+                request.setAttribute("message", "Insert product successful.");
             } catch (Exception ex) {
                 request.setAttribute("message", "File upload failed due to : " + ex);
             }
         } else {
             request.setAttribute("message", "Sorry this servlet only handles file upload request.");
         }
-        request.getRequestDispatcher("admin/insertPro.jsp").forward(request, response);
+        request.getRequestDispatcher("showCatServlet").forward(request, response);
     }
 
     @Override

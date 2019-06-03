@@ -7,6 +7,7 @@ package Servlet;
 
 import entity.Category;
 import entity.CategoryReport;
+//import entity.CategoryReport;
 import entity.Customer;
 import entity.Product;
 import entity.Purchase;
@@ -14,7 +15,13 @@ import entity.PurchaseItem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +36,10 @@ public class reportCatServlet extends HttpServlet {
 
     @EJB
     private CategoryFacadeLocal categoryFacade;
+    @PersistenceContext(unitName = "project4PU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,12 +50,12 @@ public class reportCatServlet extends HttpServlet {
 //                    }
             ArrayList<CategoryReport> list = new ArrayList<CategoryReport>();
             double total = 0.0D;
-            for (Category cat : categoryFacade.findAll()) {
-                String category = cat.getCatName();
+            for (Category c : categoryFacade.findAll()) {
+                String category = c.getCatName();
                 double income = 0.0D;
-                for (Product p : cat.getProductCollection()) {
-                    for (PurchaseItem pc : p.getPurchaseItemCollection()) {
-                        income += pc.getQuantity();
+                for (Product p : productofBrand(c)) {
+                    for (PurchaseItem pItem : odbyp(p)) {
+                        income += pItem.getPurID().getTotalPrice();
                     }
                 }
                 CategoryReport cReport = new CategoryReport(category, income);
@@ -96,5 +107,16 @@ public class reportCatServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+   private List<Product> productofBrand(Category c) {
+        return em.createQuery("SELECT p FROM Product p WHERE p.catID = :ca")
+                .setParameter("ca", c)
+                .getResultList();
+    }
 
+    private List<PurchaseItem> odbyp(Product p) {
+        return em.createQuery("SELECT o FROM PurchaseItem o WHERE o.proID = :ca and o.purID.purchaseStatus = :st")
+                .setParameter("ca", p)
+                .setParameter("st", Short.parseShort("2"))
+                .getResultList();
+    }
 }

@@ -1,6 +1,7 @@
 package Servlet;
 
 import entity.Category;
+import entity.Feature;
 import entity.ImgStog;
 import entity.Product;
 import entity.ProductType;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.CategoryFacadeLocal;
+import models.FeatureFacadeLocal;
 import models.ImgStogFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
@@ -22,6 +24,9 @@ import models.ProductTypeFacadeLocal;
  * @author Asus
  */
 public class getDetailsProductServlet extends HttpServlet {
+
+    @EJB
+    private FeatureFacadeLocal featureFacade;
 
     @EJB
     private ImgStogFacadeLocal imgStogFacade;
@@ -41,12 +46,17 @@ public class getDetailsProductServlet extends HttpServlet {
             // entity.Product product = productFacade.find(code);
             List<Category> listCate = categoryFacade.findAll();
             List<ProductType> listTyp = productTypeFacade.findAll();
+            List<ImgStog> listImg = imgStogFacade.findAll();
+            List<Feature> listF = featureFacade.findAll();
             Product product = productFacade.find(code);
             List<ImgStog> img = imgStogFacade.findList(product);
             request.setAttribute("listCat", listCate);
             request.setAttribute("listType", listTyp);
-            request.setAttribute("listImg", img);
+            
+            request.setAttribute("listF", listF);
             //request.setAttribute("product", product);
+            request.setAttribute("imgg", listImg);
+            request.setAttribute("listImg", img);
             request.setAttribute("product", product);
             request.getRequestDispatcher("admin/updateProduct.jsp").forward(request, response);
         }

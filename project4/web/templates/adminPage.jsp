@@ -5,9 +5,11 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<style>
+    .app-sidebar__toggle:before{content: "";}
+</style>
 <header class="app-header"><a class="app-header__logo" href="index.jsp">Cang cu Cot</a>
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"><i class="fal fa-indent"></i></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
         <li class="app-search">

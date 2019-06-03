@@ -5,50 +5,44 @@
  */
 package Servlet;
 
-import entity.ProductType;
+import entity.Product;
+import entity.Purchase;
+import entity.PurchaseItem;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.ProductTypeFacadeLocal;
+import models.ProductFacadeLocal;
+import models.PurchaseFacadeLocal;
+import models.PurchaseItemFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class updateTypeServlet extends HttpServlet {
+public class showPurServlet extends HttpServlet {
+    @EJB
+    private ProductFacadeLocal productFacade;
+    @EJB
+    private PurchaseItemFacadeLocal purchaseItemFacade;
 
     @EJB
-    private ProductTypeFacadeLocal productTypeFacade;
+    private PurchaseFacadeLocal purchaseFacade;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int typeID = Integer.parseInt(request.getParameter("typeID"));
-            String typeDes = request.getParameter("typeDes");
-            String name = request.getParameter("typeName");
-            String status = request.getParameter("status");
-            ProductType types = new ProductType();
-            types.setTypeID(typeID);
-            types.setTypeName(name);
-            types.setTypeDescription(typeDes);
-            types.setStatusType(Boolean.valueOf(status));
-            productTypeFacade.edit(types);
-            request.getRequestDispatcher("listCatServlet").forward(request, response);
-
+            
+            List<Purchase> litP = purchaseFacade.findAll();
+            List<PurchaseItem> listPurItem = purchaseItemFacade.findAll();
+            request.setAttribute("listPur", litP);
+             request.setAttribute("listPuritem", listPurItem);
+            request.getRequestDispatcher("admin/listPurchase.jsp").forward(request, response);
         }
     }
 

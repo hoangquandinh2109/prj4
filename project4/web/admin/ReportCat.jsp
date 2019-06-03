@@ -3,7 +3,7 @@
     Created on : May 26, 2019, 3:45:03 PM
     Author     : Asus
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -64,7 +64,7 @@
 
 
             //define rows of data
-            dataTable.addRows([ < c:forEach items = "${list}" var = "data" > ['${data.category}',${data.income} ], < /c:forEach>]);
+            dataTable.addRows([ <c:forEach items = "${list}" var = "data" > ['${data.category}',${data.income} ], </c:forEach>]);
 
                     //instantiate our chart object
                     var chart1 = new google.visualization.ColumnChart(document.getElementById('chart1'));

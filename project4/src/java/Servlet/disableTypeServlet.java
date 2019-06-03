@@ -19,7 +19,7 @@ import models.ProductTypeFacadeLocal;
  *
  * @author Asus
  */
-public class updateTypeServlet extends HttpServlet {
+public class disableTypeServlet extends HttpServlet {
 
     @EJB
     private ProductTypeFacadeLocal productTypeFacade;
@@ -37,18 +37,18 @@ public class updateTypeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int typeID = Integer.parseInt(request.getParameter("typeID"));
-            String typeDes = request.getParameter("typeDes");
-            String name = request.getParameter("typeName");
+            int idPro = Integer.parseInt(request.getParameter("id"));
+            String action = request.getParameter("action");
             String status = request.getParameter("status");
-            ProductType types = new ProductType();
-            types.setTypeID(typeID);
-            types.setTypeName(name);
-            types.setTypeDescription(typeDes);
-            types.setStatusType(Boolean.valueOf(status));
-            productTypeFacade.edit(types);
+            if (action.equals("disable")) {
+                ProductType disableType = productTypeFacade.find(idPro);
+                if (disableType != null && disableType.getStatusType().toString().toLowerCase().equals(status.toLowerCase())) {
+                    boolean currentState = disableType.getStatusType().booleanValue();
+                    disableType.setStatusType(Boolean.valueOf(!currentState));
+                    productTypeFacade.edit(disableType);
+                }
+            }
             request.getRequestDispatcher("listCatServlet").forward(request, response);
-
         }
     }
 

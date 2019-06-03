@@ -8,7 +8,6 @@
         <c:import url="../templates/datatablecss.jsp"></c:import>
         </head>
         <body class="app sidebar-mini rtl">
-
         <c:import url="../templates/adminPage.jsp"></c:import>
 
         <main class="app-content">
@@ -23,22 +22,21 @@
                     <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
                 </ul>
             </div>   
-            <div id="wrap">
-
+            <div id="wrap" class="table-responsive">
                 <table id="example" class="table table-striped table-bordered display">
                     <thead>
                         <tr>
+                            <th>Image ID</th>
                             <th>Product ID</th>
-                            <th>ImageOD</th>
                             <th>Product Name</th>
                             <th>Product Details</th>
                             <th>Product Price</th>
                             <th>Quantity</th>
                             <th>Date Release</th>
-                            <th>Status</th>
-                            <th>Tags</th>
+                            <th>Status</th>          
                             <th>Category</th>
                             <th>Type</th>
+                            <th>Fre</th>
                             <th>Actions</th>
 
                         </tr>
@@ -47,23 +45,19 @@
                     <c:forEach items="${listPro}" var="s">
                         <tr>
                             <td>
-                               
-                             <c:forEach items="${list}" var="i">
-                                  <c:if test="${i.proID ==s.proID}">
-                                        ${i.imgID}
-                                          </c:if>
-                                  
-                             </c:forEach>
-                     
-                               </td>
-                          <!-- <td><img src="productImage/$.{s.imgID.imgName}" alt="pets" width="150px" height="150px"></td>--> 
+                                <c:forEach items="${list}" var="i">
+                                    <c:if test="${i.proID.proID == s.proID}">
+                                        
+                                        <p><img src="productImage/${i.imgName}" alt="pets" width="70px" height="80px" ></p>
+                                        </c:if>
+                                    </c:forEach>  
+                            </td> 
                             <td>${s.proID}</td>
-                            
                             <td>${s.proName}</td>
+                            <td>${s.proDetails}</td>
                             <td>${s.proPrice}</td>
                             <td>${s.quantity}</td>
                             <td> <fmt:formatDate value="${s.dateRelease}" pattern="yyyy-MM-dd" /></td>
-
                             <td><c:choose>
                                     <c:when test="${s.proStatus==true}">
                                         <input type="checkbox" checked onclick="return false;" />
@@ -72,14 +66,13 @@
                                         <input type="checkbox" onclick="return false;" />
                                     </c:otherwise>
                                 </c:choose></td>
-                            <td>${s.tags}</td>     
                             <td>${s.catID.catName}</td>
                             <td>${s.typeID.typeName}</td>
+                            <td>${s.featureID.featureID}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="getDetailsProductServlet?code=${s.proID}">Update</a>  
-                   
-                                 <br/>
-                                 <br/>
+                                <br/>
+                                <br/>
                                 <input type="hidden" value="${s.proID}" name="id"/>     
                                 <c:if test="${s.proStatus==true}">
                                     <a class="btn btn-danger btn-sm" onclick="disable('disableProductServlet', '${s.proID}', '${s.proStatus}')">Disable</a>
@@ -91,9 +84,7 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-
             </table>  
-
             <div class="clearix"></div>
             <div class="col-md"></div>
 

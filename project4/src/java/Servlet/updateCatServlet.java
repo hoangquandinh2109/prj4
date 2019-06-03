@@ -20,28 +20,23 @@ import models.CategoryFacadeLocal;
  * @author Asus
  */
 public class updateCatServlet extends HttpServlet {
-    
+
     @EJB
     private CategoryFacadeLocal categoryFacade;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String name = request.getParameter("catName");
+            String catDes = request.getParameter("catDes");
             int catID = Integer.parseInt(request.getParameter("catID"));
-            Category cate = new Category();
-            cate.setCatID(catID);
-            cate.setCatName(name);
+            String status = request.getParameter("status");
+            Category cate = new Category(catDes, catID, name);
+            cate.setStatusCategory(Boolean.valueOf(status));
+//            cate.setCateDescription(catDes);
+//            cate.setCatID(catID);
+//            cate.setCatName(name);
             categoryFacade.edit(cate);
             request.getRequestDispatcher("listCatServlet").forward(request, response);
         }

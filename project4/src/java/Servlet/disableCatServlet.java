@@ -5,7 +5,8 @@
  */
 package Servlet;
 
-import entity.ProductType;
+import entity.Category;
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -13,16 +14,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.ProductTypeFacadeLocal;
+import models.CategoryFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class updateTypeServlet extends HttpServlet {
+public class disableCatServlet extends HttpServlet {
 
     @EJB
-    private ProductTypeFacadeLocal productTypeFacade;
+    private CategoryFacadeLocal categoryFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +38,18 @@ public class updateTypeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int typeID = Integer.parseInt(request.getParameter("typeID"));
-            String typeDes = request.getParameter("typeDes");
-            String name = request.getParameter("typeName");
+            int idPro = Integer.parseInt(request.getParameter("id"));
+            String action = request.getParameter("action");
             String status = request.getParameter("status");
-            ProductType types = new ProductType();
-            types.setTypeID(typeID);
-            types.setTypeName(name);
-            types.setTypeDescription(typeDes);
-            types.setStatusType(Boolean.valueOf(status));
-            productTypeFacade.edit(types);
+            if (action.equals("disable")) {
+                Category disableCat = categoryFacade.find(idPro);
+                if (disableCat != null && disableCat.getStatusCategory().toString().toLowerCase().equals(status.toLowerCase())) {
+                    boolean currentState = disableCat.getStatusCategory().booleanValue();
+                    disableCat.setStatusCategory(Boolean.valueOf(!currentState));
+                    categoryFacade.edit(disableCat);
+                }
+            }
             request.getRequestDispatcher("listCatServlet").forward(request, response);
-
         }
     }
 
