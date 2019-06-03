@@ -39,7 +39,8 @@ go
 create table category(
 	catID int identity primary key,
 	catName varchar(20),
-	statusCategory bit
+	statusCategory bit,
+	cateDescription  varchar(255)
 )
 drop table if exists tbTag
 go
@@ -55,7 +56,16 @@ go
 create table productType(
 	typeID int identity primary key,
 	typeName varchar(20),
-	statusType bit
+	statusType bit,
+	typeDescription  varchar(255)
+
+)
+drop table if exists Feature
+create table Feature(
+	FeatureID int identity primary key,
+	Fname varchar(50),
+	Fdescription varchar(255),
+	statusFeature bit
 )
 Drop table if exists product
 go
@@ -63,13 +73,14 @@ create table product(
 	proID varchar(10) primary key,
 	proName nvarchar(255),
 	proDetails text,
-	proPrice int,
+	proPrice float,
 	quantity int,
 	DateRelease date,
 	proStatus bit,
 	tags varchar(255),
 	catID int foreign key REFERENCES category(catID),
 	typeID int foreign key REFERENCES productType(typeID),
+	FeatureID int foreign key REFERENCES Feature(FeatureID),
 	starAVG float
 )
 go
@@ -77,6 +88,7 @@ drop table if exists imgStog
 create table imgStog (
 	imgID int identity primary key,
 	img_name varchar(255),
+	thumbnail bit,
 	proID varchar(10) foreign key REFERENCES product(proID)
 )
 Drop table if exists purchase
@@ -125,6 +137,7 @@ drop table if exists rating
 go
 create table review(
 	rateID int identity primary key,
+	reviewTitle varchar(50),
 	reviewContent text,
 	star int,
 	cusID int foreign key REFERENCES customer(cusID),
@@ -139,13 +152,7 @@ create table whislist(
  proID varchar(10) foreign key REFERENCES product(proID)
 )
 go
-drop table if exists Feature
-create table Feature(
-	FeatureID int identity primary key,
-	Fname varchar(50),
-	Fdescription varchar(255),
-	proID varchar(10) foreign key REFERENCES product(proID)
-)
+
 
 
 
