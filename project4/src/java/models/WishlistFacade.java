@@ -6,20 +6,17 @@
 
 package models;
 
-import entity.Customer;
-import entity.Product;
-import entity.Whislist;
-import java.util.List;
+import entity.Wishlist;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Stateless
-public class WhislistFacade extends AbstractFacade<Whislist> implements WhislistFacadeLocal{
+public class WishlistFacade extends AbstractFacade<Wishlist> implements WishlistFacadeLocal {
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -28,16 +25,8 @@ public class WhislistFacade extends AbstractFacade<Whislist> implements Whislist
         return em;
     }
 
-    public WhislistFacade() {
-        super(Whislist.class);
-    }
-
-    @Override
-    public List<Whislist> getWishtlistOfMe(Customer me) {
-        return em.createQuery("SELECT w FROM Whislist w WHERE w.cusID = :me")
-                .setParameter("me", me)
-                .getResultList();
+    public WishlistFacade() {
+        super(Wishlist.class);
     }
     
-
 }

@@ -29,13 +29,13 @@ public class PurchaseFacade extends AbstractFacade<Purchase> implements Purchase
     public PurchaseFacade() {
         super(Purchase.class);
     }
-
+    
     @Override
     public String getLastPurchaseID() {
         try{
             List<Purchase> list = em.createQuery("SELECT p FROM Purchase p ORDER BY p.purID DESC").getResultList();
             return list.get(0).getPurID();
-        }
+}
         catch(Exception e){
             return null;
         }

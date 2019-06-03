@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ImgStog.findAll", query = "SELECT i FROM ImgStog i"),
     @NamedQuery(name = "ImgStog.findByImgID", query = "SELECT i FROM ImgStog i WHERE i.imgID = :imgID"),
-    @NamedQuery(name = "ImgStog.findByImgName", query = "SELECT i FROM ImgStog i WHERE i.imgName = :imgName")})
+    @NamedQuery(name = "ImgStog.findByImgName", query = "SELECT i FROM ImgStog i WHERE i.imgName = :imgName"),
+    @NamedQuery(name = "ImgStog.findByThumbnail", query = "SELECT i FROM ImgStog i WHERE i.thumbnail = :thumbnail")})
 public class ImgStog implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,6 +44,8 @@ public class ImgStog implements Serializable {
     @Size(max = 255)
     @Column(name = "img_name", length = 255)
     private String imgName;
+    @Column(name = "thumbnail")
+    private Boolean thumbnail;
     @JoinColumn(name = "proID", referencedColumnName = "proID")
     @ManyToOne
     private Product proID;
@@ -73,6 +76,14 @@ public class ImgStog implements Serializable {
 
     public void setImgName(String imgName) {
         this.imgName = imgName;
+    }
+
+    public Boolean getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(Boolean thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public Product getProID() {

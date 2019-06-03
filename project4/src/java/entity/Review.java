@@ -33,17 +33,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Review.findAll", query = "SELECT r FROM Review r"),
     @NamedQuery(name = "Review.findByRateID", query = "SELECT r FROM Review r WHERE r.rateID = :rateID"),
+    @NamedQuery(name = "Review.findByReviewTitle", query = "SELECT r FROM Review r WHERE r.reviewTitle = :reviewTitle"),
     @NamedQuery(name = "Review.findByStar", query = "SELECT r FROM Review r WHERE r.star = :star")})
 public class Review implements Serializable {
-    @Size(max = 50)
-    @Column(name = "reviewTitle", length = 50)
-    private String reviewTitle;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rateID", nullable = false)
     private Integer rateID;
+    @Size(max = 50)
+    @Column(name = "reviewTitle", length = 50)
+    private String reviewTitle;
     @Lob
     @Size(max = 2147483647)
     @Column(name = "reviewContent", length = 2147483647)
@@ -70,6 +71,14 @@ public class Review implements Serializable {
 
     public void setRateID(Integer rateID) {
         this.rateID = rateID;
+    }
+
+    public String getReviewTitle() {
+        return reviewTitle;
+    }
+
+    public void setReviewTitle(String reviewTitle) {
+        this.reviewTitle = reviewTitle;
     }
 
     public String getReviewContent() {
@@ -127,14 +136,6 @@ public class Review implements Serializable {
     @Override
     public String toString() {
         return "entity.Review[ rateID=" + rateID + " ]";
-    }
-
-    public String getReviewTitle() {
-        return reviewTitle;
-    }
-
-    public void setReviewTitle(String reviewTitle) {
-        this.reviewTitle = reviewTitle;
     }
     
 }

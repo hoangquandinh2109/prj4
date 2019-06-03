@@ -19,7 +19,6 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ProductTypeFacade extends AbstractFacade<ProductType> implements ProductTypeFacadeLocal {
-
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -31,14 +30,14 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> implements Pr
     public ProductTypeFacade() {
         super(ProductType.class);
     }
-
+    
     @Override
     public String getNameType(int id) {
          try {
             return em.find(ProductType.class, id).getTypeName();
         } catch (Exception e) {
             return null;
-        }
+}
     }
 
     @Override

@@ -33,14 +33,14 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
     public CategoryFacade() {
         super(Category.class);
     }
-
+    
     @Override
     public List<Category> showCategory() {
        List<Category> list = new ArrayList<>();
         Query q = em.createNamedQuery("select DISTINCT catName from category");
         list =q.getResultList();
         return list;
-    }
+}
 
     @Override
     public String getCategoryName(int id) {

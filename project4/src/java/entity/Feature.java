@@ -7,18 +7,21 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,12 +34,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Feature.findAll", query = "SELECT f FROM Feature f"),
     @NamedQuery(name = "Feature.findByFeatureID", query = "SELECT f FROM Feature f WHERE f.featureID = :featureID"),
     @NamedQuery(name = "Feature.findByFname", query = "SELECT f FROM Feature f WHERE f.fname = :fname"),
-    @NamedQuery(name = "Feature.findByFdescription", query = "SELECT f FROM Feature f WHERE f.fdescription = :fdescription")})
+    @NamedQuery(name = "Feature.findByFdescription", query = "SELECT f FROM Feature f WHERE f.fdescription = :fdescription"),
+    @NamedQuery(name = "Feature.findByStatusFeature", query = "SELECT f FROM Feature f WHERE f.statusFeature = :statusFeature")})
 public class Feature implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FeatureID", nullable = false)
     private Integer featureID;
     @Size(max = 50)
@@ -45,9 +49,10 @@ public class Feature implements Serializable {
     @Size(max = 255)
     @Column(name = "Fdescription", length = 255)
     private String fdescription;
-    @JoinColumn(name = "proID", referencedColumnName = "proID")
-    @ManyToOne
-    private Product proID;
+    @Column(name = "statusFeature")
+    private Boolean statusFeature;
+    @OneToMany(mappedBy = "featureID")
+    private Collection<Product> productCollection;
 
     public Feature() {
     }
@@ -80,12 +85,21 @@ public class Feature implements Serializable {
         this.fdescription = fdescription;
     }
 
-    public Product getProID() {
-        return proID;
+    public Boolean getStatusFeature() {
+        return statusFeature;
     }
 
-    public void setProID(Product proID) {
-        this.proID = proID;
+    public void setStatusFeature(Boolean statusFeature) {
+        this.statusFeature = statusFeature;
+    }
+
+    @XmlTransient
+    public Collection<Product> getProductCollection() {
+        return productCollection;
+    }
+
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
     }
 
     @Override

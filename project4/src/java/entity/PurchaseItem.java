@@ -7,7 +7,6 @@
 package entity;
 
 import java.io.Serializable;
-import javax.annotation.Generated;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Entity
 @Table(name = "purchaseItem", catalog = "projectSem4", schema = "dbo")

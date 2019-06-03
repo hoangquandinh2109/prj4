@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Entity
 @Table(name = "customer", catalog = "projectSem4", schema = "dbo")
@@ -42,8 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Customer.findByCusStatus", query = "SELECT c FROM Customer c WHERE c.cusStatus = :cusStatus"),
     @NamedQuery(name = "Customer.findByCusGender", query = "SELECT c FROM Customer c WHERE c.cusGender = :cusGender")})
 public class Customer implements Serializable {
-    @OneToMany(mappedBy = "cusID")
-    private Collection<Review> reviewCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -72,6 +70,16 @@ public class Customer implements Serializable {
     private Boolean cusStatus;
     @Column(name = "cusGender")
     private Boolean cusGender;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Wishlist> wishlistCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Purchase> purchaseCollection;
+    @OneToMany(mappedBy = "sender")
+    private Collection<Feedback> feedbackCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Mailbox> mailboxCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Review> reviewCollection;
 
     public Customer() {
     }
@@ -163,6 +171,51 @@ public class Customer implements Serializable {
         this.cusGender = cusGender;
     }
 
+    @XmlTransient
+    public Collection<Wishlist> getWishlistCollection() {
+        return wishlistCollection;
+    }
+
+    public void setWishlistCollection(Collection<Wishlist> wishlistCollection) {
+        this.wishlistCollection = wishlistCollection;
+    }
+
+    @XmlTransient
+    public Collection<Purchase> getPurchaseCollection() {
+        return purchaseCollection;
+    }
+
+    public void setPurchaseCollection(Collection<Purchase> purchaseCollection) {
+        this.purchaseCollection = purchaseCollection;
+    }
+
+    @XmlTransient
+    public Collection<Feedback> getFeedbackCollection() {
+        return feedbackCollection;
+    }
+
+    public void setFeedbackCollection(Collection<Feedback> feedbackCollection) {
+        this.feedbackCollection = feedbackCollection;
+    }
+
+    @XmlTransient
+    public Collection<Mailbox> getMailboxCollection() {
+        return mailboxCollection;
+    }
+
+    public void setMailboxCollection(Collection<Mailbox> mailboxCollection) {
+        this.mailboxCollection = mailboxCollection;
+    }
+
+    @XmlTransient
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
+    }
+
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -186,15 +239,6 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "entity.Customer[ cusID=" + cusID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Review> getReviewCollection() {
-        return reviewCollection;
-    }
-
-    public void setReviewCollection(Collection<Review> reviewCollection) {
-        this.reviewCollection = reviewCollection;
     }
     
 }

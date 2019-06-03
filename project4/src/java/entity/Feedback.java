@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -35,12 +37,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Feedback.findAll", query = "SELECT f FROM Feedback f"),
     @NamedQuery(name = "Feedback.findByFeedId", query = "SELECT f FROM Feedback f WHERE f.feedId = :feedId"),
     @NamedQuery(name = "Feedback.findBySubject", query = "SELECT f FROM Feedback f WHERE f.subject = :subject"),
-    @NamedQuery(name = "Feedback.findByReceivedDate", query = "SELECT f FROM Feedback f WHERE f.receivedDate = :receivedDate")})
+    @NamedQuery(name = "Feedback.findByReceivedDate", query = "SELECT f FROM Feedback f WHERE f.receivedDate = :receivedDate"),
+    @NamedQuery(name = "Feedback.findByRating", query = "SELECT f FROM Feedback f WHERE f.rating = :rating")})
 public class Feedback implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "feedId", nullable = false)
     private Integer feedId;
     @Size(max = 500)
@@ -53,6 +56,8 @@ public class Feedback implements Serializable {
     @Column(name = "ReceivedDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date receivedDate;
+    @Column(name = "rating")
+    private Integer rating;
     @JoinColumn(name = "sender", referencedColumnName = "cusID")
     @ManyToOne
     private Customer sender;
@@ -94,6 +99,14 @@ public class Feedback implements Serializable {
 
     public void setReceivedDate(Date receivedDate) {
         this.receivedDate = receivedDate;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public Customer getSender() {

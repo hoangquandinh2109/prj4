@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
     @NamedQuery(name = "Category.findByCatID", query = "SELECT c FROM Category c WHERE c.catID = :catID"),
     @NamedQuery(name = "Category.findByCatName", query = "SELECT c FROM Category c WHERE c.catName = :catName"),
-    @NamedQuery(name = "Category.findByStatusCategory", query = "SELECT c FROM Category c WHERE c.statusCategory = :statusCategory")})
+    @NamedQuery(name = "Category.findByStatusCategory", query = "SELECT c FROM Category c WHERE c.statusCategory = :statusCategory"),
+    @NamedQuery(name = "Category.findByCateDescription", query = "SELECT c FROM Category c WHERE c.cateDescription = :cateDescription")})
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,6 +48,9 @@ public class Category implements Serializable {
     private String catName;
     @Column(name = "statusCategory")
     private Boolean statusCategory;
+    @Size(max = 255)
+    @Column(name = "cateDescription", length = 255)
+    private String cateDescription;
     @OneToMany(mappedBy = "catID")
     private Collection<Product> productCollection;
 
@@ -79,6 +83,14 @@ public class Category implements Serializable {
 
     public void setStatusCategory(Boolean statusCategory) {
         this.statusCategory = statusCategory;
+    }
+
+    public String getCateDescription() {
+        return cateDescription;
+    }
+
+    public void setCateDescription(String cateDescription) {
+        this.cateDescription = cateDescription;
     }
 
     @XmlTransient

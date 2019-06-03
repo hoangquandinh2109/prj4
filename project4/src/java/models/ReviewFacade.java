@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author johnn
+ * @author Asus
  */
 @Stateless
 public class ReviewFacade extends AbstractFacade<Review> implements ReviewFacadeLocal {

@@ -28,7 +28,5 @@ public class PurchaseItemFacade extends AbstractFacade<PurchaseItem> implements 
     public PurchaseItemFacade() {
         super(PurchaseItem.class);
     }
-
-    
     
 }

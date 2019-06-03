@@ -43,10 +43,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByDateRelease", query = "SELECT p FROM Product p WHERE p.dateRelease = :dateRelease"),
     @NamedQuery(name = "Product.findByProStatus", query = "SELECT p FROM Product p WHERE p.proStatus = :proStatus"),
     @NamedQuery(name = "Product.findByTags", query = "SELECT p FROM Product p WHERE p.tags = :tags"),
+    @NamedQuery(name = "Product.findByDiscout", query = "SELECT p FROM Product p WHERE p.discout = :discout"),
     @NamedQuery(name = "Product.findByStarAVG", query = "SELECT p FROM Product p WHERE p.starAVG = :starAVG")})
 public class Product implements Serializable {
-    @OneToMany(mappedBy = "proID")
-    private Collection<Review> reviewCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -61,11 +60,11 @@ public class Product implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "proDetails", length = 2147483647)
     private String proDetails;
-    @Column(name = "proPrice")
-    private Integer proPrice;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "proPrice", precision = 53)
+    private Double proPrice;
     @Column(name = "quantity")
     private Integer quantity;
-    
     @Column(name = "DateRelease")
     @Temporal(TemporalType.DATE)
     private Date dateRelease;
@@ -74,24 +73,32 @@ public class Product implements Serializable {
     @Size(max = 255)
     @Column(name = "tags", length = 255)
     private String tags;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "discout")
+    private Integer discout;
     @Column(name = "starAVG", precision = 53)
     private Double starAVG;
     @JoinColumn(name = "catID", referencedColumnName = "catID")
     @ManyToOne
     private Category catID;
+    @JoinColumn(name = "FeatureID", referencedColumnName = "FeatureID")
+    @ManyToOne
+    private Feature featureID;
     @JoinColumn(name = "typeID", referencedColumnName = "typeID")
     @ManyToOne
     private ProductType typeID;
     @OneToMany(mappedBy = "proID")
-    private Collection<Feature> featureCollection;
+    private Collection<Wishlist> wishlistCollection;
+    @OneToMany(mappedBy = "proID")
+    private Collection<Review> reviewCollection;
+    @OneToMany(mappedBy = "proID")
+    private Collection<PurchaseItem> purchaseItemCollection;
     @OneToMany(mappedBy = "proID")
     private Collection<ImgStog> imgStogCollection;
 
     public Product() {
     }
 
-    public Product(String proID, String proName, String proDetails, Integer proPrice, Integer quantity, Date dateRelease, Boolean proStatus, String tags, Double starAVG, Category catID, ProductType typeID) {
+    public Product(String proID, String proName, String proDetails, Double proPrice, Integer quantity, Date dateRelease, Boolean proStatus, String tags, Double starAVG, Category catID, ProductType typeID) {
         this.proID = proID;
         this.proName = proName;
         this.proDetails = proDetails;
@@ -133,11 +140,11 @@ public class Product implements Serializable {
         this.proDetails = proDetails;
     }
 
-    public Integer getProPrice() {
+    public Double getProPrice() {
         return proPrice;
     }
 
-    public void setProPrice(Integer proPrice) {
+    public void setProPrice(Double proPrice) {
         this.proPrice = proPrice;
     }
 
@@ -173,6 +180,14 @@ public class Product implements Serializable {
         this.tags = tags;
     }
 
+    public Integer getDiscout() {
+        return discout;
+    }
+
+    public void setDiscout(Integer discout) {
+        this.discout = discout;
+    }
+
     public Double getStarAVG() {
         return starAVG;
     }
@@ -189,6 +204,14 @@ public class Product implements Serializable {
         this.catID = catID;
     }
 
+    public Feature getFeatureID() {
+        return featureID;
+    }
+
+    public void setFeatureID(Feature featureID) {
+        this.featureID = featureID;
+    }
+
     public ProductType getTypeID() {
         return typeID;
     }
@@ -198,12 +221,30 @@ public class Product implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Feature> getFeatureCollection() {
-        return featureCollection;
+    public Collection<Wishlist> getWishlistCollection() {
+        return wishlistCollection;
     }
 
-    public void setFeatureCollection(Collection<Feature> featureCollection) {
-        this.featureCollection = featureCollection;
+    public void setWishlistCollection(Collection<Wishlist> wishlistCollection) {
+        this.wishlistCollection = wishlistCollection;
+    }
+
+    @XmlTransient
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
+    }
+
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
+    }
+
+    @XmlTransient
+    public Collection<PurchaseItem> getPurchaseItemCollection() {
+        return purchaseItemCollection;
+    }
+
+    public void setPurchaseItemCollection(Collection<PurchaseItem> purchaseItemCollection) {
+        this.purchaseItemCollection = purchaseItemCollection;
     }
 
     @XmlTransient
@@ -238,15 +279,6 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "entity.Product[ proID=" + proID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Review> getReviewCollection() {
-        return reviewCollection;
-    }
-
-    public void setReviewCollection(Collection<Review> reviewCollection) {
-        this.reviewCollection = reviewCollection;
     }
     
 }

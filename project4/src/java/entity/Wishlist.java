@@ -10,6 +10,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,24 +26,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Asus
  */
 @Entity
-@Table(name = "viewComment", catalog = "projectSem4", schema = "dbo")
+@Table(name = "wishlist", catalog = "projectSem4", schema = "dbo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ViewComment.findAll", query = "SELECT v FROM ViewComment v"),
-    @NamedQuery(name = "ViewComment.findByCommentID", query = "SELECT v FROM ViewComment v WHERE v.commentID = :commentID"),
-    @NamedQuery(name = "ViewComment.findByLikes", query = "SELECT v FROM ViewComment v WHERE v.likes = :likes")})
-public class ViewComment implements Serializable {
+    @NamedQuery(name = "Wishlist.findAll", query = "SELECT w FROM Wishlist w"),
+    @NamedQuery(name = "Wishlist.findByWishlistID", query = "SELECT w FROM Wishlist w WHERE w.wishlistID = :wishlistID"),
+    @NamedQuery(name = "Wishlist.findByQuantity", query = "SELECT w FROM Wishlist w WHERE w.quantity = :quantity")})
+public class Wishlist implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "commentID", nullable = false)
-    private Integer commentID;
-    @Column(name = "likes")
-    private Integer likes;
-    @JoinColumn(name = "comItem", referencedColumnName = "id")
-    @ManyToOne
-    private CommentItem comItem;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "wishlistID", nullable = false)
+    private Integer wishlistID;
+    @Column(name = "quantity")
+    private Integer quantity;
     @JoinColumn(name = "cusID", referencedColumnName = "cusID")
     @ManyToOne
     private Customer cusID;
@@ -49,35 +48,27 @@ public class ViewComment implements Serializable {
     @ManyToOne
     private Product proID;
 
-    public ViewComment() {
+    public Wishlist() {
     }
 
-    public ViewComment(Integer commentID) {
-        this.commentID = commentID;
+    public Wishlist(Integer wishlistID) {
+        this.wishlistID = wishlistID;
     }
 
-    public Integer getCommentID() {
-        return commentID;
+    public Integer getWishlistID() {
+        return wishlistID;
     }
 
-    public void setCommentID(Integer commentID) {
-        this.commentID = commentID;
+    public void setWishlistID(Integer wishlistID) {
+        this.wishlistID = wishlistID;
     }
 
-    public Integer getLikes() {
-        return likes;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setLikes(Integer likes) {
-        this.likes = likes;
-    }
-
-    public CommentItem getComItem() {
-        return comItem;
-    }
-
-    public void setComItem(CommentItem comItem) {
-        this.comItem = comItem;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Customer getCusID() {
@@ -99,18 +90,18 @@ public class ViewComment implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (commentID != null ? commentID.hashCode() : 0);
+        hash += (wishlistID != null ? wishlistID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ViewComment)) {
+        if (!(object instanceof Wishlist)) {
             return false;
         }
-        ViewComment other = (ViewComment) object;
-        if ((this.commentID == null && other.commentID != null) || (this.commentID != null && !this.commentID.equals(other.commentID))) {
+        Wishlist other = (Wishlist) object;
+        if ((this.wishlistID == null && other.wishlistID != null) || (this.wishlistID != null && !this.wishlistID.equals(other.wishlistID))) {
             return false;
         }
         return true;
@@ -118,7 +109,7 @@ public class ViewComment implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.ViewComment[ commentID=" + commentID + " ]";
+        return "entity.Wishlist[ wishlistID=" + wishlistID + " ]";
     }
     
 }

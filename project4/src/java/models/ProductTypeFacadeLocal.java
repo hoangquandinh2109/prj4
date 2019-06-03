@@ -30,7 +30,7 @@ public interface ProductTypeFacadeLocal {
     List<ProductType> findRange(int[] range);
 
     int count();
-
+    
     String getNameType(int id);
 
     int getQuanType(ProductType Pt);

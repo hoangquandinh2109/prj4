@@ -6,7 +6,7 @@
 
 package models;
 
-import entity.Purchase;
+import entity.Wishlist;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,22 +15,20 @@ import javax.ejb.Local;
  * @author Asus
  */
 @Local
-public interface PurchaseFacadeLocal {
+public interface WishlistFacadeLocal {
 
-    void create(Purchase purchase);
+    void create(Wishlist wishlist);
 
-    void edit(Purchase purchase);
+    void edit(Wishlist wishlist);
 
-    void remove(Purchase purchase);
+    void remove(Wishlist wishlist);
 
-    Purchase find(Object id);
+    Wishlist find(Object id);
 
-    List<Purchase> findAll();
+    List<Wishlist> findAll();
 
-    List<Purchase> findRange(int[] range);
+    List<Wishlist> findRange(int[] range);
 
     int count();
-    
-    String getLastPurchaseID();
     
 }
