@@ -89,7 +89,7 @@ body.square {
   overflow: hidden;
 }
 
-body a:hover {
+body a:hover, body a:active, body a:focus {
   text-decoration: none !important;
 }
 
@@ -100,6 +100,12 @@ body .top-nav {
 
 body .top-nav a {
   color: #fff !important;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+}
+
+body .top-nav a:hover {
+  color: #ccf4f9 !important;
 }
 
 body .top-nav .top-nav-welcome {

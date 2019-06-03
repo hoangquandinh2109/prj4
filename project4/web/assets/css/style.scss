@@ -64,7 +64,7 @@ body{
         overflow: hidden;
     }
     a{
-        &:hover{
+        &:hover, &:active, &:focus{
             text-decoration: none!important;
         }
     }
@@ -74,6 +74,10 @@ body{
         background-color: $color-blue;
         a{
             color: #fff!important;
+            transition: .1s ease-in-out;
+            &:hover{
+                color: #ccf4f9 !important;
+            }
         }
         .top-nav-welcome{
             padding: 13px 0;

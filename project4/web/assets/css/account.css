@@ -242,9 +242,7 @@ body .ui .right-part .avatar:hover a {
 }
 
 body .ui .profile {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 320px;
   margin: 0 auto;
 }
 

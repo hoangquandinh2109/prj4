@@ -10,7 +10,7 @@
     <div class="container">
         <div class="top-nav-welcome">
             <c:if test="${not empty sessionname}">
-                <div>Welcome <span id="name">${sessionname}</span>, <a href="${pageContext.request.contextPath}/logout">logout</a></div>
+                <div>Welcome <a href="${pageContext.request.contextPath}/account" id="name">${sessionname}</a>, <a href="${pageContext.request.contextPath}/logout">logout</a></div>
             </c:if>
             <c:if test="${empty sessionname}">
                 <div>Welcome visitor you can <a class="login-link" href="">Login</a> and <a class="create-acc-link" href="">create an account</a> </div>
