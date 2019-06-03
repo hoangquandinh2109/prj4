@@ -7,6 +7,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +42,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Customer.findByCusStatus", query = "SELECT c FROM Customer c WHERE c.cusStatus = :cusStatus"),
     @NamedQuery(name = "Customer.findByCusGender", query = "SELECT c FROM Customer c WHERE c.cusGender = :cusGender")})
 public class Customer implements Serializable {
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Review> reviewCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -181,6 +186,15 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "entity.Customer[ cusID=" + cusID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
+    }
+
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
     }
     
 }

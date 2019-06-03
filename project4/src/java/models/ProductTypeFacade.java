@@ -6,7 +6,9 @@
 
 package models;
 
+import entity.Product;
 import entity.ProductType;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,5 +40,14 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> implements Pr
             return null;
         }
     }
+
+    @Override
+    public int getQuanType(ProductType Pt) {
+        List<Product> lp = em.createQuery("SELECT p.productCollection FROM ProductType p WHERE p.typeID = :typeID")
+                .setParameter("typeID", Pt.getTypeID())
+                .getResultList();
+        return lp.size();
+    }
+    
 
 }

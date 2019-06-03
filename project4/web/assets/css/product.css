@@ -257,6 +257,28 @@ a.button-dhq-mk#wishlist:hover {
   border: 1px solid #ee6c92;
   color: #ee6c92;
   border-radius: 21px;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+#button-n-number button:focus {
+  outline: none;
+}
+
+#button-n-number button:hover {
+  background-color: #ee6c92;
+  color: #fff;
+  -webkit-box-shadow: 4px 4px 4px #00000020;
+          box-shadow: 4px 4px 4px #00000020;
+  -webkit-transform: translate(-2px, -2px);
+          transform: translate(-2px, -2px);
+}
+
+#button-n-number button:active {
+  -webkit-box-shadow: 0 0;
+          box-shadow: 0 0;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
 }
 
 #button-n-number div {
@@ -317,5 +339,174 @@ a.button-dhq-mk#wishlist:hover {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   top: 50%;
+}
+
+.review-input {
+  padding: 6px 10px;
+  border: 1px solid #e5e5e5;
+  width: 100%;
+  font-family: "MerriweatherSans";
+}
+
+.review-label {
+  font-size: 13px;
+  font-family: "MerriweatherSans";
+  font-weight: normal;
+  line-height: 20px;
+  height: 20px;
+  margin-bottom: 6px;
+}
+
+.review-h3 {
+  font-size: 13px;
+  font-weight: bold;
+  font-family: "MerriweatherSans";
+  margin: 0px;
+  height: 30px;
+  line-height: 30px;
+}
+
+#title-r {
+  margin-bottom: 15px;
+}
+
+#content-r {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 160px;
+  max-height: 160px;
+  resize: none;
+}
+
+#btn-review {
+  padding: 16px 10px;
+  color: #fff;
+  background-color: #31a8d2;
+  font-family: "MerriweatherSans";
+  text-transform: uppercase;
+  border: 1px solid #2a99c0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: block;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+#btn-review:hover {
+  background-color: #fff;
+  color: #2a99c0;
+}
+
+.span-info {
+  padding-left: 20px;
+  font-size: 13px;
+  font-family: "MerriweatherSans";
+  line-height: 20px;
+}
+
+#write-review {
+  cursor: pointer;
+  font-family: "MerriweatherSans";
+  padding: 10px 0;
+  color: #777;
+}
+
+#write-review:hover {
+  color: #2a99c0;
+}
+
+.item-review {
+  font-family: "MerriweatherSans";
+}
+
+.item-review h2 {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.item-review .info-people {
+  margin-bottom: 13px;
+  opacity: 0.5;
+  display: inline-block;
+}
+
+.item-review p {
+  margin: 0;
+  padding: 0;
+}
+
+.item-review + .item-review {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e5e5;
+}
+
+#reviewTab > div + div {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e5e5;
+}
+
+#input-star {
+  margin-bottom: 15px;
+}
+
+#input-star > div {
+  display: inline-block;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+#input-star a {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 400;
+  color: #fc0;
+}
+
+#input-star a:after {
+  content: '\f005';
+}
+
+#input-star a:active, #input-star a:focus {
+  text-decoration: none;
+}
+
+#input-star a:hover {
+  color: #ff7800;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+#input-star a:hover ~ a {
+  font-weight: 900;
+}
+
+#input-star a.selected {
+  color: #ffcc00;
+  font-weight: 900;
+}
+
+#input-star a.selected ~ a {
+  font-weight: 900;
+}
+
+#input-star a.selected ~ a:hover {
+  color: #ffcc00;
+}
+
+#thankyou {
+  font-family: "MerriweatherSans";
+  padding: 10px 0;
+  float: right;
+}
+
+.img img {
+  width: 100%;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+  height: 380px;
 }
 /*# sourceMappingURL=product.css.map */

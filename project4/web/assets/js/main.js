@@ -1,7 +1,7 @@
 var linkpage = "/project4/";
 $(document).ready(function(){
     $(".addtocart").click(function(){
-//        alert("mua gì");
+        alert("mua gì");
         event.preventDefault();
         showcartajax();
     });
@@ -9,10 +9,6 @@ $(document).ready(function(){
 //        alert("mua gì");
         event.preventDefault();
         showcartajax();
-    });
-    $(".btn-love").click(function(){
-        event.preventDefault();
-        alert("yêu thương mẹ gì");
     });
     $(".clickdetrove").click(function(){
         $(".content").removeClass("vao");
@@ -27,7 +23,7 @@ $(document).ready(function(){
         $(".clickdetrove").addClass("havemodal");
         $("body").addClass("square");
         $(".modal-form").remove();
-        $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
         $(".modal-form").load(linkpage+"templates/login.html");
     });    
     $('a.create-acc-link').click(function(event) {
@@ -35,7 +31,7 @@ $(document).ready(function(){
         $(".clickdetrove").addClass("havemodal");
         $("body").addClass("square");
         $(".modal-form").remove();
-        $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
         $(".modal-form").load(linkpage+"templates/register.html");
     });   
 
@@ -97,18 +93,26 @@ $(document).ready(function(){
         $(this).addClass("active");
         $(".everyblock").hide();
         $("#showdashboard").show();
+        window.history.pushState("Details", "Title", linkpage+"account/dashboard");
+        document.title= "Dashboard - "+usernamess;
     });
-    $('#account').click(function(){
+    $('#account, a#pen-edit').click(function(){
+        event.preventDefault();
         $("#switcher>div").removeClass("active");
         $(this).addClass("active");
         $(".everyblock").hide();
         $("#showaccount").show();
+        $("#address-need-fc").focus();
+        window.history.pushState("Details", "Title", linkpage+"account/info");
+        document.title= "Account - "+usernamess;
     });
     $('#wishlist').click(function(){
         $("#switcher>div").removeClass("active");
         $(this).addClass("active");
         $(".everyblock").hide();
         $("#showwishlist").show();
+        window.history.pushState("Details", "Title", linkpage+"account/wishlist");
+        document.title= "Wishlist - "+usernamess;
     });
     $('#orders').click(function(){
         $("#switcher>div").removeClass("active");
@@ -117,9 +121,49 @@ $(document).ready(function(){
         $("#order-detail").hide();
         $("#orderslist").show();
         $("#showorders").show();
+        window.history.pushState("Details", "Title", linkpage+"account/orders");
+        document.title= "Orders - "+usernamess;
     });
-    ///////////////////////////////////////////////////////////////////////////////////////////////account
-
+    var tabname = $("#tabname").val();
+    var usernamess = $("#usernamess").val();
+    switch (tabname) {
+        case "orders":
+            $("#switcher>div").removeClass("active");
+            $('#orders').addClass("active");
+            $(".everyblock").hide();
+            $("#order-detail").hide();
+            $("#orderslist").show();
+            $("#showorders").show();
+            break;
+        case "orderdetail":
+            $("#switcher>div").removeClass("active");
+            $('#orders').addClass("active");
+            $(".everyblock").hide();
+            $("#orderslist").hide();
+            $("#order-detail").show();
+            $("#showorders").show();
+            break;
+        case "wishlist":
+            $("#switcher>div").removeClass("active");
+            $('#wishlist').addClass("active");
+            $(".everyblock").hide();
+            $("#showwishlist").show();
+            break;
+        case "dashboard":
+            $("#switcher>div").removeClass("active");
+            $('#dashboard').addClass("active");
+            $(".everyblock").hide();
+            $("#showdashboard").show();
+            break;
+        case "info":
+            $("#switcher>div").removeClass("active");
+            $('#account').addClass("active");
+            $(".everyblock").hide();
+            $("#showaccount").show();
+            $("#address-need-fc").focus();
+            break;
+    }  
+    
     $(".button-remove").click(function(){
         event.preventDefault();
         var val = $(this).text(); 
@@ -127,9 +171,14 @@ $(document).ready(function(){
             $("#orderslist").hide();
             $("#order-detail").show();
             $("html, body").scrollTop(0);
+            window.history.pushState("Details", "Title", linkpage+"account/orders/detail");
+            document.title= "#20190205392 - "+usernamess;
         }
     });//temp view bip
     
+    ///////////////////////////////////////////////////////////////////////////////////////////////account
+
+  
     
     
     $(window).scroll(function() {
@@ -146,6 +195,14 @@ $(document).ready(function(){
     $("#abcxyz").click(function(){
         $("html, body").animate({ scrollTop: 0 }, "slow");
     });
+    var thistext = $("#product-filter-element").data("thistext").split(" ");
+    var therest = "<span> ";
+    for(var ii = 1; ii<thistext.length;ii++){
+        therest += thistext[ii]+" ";
+    }
+    therest += "</span>";
+    $("#product-filter-element").text(thistext[0]);
+    $("#product-filter-element").append(therest);
 });
 
 new WOW().init();

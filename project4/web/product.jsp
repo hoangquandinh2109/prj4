@@ -13,7 +13,8 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
-    <body ng-app="cangcucot">
+    <body ng-app="cangcucot" ng-controller="cart">
+       <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>
@@ -100,12 +101,13 @@
                                 <div class="event">
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
                                 </div>
-                                <div class="title-row">News <span>Product</span></div>
+                                <div class="title-row" id="product-filter-element" data-thistext="${pagename}"></div>
                                 <div class="product-block"  ng-controller="proPagination">
+                                    <div ng-if="listPro.length == 0" style="padding: 67px 0; text-align: center; opacity: 0.5;">No result</div>
                                     <div class="row" ng-repeat="row in range(1,numrow)">
                                         <div class="product-item wow fadeIn" ng-repeat="item in productRow(row)" >
                                             <div class="image-product">
-                                                <a href="/project4/product/v/{{item.proID}}"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
+                                                <a href="/project4/product/v/{{item.proID}}"><img src="/project4/productImage/{{item.proImg}}" alt=""></a>
                                             </div>
                                             <div class="product-info">
                                                 <a href="/project4/product/v/{{item.proID}}">{{item.proName}}</a>
@@ -128,14 +130,14 @@
                                                             <i class="fas fa-star"></i>
                                                         </div>
                                                     </div>
-                                                    <span class="quantity-review">No reviews</span>
+                                                    <span ng-class="classnumRev(item.numReview)" class="quantity-review">{{numRV(item.numReview)}}</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div ng-click="addtocart()" class="btn-addtocart clearfix">
+                                                    <div ng-click="addThisToCart(item.proID)" class="btn-addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
                                                         <span class="tool-title">Add to cart</span>
                                                     </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                    <div ng-class="addedClass(item.onWishlist)" class="btn-love" ng-click="item.onWishlist = btnWishlist(item.proID,item.onWishlist)"><span ><i class="fa fa-heart"></i></span></div>
                                                 </div>
                                             </div>
                                         </div> 
@@ -169,11 +171,12 @@
                     </div>
                 </div>
                 <c:import url="templates/footer.jsp"></c:import>
-                <span id="collVal">${collVal}</span>
-                <span id="nameColl">${nameColl}</span>
+                <span class="hide" id="collVal">${collVal}</span>
+                <span class="hide" id="nameColl">${nameColl}</span>
             </div>
             <c:import url="templates/cart-modal.jsp"></c:import>
         </div>
+        <span id="maxPrice" class="hide">${maxPrice}</span>
         <c:import url="templates/script.jsp"></c:import>
               <script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery-ui.js"></script>
     </body>

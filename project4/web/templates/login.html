@@ -79,7 +79,7 @@ function checkEmail(email) {
                     $.ajax({
                         type:"POST",
                        data:{"email":email,"password":pass},
-                       url: "/project4/login",
+                       url: linkpage+"login",
                        success: function(data) {
                            console.log("success");
                            location.reload();
@@ -96,7 +96,7 @@ function checkEmail(email) {
     $('a.modal-create-acc').click(function(event) {
         event.preventDefault();
         $(".modal-form").remove();
-        $(".content").append("<div class=\"modal-form wow fadeInDownModal\"></div>");
-        $(".modal-form").load("http://localhost:8080/project4/templates/register.html");
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+        $(".modal-form").load(linkpage+"templates/register.html");
     });   
         </script>

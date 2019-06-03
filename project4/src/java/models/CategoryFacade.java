@@ -7,6 +7,7 @@
 package models;
 
 import entity.Category;
+import entity.Product;
 import entity.ProductType;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,14 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public int getCatQuan(Category cat) {
+        List<Product> lp = em.createQuery("SELECT c.productCollection FROM Category c WHERE c.catID = :catID")
+                .setParameter("catID", cat.getCatID())
+                .getResultList();
+        return lp.size();
     }
     
 }

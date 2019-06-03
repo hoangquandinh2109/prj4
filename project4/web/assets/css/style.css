@@ -89,7 +89,7 @@ body.square {
   overflow: hidden;
 }
 
-body a:hover {
+body a:hover, body a:active, body a:focus {
   text-decoration: none !important;
 }
 
@@ -100,6 +100,12 @@ body .top-nav {
 
 body .top-nav a {
   color: #fff !important;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+}
+
+body .top-nav a:hover {
+  color: #ccf4f9 !important;
 }
 
 body .top-nav .top-nav-welcome {
@@ -609,6 +615,7 @@ body .web-body .product-block > .row + .row .product-item:before {
 body .web-body .product-block > .row .product-item {
   float: left;
   width: 25%;
+  background-color: #fff;
   padding: 30px 20px;
   position: relative;
 }
@@ -839,6 +846,10 @@ body .content-n-cart .cart.ra {
 .product-item .image-product img {
   display: block;
   margin: 0 auto;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+  width: 160px;
+  height: 140px;
 }
 
 .product-item .product-info {
@@ -920,6 +931,15 @@ body .content-n-cart .cart.ra {
   text-align: center;
   padding: 5px;
   display: inline-block;
+}
+
+.product-item .review-n-button-tu .button-tu .btn-love.added span {
+  -webkit-box-shadow: inset 0px 0px 4px #db195261;
+          box-shadow: inset 0px 0px 4px #db195261;
+}
+
+.product-item .review-n-button-tu .button-tu .btn-love.added span i {
+  color: #db1952;
 }
 
 .product-item .review-n-button-tu .button-tu .btn-love {
@@ -1060,6 +1080,13 @@ body .content-n-cart .cart.ra {
   animation-name: fadeInDownModal;
 }
 
+.fadeInDownMsg {
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: fadeInDownModal;
+  animation-name: fadeInDownModal;
+}
+
 .pagination > li > a, .pagination > li > span {
   background-color: transparent;
   border-color: transparent;
@@ -1144,5 +1171,10 @@ body .content-n-cart .cart.ra {
 #abcxyz:active {
   -webkit-box-shadow: 0px 0px;
           box-shadow: 0px 0px;
+}
+
+.review-tu .quantity-review.numrv {
+  float: left;
+  padding-left: 10px;
 }
 /*# sourceMappingURL=style.css.map */

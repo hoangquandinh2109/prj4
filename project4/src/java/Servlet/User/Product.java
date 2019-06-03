@@ -23,10 +23,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jdk.nashorn.internal.parser.JSONParser;
 import models.CategoryFacadeLocal;
+import models.CustomerFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
+import models.ReviewFacadeLocal;
 
 /**
  *
@@ -34,6 +37,10 @@ import models.ProductTypeFacadeLocal;
  */
 @WebServlet(name = "ProductDetail", urlPatterns = {"/product/*"})
 public class Product extends HttpServlet {
+    @EJB
+    private CustomerFacadeLocal customerFacade;
+    @EJB
+    private ReviewFacadeLocal reviewFacade;
     @EJB
     private CategoryFacadeLocal proCat;
     @EJB
@@ -66,14 +73,25 @@ public class Product extends HttpServlet {
                 break;
             case "type":
             if(!id.isEmpty() && (!id.equals("page") && !id.equals("api"))){
-                
-                req.setAttribute("pagename", proType.getNameType(Integer.parseInt(id)));
-                req.setAttribute("collVal", id);
-                req.setAttribute("nameColl", "type");
-                getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+                String name; // page name
+                try {
+                    name = proType.getNameType(Integer.parseInt(id));
+                } catch (Exception e) {
+                    name = null;
+                }
+                if(name == null){
+                    getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
+                }
+                else{
+                    req.setAttribute("pagename", name);
+                    req.setAttribute("collVal", id);
+                    req.setAttribute("nameColl", "type");
+                    req.setAttribute("maxPrice", productDB.getMaxPrice());
+                    getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+                }
             }else{
                 //trang type
-                req.setAttribute("pagename", "Type");
+                req.setAttribute("pagename", "Types");
                 try {
                     pageno = Integer.parseInt(uris[2]);
                 } catch (Exception e) {
@@ -81,11 +99,10 @@ public class Product extends HttpServlet {
                 }
                 List<String[]> listPT = new ArrayList<>();
                 int pagenum = 0, count = 0, countlist = 0, skip = (pageno-1) * 3;
-                
                 for(ProductType pt: proType.findAll()){
                     if(countlist>=skip){
                         if(count < 3){
-                            listPT.add(new String[]{String.valueOf(pt.getTypeID()),pt.getTypeName()});
+                            listPT.add(new String[]{String.valueOf(pt.getTypeID()),pt.getTypeName(),proType.getQuanType(pt)+""});
                             count++;
                         }
                         
@@ -108,13 +125,25 @@ public class Product extends HttpServlet {
                 break;
             case "category":
             if(!id.isEmpty() && !id.equals("page") && !id.equals("api")){
-                req.setAttribute("pagename", proCat.getCategoryName(Integer.parseInt(id)));
-                req.setAttribute("collVal", id);
-                req.setAttribute("nameColl", "category");
-                getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+                String name; // page name
+                try {
+                    name = proCat.getCategoryName(Integer.parseInt(id));
+                } catch (Exception e) {
+                    name = null;
+                }
+                if(name == null){
+                    getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
+                }
+                else{
+                    req.setAttribute("pagename", name);
+                    req.setAttribute("collVal", id);
+                    req.setAttribute("nameColl", "category");
+                    req.setAttribute("maxPrice", productDB.getMaxPrice());
+                    getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+                }
             }else{
                 //trang category
-                req.setAttribute("pagename", "Category");
+                req.setAttribute("pagename", "Categories");
                 try {
                     pageno = Integer.parseInt(uris[2]);
                 } catch (Exception e) {
@@ -126,7 +155,7 @@ public class Product extends HttpServlet {
                 for(Category pt: proCat.findAll()){
                     if(countlist>=skip){
                         if(count < 3){
-                            listPT.add(new String[]{String.valueOf(pt.getCatID()),pt.getCatName()});
+                            listPT.add(new String[]{String.valueOf(pt.getCatID()),pt.getCatName(), proCat.getCatQuan(pt)+""});
                             count++;
                         }
                     }
@@ -172,7 +201,21 @@ public class Product extends HttpServlet {
             //        list.add("Sony Z8");
                     req.setAttribute("list", list);
                     req.setAttribute("thisP", p);
+                    req.setAttribute("thisImg", productDB.imageOf(p));
                     req.setAttribute("pagename", p.getProName());
+                    req.setAttribute("url", req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/v/"+id);
+                    HttpSession session = req.getSession();
+                    try {
+                        int cusid = (int) session.getAttribute("sessionid");
+                        if(!reviewFacade.checkIfCusRatingThis(customerFacade.find(cusid), p)){
+                            req.setAttribute("allowRV", 1);
+                        }else{
+                            req.setAttribute("allowRV", 0);
+                        }
+                    } catch (Exception e) {
+                        req.setAttribute("allowRV", 1);
+                    }
+                    
                     getServletContext().getRequestDispatcher("/proDetails.jsp").forward(req, resp);
                 }else{
                     getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);

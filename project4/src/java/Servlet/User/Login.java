@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
         HttpSession session=req.getSession();  
         PrintWriter out = resp.getWriter();
         Customer thisCus = db.login(email, password);
-        if(thisCus != null){
+        if(thisCus != null && thisCus.getCusEmail().equals(email) && thisCus.getCusPassword().equals(password)){
             resp.setStatus(HttpServletResponse.SC_OK);
             session.setAttribute("sessionname", thisCus.getCusName());  
             session.setAttribute("sessionid", thisCus.getCusID()); 

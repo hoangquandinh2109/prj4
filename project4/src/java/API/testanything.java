@@ -6,6 +6,7 @@
 
 package API;
 
+import entity.ImgStog;
 import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +22,8 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +39,8 @@ import models.ProductTypeFacadeLocal;
  */
 @WebServlet(name = "abc", urlPatterns = {"/abc"})
 public class testanything extends HttpServlet {
+    @PersistenceContext(unitName = "project4PU")
+    private EntityManager em;
     @EJB
     private ProductTypeFacadeLocal typefacade;
     @EJB
@@ -58,8 +63,7 @@ public class testanything extends HttpServlet {
             
             
             
-            
-            
+           
             
 //////////////du lieu product
 //        try {
@@ -73,24 +77,8 @@ public class testanything extends HttpServlet {
 //        }
             ////////////////du lieu product
         
-        //goi y name
-        PrintWriter out = resp.getWriter();
-        JsonArrayBuilder jab = Json.createArrayBuilder();
-        for(Product p : productFacade.findAll()){
-            jab.add(getJsonbyName(p.getProName()));
-        }
-        out.println(getArrayName(jab.build()));
+//        //goi y name
+//        out.println(productFacade.getMaxPrice());
     }
-    public static JsonObject getJsonbyName(String name){
-        return Json.createObjectBuilder()
-                .add("proName", name)
-                .build();
-    }
-    public static JsonObject getArrayName(JsonArray arrayname){
-        return Json.createObjectBuilder()
-                .add("listName", arrayname)
-                .build();
-    }
-    
 
 }

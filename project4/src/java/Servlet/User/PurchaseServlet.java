@@ -45,7 +45,7 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath());
+        request.getRequestDispatcher("purchase.jsp").forward(request, response);
     }
 
     @Override
@@ -81,18 +81,20 @@ public class PurchaseServlet extends HttpServlet {
             }
         } else purId= dateFormat.format(now)+"001";
         System.out.println(purId);
-        int totalPrice = (int) session.getAttribute("totalPrice");
+        
         if(payment != null && "payment".equals(payment)){
+            System.out.println("payment");
             CartFacade cartFacade = new CartFacade(request.getSession());
             Purchase purchase = new Purchase();
             purchase.setCusID(customerFacade.find(cusID));
             purchase.setDateOrderPlaced(now);
             purchase.setPurID(purId);
             purchase.setPurchaseStatus(Short.parseShort("0"));
-            purchase.setTotalPrice(totalPrice);
+            purchase.setTotalPrice(cartFacade.getTotalPrice());
             purchaseFacade.create(purchase);
             PurchaseItem purchaseItem = new PurchaseItem();
             for(Cart cartItem: cartFacade.getAllCartItems()){
+//                System.out.println(cartItem.getProduct().getProName());
                 purchaseItem.setProID(cartItem.getProduct());
                 purchaseItem.setPurID(purchase);
                 purchaseItem.setQuantity(cartItem.getQuantity());

@@ -35,6 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Review.findByRateID", query = "SELECT r FROM Review r WHERE r.rateID = :rateID"),
     @NamedQuery(name = "Review.findByStar", query = "SELECT r FROM Review r WHERE r.star = :star")})
 public class Review implements Serializable {
+    @Size(max = 50)
+    @Column(name = "reviewTitle", length = 50)
+    private String reviewTitle;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -124,6 +127,14 @@ public class Review implements Serializable {
     @Override
     public String toString() {
         return "entity.Review[ rateID=" + rateID + " ]";
+    }
+
+    public String getReviewTitle() {
+        return reviewTitle;
+    }
+
+    public void setReviewTitle(String reviewTitle) {
+        this.reviewTitle = reviewTitle;
     }
     
 }

@@ -63,6 +63,8 @@
         padding-bottom: 30px;
         border-bottom: 2px solid #ededed;
         border-top: 1px solid #ededed;
+        max-height: 391.23px;
+        overflow: auto;
         .cart-item{ 
             &+.cart-item{
                 padding-top: 30px;
@@ -70,7 +72,10 @@
             .cart-photo{
                 float: left;
                 width: 33.3333333%;
+                padding-right: 10px;
                 img{
+                    height: 90px;
+                    object-fit: scale-down;
                     width: 100%;
                 }
             }
@@ -201,4 +206,7 @@
 }
 #h2yourcart{
     font-family: 'MerriweatherSans';
+}
+#empty-cart{
+    margin: 100px 0;
 }

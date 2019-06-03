@@ -1,3 +1,10 @@
+<%-- 
+    Document   : account
+    Created on : Jun 3, 2019, 7:46:28 AM
+    Author     : johnn
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +12,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="assets/library/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/account.css">
+    <title>${pagename} - ${username}</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/account.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/fav.png">
 </head>
 
 <body>
+    <input type="hidden" id="tabname" value="${tabname}">
+    <input type="hidden" id="usernamess" value="${username}">
     <div class="ui clearfix">
         <div id="switcher">
             <div id="dashboard" class="active"><i class="fas fa-tachometer-alt-fastest"></i></div>
@@ -35,7 +45,7 @@
 
 
 <!--////////////////////////////////////////////////////////////////////// dashboard block -->
-            <div id="showdashboard" class="everyblock">
+            <div  style="display: none;" id="showdashboard" class="everyblock">
                 <div class="block-product">
                     <h2>Products purchased</h2>
                     <div class="r list-product">
@@ -127,12 +137,15 @@
 
             <div style="display: none;" id="showaccount" class="everyblock form-account">
                 <h2>Update Information</h2>
-                <div class="label-account">Address</div>
-                <input type="text">
-                <div class="label-account">Phone</div>
-                <input type="text">
-                <button class="btn">Update</button>
+                <form>
+                    <div class="label-account">Address</div>
+                    <input id="address-need-fc" type="text">
+                    <div class="label-account">Phone</div>
+                    <input type="text">
+                    <button class="btn">Update</button>
+                </form>
                 <h2>Change Password</h2>
+                <form>
                 <div class="label-account">Old password</div>
                 <input type="password">
                 <div class="label-account">New password</div>
@@ -140,6 +153,7 @@
                 <div class="label-account">Re-enter new password</div>
                 <input type="password">
                 <button class="btn">Change</button>
+                </form>
 
             </div>
 
@@ -436,19 +450,19 @@
                     <a href=""><i class="fal fa-camera"></i>Upload an avatar</a>
                 </div>
                 <div class="profile">
-                    <p class="profile-name">Shark Hung <a href=""><i class="fal fa-pencil"></i></a></p>
+                    <p class="profile-name">${myname} <a id="pen-edit" href=""><i class="fal fa-pencil"></i></a></p>
                     <div class="profile-info">
-                        <span><i class="far fa-map-marker-alt"></i> 172 Ông Ích Khiêm, p15, q11, Tp.Hcm</span>
-                        <span><i class="fal fa-phone"></i> 0978468469</span>
-                        <span><i class="fal fa-envelope"></i> sharkhung@gmail.com</span>
+                        <span><i class="far fa-map-marker-alt"></i> ${myaddress}</span>
+                        <span><i class="fal fa-phone"></i> ${myphone}</span>
+                        <span><i class="fal fa-envelope"></i> ${myemail}</span>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="assets/library/jquery/js/jquery.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 
 </html>

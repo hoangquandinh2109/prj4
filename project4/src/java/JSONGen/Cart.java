@@ -18,12 +18,14 @@ import javax.json.JsonObject;
  * @author johnn
  */
 public class Cart {
-    public static JsonObject getTypeJson(entity.Cart cart){
+    public static JsonObject getTypeJson(entity.Cart cart, String img){
         return Json.createObjectBuilder()
                 .add("ID",cart.getId())
                 .add("quantity", cart.getQuantity())
                 .add("proID", cart.getProduct().getProID())
+                .add("proName", cart.getProduct().getProName())
                 .add("proPrice", cart.getProduct().getProPrice())
+                .add("proImg", img)
                 .build();
     }
     public static JsonObject getTypeThings(JsonArray cart, int total){

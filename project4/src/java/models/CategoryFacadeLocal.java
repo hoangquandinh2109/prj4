@@ -34,5 +34,7 @@ public interface CategoryFacadeLocal {
     List<Category> showCategory();
 
     String getCategoryName(int id);
+
+    int getCatQuan(Category cat);
     
 }

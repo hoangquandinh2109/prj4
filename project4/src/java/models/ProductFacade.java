@@ -106,4 +106,24 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
         }
         
     }  
+    
+    @Override
+    public int getMaxPrice() {
+        return (int) em.createQuery("select max(p.proPrice) from Product p").getSingleResult();
+    }
+
+    @Override
+    public String imageOf(Product p) {
+        
+         List<ImgStog> listImg =  (List<ImgStog>) em.createQuery("SELECT i FROM Product p INNER JOIN p.imgStogCollection i WHERE p.proID = :product")
+                    .setParameter("product", p.getProID())
+                    .getResultList();
+            for(ImgStog img : listImg){
+                if(img.getThumbnail()!=null && img.getThumbnail()){
+                    return img.getImgName();
+                }
+            }
+            return null;
+    }
+    
 }

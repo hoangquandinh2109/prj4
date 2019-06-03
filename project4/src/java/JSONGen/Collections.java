@@ -29,6 +29,7 @@ public class Collections {
         return Json.createObjectBuilder()
                 .add("coID", type[0])
                 .add("coName",type[1])
+                .add("coQuan",type[2])
                 .build();
     }
     public static JsonObject getTypeThings(List<String[]> listPT, int pagenum, int pageno){

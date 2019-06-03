@@ -7,6 +7,7 @@
 package models;
 
 import entity.Customer;
+import entity.Product;
 import entity.Review;
 import java.util.List;
 import javax.ejb.Local;
@@ -32,5 +33,5 @@ public interface ReviewFacadeLocal {
 
     int count();
     
-    boolean checkIfCusRating(Customer cusID);
+    boolean checkIfCusRatingThis(Customer cusID, Product proID);
 }
