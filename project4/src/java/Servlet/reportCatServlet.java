@@ -7,10 +7,7 @@ package Servlet;
 
 import entity.Category;
 import entity.CategoryReport;
-//import entity.CategoryReport;
-import entity.Customer;
 import entity.Product;
-import entity.Purchase;
 import entity.PurchaseItem;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,16 +35,11 @@ public class reportCatServlet extends HttpServlet {
     private CategoryFacadeLocal categoryFacade;
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
-    @Resource
-    private javax.transaction.UserTransaction utx;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-//            for (PurchaseItem pc : p.getPurchaseItemCollection()) {
-//                        income += pc.getQuantity();
-//                    }
             ArrayList<CategoryReport> list = new ArrayList<CategoryReport>();
             double total = 0.0D;
             for (Category c : categoryFacade.findAll()) {

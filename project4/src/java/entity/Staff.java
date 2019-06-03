@@ -71,6 +71,16 @@ public class Staff implements Serializable {
     public Staff() {
     }
 
+    public Staff(String staffID, String staffName, String staffPhone, String staffEmail, String staffAddress, String staffPassword) {
+        this.staffID = staffID;
+        this.staffName = staffName;
+        this.staffPhone = staffPhone;
+        this.staffEmail = staffEmail;
+        this.staffAddress = staffAddress;
+        this.staffPassword = staffPassword;
+      
+    }
+
     public Staff(String staffID) {
         this.staffID = staffID;
     }

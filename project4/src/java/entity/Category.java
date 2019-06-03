@@ -57,6 +57,20 @@ public class Category implements Serializable {
     public Category() {
     }
 
+    public Category(String cateDescription,Integer catID, String catName) {
+        this.catID = catID;
+        this.catName = catName;
+        this.cateDescription = cateDescription;
+    }
+
+    public Category(String cateDescription ,String catName, Boolean statusCategory) {
+        
+        this.catName = catName;
+        this.statusCategory = statusCategory;
+        this.cateDescription = cateDescription;
+       
+    }
+
     public Category(Integer catID) {
         this.catID = catID;
     }
