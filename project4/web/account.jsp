@@ -4,6 +4,7 @@
     Author     : johnn
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,106 +171,36 @@
             <div  style="display: none" id="showwishlist" class="table-account everyblock">
                 <h2>Your Wishlist</h2>
                 <div class="list-product">
-                    <div class="r">
+                    <c:set var="i" value="0" />
+                    
+                    <c:forEach items="${myWishlist}" var="lw">
+                        
+                    <c:if test="${i == 0}">
+                    <div class="r"><!--row item-->  
+                    </c:if>
+                    
+                    
+                        <!------------------------------item--------------------------------------->
                         <div class="c-05">
                             <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
+                                <a href="${pageContext.request.contextPath}/product/v/${lw.proID.proID}"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
+                                    alt=""></a>
+                                <a href="${pageContext.request.contextPath}/product/v/${lw.proID.proID}" class="pname">${lw.proID.proName}</a>
+                                <div class="wishlist-price">&#36;${lw.proID.proPrice}.00</div>
                                 <button class="button-remove pbutton-wishlist">Remove</button>
                             </div>
                         </div>
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-15_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="r">
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-23_dad2d891-eb69-45a3-b5d5-ab53fb94b51e_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-7_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="r">
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-18_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-10_aed5aef2-1985-474e-9f24-a7deb10b70ab_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="r">
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-21_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-2_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="r">
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-11_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                        <div class="c-05">
-                            <div class="product-item">
-                                <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-5_552caf6b-9e67-483d-9599-2e0585c40739_160x140.png"
-                                    alt="">
-                                <a href="" class="pname">Samsung Galaxy S7</a>
-                                <div class="wishlist-price">$800.00</div>
-                                <button class="button-remove pbutton-wishlist">Remove</button>
-                            </div>
-                        </div>
-                    </div>
+                        <c:set var="i" value="${i+1}" />
+                        <!-----------------------/item----------------------------------------->
+                        
+                        
+                        
+                    <c:if test="${i == 2}">
+                    </div><!--/row item-->  
+                    <c:set var="i" value="0" />
+                    </c:if>
+                    
+                    </c:forEach>
                 </div>
             </div>
 

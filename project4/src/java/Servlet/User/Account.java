@@ -7,8 +7,10 @@
 package Servlet.User;
 
 import entity.Customer;
+import entity.Whislist;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.CustomerFacadeLocal;
+import models.WhislistFacadeLocal;
 
 /**
  *
@@ -24,6 +27,8 @@ import models.CustomerFacadeLocal;
  */
 @WebServlet(name = "Account", urlPatterns = {"/account/*"})
 public class Account extends HttpServlet {
+    @EJB
+    private WhislistFacadeLocal whislist;
     @EJB
     private CustomerFacadeLocal customer;
 
@@ -35,17 +40,18 @@ public class Account extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String usernamess = (String) session.getAttribute("sessionname");
-        int myid = (int) session.getAttribute("sessionid");
-        
-        Customer me = customer.find(myid);
-        req.setAttribute("myname", me.getCusName());
-        req.setAttribute("myaddress", me.getCusAddress());
-        req.setAttribute("myphone", me.getCusPhone());
-        req.setAttribute("myemail", me.getCusEmail());
         
         if(usernamess==null){
             resp.sendRedirect(req.getContextPath());
         }else{
+            int myid = (int) session.getAttribute("sessionid");
+
+            Customer me = customer.find(myid);
+            req.setAttribute("myname", me.getCusName());
+            req.setAttribute("myaddress", me.getCusAddress());
+            req.setAttribute("myphone", me.getCusPhone());
+            req.setAttribute("myemail", me.getCusEmail());
+            
             req.setAttribute("username", usernamess);
             String[] uris = new String[]{};
             PrintWriter out =  resp.getWriter();
@@ -75,9 +81,12 @@ public class Account extends HttpServlet {
 
 
 
+                List<Whislist> lw = whislist.getWishtlistOfMe(me);
+                req.setAttribute("myWishlist", lw);
 
                 //if no.0 
                 if((subpage == null || (subpage.equals("detail") && page.equals("orders"))) && uri3rd == null){
+                    
                     switch (page) {
                         case "dashboard":
                             req.setAttribute("pagename", "DashBoard");

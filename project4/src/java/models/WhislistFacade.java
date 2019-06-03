@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Customer;
 import entity.Product;
 import entity.Whislist;
 import java.util.List;
@@ -30,5 +31,13 @@ public class WhislistFacade extends AbstractFacade<Whislist> implements Whislist
     public WhislistFacade() {
         super(Whislist.class);
     }
+
+    @Override
+    public List<Whislist> getWishtlistOfMe(Customer me) {
+        return em.createQuery("SELECT w FROM Whislist w WHERE w.cusID = :me")
+                .setParameter("me", me)
+                .getResultList();
+    }
+    
 
 }
