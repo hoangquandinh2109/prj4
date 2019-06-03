@@ -1,0 +1,102 @@
+<h3>Login</h3>
+<form id="form-in-modal" method="post" action="login">
+    <span class="label-form-modal">Email</span>
+    <input value="" type="text" name="email" id="email" class="form-in-modal">
+    <span class="label-form-modal">Password</span>
+    <input value="" type="password" name="password" id="password" class="form-in-modal">
+    <a class="db-tac" href="">Forgot your Password?</a>
+    <button id="login-button" class="db-tac" type="submit">SIGN IN</button>
+    <a class="db-tac modal-create-acc" href="">Create account</a>
+</form>
+<script>
+    
+    var error=0;
+    $(".form-in-modal").focusin(function (){
+        $(this).next('.error-form').remove(); 
+    });
+    
+    $("#password").focusout(function(){
+       var pass = $(this).val();
+       
+       if(pass == "") {
+            $("#password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+            error++;
+      } else if(pass.length<6 || pass.length>22){
+           $(this).after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+            error++;
+       } else{
+          $("#password").next('.error-form').remove(); 
+      }
+   });
+   
+function checkEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+  $("#email").focusout(function(){
+        var email = $(this).val();
+        if(email != ""){
+             if(!checkEmail(email)){
+               $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is wrong format!</span>");
+               error++;
+             }
+       } else{
+             $("#email").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+             error++;
+       }
+    });
+    
+           $('#login-button').click(function() {
+                event.preventDefault();
+              var email=$("#email").val();
+              var pass=$("#password").val();
+              $(".error-form").remove();
+              
+              
+              error = 0;
+              
+              if(pass == "") {
+                    $("#password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+                    error++;
+              } else if(pass.length<6 || pass.length>22){
+                   $("#password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+                    error++;
+               } else{
+                  $("#password").next('.error-form').remove(); 
+              }
+              
+              if(email != ""){
+                    if(!checkEmail(email)){
+                      $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is wrong format!</span>");
+                      error++;
+                    }
+              } else{
+                    $("#email").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+                    error++;
+              }
+              
+                if(error == 0){
+                    $.ajax({
+                        type:"POST",
+                       data:{"email":email,"password":pass},
+                       url: linkpage+"login",
+                       success: function(data) {
+                           console.log("success");
+                           location.reload();
+                       },
+                       error:function(){
+                           console.log("error");
+                           $("#password").after("<span class=\"error-form\" style=\"color: red;\">Wrong Email or Password!</span>");
+                       },
+                    });
+                } 
+            });
+            
+            
+    $('a.modal-create-acc').click(function(event) {
+        event.preventDefault();
+        $(".modal-form").remove();
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+        $(".modal-form").load(linkpage+"templates/register.html");
+    });   
+        </script>

@@ -1,0 +1,69 @@
+$color-blue: #76c4ce;
+$color-pink: #ee6c92;
+$color-dark-pink: #ec5a84;
+$color-border-pink: #db1952;
+
+@font-face {
+    font-family: 'MerriweatherSans';
+    src: url('../fonts/MerriweatherSans-Regular/MerriweatherSans-Regular.eot');
+    src: local('☺'), url('../fonts/MerriweatherSans-Regular/MerriweatherSans-Regular.woff') format('woff'), url('../fonts/MerriweatherSans-Regular/MerriweatherSans-Regular.ttf') format('truetype'), url('../fonts/MerriweatherSans-Regular/MerriweatherSans-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+#h3name{
+    font-size: 30px;
+    font-family: 'MerriweatherSans';
+}
+.collection-grid-item{
+    font-family: 'MerriweatherSans';
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+    .collection-image {
+        .collection-grid-item__link {
+            clear: both;
+            display: block;
+            overflow: hidden;
+            .image-more-hover {
+                -webkit-transition: opacity 0.5s,transform 0.5s;
+                transition: opacity 0.5s,transform 0.5s;
+                overflow: hidden;
+                &:hover {
+                    -ms-transform: scale3d(1.05, 1.05, 1);
+                    -webkit-transform: scale3d(1.05, 1.05, 1);
+                    transform: scale3d(1.05, 1.05, 1);
+                }
+            }
+        }
+    }
+    .collection-grid-item__title {
+        line-height: 40px;
+        font-size: 16px;
+        margin: 0;
+        a:hover {
+            color: $color-pink;
+        }
+    }
+    .count_items {
+        color: gray;
+        margin-bottom: 15px;
+        &:hover {
+            color: $color-blue;
+            text-decoration: underline;
+        }
+    }
+    .button-collections {
+        padding: 6px 12px;
+        color: #000;
+        background-color: #fff;
+        border-color: #000;
+        -webkit-transition: all 0.35s ease;
+        transition: all 0.35s ease;
+        margin-top: 20px;
+        &:hover{
+            border-color: $color-blue;
+            color: $color-blue;
+        }
+    }
+}

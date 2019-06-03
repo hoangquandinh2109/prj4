@@ -1,0 +1,171 @@
+<h3>Register</h3>
+<form id="form-in-modal">
+    <span class="label-form-modal">Email</span>
+    <input id="email" type="text" name="email" value="" class="form-in-modal check-blank">
+    <span class="label-form-modal">Password</span>
+    <input id="password" type="password" name="password" value="" class="form-in-modal check-blank">
+    <span class="label-form-modal">Re-enter Password</span>
+    <input id="re-password" type="password" name="re-password" class="form-in-modal check-blank">
+    <span class="label-form-modal">Name</span>
+    <input id="name" type="text" name="name" class="form-in-modal">
+    <span class="label-form-modal">Gender</span>
+    <div class="form-in-modal">
+        <label>
+            <input id="male" checked value="male" name="gender" type="radio">
+            <i class="far fa-male"></i> <span>Male</span>
+        </label>
+        <label style="margin-left: 18px;">
+            <input id="female" value="female" name="gender" type="radio">
+            <i class="far fa-female"></i> <span>Female</span>
+        </label>
+    </div>
+    <span class="label-form-modal">Address</span>
+    <input id="address" type="text" name="address" class="form-in-modal">
+    <span class="label-form-modal">Phone</span>
+    <input id="phone" type="number" name="phone" class="form-in-modal">
+    <button class="db-tac" id="register-button" type="submit">REGISTER</button>
+    <div class="db-tac"><span>You already have account?</span> <a class="modal-login" href="">Login</a></div>
+</form>
+<script>
+    var error = 1;
+    var  gender = $('input[type=radio][name=gender]').val();
+    $('input[type=radio][name=gender]').change(function(){
+        gender = $(this).val();
+    });
+    $('form#form-in-modal>input').focusout(function(){
+        var value = $(this).val();
+        var theid = $(this).attr('id');
+
+        var email=$("#email").val();
+        var password=$("#password").val();
+        var repassword=$("#re-password").val();
+        var name=$("#name").val();
+        var address=$("#address").val();
+        var phone=$("#phone").val();
+
+        if(value.trim() == ""){
+            error=1;
+            $(this).next('.error-form').remove(); 
+            $(this).after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+        } else{
+            if(  email!="" && password!="" && repassword!="" && name!="" && address!="" && phone!=""){
+                error = 0;
+            }
+            $(this).next('.error-form').remove(); 
+            switch (theid) {
+                case "email":
+                    validateemail(email);
+                    break;
+                case "password":
+                    validatePassword(password);
+                    if(repassword != "") validatePasswords(password, repassword);
+                    break;
+                case "re-password":
+                    validateRePassword(repassword);
+                    if(password != "") validatePasswords(password, repassword);
+                    break;
+                case "phone":
+                    validatePhone(phone);
+                    break;
+            }
+        }
+    })
+    $('#register-button').click(function() {
+            event.preventDefault();
+            var email=$("#email").val();
+            var password=$("#password").val();
+            var repassword=$("#re-password").val();
+            var name=$("#name").val();
+            var address=$("#address").val();
+            var phone=$("#phone").val();
+            
+            
+            if(error == 0){
+                $(".error-form").remove();
+                console.log("error = 0");
+               $.ajax({
+                   type:"POST",
+                  data:{"email":email,"password":password,"name":name,"address":address,"phone":phone,"gender":gender},
+                  url: linkpage+"register",
+                  success: function(data) {
+                      console.log("success");
+                      location.reload();
+                  },
+                  error:function(){
+                      console.log("error");
+                  },
+               });
+            }
+    });
+    
+    $('a.modal-login').click(function(event) {
+        event.preventDefault();
+        $(".modal-form").remove();
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+        $(".modal-form").load("/project4/templates/login.html");
+    });  
+    
+
+    function validateemail(email){
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+        if(re.test(email)){
+            $.ajax({
+                type:"GET",
+                data:{"email":email},
+                url: linkpage+"register",
+                success: function(){
+                    $("#email").next('.error-form').remove(); 
+                    error = 0; 
+                    console.log("email okay");
+                },
+                error: function(){
+                    $("#email").next('.error-form').remove(); 
+                    $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is existed!</span>");
+                    error=1; 
+                    console.log("email existed"+error);
+                }
+            });
+        }else{
+            $("#email").next('.error-form').remove(); 
+            $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is wrong format!</span>");
+            error = 1;
+            console.log("wrong email format: "+error);
+        }
+    }
+    function validatePassword(password){
+        if(password.length<6 || password.length>22){
+            error = 1;
+            console.log("pass 6 22");
+            $("#password").next('.error-form').remove(); 
+            $("#password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+        }
+    }
+    function validateRePassword(repassword){
+        if(repassword.length<6 || repassword.length>22){
+            error = 1;
+            console.log("repass 6 22");
+            $("#re-password").next('.error-form').remove(); 
+            $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+        }
+    }
+    function validatePasswords(password, repassword){       
+        $("#re-password").next('.error-form').remove(); 
+        if(repassword != password){
+            error = 1;
+            console.log("pass not match");
+            $("#re-password").next('.error-form').remove(); 
+            $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">Password not match!</span>");
+        }
+    }
+    function validatePhone(phone){
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if(!vnf_regex.test(phone)){
+            error = 1;
+            console.log("phone not ok");
+            $("#phone").next('.error-form').remove(); 
+            $("#phone").after("<span class=\"error-form\" style=\"color: red; \">Your Phonenumber is not supported!</span>");
+        }
+
+    }
+</script>
