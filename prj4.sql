@@ -81,7 +81,9 @@ create table product(
 	catID int foreign key REFERENCES category(catID),
 	typeID int foreign key REFERENCES productType(typeID),
 	FeatureID int foreign key REFERENCES Feature(FeatureID),
-	starAVG float
+	discout int,
+	starAVG float,
+	
 )
 go
 drop table if exists imgStog
