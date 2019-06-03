@@ -10,7 +10,7 @@ import static JSONGen.Collections.getTypesJson;
 import entity.Category;
 import entity.Product;
 import entity.ProductType;
-import entity.Whislist;
+import entity.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -145,7 +145,7 @@ public class FilterProduct {
                 .add("proID", ifNull(p.getProID()))
                 .add("proName", ifNull(p.getProName()))
                 .add("proPrice", ifNull(p.getProPrice()))
-                .add("onWishlist", onWoC(p.getWhislistCollection()))
+                .add("onWishlist", onWoC(p.getWishlistCollection()))
                 .add("starAVG", ifNull(p.getStarAVG()))
                 .add("proDetails", ifNull(p.getProDetails()))
                 .add("proImg", ifNull(img))
@@ -160,10 +160,10 @@ public class FilterProduct {
         }
     }
     ///Product on Wishlist of Customer
-    private boolean onWoC(Collection<Whislist> cw) {
+    private boolean onWoC(Collection<Wishlist> cw) {
         try {
             int cusid = (int) session.getAttribute("sessionid");
-            for(Whislist wh : cw){
+            for(Wishlist wh : cw){
                 if(wh.getCusID().getCusID() == cusid){
                     return true;
                 }
