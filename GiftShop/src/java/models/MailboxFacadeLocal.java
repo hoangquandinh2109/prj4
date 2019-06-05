@@ -7,6 +7,7 @@
 package models;
 
 import entity.Mailbox;
+import entity.Staff;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +31,6 @@ public interface MailboxFacadeLocal {
     List<Mailbox> findRange(int[] range);
 
     int count();
+    Staff findByEmail(String email);
     
 }

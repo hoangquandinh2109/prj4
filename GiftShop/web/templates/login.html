@@ -4,7 +4,7 @@
     <input value="" type="text" name="email" id="email" class="form-in-modal">
     <span class="label-form-modal">Password</span>
     <input value="" type="password" name="password" id="password" class="form-in-modal">
-    <a class="db-tac" href="">Forgot your Password?</a>
+    <a class="db-tac modal-reset-acc" href="">Forgot your Password?</a>
     <button id="login-button" class="db-tac" type="submit">SIGN IN</button>
     <a class="db-tac modal-create-acc" href="">Create account</a>
 </form>
@@ -19,7 +19,6 @@
     $("#password").focusout(function(){
        var pass = $(this).val();
        
-        
        if(pass == "") {
             $("#password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
             error++;
@@ -101,4 +100,12 @@ function checkEmail(email) {
         $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
         $(".modal-form").load(linkpage+"templates/register.html");
     });   
+      
+    $('a.modal-reset-acc').click(function(event) {
+        event.preventDefault();
+        $(".modal-form").remove();
+        $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+        $(".modal-form").load(linkpage+"templates/resetpassword.html");
+        
+    }); 
         </script>

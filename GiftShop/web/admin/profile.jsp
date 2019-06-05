@@ -32,6 +32,9 @@
                         <h3 class="tile-title">Edit Profile</h3>
                         <div class="tile-body">
                             <form action="../profileServlet" class="form-horizontal" method="POST">
+                  
+                                
+                                
                                 <div class="form-group row">
                                     <label class="control-label col-md-3"></label>
                                     <div class="col-md-8">
@@ -39,25 +42,25 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Name</label>
+                                <label class="control-label col-md-3">Name*</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="name" type="text" placeholder="Enter full name" value="${staff.staffName}">
+                                    <input class="form-control" name="name" type="text" placeholder="Enter full name" value="${staff.staffName}" >
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Phone</label>
+                                <label class="control-label col-md-3">Phone*</label>
                                 <div class="col-md-8">
                                     <input class="form-control" type="number" placeholder="Enter phone number" name="phone" value="${staff.staffPhone}" >
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Email</label>
+                                <label class="control-label col-md-3">Email*</label>
                                 <div class="col-md-8">
-                                    <input class="form-control col-md-8" type="email" placeholder="Enter email address" name="email"value="${staff.staffEmail}" >
+                                    <input class="form-control" type="email" placeholder="Enter email address" name="email"value="${staff.staffEmail}" >
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Address</label>
+                                <label class="control-label col-md-3">Address*</label>
                                 <div class="col-md-8">
                                     <input class="form-control" rows="4" placeholder="Enter your address" name="address" value="${staff.staffAddress}" >
                                 </div>
@@ -90,6 +93,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="submit" value="Edit" name="Edit">
+                            
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">

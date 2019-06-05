@@ -159,7 +159,7 @@
     <c:if test="${msg eq true}">
         <script type="text/javascript">
             $(document).ready(function() {
-                swal("", "Password confirm incorrect", "error");
+                swal("", "${message}", "error");
             });
 
         </script>

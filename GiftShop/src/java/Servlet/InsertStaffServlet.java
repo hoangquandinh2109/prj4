@@ -34,12 +34,12 @@ public class InsertStaffServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-            String pass = request.getParameter("pass");
+            String pass = request.getParameter("password");
          
           
             Staff staff = new Staff(id, name, phone, email, address, pass);
             staffFacade.create(staff);
-            request.getRequestDispatcher("showStaffServlet").forward(request, response);
+            request.getRequestDispatcher("showStaffServlet?action=ShowStaff").forward(request, response);
 
         }
     }

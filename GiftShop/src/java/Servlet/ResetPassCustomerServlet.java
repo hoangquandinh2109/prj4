@@ -6,45 +6,40 @@
 
 package Servlet;
 
+import entity.Mailbox;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import models.MailboxFacadeLocal;
 
 /**
  *
  * @author USER
  */
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "ResetPassCustomerServlet", urlPatterns = {"/ResetPassCustomerServlet"})
+public class ResetPassCustomerServlet extends HttpServlet {
+    @EJB
+    private MailboxFacadeLocal mailboxFacade;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-              
-        HttpSession session=request.getSession();
-        if(session != null)
-           session.invalidate();
-           request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request,response);
-        //request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
             
+            String messa = request.getParameter("recipient");
+            //date = request.getParameter("date");
             
-//            HttpSession session = request.getSession(false);
-//            if(session != null)
-//            session.invalidate();
-//            request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request,response);
+                Mailbox mail = new Mailbox(messa);
+
+                mailboxFacade.create(mail);
+
+                request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
         }
     }
 

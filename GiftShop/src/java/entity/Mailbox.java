@@ -8,9 +8,12 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.Generated;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -41,7 +44,8 @@ public class Mailbox implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mailID", nullable = false)
     private Integer mailID;
     @Size(max = 500)
@@ -70,7 +74,19 @@ public class Mailbox implements Serializable {
 
     public Mailbox() {
     }
-
+    
+    public Mailbox(String message) {
+        
+        this.subject = "Reset Password";
+        this.message = message;
+        
+        this.receivedDate = new Date();
+        this.replyContent = null;
+        this.replyDate = null;
+        this.cusID = null;
+        this.staffID = null;
+    }
+    
     public Mailbox(Integer mailID) {
         this.mailID = mailID;
     }
