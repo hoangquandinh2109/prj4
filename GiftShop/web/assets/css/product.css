@@ -147,8 +147,13 @@ a.button-dhq-mk:focus {
   text-decoration: none;
 }
 
-a.button-dhq-mk#wishlist:hover {
+a.button-dhq-mk#wishlist-btn:hover {
   background-color: #ee6c92;
+}
+
+a.button-dhq-mk#wishlist-btn.added {
+  background-color: #ee6c92;
+  color: #fff;
 }
 
 .tab-for-somthing {
@@ -508,5 +513,23 @@ a.button-dhq-mk#wishlist:hover {
   -o-object-fit: scale-down;
      object-fit: scale-down;
   height: 380px;
+}
+
+.small-img {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.small-img img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.small-img img:not(:first-child) {
+  margin-left: 10px;
 }
 /*# sourceMappingURL=product.css.map */

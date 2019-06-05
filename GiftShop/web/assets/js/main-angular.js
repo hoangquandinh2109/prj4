@@ -1,6 +1,76 @@
-var app = angular.module('cangcucot', []);
+var app = angular.module('cangcucot', ['ngMaterial']);
  
+app.controller('vippro', DemoCtrl);
+function DemoCtrl ($timeout, $q, $log, $http) {
+    var self = this;
 
+    self.simulateQuery = false;
+    self.isDisabled    = false;
+
+    
+    $http.get(linkpage+"autocomplete")
+    .then(function(response) {
+        self.repos = loadAll(response.data);
+    });
+
+    
+    self.querySearch   = querySearch;
+    self.selectedItemChange = selectedItemChange;
+    self.searchTextChange   = searchTextChange;
+
+    function querySearch (query) {
+      var results = query ? self.repos.filter(createFilterFor(query)) : self.repos,
+          deferred;
+          var top5results = [];
+          var ii = 0;
+          for(var index=0; index < results.length; index++){
+              if(ii<5){
+                top5results.push(results[index]);
+              }
+              ii++;
+          }
+        return top5results;
+//      if (self.simulateQuery) {
+//        deferred = $q.defer();
+//        $timeout(function () { deferred.resolve(results); }, Math.random() * 1000, false);
+//        return deferred.promise;
+//      } else {
+//      }
+    }
+
+    function searchTextChange(text) {
+      $log.info('Text changed to ' + text);
+    }
+
+    function selectedItemChange(item) {
+      location.replace(item.proURL);
+      $log.info('Item changed to ' + JSON.stringify(item));
+    }
+    
+    
+    
+    
+    
+    function loadAll(vip) {
+      var repos = vip;
+      return repos.map(function (repo) {
+        repo.value = repo.proName.toLowerCase();
+        return repo;
+      });
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = query.toLowerCase();
+
+      return function filterFn(item) {
+        return (item.value.includes(lowercaseQuery));
+      };
+
+    }
+  }
 //////////////////////////////////////////////////////////////////////////////////////Cart
 
     app.controller('cart', function($scope, $http){
@@ -144,43 +214,131 @@ var app = angular.module('cangcucot', []);
 
 
 //////////////////////////////////////////////////////////////////////////////////////Search Suggestion
-app.controller('suggest', function($scope, $http) {
-    $http.get(linkpage+"autocomplete")
-    .then(function(response) {
-        $scope.listName = response.data.listName;
-    });
-    $scope.inputkeyup = function(n){
-        if(n.keyCode == 38 || n.keyCode == 40){
-            n.preventDefault();
+//app.controller('suggest', function($scope, $http) {
+//    $http.get(linkpage+"autocomplete")
+//    .then(function(response) {
+//        $scope.listName = response.data.listName;
+//    });
+//    $scope.inputkeyup = function(n){
+//        if(n.keyCode == 38 || n.keyCode == 40){
+//            n.preventDefault();
+//        }else{
+//            $scope.suggest(n.target.value);
+//        }
+//    }
+////    $("#search-input").focusout(function(){
+////        $("#result-suggest").addClass("hide");
+////    });
+//    $scope.suggest = function(n){
+////        console.log(e);
+//        $scope.hide = false;
+//        $("#result-suggest").removeClass("hide");
+//        $scope.listSuggest = [];
+//        var count = 0;
+//        $.each($scope.listName,function(index){
+//            if(n != "" && n != " "){
+//                if($scope.listName[index].proName.toLowerCase().includes(n.toLowerCase())){
+//                    if(count<5){
+//                        $scope.listSuggest.push($scope.listName[index].proName);
+//                        count++;
+//                    }
+//                }
+//            }
+//        });
+//    }
+//    $scope.auto = function(n){
+//        $scope.mysearch = n;
+//        $scope.hide = true;
+//    }
+//});
+
+
+
+
+
+
+ /************************************************************************************************************************************************/
+    /***************************WISHLIST*************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /*******/ 
+    /*******/   
+app.controller('wishlist', function($scope, $http) {
+    $scope.addedClass = function(n){
+        
+        if(n){
+            return "added";
+        }
+        return "";
+    }
+    var sessionid = $("#sessionid").val();
+    $scope.onW = ($("#onW").text() == "true");
+    $scope.namingWBtn = function(onW){
+        if(!onW){
+            return "Add to Wishlist";
         }else{
-            $scope.suggest(n.target.value);
+            return "Remove from Wishlist"
         }
     }
-//    $("#search-input").focusout(function(){
-//        $("#result-suggest").addClass("hide");
-//    });
-    $scope.suggest = function(n){
-//        console.log(e);
-        $scope.hide = false;
-        $("#result-suggest").removeClass("hide");
-        $scope.listSuggest = [];
-        var count = 0;
-        $.each($scope.listName,function(index){
-            if(n != "" && n != " "){
-                if($scope.listName[index].proName.toLowerCase().includes(n.toLowerCase())){
-                    if(count<5){
-                        $scope.listSuggest.push($scope.listName[index].proName);
-                        count++;
-                    }
+    $scope.btnWishlist = function(id,dfdf){
+        
+        if(sessionid != null && sessionid != ""){
+            $.ajax({
+                url: linkpage+"wishlist",
+                method: 'POST',
+                data: {"proID": id},
+                success: function(){
+//                    $(".clickdetrove").addClass("havemodal");
+//                    $("body").addClass("square");
+//                    $(".modal-form").remove();
+//                    $(".content").append("<div class=\"modal-form text-center fadeInDownMsg\">This is added to you wishlist</div>");
+//                    $(".modal-form").delay(2000).fadeOut(200);
+//                    setTimeout(function(){
+//                        $(".clickdetrove").css("opacity","0");
+//                            setTimeout(function(){
+//                            $(".clickdetrove").removeClass("havemodal");
+//                            $("body").removeClass("square");
+//                            $(".clickdetrove").removeAttr('style');
+//                            },300);
+//                    },2000);
+                },
+                error: function(){
+//                    $(".clickdetrove").addClass("havemodal");
+//                    $("body").addClass("square");
+//                    $(".modal-form").remove();
+//                    $(".content").append("<div class=\"modal-form text-center text-danger fadeInDownMsg\">This is removed from you wishlist</div>");
+//                    $(".modal-form").delay(2000).fadeOut(200);
+//                    setTimeout(function(){
+//                        $(".clickdetrove").css("opacity","0");
+//                            setTimeout(function(){
+//                            $(".clickdetrove").removeClass("havemodal");
+//                            $("body").removeClass("square");
+//                            $(".clickdetrove").removeAttr('style');
+//                            },300);
+//                    },2000);
                 }
-            }
-        });
+            });
+            return !dfdf;
+        } else{
+            $(".clickdetrove").addClass("havemodal");
+            $("body").addClass("square");
+            $(".modal-form").remove();
+            $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+            $(".modal-form").load(linkpage+"templates/login.html");
+            return dfdf;
+        }
+    }                     
+    function fadeMsgDown(msg){
     }
-    $scope.auto = function(n){
-        $scope.mysearch = n;
-        $scope.hide = true;
-    }
-});
+});    
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    /************************************************************************************************************************************************/
+    
+
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////Filter Pagination
@@ -195,6 +353,7 @@ app.controller('proPagination', function($scope, $http) {
 //    $scope.maxPrice = $("#maxPrice").text();
     var minPrice = 0;
     var maxPrice = $("#maxPrice").text();
+    maxPrice = Math.round(maxPrice);
 
   $("#min").text(minPrice);
     $("#max").text(maxPrice);
@@ -280,6 +439,7 @@ app.controller('proPagination', function($scope, $http) {
        }
    }
    function loadPage(page){
+       console.log(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page);
        return $http.get(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page)
        .then(function(response) {
            $scope.listPro = response.data.listPro;
@@ -290,6 +450,7 @@ app.controller('proPagination', function($scope, $http) {
    }
    function filtbyprice(page){
        console.log("filtprice");
+       console.log(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page+"?from="+minPrice+"&to="+maxPrice);
        return $http.get(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page+"?from="+minPrice+"&to="+maxPrice)
        .then(function(response) {
            $scope.listPro = response.data.listPro;
@@ -322,74 +483,7 @@ app.controller('proPagination', function($scope, $http) {
             return "("+numrv+")";
         }
     }
-    /************************************************************************************************************************************************/
-    /***************************WISHLIST*************************************************************************************************************/
-    /************************************************************************************************************************************************/
-    /************************************************************************************************************************************************/
-    /*******/                                                                                              /*******/        
-    $scope.addedClass = function(n){
-        
-        if(n){
-            return "added";
-        }
-        return "";
-    }
-    var sessionid = $("#sessionid").val();
-    $scope.btnWishlist = function(id,dfdf){
-        
-        if(sessionid != null && sessionid != ""){
-            $.ajax({
-                url: linkpage+"wishlist",
-                method: 'POST',
-                data: {"proID": id},
-                success: function(){
-//                    $(".clickdetrove").addClass("havemodal");
-//                    $("body").addClass("square");
-//                    $(".modal-form").remove();
-//                    $(".content").append("<div class=\"modal-form text-center fadeInDownMsg\">This is added to you wishlist</div>");
-//                    $(".modal-form").delay(2000).fadeOut(200);
-//                    setTimeout(function(){
-//                        $(".clickdetrove").css("opacity","0");
-//                            setTimeout(function(){
-//                            $(".clickdetrove").removeClass("havemodal");
-//                            $("body").removeClass("square");
-//                            $(".clickdetrove").removeAttr('style');
-//                            },300);
-//                    },2000);
-                },
-                error: function(){
-//                    $(".clickdetrove").addClass("havemodal");
-//                    $("body").addClass("square");
-//                    $(".modal-form").remove();
-//                    $(".content").append("<div class=\"modal-form text-center text-danger fadeInDownMsg\">This is removed from you wishlist</div>");
-//                    $(".modal-form").delay(2000).fadeOut(200);
-//                    setTimeout(function(){
-//                        $(".clickdetrove").css("opacity","0");
-//                            setTimeout(function(){
-//                            $(".clickdetrove").removeClass("havemodal");
-//                            $("body").removeClass("square");
-//                            $(".clickdetrove").removeAttr('style');
-//                            },300);
-//                    },2000);
-                }
-            });
-            return !dfdf;
-        } else{
-            $(".clickdetrove").addClass("havemodal");
-            $("body").addClass("square");
-            $(".modal-form").remove();
-            $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
-            $(".modal-form").load(linkpage+"templates/login.html");
-            return dfdf;
-        }
-    }                     
-    function fadeMsgDown(msg){
-    }
-    /************************************************************************************************************************************************/
-    /************************************************************************************************************************************************/
-    /************************************************************************************************************************************************/
-    /************************************************************************************************************************************************/
-    
+   
     
 }); 
 

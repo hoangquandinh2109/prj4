@@ -1,3 +1,14 @@
+   function filterwishlist(t){
+        if(!t){
+            $(".clickdetrove").addClass("havemodal");
+            $("body").addClass("square");
+            $(".modal-form").remove();
+            $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+            $(".modal-form").load(linkpage+"templates/login.html");
+            return false;
+        } 
+        return true;
+    }
 var linkpage = "/GiftShop/";
 $(document).ready(function(){
     $(".addtocart").click(function(){
@@ -103,6 +114,8 @@ $(document).ready(function(){
         $(".everyblock").hide();
         $("#showaccount").show();
         $("#address-need-fc").focus();
+        $("#address-need-fc").val($("#myaddress").val());
+        $("#phone-need-fc").val($("#myphone").val());
         window.history.pushState("Details", "Title", linkpage+"account/info");
         document.title= "Account - "+usernamess;
     });
@@ -161,6 +174,8 @@ $(document).ready(function(){
             $(".everyblock").hide();
             $("#showaccount").show();
             $("#address-need-fc").focus();
+            $("#address-need-fc").val($("#myaddress").val());
+            $("#phone-need-fc").val($("#myphone").val());
             break;
     }  
     

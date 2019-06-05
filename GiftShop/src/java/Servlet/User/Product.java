@@ -8,10 +8,12 @@ package Servlet.User;
 import com.sun.xml.ws.transport.tcp.io.OutputWriter;
 import entity.Category;
 import entity.ProductType;
+import entity.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.json.Json;
@@ -202,9 +204,11 @@ public class Product extends HttpServlet {
                     req.setAttribute("list", list);
                     req.setAttribute("thisP", p);
                     req.setAttribute("thisImg", productDB.imageOf(p));
+                    req.setAttribute("otherImgs", productDB.imagesOf(p));
                     req.setAttribute("pagename", p.getProName());
                     req.setAttribute("url", req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/v/"+id);
                     HttpSession session = req.getSession();
+                    req.setAttribute("onWishlist", onWoC(p.getWishlistCollection(), session));
                     try {
                         int cusid = (int) session.getAttribute("sessionid");
                         if(!reviewFacade.checkIfCusRatingThis(customerFacade.find(cusid), p)){
@@ -231,6 +235,21 @@ public class Product extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
+    
+    ///Product on Wishlist of Customer
+    private boolean onWoC(Collection<Wishlist> cw, HttpSession session) {
+        try {
+            int cusid = (int) session.getAttribute("sessionid");
+            for(Wishlist wh : cw){
+                if(wh.getCusID().getCusID() == cusid){
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
     
 }

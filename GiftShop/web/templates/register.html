@@ -72,7 +72,7 @@
     })
     $('#register-button').click(function() {
             event.preventDefault();
-            var email=$("#email").val();
+            var email=$("#email").val().toLowerCase();
             var password=$("#password").val();
             var repassword=$("#re-password").val();
             var name=$("#name").val();
@@ -134,19 +134,21 @@
         }
     }
     function validatePassword(password){
-        if(password.length<6 || password.length>22){
+        var regexP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,22}$/;
+        if(!regexP.test(password)){
             error = 1;
             console.log("pass 6 22");
             $("#password").next('.error-form').remove(); 
-            $("#password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+            $("#password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
         }
     }
     function validateRePassword(repassword){
-        if(repassword.length<6 || repassword.length>22){
+        var regexP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,22}$/;
+        if(!regexP.test(repassword)){
             error = 1;
             console.log("repass 6 22");
             $("#re-password").next('.error-form').remove(); 
-            $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+            $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
         }
     }
     function validatePasswords(password, repassword){       

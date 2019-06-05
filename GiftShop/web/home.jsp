@@ -25,40 +25,43 @@
                                     <ul>
                                         <li>
                                             <a href="">
-                                                <span class="categories-title"><i class="fa fa-gamepad"></i>Game &amp; Software</span>
+                                                <span class="categories-title"><i class="fa fa-gamepad"></i>Boys</span>
                                                 <span class="categories-desc">Proin gravida nibh vel velit auctor aliquet</span></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="">
-                                                <span class="categories-title"><i class="far fa-robot"></i>Mobile &amp; Computers</span>
-                                                <span class="categories-desc">Aenean sollicitudin, lorem quis bibendum auctor</span></span><i class="fas fa-caret-left"></i>
+                                                <span class="categories-title"><i class="fal fa-diploma"></i></i>Girls</span>
+                                                <span class="categories-desc">Aenean sollicitudin, lorem quis bibendum auctor</span></span>
+                                            <!--<i class="fas fa-caret-left"></i>-->
                                             </a>
                                         </li>
                                         <li>
                                             <a href="">
-                                                <span class="categories-title"><i class="fa fa-male"></i>Fashion</span>
-                                                <span class="categories-desc">Duis sed odio sit amet nibh vulputate</span></span><i class="fas fa-caret-left"></i>
+                                                <span class="categories-title"><i class="fa fa-female"></i>Women</span>
+                                                <span class="categories-desc">Duis sed odio sit amet nibh vulputate</span></span>
+                                            <!--<i class="fas fa-caret-left"></i>-->
                                             </a>
                                         </li>
                                         <li>
                                             <a href="">
-                                                <span class="categories-title"><i class="fa fa-book"></i>Books &amp; Audio</span>
+                                                <span class="categories-title"><i class="fa fa-male"></i>Men</span>
                                                 <span class="categories-desc">Morbi accumsan ipsum velit. Nam nec tellus</span></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="">
-                                                <span class="categories-title"><i class="fa fa-trophy"></i>Kids &amp; Toy</span>
-                                                <span class="categories-desc">Sed non  mauris vitae erat consequat auctor eu in elit</span></span><i class="fas fa-caret-left"></i>
+                                                <span class="categories-title"><i class="far fa-user-friends"></i></i>For All</span>
+                                                <span class="categories-desc">Sed non  mauris vitae erat consequat auctor eu in elit</span></span>
+                                            <!--<i class="fas fa-caret-left"></i>-->
                                             </a>
                                         </li>
-                                        <li>
+<!--                                        <li>
                                             <a href="">
                                                 <span class="categories-title"><i class="far fa-tennis-ball"></i>Sports</span>
                                                 <span class="categories-desc">Class aptent taciti sociosqu ad litora</span></span>
                                             </a>
-                                        </li>
+                                        </li>-->
                                     </ul>
                                 </div>
                                 <div>

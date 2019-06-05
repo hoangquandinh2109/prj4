@@ -142,7 +142,7 @@
                     <div class="label-account">Address</div>
                     <input id="address-need-fc" type="text">
                     <div class="label-account">Phone</div>
-                    <input type="text">
+                    <input id="phone-need-fc" type="text">
                     <button class="btn">Update</button>
                 </form>
                 <h2>Change Password</h2>
@@ -386,6 +386,8 @@
                         <span><i class="far fa-map-marker-alt"></i> ${myaddress}</span>
                         <span><i class="fal fa-phone"></i> ${myphone}</span>
                         <span><i class="fal fa-envelope"></i> ${myemail}</span>
+                        <input type="hidden" id="myaddress" value="${myaddress}">
+                        <input type="hidden" id="myphone" value="${myphone}">
 
                     </div>
                 </div>

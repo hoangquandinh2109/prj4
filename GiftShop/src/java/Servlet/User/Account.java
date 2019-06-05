@@ -28,7 +28,7 @@ import models.WishlistFacadeLocal;
 @WebServlet(name = "Account", urlPatterns = {"/account/*"})
 public class Account extends HttpServlet {
     @EJB
-    private WishlistFacadeLocal whislist;
+    private WishlistFacadeLocal wishlist;
     @EJB
     private CustomerFacadeLocal customer;
 
@@ -56,9 +56,13 @@ public class Account extends HttpServlet {
             String[] uris = new String[]{};
             PrintWriter out =  resp.getWriter();
 
+            for (String string : uris) {
+                System.out.println("quan: "+string);
+            }
 
-
-
+            List<Wishlist> lw = wishlist.getWishlistOfMe(me);
+            req.setAttribute("myWishlist", lw);
+            
             try {//page != null case
                 uris = req.getPathInfo().substring(1).split("/");
                 String page = uris[0];
@@ -81,8 +85,6 @@ public class Account extends HttpServlet {
 
 
 
-                List<Wishlist> lw = whislist.getWishlistOfMe(me);
-                req.setAttribute("myWishlist", lw);
 
                 //if no.0 
                 if((subpage == null || (subpage.equals("detail") && page.equals("orders"))) && uri3rd == null){
@@ -129,11 +131,12 @@ public class Account extends HttpServlet {
 
 
                         default:
-                            out.println("4041"+page);
-                            break;
+                    getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
+                    return;
                     }
                 } else{
-                    out.println("4042"+subpage);
+                    getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
+                    return;
                 }
             } catch (Exception e) {
                 ///page = null case

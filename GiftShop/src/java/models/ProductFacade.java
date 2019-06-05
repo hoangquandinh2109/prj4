@@ -10,6 +10,7 @@ import entity.Category;
 import entity.ImgStog;
 import entity.Product;
 import entity.ProductType;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -125,5 +126,19 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
             }
             return null;
     }
+    @Override
+    public List<String> imagesOf(Product p){
+        List<ImgStog> listImg =  (List<ImgStog>) em.createQuery("SELECT i FROM Product p INNER JOIN p.imgStogCollection i WHERE p.proID = :product")
+                    .setParameter("product", p.getProID())
+                    .getResultList();
+        List<String> limgname = new ArrayList<>();
+            for(ImgStog img : listImg){
+                if(img.getThumbnail()==null || !img.getThumbnail()){
+                    limgname.add(img.getImgName());
+                }
+            }
+            return limgname;
+    }
+    
     
 }

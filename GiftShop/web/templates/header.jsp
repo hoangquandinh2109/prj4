@@ -6,20 +6,23 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<div id="dangcap"></div>
 <div class="top-nav">
     <div class="container">
         <div class="top-nav-welcome">
             <c:if test="${not empty sessionname}">
+                <c:set var="signedIn" value="true"></c:set>
                 <div>Welcome <a href="${pageContext.request.contextPath}/account" id="name">${sessionname}</a>, <a href="${pageContext.request.contextPath}/logout">logout</a></div>
             </c:if>
             <c:if test="${empty sessionname}">
+                <c:set var="signedIn" value="false"></c:set>
                 <div>Welcome visitor you can <a class="login-link" href="">Login</a> and <a class="create-acc-link" href="">create an account</a> </div>
             </c:if>
         </div>
         <div class="top-nav-tools">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/account/wishlist"><i class="far fa-list-alt"></i> Wishlist</a></li>
-                <li><a href="${pageContext.request.contextPath}/account"><i class="fas fa-user-alt"></i> My Account</a></li>
+                <li><a onclick="return filterwishlist(${signedIn});" href="${pageContext.request.contextPath}/account/wishlist"><i class="far fa-list-alt"></i> Wishlist</a></li>
+                <li><a onclick="return filterwishlist(${signedIn});" href="${pageContext.request.contextPath}/account"><i class="fas fa-user-alt"></i> My Account</a></li>
                 <li><a href="${pageContext.request.contextPath}/cart"><i class="fas fa-share"></i> Checkout</a></li>
 <!--                <li><div id="tools-setting"><i class="fas fa-cog"></i> Setting <i class="fas fa-caret-down"></i></div></li>-->
             </ul>
@@ -92,11 +95,34 @@
             </li>
             <li><a href="${pageContext.request.contextPath}">Blog</a></li>
         </ul>
-                 <form method="post" ng-controller="suggest">
+<!--                 <form method="post" ng-controller="suggest">
             <input ng-keyup="inputkeyup($event)" ng-model="mysearch" id="search-input" type="text"><button id="search-button"><i class="fas fa-search"></i></button>
             <div id="result-suggest" class="hide" ng-hide="hide">
                 <p ng-repeat="n in listSuggest" ng-click="auto(n)"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png">{{n}}</p>
             </div>
-        </form>
+        </form>-->
+        <div ng-controller="vippro as ctrl" id="form-autocomplete" layout="column" >
+          <md-content layout-padding layout="column">
+            <form ng-submit="$event.preventDefault()">
+              <md-autocomplete
+                  id="custom-template"
+                  md-selected-item="ctrl.selectedItem"
+                  md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                  md-search-text="ctrl.searchText"
+                  md-selected-item-change="ctrl.selectedItemChange(item)"
+                  md-items="item in ctrl.querySearch(ctrl.searchText)"
+                  md-item-text="item.proName"
+                  md-min-length="0"
+                  input-aria-label="Current Repository"
+                  placeholder="Enter a name"
+                  md-menu-class="autocomplete-custom-template"
+                  md-menu-container-class="custom-container">
+                <md-item-template>
+                    <img width="45" height="45" src="{{item.proImage}}"><span md-highlight-text="ctrl.searchText" md-highlight-flags="i">{{item.proName}}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </form>
+          </md-content>
+        </div>
     </div>
 </nav>

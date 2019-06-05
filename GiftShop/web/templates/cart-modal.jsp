@@ -9,10 +9,18 @@
 <div class="cart">
     <h2>YOUR CART</h2>
     <div class="cart-list-total">
-        <div class="list-cart-items" ng-repeat="ci in listCartItems">
-            <div class="cart-item clearfix" >
+        <div class="list-cart-items" >
+            <div style="padding: 40px 0;
+                 text-align: center; 
+                 font-family: 'MerriweatherSans';
+                 font-size: 21px; 
+                 opacity: 0.5;" 
+                 ng-if="numCart == 0">
+                no item
+            </div>
+            <div class="cart-item clearfix" ng-repeat="ci in listCartItems">
                 <div class="cart-photo">
-                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
+                    <img src="${pageContext.request.contextPath}/productImage/{{ci.proImg}}"
                         alt="">
                 </div>
                 <div class="cart-info">
@@ -26,7 +34,7 @@
                         </div>
                         <button ng-click="deleteItem(ci.ID)" class="cart-items-remove"><i class="fal fa-trash-alt"></i></button>
                     </div>
-                    <div class="cart-price">x {{"$"+ci.proPrice}}.00 = {{"$"+(ci.proPrice*ci.quantity)}}</div>
+                    <div class="cart-price">x {{"$"+ci.proPrice}} = {{"$"+(ci.proPrice*ci.quantity)}}</div>
                 </div>
             </div>
         </div>

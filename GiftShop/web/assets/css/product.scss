@@ -111,8 +111,12 @@ a.button-dhq-mk{
     &:focus{
         text-decoration: none;
     }
-    &#wishlist:hover{
+    &#wishlist-btn:hover{
         background-color: $color-pink;
+    }
+    &#wishlist-btn.added{
+        background-color: $color-pink;
+        color: #fff;
     }
 }
 .tab-for-somthing{
@@ -412,5 +416,17 @@ a.button-dhq-mk{
         width: 100%;
         object-fit: scale-down;
         height: 380px;
+    }
+}
+.small-img{
+    width: max-content;
+    margin: 0 auto;
+    img{
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        &:not(:first-child){
+            margin-left: 10px;
+        }
     }
 }

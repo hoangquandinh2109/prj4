@@ -248,7 +248,20 @@ body .navigation .container {
   position: relative;
 }
 
-body .navigation form {
+body .navigation .layout-padding, body .navigation .layout-padding-gt-sm, body .navigation .layout-padding-gt-sm > *, body .navigation .layout-padding-md, body .navigation .layout-padding-md > *, body .navigation .layout-padding > *, body .navigation .layout-padding > .flex, body .navigation .layout-padding > .flex-gt-sm, body .navigation .layout-padding > .flex-md {
+  padding: 0;
+}
+
+body .navigation md-autocomplete {
+  height: auto;
+}
+
+body .navigation md-autocomplete md-autocomplete-wrap {
+  height: auto;
+}
+
+body .navigation #form-autocomplete {
+  display: inline-block;
   position: absolute;
   right: 25px;
   z-index: 99994;
@@ -902,6 +915,10 @@ body .content-n-cart .cart.ra {
   color: #76c4ce;
 }
 
+.product-item .review-n-button-tu .button-tu .btn-addtocart:focus {
+  outline: none;
+}
+
 .product-item .review-n-button-tu .button-tu .btn-addtocart > span.icon-btn {
   padding: 5px;
   float: left;
@@ -948,6 +965,10 @@ body .content-n-cart .cart.ra {
   border-left: 0px;
   cursor: pointer;
   width: 30px;
+}
+
+.product-item .review-n-button-tu .button-tu .btn-love:focus {
+  outline: none;
 }
 
 .product-item .review-n-button-tu .button-tu .btn-love span {

@@ -28,28 +28,32 @@ import models.ProductFacadeLocal;
 @WebServlet(name = "Autocomplete", urlPatterns = {"/autocomplete"})
 public class Autocomplete extends HttpServlet {
     @EJB
-    private ProductFacadeLocal productFacade;
+    private ProductFacadeLocal product;
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-      PrintWriter out = response.getWriter();
-        JsonArrayBuilder jab = Json.createArrayBuilder();
-        for(Product p : productFacade.findAll()){
-            jab.add(getJsonbyName(p.getProName()));
+      String detaillink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/product/v/";
+      String imglink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/productImage/";
+      PrintWriter out = resp.getWriter();
+      String json ="[";
+      int i = 0;
+        for(Product p : product.findAll()){
+            json +="{";
+            
+            json +="\"proURL\":\""+detaillink+p.getProID()+"\",";
+            json +="\"proName\":\""+p.getProName()+"\",";
+            json +="\"proImage\":\""+imglink+product.imageOf(p)+"\"";
+            
+            json +="}";
+            i++;
+            if(i!= product.count()){
+                json += ",";
+            }
+            
         }
-        out.println(getArrayName(jab.build()));
+        json +="]";
+        out.println(json);
+      
     }
     
-    
-    public static JsonObject getJsonbyName(String name){
-        return Json.createObjectBuilder()
-                .add("proName", name)
-                .build();
-    }
-    
-    public static JsonObject getArrayName(JsonArray arrayname){
-        return Json.createObjectBuilder()
-                .add("listName", arrayname)
-                .build();
-    }
 }

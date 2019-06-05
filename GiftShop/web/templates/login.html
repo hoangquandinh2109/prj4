@@ -11,6 +11,7 @@
 <script>
     
     var error=0;
+        var regexP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,22}$/;
     $(".form-in-modal").focusin(function (){
         $(this).next('.error-form').remove(); 
     });
@@ -18,11 +19,12 @@
     $("#password").focusout(function(){
        var pass = $(this).val();
        
+        
        if(pass == "") {
             $("#password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
             error++;
-      } else if(pass.length<6 || pass.length>22){
-           $(this).after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+      } else if(!regexP.test(pass)){
+           $(this).after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
             error++;
        } else{
           $("#password").next('.error-form').remove(); 
@@ -58,8 +60,8 @@ function checkEmail(email) {
               if(pass == "") {
                     $("#password").after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
                     error++;
-              } else if(pass.length<6 || pass.length>22){
-                   $("#password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character!</span>");
+              } else if(!regexP.test(pass)){
+                   $("#password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
                     error++;
                } else{
                   $("#password").next('.error-form').remove(); 
@@ -78,7 +80,7 @@ function checkEmail(email) {
                 if(error == 0){
                     $.ajax({
                         type:"POST",
-                       data:{"email":email,"password":pass},
+                       data:{"email":email.toLowerCase(),"password":pass},
                        url: linkpage+"login",
                        success: function(data) {
                            console.log("success");

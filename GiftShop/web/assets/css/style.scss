@@ -191,11 +191,23 @@ body{
         .container{
             position: relative;
         }
-        form{
+        .layout-padding, .layout-padding-gt-sm, .layout-padding-gt-sm>*, .layout-padding-md, .layout-padding-md>*, .layout-padding>*, .layout-padding>.flex, .layout-padding>.flex-gt-sm, .layout-padding>.flex-md {
+            padding: 0;
+        }
+        md-autocomplete {
+            height: auto;
+        }
+        md-autocomplete md-autocomplete-wrap {
+            height: auto;
+        }
+        #form-autocomplete{
+            display: inline-block;
             position: absolute;
             right: 25px;
             z-index: 99994;
             @include center-in-vertical();
+        }
+        form{
             input{
                 border: none;
                 height: 30px; 
@@ -740,6 +752,9 @@ body{
                         color: $color-blue;
                     }
                 }
+                &:focus{
+                    outline: none;
+                }
                 >span.icon-btn{
                     padding: 5px;
                     float: left;
@@ -775,6 +790,10 @@ body{
                 }
             }
             .btn-love{
+                
+                &:focus{
+                    outline: none;
+                }
                 float: left;
                 border: 1px solid #e5e5e5;
                 border-left: 0px;   

@@ -62,6 +62,7 @@ public class CartServlet extends HttpServlet {
             out.println(JSONGen.Cart.getTypeThings(jab.build(), price));
             response.setStatus(HttpServletResponse.SC_OK);
         } else{///neu ko thi hien trang cart
+            request.setAttribute("pagename", "Cart");
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
     }

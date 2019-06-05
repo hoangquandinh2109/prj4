@@ -31,7 +31,7 @@ import models.PurchaseItemFacadeLocal;
  *
  * @author johnn
  */
-@WebServlet(name = "PurchaseServlet", urlPatterns = {"/purchase"})
+@WebServlet(name = "PurchaseServlet", urlPatterns = {"/checkout/*"})
 public class PurchaseServlet extends HttpServlet {
     @EJB
     private ProductFacadeLocal productFacade;
@@ -49,9 +49,29 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        request.getRequestDispatcher("purchase.jsp").forward(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().println(form);
+        HttpSession session  = request.getSession();
+        String page;
+        try {
+            page = request.getPathInfo().substring(1);
+            if(page.contains("/") || !page.equals("information") || !page.equals("payment")){
+                getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
+                return;
+            }
+            
+        } catch (Exception e) {
+            page = "information";
+        }
+        
+        CartFacade cart = new CartFacade(session);
+        
+        if(cart.size() == 0  || session.getAttribute("sessionid")==null ){
+            response.sendRedirect(request.getContextPath());
+        }else{
+            
+            request.setAttribute("pagename", "Check Out");
+            request.setAttribute("thispage", page);
+            getServletContext().getRequestDispatcher("/purchase.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -107,7 +127,10 @@ public class PurchaseServlet extends HttpServlet {
                 purchaseItemFacade.create(purchaseItem);
                
             }
+            response.setStatus(200);
+            return;
         }
+        response.setStatus(404);
     }
 
 }

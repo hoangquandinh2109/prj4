@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
  */
 public class CartFacade {
     private  HttpSession session;
+    public int size(){
+        return (session.getAttribute("cart") != null)? ((List<Cart>)session.getAttribute("cart")).size() : 0;
+    }
 
     public CartFacade(HttpSession session) {
         this.session = session;

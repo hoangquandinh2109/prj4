@@ -50,4 +50,6 @@ public interface ProductFacadeLocal {
 
     String imageOf(Product p);
     
+    List<String> imagesOf(Product p);
+    
 }

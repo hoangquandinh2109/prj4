@@ -32,11 +32,13 @@
                                 <img src="${pageContext.request.contextPath}/productImage/${thisImg}"
                                     alt="">
                                 <div class="small-img">
-
+                                    <c:forEach items="${otherImgs}" var="oi">
+                                        <img src="${pageContext.request.contextPath}/productImage/${oi}">
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7 pro-details">
+                        <div ng-controller="wishlist" class="col-md-7 pro-details">
                             <div class="details-block">
                                 <h1>${thisP.proName}</h1>
                                 <div class="review-tu clearfix">
@@ -76,8 +78,9 @@
                                 <div style="padding-top: 20px">
                                     <a ng-click="addThisToCart('${thisP.proID}')" href=""
                                         class="button-dhq-mk"><i class="fal fa-cart-plus"></i> Add to cart</a>
-                                    <a href="" id="wishlist" class="button-dhq-mk btn-love"><i
-                                            class="far fa-heart-square"></i> Add to Wishlist</a>
+                                        <span class="hide" id="onW">${onWishlist}</span>
+                                    <a ng-class="addedClass(onW)" ng-click="onW = btnWishlist('${thisP.proID}', onW)" href="" id="wishlist-btn" class="button-dhq-mk btn-love"><i
+                                            class="far fa-heart-square"></i> {{namingWBtn(onW)}}</a>
                                 </div>
                                 <hr>
 
