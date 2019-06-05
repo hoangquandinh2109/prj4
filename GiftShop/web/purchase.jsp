@@ -30,14 +30,14 @@
                             <div class="iIF">
                                 <div class="ifo-iTF">
                                     <div class="tt-if">Contact</div>
-                                    <div class="ct-if">hoangquandinh@gmail.com</div>
+                                    <div class="ct-if">${thisIsMe.cusEmail}</div>
                                 </div>
                                 <a href="">change</a>
                             </div>
                             <div class="iIF">
                                 <div class="ifo-iTF">
                                     <div class="tt-if">Ship to</div>
-                                    <div class="ct-if">sdfsdf, dfsdfsdfs, sdsdfsfsdf, sdsfsdf 323122, Vietnam</div>
+                                    <div class="ct-if">${thisIsMe.cusAddress}</div>
                                 </div>
                                 <a href="">change</a>
                             </div>
@@ -54,8 +54,8 @@
                         <div id="conInf-ca">
                             <div id="img-coninfca"><img src="${pageContext.request.contextPath}/img/blankava.png" alt=""></div>
                             <div id="ifo-conifi">
-                                <p>Vip Pro (vippro@gmail.com) </p>
-                                <p><a href="">Log out</a></p>
+                                <p>${thisIsMe.cusName} (${thisIsMe.cusEmail}) </p>
+                                <p><a href="${pageContext.request.contextPath}/logout">Log out</a></p>
                             </div>
                         </div>
                     </div>
@@ -66,9 +66,9 @@
                     <p id="title-down"></p>
                     <!------------------------------------------------------------------------------------------------>
                     <div id="inforthings" class="nrwsw bcifst">
-                        <input type="text" placeholder="Name">
-                        <input type="text" placeholder="Address">
-                        <input type="text" placeholder="Phone">
+                        <input type="text" placeholder="Name" value="${thisIsMe.cusName}">
+                        <input type="text" placeholder="Address" value="${thisIsMe.cusAddress}">
+                        <input type="text" placeholder="Phone" value="${thisIsMe.cusPhone}">
                     </div>
                     <!------------------------------------------------------------------------------------------------>
                     <!------------------------------------------------------------------------------------------------>
@@ -149,6 +149,7 @@
                 $("#nexttocontinue").click(function(){
                     event.preventDefault();
                     if(page == "information"){
+                        page = "payment";
                         paymentpage();
                     } else{
                         //// place order code here
@@ -171,6 +172,7 @@
                     if(page == "information"){
                         location.replace(linkpage+"cart");
                     } else{
+                        page = "information";
                         inforpage();
                     }
                 });

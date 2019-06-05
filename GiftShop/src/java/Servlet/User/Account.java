@@ -34,6 +34,47 @@ public class Account extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        HttpSession session = req.getSession();
+        int myid = (int) session.getAttribute("sessionid");
+
+        Customer me = customer.find(myid);
+        switch (action) {
+            case "changepass":
+                String password = req.getParameter("password");
+                
+                me.setCusPassword(password);
+                
+                try {
+                    customer.edit(me);
+                    resp.setStatus(200);
+                } catch (Exception e) {
+                    resp.setStatus(404);
+                }
+                break;
+            case"testoldpass":
+                String oldpass = req.getParameter("oldpassword");
+                if(!me.getCusPassword().equals(oldpass)){
+                    resp.setStatus(200);
+                } else{
+                    resp.setStatus(404);
+                }
+                break;
+            case "updateinfo":
+                String address = req.getParameter("address");
+                String phone = req.getParameter("phone");
+                
+                me.setCusAddress(address);
+                me.setCusPhone(phone);
+                try {
+                    customer.edit(me);
+                    resp.setStatus(200);
+                } catch (Exception e) {
+                    resp.setStatus(404);
+                }
+                
+                break;
+        }
     }
 
     @Override

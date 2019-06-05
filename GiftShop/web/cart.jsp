@@ -67,7 +67,7 @@
                                     <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">{{"$"+subtotal}}</span>
                                 </div>
                                 <div class="pt20 pb20 text-right fz11"><i>Shipping & taxes calculated at checkout</i></div>
-                                <div class="text-right"><a href="" class="button-in-cart-page fz13">CHECK OUT</a></div>
+                                <div class="text-right"><a href="${pageContext.request.contextPath}/checkout" class="button-in-cart-page fz13">CHECK OUT</a></div>
                             </div>
                         </div>
                     </div>

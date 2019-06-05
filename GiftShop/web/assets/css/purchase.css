@@ -205,6 +205,7 @@ body * {
 .side-bar .list-cart .ci-pu > div .imgcipu {
   width: 70px;
   height: 70px;
+  position: relative;
 }
 
 .side-bar .list-cart .ci-pu > div .imgcipu img {
@@ -220,6 +221,10 @@ body * {
   line-height: 20px;
   background-color: #ccc;
   border-radius: 50%;
+  position: absolute;
+  text-align: center;
+  right: -10px;
+  top: -10px;
 }
 
 .side-bar .list-cart .ci-pu > div > p {

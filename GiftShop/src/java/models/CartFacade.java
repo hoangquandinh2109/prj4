@@ -20,7 +20,9 @@ public class CartFacade {
     public int size(){
         return (session.getAttribute("cart") != null)? ((List<Cart>)session.getAttribute("cart")).size() : 0;
     }
-
+    public void removeAll(){
+        session.setAttribute("cart", new ArrayList<Cart>());
+    }
     public CartFacade(HttpSession session) {
         this.session = session;
     }

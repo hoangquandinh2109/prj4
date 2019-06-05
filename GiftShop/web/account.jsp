@@ -148,11 +148,11 @@
                 <h2>Change Password</h2>
                 <form>
                 <div class="label-account">Old password</div>
-                <input type="password">
+                <input id="oldpass" type="password">
                 <div class="label-account">New password</div>
-                <input type="password">
+                <input id="newpass" type="password">
                 <div class="label-account">Re-enter new password</div>
-                <input type="password">
+                <input id="renewpass" type="password">
                 <button class="btn">Change</button>
                 </form>
 
@@ -172,7 +172,9 @@
                 <h2>Your Wishlist</h2>
                 <div class="list-product">
                     <c:set var="i" value="0" />
-                    
+                    <c:if test="${myWishlist.size() == 0 }">
+                    <div style="opacity: 0.5;">no items</div>
+                    </c:if>
                     <c:forEach items="${myWishlist}" var="lw">
                         
                     <c:if test="${i == 0}">
@@ -396,6 +398,113 @@
     </div>
     <script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+    <script>
+        var error = 0;
+        $(document).ready(function(){
+            $(".btn").click(function(){
+                error = 0;
+                event.preventDefault();
+                var action = $(this).text();
+                if( action =="Update"){
+                    var address = $("#address-need-fc").val();
+                    var phone = $("#phone-need-fc").val();
+                    
+                    validatePhone(phone);
+
+                    if(error == 0){
+                        $.ajax({
+                            url: linkpage+"account",
+                            method: 'POST',
+                            data: {"action":"updateinfo","address":address,"phone":phone},
+                            success: function(){
+                                alert("update info success");
+                                location.reload();
+                            },
+                            error: function(){
+                                alert("error");
+                            }
+                        });
+                    }
+
+                }
+                if(action == "Change"){
+                    var op = $("#oldpass").val();
+                    var np = $("#newpass").val();
+                    var rnp = $("#renewpass").val();
+
+                    if(op == "" || np == "" || rnp == "") {
+                        error = 1;
+                        $("#renewpass").next('.error-form').remove(); 
+                        $("#renewpass").after("<span class=\"error-form\" style=\"color: red; \">No field is null!</span>");
+                    }
+                    // ///////////////////////////////////
+                    $.ajax({
+                        url: linkpage+"account",
+                        method: 'POST',
+                        data: {"action":"testoldpass","oldpassword":op},
+                        success: function(){
+                            //sai mk cu
+                            error = 1;
+                            $("#oldpass").next('.error-form').remove(); 
+                            $("#oldpass").after("<span class=\"error-form\" style=\"color: red; \">Pass is wrong!</span>");
+                        }
+                    });
+                    ////////////////////////////////////////
+                    validatePassword(op);
+                    validatePassword(np);
+                    validatePassword(rnp);
+
+                    if(np != rnp){
+                        error = 1;
+                        $("#renewpass").next('.error-form').remove(); 
+                        $("#renewpass").after("<span class=\"error-form\" style=\"color: red; \">New Password not match!</span>");
+                    }
+                    if(np == op){
+                        error = 1;
+                        $("#renewpass").next('.error-form').remove(); 
+                        $("#renewpass").after("<span class=\"error-form\" style=\"color: red; \">You should use new Password!</span>");
+                    }
+
+                    if(error == 0){
+                        $.ajax({
+                            url: linkpage+"account",
+                            method: 'POST',
+                            data: {"action":"changepass","password":np},
+                            success: function(){
+                                alert("change pass success");
+                                location.reload();
+                            },
+                            error: function(){
+                                alert("error");
+                            }
+                        });
+                    }
+
+
+                    
+                }
+            })
+        });
+        function validatePhone(phone){
+            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+            if(!vnf_regex.test(phone)){
+                error = 1;
+                console.log("phone not ok");
+                $("#phone-need-fc").next('.error-form').remove(); 
+                $("#phone-need-fc").after("<span class=\"error-form\" style=\"color: red; \">Your Phonenumber is not supported!</span>");
+            }
+
+        }
+        function validatePassword(password){
+        var regexP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,22}$/;
+        if(!regexP.test(password)){
+            error = 1;
+            console.log("pass 6 22");
+            $("#renewpass").next('.error-form').remove(); 
+            $("#renewpass").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
+        }
+    }
+    </script>
 </body>
 
 </html>

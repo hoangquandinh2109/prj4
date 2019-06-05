@@ -8,6 +8,7 @@ package Servlet.User;
 
 import models.CartFacade;
 import entity.Cart;
+import entity.Customer;
 import entity.Purchase;
 import entity.PurchaseItem;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class PurchaseServlet extends HttpServlet {
     @EJB
     private ProductFacadeLocal productFacade;
     @EJB
-    private CustomerFacadeLocal customerFacade;
+    private CustomerFacadeLocal customer;
     @EJB
     private PurchaseItemFacadeLocal purchaseItemFacade;
     @EJB
@@ -67,7 +68,10 @@ public class PurchaseServlet extends HttpServlet {
         if(cart.size() == 0  || session.getAttribute("sessionid")==null ){
             response.sendRedirect(request.getContextPath());
         }else{
+            int cusid = (int) session.getAttribute("sessionid");
+            Customer c = customer.find(cusid);
             
+            request.setAttribute("thisIsMe", c);
             request.setAttribute("pagename", "Check Out");
             request.setAttribute("thispage", page);
             getServletContext().getRequestDispatcher("/purchase.jsp").forward(request, response);
@@ -112,7 +116,7 @@ public class PurchaseServlet extends HttpServlet {
             System.out.println("payment");
             CartFacade cartFacade = new CartFacade(request.getSession());
             Purchase purchase = new Purchase();
-            purchase.setCusID(customerFacade.find(cusID));
+            purchase.setCusID(customer.find(cusID));
             purchase.setDateOrderPlaced(now);
             purchase.setPurID(purId);
             purchase.setPurchaseStatus(Short.parseShort("0"));
@@ -127,6 +131,7 @@ public class PurchaseServlet extends HttpServlet {
                 purchaseItemFacade.create(purchaseItem);
                
             }
+            cartFacade.removeAll();
             response.setStatus(200);
             return;
         }
