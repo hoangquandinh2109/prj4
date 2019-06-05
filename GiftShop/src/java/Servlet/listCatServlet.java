@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlet;
 
 import entity.Category;
@@ -24,6 +23,7 @@ import models.ProductTypeFacadeLocal;
  * @author Asus
  */
 public class listCatServlet extends HttpServlet {
+
     @EJB
     private ProductTypeFacadeLocal productTypeFacade;
     @EJB
@@ -33,11 +33,11 @@ public class listCatServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-         List<Category> listCate = categoryFacade.findAll();
-                request.setAttribute("listCat", listCate);
-                List<ProductType> listtype = productTypeFacade.findAll();
-                request.setAttribute("listType", listtype);
-                request.getRequestDispatcher("admin/listCat.jsp").forward(request, response);
+            List<Category> listCate = categoryFacade.findAll();
+            request.setAttribute("listCat", listCate);
+            List<ProductType> listtype = productTypeFacade.findAll();
+            request.setAttribute("listType", listtype);
+            request.getRequestDispatcher("admin/listCat.jsp").forward(request, response);
         }
     }
 

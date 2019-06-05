@@ -25,14 +25,13 @@
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                    <li class="breadcrumb-item">Forms</li>
-                    <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/index.jsp">Home</a></li>
                 </ul>
             </div>
             <div class="row">
                 <div class="col-md">
                     <div class="tile">
-                        <h3 class="tile-title">INFOR OF product</h3>
+                        <h3 class="tile-title">Product's Information</h3>
                         <div class="tile-body">
                             <form id="fileForm" class="form-horizontal" action="updateProductServlet" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
@@ -114,19 +113,15 @@
                                 <div class="col-md-3">           
                                     <c:forEach items="${imgg}" var="i">
                                         <c:if test="${i.proID.proID == product.proID}">
-
-                                            <input type="file" name="${i.imgID}">
+                                        
+                                            <input type="file" name="${i.imgID}" id="file" accept=".png,.jpg,.bmp,.jpeg">
                                             <p><img src="productImage/${i.imgName}" alt="pets" width="70px" height="80px" ></p>
                                             </c:if>
                                         </c:forEach>  
-
-
-                                    <%--    <p><img src="productImage/${imgg.imgName}" alt="pets" width="150px" height="150px" ></p>--%>   
-
                                 </div>
 
                             </div>
-                            <%--<span>Nhin ki du</span>
+                            <%--<span>Nhin ki di</span>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Image Product<span class="required">*</span></label>
                                 <div class="col-md-8">
@@ -151,7 +146,7 @@
             </div>
         </div>
     </main>  
-    <script>
+<!--    <script>
                 //SHOW IMAGE
                 window.URL = window.URL || window.webkitURL;
                 const fileSelect = document.getElementById("fileSelect"),
@@ -186,7 +181,7 @@
                     }
                   }
                 }
-    </script>
+    </script>-->
     <script>
         $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4', maxDate: new Date, minDate: new Date(2018, 10, 12)});

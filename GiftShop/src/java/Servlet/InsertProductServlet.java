@@ -118,14 +118,29 @@ public class InsertProductServlet extends HttpServlet {
                 product.setFeatureID(feaID);
                 productFacade.create(product);
 
+                int i =0;
                 for (FileItem item : multiparts) {
                     if (!item.isFormField()) {
                         String name = new File(item.getName()).getName();
                         item.write(new File(getServletContext().getRealPath("") + File.separator + SAVE_DIRECTORY + File.separator + name));
                         Product PID = productFacade.find(proID);
-                        ImgStog is = new ImgStog(name, PID);
-                        imgStogFacade.create(is);
-
+                        ImgStog newImg = new ImgStog();
+                        newImg.setImgName(name);
+                        newImg.setProID(PID);
+                        i++;
+                        newImg.setThumbnail(i == 1); 
+                        imgStogFacade.create(newImg);   
+                        //
+//                        for (int i=0;i<4;i++) {
+//                            ImgStog newImg = new ImgStog();
+//                            if (i == 1) {
+//                                newImg.setThumbnail(true);
+//                            }
+//                            newImg.setImgName(name);
+//                            newImg.setProID(PID);
+//                            imgStogFacade.create(newImg);
+//                            //bình thường thêm sao đâu
+//                        }
                     }
 
                 }

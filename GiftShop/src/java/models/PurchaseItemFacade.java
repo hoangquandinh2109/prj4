@@ -7,9 +7,11 @@
 package models;
 
 import entity.PurchaseItem;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,13 @@ public class PurchaseItemFacade extends AbstractFacade<PurchaseItem> implements 
 
     public PurchaseItemFacade() {
         super(PurchaseItem.class);
+    }
+
+    @Override
+    public List<PurchaseItem> purItemByPur(String purchaseID) {
+        Query q = getEntityManager().createQuery("SELECT p FROM PurchaseItem p WHERE p.purID.purID = :purID");
+        q.setParameter("purID", purchaseID);
+        return q.getResultList();
     }
     
 }

@@ -10,7 +10,6 @@ import entity.Category;
 import entity.Feature;
 import entity.ImgStog;
 import entity.Product;
-//import entity.ProImgtb;
 import entity.ProductType;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,7 +33,6 @@ import javax.servlet.http.Part;
 import models.CategoryFacadeLocal;
 import models.FeatureFacadeLocal;
 import models.ImgStogFacadeLocal;
-//import models.ProImgtbFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
 import org.apache.commons.fileupload.FileItem;
@@ -62,50 +60,6 @@ public class updateProductServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static final String SAVE_DIRECTORY = "productImage";
 
-//            String proid = request.getParameter("id");
-//            String name = request.getParameter("name");
-//            String details = request.getParameter("details");
-//            int price = Integer.parseInt(request.getParameter("price"));
-//            int quantity = Integer.parseInt(request.getParameter("quantity"));
-//            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-//            String date1 = request.getParameter("datepicker");
-//            Date dateRe = sdf.parse(date1);
-//            String tags = request.getParameter("tags");
-//            int imgID = Integer.parseInt(request.getParameter("imgID"));
-//             int proImgID = Integer.parseInt(request.getParameter("proImgid"));
-//            boolean status;
-//            if ("Active".equals(request.getParameter("status"))) {
-//                status = true;
-//            } else{
-//                status=false;
-//            }
-//            int cboCate = Integer.parseInt(request.getParameter("cboCategory"));
-//            int cboType = Integer.parseInt(request.getParameter("cboType"));
-//            path = uploadFile(request);
-//            entity.Product product = new entity.Product();
-//            product.setProID(proid);
-//            product.setProName(name);
-//            product.setProDetails(details);
-//            product.setProPrice(price);
-//            product.setProStatus(true);
-//            product.setDateRelease(dateRe);
-//            product.setQuantity(quantity);
-//            product.setTags(tags);
-//            product.setProStatus(status);
-//
-//            //find catID 
-//            Category cateID = categoryFacade.find(cboCate);
-//            product.setCatID(cateID);
-//            ProductType typeID = productTypeFacade.find(cboType);
-//            product.setTypeID(typeID);
-//            productFacade.edit(product);
-//            entity.Product proIDD = productFacade.find(proid);
-//            
-//            ImgStog imgtog = new ImgStog();
-//            imgtog.setImgID(imgID);
-//            imgtog.setImgName(path);
-//            imgStogFacade.edit(imgtog);
-//            request.getRequestDispatcher("showProductServlet").forward(request, response);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -174,30 +128,22 @@ public class updateProductServlet extends HttpServlet {
                 /*
                  TODO CODE HERE
                  */
-                System.out.println("ditme");
+                int i = 0;
                 for (FileItem item : multiparts) {
-
                     if (!item.isFormField()) {
                         if (item.getSize() > 0) {
-                            //int imgID = Integer.parseInt(request.getParameter("imgID"));
                             String name = new File(item.getName()).getName();
-
                             String id = new File(item.getFieldName()).getName();
                             int idImg = Integer.parseInt(id);
                             item.write(new File(getServletContext().getRealPath("") + File.separator + SAVE_DIRECTORY + File.separator + name));
-                            System.out.println(name);
-                            System.out.println(id);
-                            System.out.println(item);
-                            //  System.out.println(id);
-////                        System.out.println(id);
                             Product PID = productFacade.find(proID);
-                            System.out.println(item);
-                            ImgStog is = new ImgStog(idImg, name, PID);
+                            i++;
+                            ImgStog oldImg = imgStogFacade.find(idImg);
+                            ImgStog is = new ImgStog(idImg, name,oldImg.getThumbnail(), PID);
                             imgStogFacade.edit(is);
                         } else {
-                            System.out.println("deoo co gi");
-                        }
-
+                            System.out.println("Loi roiii");
+                        } 
                     }
 
                 }

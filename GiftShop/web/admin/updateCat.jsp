@@ -18,10 +18,9 @@
                     <h1><i class="fa fa-edit"></i>Category & Type</h1>
                     <p>Insert new category & type</p>
                 </div>
-                <ul class="app-breadcrumb breadcrumb">
+              <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                    <li class="breadcrumb-item">Forms</li>
-                    <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/index.jsp">Home</a></li>
                 </ul>
             </div>
             <div class="row">
@@ -35,7 +34,7 @@
                                 <label class="control-label col-md-3">Category ID </label>
                                 <div class="col-md-8">
                                     <input class="form-control" type="text" name="catID" readonly value="${cat.catID}">
-                                    <input type="text" readonly name="status" value="${cat.statusCategory}">
+                                    <input type="hidden" readonly name="status" value="${cat.statusCategory}">
 
                                 </div>
                             </div>   

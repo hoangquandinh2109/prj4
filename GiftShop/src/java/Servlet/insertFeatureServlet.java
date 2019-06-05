@@ -3,52 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Servlet;
 
-import entity.Product;
-import entity.Purchase;
-import entity.PurchaseItem;
+import entity.Feature;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.ProductFacadeLocal;
-import models.PurchaseFacadeLocal;
-import models.PurchaseItemFacadeLocal;
+import models.FeatureFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class showPurServlet extends HttpServlet {
-
+public class insertFeatureServlet extends HttpServlet {
     @EJB
-    private ProductFacadeLocal productFacade;
-    @EJB
-    private PurchaseItemFacadeLocal purchaseItemFacade;
-    @PersistenceContext(unitName = "project4PU")
-    private EntityManager em;
-    @EJB
-    private PurchaseFacadeLocal purchaseFacade;
+    private FeatureFacadeLocal featureFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {  
-            List<Purchase> litP = purchaseFacade.findAll();
-            List<PurchaseItem> listPurItem = purchaseItemFacade.findAll(); 
-            request.setAttribute("listPur", litP);
-            request.setAttribute("listPurItem", listPurItem);
-            request.getRequestDispatcher("admin/listPurchase.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+           String name = request.getParameter("name");
+           String des = request.getParameter("des");
+            Feature feature = new Feature();
+            feature.setFname(name);
+            feature.setFdescription(des);
+            feature.setStatusFeature(true);
+            featureFacade.create(feature);
+            request.getRequestDispatcher("admin/insertFeature.jsp").forward(request, response);
         }
     }
 

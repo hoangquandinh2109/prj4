@@ -18,8 +18,7 @@
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                    <li class="breadcrumb-item">Forms</li>
-                    <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/index.jsp">Home</a></li>
                 </ul>
             </div>   
             <div id="wrap" class="table-responsive">
@@ -41,21 +40,18 @@
 
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
+                    <c:set var="i" value="0"></c:set>
                     <c:forEach items="${listPro}" var="s">
                         <tr>
                             <td>
-                                <c:forEach items="${list}" var="i">
-                                    <c:if test="${i.proID.proID == s.proID}">
-                                        
-                                        <p><img src="productImage/${i.imgName}" alt="pets" width="70px" height="80px" ></p>
-                                        </c:if>
-                                    </c:forEach>  
+                                <p><img class="dangcap${i}" src="productImage/${listimg[i]}" alt="pets" width="70px" height="80px" ></p>
+                                <c:set var="i" value="${i+1}"></c:set>
                             </td> 
                             <td>${s.proID}</td>
                             <td>${s.proName}</td>
                             <td>${s.proDetails}</td>
-                            <td>${s.proPrice}</td>
+                            <td>&#36;${s.proPrice}</td>
                             <td>${s.quantity}</td>
                             <td> <fmt:formatDate value="${s.dateRelease}" pattern="yyyy-MM-dd" /></td>
                             <td><c:choose>
@@ -68,7 +64,7 @@
                                 </c:choose></td>
                             <td>${s.catID.catName}</td>
                             <td>${s.typeID.typeName}</td>
-                            <td>${s.featureID.featureID}</td>
+                            <td>${s.featureID.fname}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="getDetailsProductServlet?code=${s.proID}">Update</a>  
                                 <br/>

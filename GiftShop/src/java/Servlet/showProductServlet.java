@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlet;
 
 import entity.ImgStog;
 import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -19,31 +19,37 @@ import javax.servlet.http.HttpServletResponse;
 import models.ImgStogFacadeLocal;
 import models.ProductFacadeLocal;
 
-
 /**
  *
  * @author Asus
  */
 public class showProductServlet extends HttpServlet {
+
     @EJB
     private ProductFacadeLocal productFacade;
 
     @EJB
     private ImgStogFacadeLocal imgStogFacade;
 
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           List<ImgStog> list = imgStogFacade.findAll();
-           List<Product> listPro = productFacade.findAll();
-           
-            request.setAttribute("list", list);
-             request.setAttribute("listPro", listPro);
+            List<String> listimg = new ArrayList<>();
+            List<Product> listPro = productFacade.findAll();
+
+            for (Product p : listPro) {
+
+                listimg.add(productFacade.imageOf(p));
+
+            }
+
+            request.setAttribute("listimg", listimg);
+            //skdfjlsdkf
+            request.setAttribute("listPro", listPro);
             request.getRequestDispatcher("admin/listProducts.jsp").forward(request, response);
         }
-    }
+    }///saao eo thay no deploy
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

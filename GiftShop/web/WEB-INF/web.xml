@@ -116,6 +116,30 @@
         <servlet-name>changeStatusServlet</servlet-name>
         <servlet-class>Servlet.changeStatusServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getDetailsPurServlet</servlet-name>
+        <servlet-class>Servlet.getDetailsPurServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insertFeatureServlet</servlet-name>
+        <servlet-class>Servlet.insertFeatureServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>listFeatureServlet</servlet-name>
+        <servlet-class>Servlet.listFeatureServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>disableFeaServlet</servlet-name>
+        <servlet-class>Servlet.disableFeaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getDetailsFeaServlet</servlet-name>
+        <servlet-class>Servlet.getDetailsFeaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateFeatureServlet</servlet-name>
+        <servlet-class>Servlet.updateFeatureServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -231,6 +255,30 @@
     <servlet-mapping>
         <servlet-name>changeStatusServlet</servlet-name>
         <url-pattern>/changeStatusServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getDetailsPurServlet</servlet-name>
+        <url-pattern>/getDetailsPurServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertFeatureServlet</servlet-name>
+        <url-pattern>/insertFeatureServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listFeatureServlet</servlet-name>
+        <url-pattern>/listFeatureServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>disableFeaServlet</servlet-name>
+        <url-pattern>/disableFeaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getDetailsFeaServlet</servlet-name>
+        <url-pattern>/getDetailsFeaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateFeatureServlet</servlet-name>
+        <url-pattern>/updateFeatureServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

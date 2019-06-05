@@ -57,6 +57,14 @@ public class Feature implements Serializable {
     public Feature() {
     }
 
+    public Feature(Integer featureID, String fname, String fdescription, Boolean statusFeature) {
+        this.featureID = featureID;
+        this.fname = fname;
+        this.fdescription = fdescription;
+        this.statusFeature = statusFeature;
+       
+    }
+
     public Feature(Integer featureID) {
         this.featureID = featureID;
     }

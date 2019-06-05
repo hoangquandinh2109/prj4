@@ -90,7 +90,6 @@
             <div class="col-md"></div>
 
         </div>
-
     </main>  
     <c:import url="../templates/adminScript.jsp"></c:import>
 </body>

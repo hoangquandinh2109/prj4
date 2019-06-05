@@ -30,5 +30,7 @@ public interface PurchaseItemFacadeLocal {
     List<PurchaseItem> findRange(int[] range);
 
     int count();
+
+    List<PurchaseItem> purItemByPur(String purchaseID);
     
 }

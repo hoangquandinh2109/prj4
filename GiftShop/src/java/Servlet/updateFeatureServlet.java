@@ -3,52 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Servlet;
 
-import entity.Product;
-import entity.Purchase;
-import entity.PurchaseItem;
+import entity.Feature;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.ProductFacadeLocal;
-import models.PurchaseFacadeLocal;
-import models.PurchaseItemFacadeLocal;
+import models.FeatureFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class showPurServlet extends HttpServlet {
+public class updateFeatureServlet extends HttpServlet {
+    @EJB
+    private FeatureFacadeLocal featureFacade;
 
-    @EJB
-    private ProductFacadeLocal productFacade;
-    @EJB
-    private PurchaseItemFacadeLocal purchaseItemFacade;
-    @PersistenceContext(unitName = "project4PU")
-    private EntityManager em;
-    @EJB
-    private PurchaseFacadeLocal purchaseFacade;
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {  
-            List<Purchase> litP = purchaseFacade.findAll();
-            List<PurchaseItem> listPurItem = purchaseItemFacade.findAll(); 
-            request.setAttribute("listPur", litP);
-            request.setAttribute("listPurItem", listPurItem);
-            request.getRequestDispatcher("admin/listPurchase.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+           int feaID = Integer.parseInt(request.getParameter("feaID"));
+            String feaDes = request.getParameter("feaDes");
+            String name = request.getParameter("name");
+            String status = request.getParameter("status");
+            Feature fea = new Feature();
+            fea.setFeatureID(feaID);
+            fea.setFname(name);
+            fea.setFdescription(feaDes);
+            fea.setStatusFeature(Boolean.valueOf(status));
+            featureFacade.edit(fea);
+            request.getRequestDispatcher("listCatServlet").forward(request, response);
         }
     }
 
