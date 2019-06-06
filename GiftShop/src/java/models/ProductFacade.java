@@ -133,9 +133,7 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
                     .getResultList();
         List<String> limgname = new ArrayList<>();
             for(ImgStog img : listImg){
-                if(img.getThumbnail()==null || !img.getThumbnail()){
-                    limgname.add(img.getImgName());
-                }
+                limgname.add(img.getImgName());
             }
             return limgname;
     }

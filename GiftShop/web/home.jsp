@@ -11,7 +11,7 @@
     <head>
         <c:import url="templates/head.jsp"></c:import>
     </head>
-    <body ng-app="cangcucot"  ng-controller="cart">
+    <body onload="hidedangcap();" ng-app="cangcucot"  ng-controller="cart">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>
@@ -148,7 +148,7 @@
                                     <c:set var="i" value="0" />
                                 <c:forEach items="${list}" var="sd">
                                     <c:if test="${i == 0}">
-                                    <div class="row">
+                                    <div class="row"  style="overflow: hidden;">
                                     </c:if>
                                         <div class="product-item wow fadeInUp">
                                             <div class="image-product">

@@ -10,14 +10,11 @@
         return true;
     }
 var linkpage = "/GiftShop/";
-$(document).ready(function(){
-    $(".addtocart").click(function(){
-        alert("mua gì");
-        event.preventDefault();
-        showcartajax();
-    });
+function hidedangcap(){
+    $("#dangcap").hide();
+}
+$(document).ready(function(){   
     $(".showcartajax").click(function(){
-//        alert("mua gì");
         event.preventDefault();
         showcartajax();
     });
@@ -98,100 +95,7 @@ $(document).ready(function(){
         $(".tabs").hide();
         $("#commentTab").show();
     });
-    ///////////////////////////////////////////////////////////////////////////////////////////////account
-    $('#dashboard').click(function(){
-        $("#switcher>div").removeClass("active");
-        $(this).addClass("active");
-        $(".everyblock").hide();
-        $("#showdashboard").show();
-        window.history.pushState("Details", "Title", linkpage+"account/dashboard");
-        document.title= "Dashboard - "+usernamess;
-    });
-    $('#account, a#pen-edit').click(function(){
-        event.preventDefault();
-        $("#switcher>div").removeClass("active");
-        $(this).addClass("active");
-        $(".everyblock").hide();
-        $("#showaccount").show();
-        $("#address-need-fc").focus();
-        $("#address-need-fc").val($("#myaddress").val());
-        $("#phone-need-fc").val($("#myphone").val());
-        window.history.pushState("Details", "Title", linkpage+"account/info");
-        document.title= "Account - "+usernamess;
-    });
-    $('#wishlist').click(function(){
-        $("#switcher>div").removeClass("active");
-        $(this).addClass("active");
-        $(".everyblock").hide();
-        $("#showwishlist").show();
-        window.history.pushState("Details", "Title", linkpage+"account/wishlist");
-        document.title= "Wishlist - "+usernamess;
-    });
-    $('#orders').click(function(){
-        $("#switcher>div").removeClass("active");
-        $(this).addClass("active");
-        $(".everyblock").hide();
-        $("#order-detail").hide();
-        $("#orderslist").show();
-        $("#showorders").show();
-        window.history.pushState("Details", "Title", linkpage+"account/orders");
-        document.title= "Orders - "+usernamess;
-    });
-    var tabname = $("#tabname").val();
-    var usernamess = $("#usernamess").val();
-    switch (tabname) {
-        case "orders":
-            $("#switcher>div").removeClass("active");
-            $('#orders').addClass("active");
-            $(".everyblock").hide();
-            $("#order-detail").hide();
-            $("#orderslist").show();
-            $("#showorders").show();
-            break;
-        case "orderdetail":
-            $("#switcher>div").removeClass("active");
-            $('#orders').addClass("active");
-            $(".everyblock").hide();
-            $("#orderslist").hide();
-            $("#order-detail").show();
-            $("#showorders").show();
-            break;
-        case "wishlist":
-            $("#switcher>div").removeClass("active");
-            $('#wishlist').addClass("active");
-            $(".everyblock").hide();
-            $("#showwishlist").show();
-            break;
-        case "dashboard":
-            $("#switcher>div").removeClass("active");
-            $('#dashboard').addClass("active");
-            $(".everyblock").hide();
-            $("#showdashboard").show();
-            break;
-        case "info":
-            $("#switcher>div").removeClass("active");
-            $('#account').addClass("active");
-            $(".everyblock").hide();
-            $("#showaccount").show();
-            $("#address-need-fc").focus();
-            $("#address-need-fc").val($("#myaddress").val());
-            $("#phone-need-fc").val($("#myphone").val());
-            break;
-    }  
     
-    $(".button-remove").click(function(){
-        event.preventDefault();
-        var val = $(this).text(); 
-        if(val == "View"){
-            $("#orderslist").hide();
-            $("#order-detail").show();
-            $("html, body").scrollTop(0);
-            window.history.pushState("Details", "Title", linkpage+"account/orders/detail");
-            document.title= "#20190205392 - "+usernamess;
-        }
-    });//temp view bip
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////////account
 
   
     

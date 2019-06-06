@@ -280,42 +280,36 @@ app.controller('wishlist', function($scope, $http) {
             return "Remove from Wishlist"
         }
     }
+    var itemtaghtml;
     $scope.btnWishlist = function(id,dfdf){
         
+            
+        
         if(sessionid != null && sessionid != ""){
+            for(var idd=0; idd<6; idd++){
+                if(event.path[idd].className.includes("product-item")){
+                    itemtaghtml = $(event.path[idd]);
+
+                }
+
+            }
             $.ajax({
                 url: linkpage+"wishlist",
                 method: 'POST',
                 data: {"proID": id},
                 success: function(){
-//                    $(".clickdetrove").addClass("havemodal");
-//                    $("body").addClass("square");
-//                    $(".modal-form").remove();
-//                    $(".content").append("<div class=\"modal-form text-center fadeInDownMsg\">This is added to you wishlist</div>");
-//                    $(".modal-form").delay(2000).fadeOut(200);
-//                    setTimeout(function(){
-//                        $(".clickdetrove").css("opacity","0");
-//                            setTimeout(function(){
-//                            $(".clickdetrove").removeClass("havemodal");
-//                            $("body").removeClass("square");
-//                            $(".clickdetrove").removeAttr('style');
-//                            },300);
-//                    },2000);
+                     itemtaghtml.find(".image-product").find(".notificate-product").remove();
+                    itemtaghtml.find(".image-product").append("<div class=\"notificate-product fadeIn animated\">Added to wishlist</div>");
+                    setTimeout(function (){
+                        $(".notificate-product").remove();
+                    },1500);
                 },
                 error: function(){
-//                    $(".clickdetrove").addClass("havemodal");
-//                    $("body").addClass("square");
-//                    $(".modal-form").remove();
-//                    $(".content").append("<div class=\"modal-form text-center text-danger fadeInDownMsg\">This is removed from you wishlist</div>");
-//                    $(".modal-form").delay(2000).fadeOut(200);
-//                    setTimeout(function(){
-//                        $(".clickdetrove").css("opacity","0");
-//                            setTimeout(function(){
-//                            $(".clickdetrove").removeClass("havemodal");
-//                            $("body").removeClass("square");
-//                            $(".clickdetrove").removeAttr('style');
-//                            },300);
-//                    },2000);
+                     itemtaghtml.find(".image-product").find(".notificate-product").remove();
+                    itemtaghtml.find(".image-product").append("<div class=\"notificate-product fadeIn animated\">Removed from wishlist</div>");
+                    setTimeout(function (){
+                        $(".notificate-product").remove();
+                    },1500);
                 }
             });
             return !dfdf;

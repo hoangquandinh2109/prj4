@@ -13,7 +13,7 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
-    <body ng-app="cangcucot" ng-controller="cart">
+    <body onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
         <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
         <div class="content-n-cart clearfix">
             <div class="content">
@@ -107,8 +107,8 @@
                                     <div class="title-row" id="product-filter-element" data-thistext="${pagename}"></div>
                                 <div class="product-block"  ng-controller="proPagination">
                                     <div ng-if="listPro.length == 0" style="padding: 67px 0; text-align: center; opacity: 0.5;">No result</div>
-                                    <div class="row" ng-repeat="row in range(1, numrow)">
-                                        <div class="product-item wow fadeIn" ng-repeat="item in productRow(row)" >
+                                    <div class="row" style="overflow: hidden;" ng-repeat="row in range(1, numrow)">
+                                        <div class="product-item wow fadeInUp" ng-repeat="item in productRow(row)" >
                                             <div class="image-product">
                                                 <a href="${pageContext.request.contextPath}/product/v/{{item.proID}}"><img src="${pageContext.request.contextPath}/productImage/{{item.proImg}}" alt=""></a>
                                             </div>

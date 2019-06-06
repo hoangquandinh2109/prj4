@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Purchase;
 import entity.PurchaseItem;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -36,6 +37,13 @@ public class PurchaseItemFacade extends AbstractFacade<PurchaseItem> implements 
         Query q = getEntityManager().createQuery("SELECT p FROM PurchaseItem p WHERE p.purID.purID = :purID");
         q.setParameter("purID", purchaseID);
         return q.getResultList();
+    }
+    
+    @Override
+    public List<PurchaseItem> ItemofMe(Purchase purID) {
+        return em.createQuery("SELECT p FROM PurchaseItem p WHERE p.purID = :purID")
+                .setParameter("purID", purID)
+                .getResultList();
     }
     
 }

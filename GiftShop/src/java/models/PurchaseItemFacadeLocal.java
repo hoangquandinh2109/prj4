@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Purchase;
 import entity.PurchaseItem;
 import java.util.List;
 import javax.ejb.Local;
@@ -32,5 +33,7 @@ public interface PurchaseItemFacadeLocal {
     int count();
 
     List<PurchaseItem> purItemByPur(String purchaseID);
+    
+    List<PurchaseItem> ItemofMe(Purchase purID);
     
 }

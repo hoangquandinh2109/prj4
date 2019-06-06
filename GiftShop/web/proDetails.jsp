@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
 </head>
 
-<body ng-app="cangcucot" ng-controller="cart">
+<body onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
     <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
     <input type="hidden" value="${thisP.proID}" id="proID">
     <div class="content-n-cart clearfix">
@@ -29,13 +29,14 @@
                     <div class="row details">
                         <div class="col-md-5">
                             <div class="img">
-                                <img src="${pageContext.request.contextPath}/productImage/${thisImg}"
-                                    alt="">
-                                <div class="small-img">
-                                    <c:forEach items="${otherImgs}" var="oi">
-                                        <img src="${pageContext.request.contextPath}/productImage/${oi}">
-                                    </c:forEach>
-                                </div>
+                                <img id="big-img" src="${pageContext.request.contextPath}/productImage/${thisImg}" alt="">
+                            </div>
+                            <div class="small-img">
+                                <c:forEach items="${otherImgs}" var="oi">
+                                    <div>
+                                    <img class="sm-img-item" src="${pageContext.request.contextPath}/productImage/${oi}">
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
                         <div ng-controller="wishlist" class="col-md-7 pro-details">
@@ -272,4 +273,18 @@
     </div>
     <c:import url="templates/script.jsp"></c:import>
     <script src="${pageContext.request.contextPath}/assets/js/ajax/reviewajax.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".small-img > div:first-child").addClass("active");
+            $(".sm-img-item").click(function(){
+                var newimg = $(this).attr("src");
+                $("#big-img").remove();
+                $(".img").append("<img id=\"big-img\" class=\"fadeIn animated\" src=\""+newimg+"\" />")
+                $(".sm-img-item").parent().removeClass("active")
+                $(this).parent().addClass("active")
+            });
+            
+            
+        });
+    </script>
     </body>

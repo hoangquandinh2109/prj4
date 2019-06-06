@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -122,15 +123,19 @@ public class PurchaseServlet extends HttpServlet {
             purchase.setPurchaseStatus(Short.parseShort("0"));
             purchase.setTotalPrice(cartFacade.getTotalPrice());
             purchaseFacade.create(purchase);
+            
             PurchaseItem purchaseItem = new PurchaseItem();
+            Collection<PurchaseItem> cPI = purchase.getPurchaseItemCollection();
             for(Cart cartItem: cartFacade.getAllCartItems()){
 //                System.out.println(cartItem.getProduct().getProName());
                 purchaseItem.setProID(cartItem.getProduct());
                 purchaseItem.setPurID(purchase);
                 purchaseItem.setQuantity(cartItem.getQuantity());
-                purchaseItemFacade.create(purchaseItem);
+                cPI.add(purchaseItem);
                
             }
+            purchase.setPurchaseItemCollection(cPI);
+            purchaseFacade.edit(purchase);
             cartFacade.removeAll();
             response.setStatus(200);
             return;

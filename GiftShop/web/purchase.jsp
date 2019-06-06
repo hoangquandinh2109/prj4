@@ -12,7 +12,7 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/purchase.css">
     </head>
-    <body ng-app="cangcucot"  ng-controller="cart">
+    <body onload="hidedangcap();" ng-app="cangcucot"  ng-controller="cart">
         <div class="wrap-page">
             <div class="container">
                 <div class="main col-xs-7">

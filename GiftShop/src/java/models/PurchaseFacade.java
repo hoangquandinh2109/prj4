@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Customer;
 import entity.Purchase;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,6 +41,13 @@ public class PurchaseFacade extends AbstractFacade<Purchase> implements Purchase
             return null;
         }
         
+    }
+
+    @Override
+    public List<Purchase> orderofme(Customer me) {
+        return em.createQuery("SELECT p FROM Purchase p WHERE p.cusID = :cusID")
+                .setParameter("cusID", me)
+                .getResultList();
     }
     
 }

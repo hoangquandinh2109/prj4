@@ -206,7 +206,7 @@ public class Product extends HttpServlet {
                     req.setAttribute("thisImg", productDB.imageOf(p));
                     req.setAttribute("otherImgs", productDB.imagesOf(p));
                     req.setAttribute("pagename", p.getProName());
-                    req.setAttribute("url", req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/v/"+id);
+                    req.setAttribute("url", req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/product/v/"+id);
                     HttpSession session = req.getSession();
                     req.setAttribute("onWishlist", onWoC(p.getWishlistCollection(), session));
                     try {

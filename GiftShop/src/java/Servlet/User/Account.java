@@ -7,7 +7,6 @@
 package Servlet.User;
 
 import entity.Customer;
-import entity.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.CustomerFacadeLocal;
+import models.PurchaseFacadeLocal;
+import models.PurchaseItemFacadeLocal;
 import models.WishlistFacadeLocal;
 
 /**
@@ -27,6 +28,10 @@ import models.WishlistFacadeLocal;
  */
 @WebServlet(name = "Account", urlPatterns = {"/account/*"})
 public class Account extends HttpServlet {
+    @EJB
+    private PurchaseItemFacadeLocal orderdetail;
+    @EJB
+    private PurchaseFacadeLocal order;
     @EJB
     private WishlistFacadeLocal wishlist;
     @EJB
@@ -97,12 +102,9 @@ public class Account extends HttpServlet {
             String[] uris = new String[]{};
             PrintWriter out =  resp.getWriter();
 
-            for (String string : uris) {
-                System.out.println("quan: "+string);
-            }
-
-            List<Wishlist> lw = wishlist.getWishlistOfMe(me);
-            req.setAttribute("myWishlist", lw);
+            
+         
+            
             
             try {//page != null case
                 uris = req.getPathInfo().substring(1).split("/");

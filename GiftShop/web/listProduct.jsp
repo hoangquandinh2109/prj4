@@ -12,7 +12,7 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="assets/css/listProduct.css">
         </head>
-        <body>
+        <body onload="hidedangcap();">
             <div class="content-n-cart clearfix">
                 <div class="content">
                     <div class="clickdetrove"></div>
