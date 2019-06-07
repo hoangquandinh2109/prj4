@@ -27,7 +27,7 @@
     <div class="db-tac"><span>You already have account?</span> <a class="modal-login" href="">Login</a></div>
 </form>
 <script>
-    var error = 1;
+    var varError = 1;
     var  gender = $('input[type=radio][name=gender]').val();
     $('input[type=radio][name=gender]').change(function(){
         gender = $(this).val();
@@ -44,14 +44,14 @@
         var phone=$("#phone").val();
 
         if(value.trim() == ""){
-            error=1;
-            $(this).next('.error-form').remove(); 
-            $(this).after("<span class=\"error-form\" style=\"color: red; \">This filed cannot be blank!</span>");
+            varError=1;
+            $(this).next('.varError-form').remove(); 
+            $(this).after("<span class=\"varError-form\" style=\"color: red; \">This filed cannot be blank!</span>");
         } else{
             if(  email!="" && password!="" && repassword!="" && name!="" && address!="" && phone!=""){
-                error = 0;
+                varError = 0;
             }
-            $(this).next('.error-form').remove(); 
+            $(this).next('.varError-form').remove(); 
             switch (theid) {
                 case "email":
                     validateemail(email);
@@ -80,21 +80,39 @@
             var phone=$("#phone").val();
             
             
-            if(error == 0){
-                $(".error-form").remove();
-                console.log("error = 0");
-               $.ajax({
-                   type:"POST",
-                  data:{"email":email,"password":password,"name":name,"address":address,"phone":phone,"gender":gender},
-                  url: linkpage+"register",
-                  success: function(data) {
-                      console.log("success");
-                      location.reload();
-                  },
-                  error:function(){
-                      console.log("error");
-                  },
-               });
+                if(varError == 0){
+                    $(".varError-form").remove();
+                    console.log("varError = 0");
+
+                     $.ajax({
+                    type:"GET",
+                    data:{"email":email.toLowerCase()},
+                    url: linkpage+"register",
+                    success: function(){
+                        $("#email").next('.varError-form').remove(); 
+                        varError = 0; 
+                        console.log("email okay");
+                        $.ajax({
+                            type:"POST",
+                           data:{"email":email,"password":password,"name":name,"address":address,"phone":phone,"gender":gender},
+                           url: linkpage+"register",
+                           success: function(data) {
+                               console.log("success");
+                               location.reload();
+                           },
+                           error:function(){
+                               console.log("varError");
+                           },
+                        });
+                    },
+                    error: function(){
+                        $("#email").next('.varError-form').remove(); 
+                        $("#email").after("<span class=\"varError-form\" style=\"color: red; \">Email is existed!</span>");
+                        varError=1; 
+                        console.log("email existed"+varError);
+                    }
+                });
+                
             }
     });
     
@@ -112,61 +130,61 @@
         if(re.test(email)){
             $.ajax({
                 type:"GET",
-                data:{"email":email},
+                data:{"email":email.toLowerCase()},
                 url: linkpage+"register",
                 success: function(){
-                    $("#email").next('.error-form').remove(); 
-                    error = 0; 
+                    $("#email").next('.varError-form').remove(); 
+                    varError = 0; 
                     console.log("email okay");
                 },
                 error: function(){
-                    $("#email").next('.error-form').remove(); 
-                    $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is existed!</span>");
-                    error=1; 
-                    console.log("email existed"+error);
+                    $("#email").next('.varError-form').remove(); 
+                    $("#email").after("<span class=\"varError-form\" style=\"color: red; \">Email is existed!</span>");
+                    varError=1; 
+                    console.log("email existed"+varError);
                 }
             });
         }else{
-            $("#email").next('.error-form').remove(); 
-            $("#email").after("<span class=\"error-form\" style=\"color: red; \">Email is wrong format!</span>");
-            error = 1;
-            console.log("wrong email format: "+error);
+            $("#email").next('.varError-form').remove(); 
+            $("#email").after("<span class=\"varError-form\" style=\"color: red; \">Email is wrong format!</span>");
+            varError = 1;
+            console.log("wrong email format: "+varError);
         }
     }
     function validatePassword(password){
         var regexP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,22}$/;
         if(!regexP.test(password)){
-            error = 1;
+            varError = 1;
             console.log("pass 6 22");
-            $("#password").next('.error-form').remove(); 
-            $("#password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
+            $("#password").next('.varError-form').remove(); 
+            $("#password").after("<span class=\"varError-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
         }
     }
     function validateRePassword(repassword){
         var regexP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,22}$/;
         if(!regexP.test(repassword)){
-            error = 1;
+            varError = 1;
             console.log("repass 6 22");
-            $("#re-password").next('.error-form').remove(); 
-            $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
+            $("#re-password").next('.varError-form').remove(); 
+            $("#re-password").after("<span class=\"varError-form\" style=\"color: red; \">Pass must have 6 to 22 character, and must include at least one upper case letter, one lower case letter, and one numeric digit.!</span>");
         }
     }
     function validatePasswords(password, repassword){       
-        $("#re-password").next('.error-form').remove(); 
+        $("#re-password").next('.varError-form').remove(); 
         if(repassword != password){
-            error = 1;
+            varError = 1;
             console.log("pass not match");
-            $("#re-password").next('.error-form').remove(); 
-            $("#re-password").after("<span class=\"error-form\" style=\"color: red; \">Password not match!</span>");
+            $("#re-password").next('.varError-form').remove(); 
+            $("#re-password").after("<span class=\"varError-form\" style=\"color: red; \">Password not match!</span>");
         }
     }
     function validatePhone(phone){
         var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
         if(!vnf_regex.test(phone)){
-            error = 1;
+            varError = 1;
             console.log("phone not ok");
-            $("#phone").next('.error-form').remove(); 
-            $("#phone").after("<span class=\"error-form\" style=\"color: red; \">Your Phonenumber is not supported!</span>");
+            $("#phone").next('.varError-form').remove(); 
+            $("#phone").after("<span class=\"varError-form\" style=\"color: red; \">Your Phonenumber is not supported!</span>");
         }
 
     }

@@ -7,6 +7,7 @@
 package models;
 
 import entity.Customer;
+import entity.Product;
 import entity.Purchase;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -45,7 +46,14 @@ public class PurchaseFacade extends AbstractFacade<Purchase> implements Purchase
 
     @Override
     public List<Purchase> orderofme(Customer me) {
-        return em.createQuery("SELECT p FROM Purchase p WHERE p.cusID = :cusID")
+        return em.createQuery("SELECT p FROM Purchase p WHERE p.cusID = :cusID ORDER BY p.dateOrderPlaced DESC")
+                .setParameter("cusID", me)
+                .getResultList();
+    }
+    @Override
+    public List<Product> top4productordered(Customer me) {
+        return em.createQuery("SELECT p2.proID FROM Purchase p INNER JOIN p.purchaseItemCollection p2 WHERE p.cusID = :cusID")
+                .setMaxResults(4)
                 .setParameter("cusID", me)
                 .getResultList();
     }

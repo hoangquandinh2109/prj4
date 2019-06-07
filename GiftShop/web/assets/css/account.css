@@ -210,8 +210,8 @@ body .product-item {
 body .product-item img {
   width: 90px;
   height: 90px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
   display: block;
 }
 
@@ -543,5 +543,13 @@ body .ui .profile .profile-info > span {
   position: absolute;
   right: 20px;
   bottom: 20px;
+}
+
+span.varError-form {
+  color: #f00;
+  width: 400px;
+  margin: 0 auto;
+  display: block;
+  font-size: 11px;
 }
 /*# sourceMappingURL=account.css.map */

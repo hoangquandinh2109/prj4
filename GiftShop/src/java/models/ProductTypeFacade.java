@@ -42,9 +42,12 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> implements Pr
 
     @Override
     public int getQuanType(ProductType Pt) {
-        List<Product> lp = em.createQuery("SELECT p.productCollection FROM ProductType p WHERE p.typeID = :typeID")
-                .setParameter("typeID", Pt.getTypeID())
+        List<Product> lp = em.createQuery("SELECT p FROM Product p WHERE p.typeID = :typeID")
+                .setParameter("typeID", Pt)
                 .getResultList();
+        if(lp == null){
+            return 0;
+        }
         return lp.size();
     }
     

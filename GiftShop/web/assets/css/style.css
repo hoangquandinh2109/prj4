@@ -178,10 +178,13 @@
 
 body {
   background-color: #f5f5f5;
+  overflow-y: scroll !important;
 }
 
 body.square {
-  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
 
 body a:hover, body a:active, body a:focus {
@@ -351,6 +354,11 @@ body .navigation md-autocomplete {
   height: auto;
 }
 
+body .navigation .md-whiteframe-1dp, body .navigation .md-whiteframe-z1 {
+  -webkit-box-shadow: 0 0;
+          box-shadow: 0 0;
+}
+
 body .navigation md-autocomplete md-autocomplete-wrap {
   height: auto;
 }
@@ -365,6 +373,11 @@ body .navigation #form-autocomplete {
   top: 50%;
 }
 
+body .navigation form {
+  position: relative;
+  margin-right: 30px;
+}
+
 body .navigation form input {
   border: none;
   height: 30px;
@@ -377,6 +390,12 @@ body .navigation form input:focus {
 }
 
 body .navigation form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+body .navigation form button#search-button {
   height: 30px;
   width: 30px;
   -webkit-box-shadow: none;
@@ -384,9 +403,12 @@ body .navigation form button {
   border: none;
   background-color: #aaa;
   color: #fff;
+  position: absolute;
+  top: 0;
+  left: 100%;
 }
 
-body .navigation form button:focus {
+body .navigation form button#search-button:focus {
   outline: none;
 }
 
@@ -1344,5 +1366,27 @@ body .content-n-cart .cart.ra {
 .review-tu .quantity-review.numrv {
   float: left;
   padding-left: 10px;
+}
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper) {
+  height: unset;
+  line-height: unset;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper) .imgClass {
+  width: 60px;
+  height: 60px;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper) .proNameClass {
+  padding-left: 20px;
+}
+
+.custom-container {
+  min-width: 230px !important;
 }
 /*# sourceMappingURL=style.css.map */

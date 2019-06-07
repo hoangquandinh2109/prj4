@@ -547,8 +547,8 @@ a.button-dhq-mk#wishlist-btn.added {
 .small-img img {
   width: 100px;
   height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }
 
 #zoom-result {

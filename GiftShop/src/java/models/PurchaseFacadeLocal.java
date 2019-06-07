@@ -7,6 +7,7 @@
 package models;
 
 import entity.Customer;
+import entity.Product;
 import entity.Purchase;
 import java.util.List;
 import javax.ejb.Local;
@@ -35,5 +36,7 @@ public interface PurchaseFacadeLocal {
     String getLastPurchaseID();
 
     List<Purchase> orderofme(Customer me);
+
+    List<Product> top4productordered(Customer me);
     
 }

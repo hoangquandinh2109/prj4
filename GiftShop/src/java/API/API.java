@@ -25,6 +25,7 @@ import models.TbTagFacadeLocal;
 import entity.Product;
 import entity.Purchase;
 import entity.PurchaseItem;
+import entity.Wishlist;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import models.CategoryFacadeLocal;
@@ -32,6 +33,7 @@ import models.CustomerFacadeLocal;
 import models.ProductTypeFacadeLocal;
 import models.PurchaseFacadeLocal;
 import models.PurchaseItemFacadeLocal;
+import models.WishlistFacadeLocal;
 
 /**
  *
@@ -41,6 +43,8 @@ import models.PurchaseItemFacadeLocal;
 public class API extends HttpServlet {
     @EJB
     private PurchaseFacadeLocal order;
+    @EJB
+    private WishlistFacadeLocal wishlist;
     @EJB
     private PurchaseItemFacadeLocal orderdetail;
     @EJB
@@ -62,6 +66,61 @@ public class API extends HttpServlet {
             PrintWriter out = resp.getWriter();
             String json;
             SimpleDateFormat fmDate = new SimpleDateFormat("MMM d, yyyy");  
+            String detaillink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/product/v/";
+            String imglink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/productImage/";
+            
+            if(uris[0].equals("top4purchase")){                    
+                try {
+                    json = "[";
+                    Customer me = customer.find(((int) req.getSession().getAttribute("sessionid")));
+                    List<Product> top4product = order.top4productordered(me);
+                    int i;
+                    for ( i = 0; i < top4product.size(); i++) {
+                        json += "{";
+                        json +="\"url\":\""+detaillink+top4product.get(i).getProID()+"\",";
+                        json +="\"name\":\""+top4product.get(i).getProName()+"\",";
+                        json +="\"price\":\"&"+top4product.get(i).getProPrice()+"\",";
+                        json +="\"img\":\""+imglink+productFacade.imageOf(top4product.get(i))+"\"";
+                        json+= "}";
+                       if( (i+1) < top4product.size()){
+                           json+=",";
+                       }
+                    }
+                    json += "]";
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    json = "[]";
+                }
+                out.println(json);
+
+            }
+            
+            
+            if(uris[0].equals("getMyWishlist")){
+                try {
+                    json = "[";
+                    Customer me = customer.find(((int) req.getSession().getAttribute("sessionid")));
+                    List<Wishlist> mywishlist = wishlist.getWishlistOfMe(me);
+                    int i;
+                    for ( i = 0; i < mywishlist.size(); i++) {
+                        json += "{";
+                        json +="\"id\":\""+mywishlist.get(i).getProID().getProID()+"\",";
+                        json +="\"url\":\""+detaillink+mywishlist.get(i).getProID().getProID()+"\",";
+                        json +="\"name\":\""+mywishlist.get(i).getProID().getProName()+"\",";
+                        json +="\"price\":\"&"+mywishlist.get(i).getProID().getProPrice()+"\",";
+                        json +="\"img\":\""+imglink+productFacade.imageOf(mywishlist.get(i).getProID())+"\"";
+                        json+= "}";
+                       if( (i+1) < mywishlist.size()){
+                           json+=",";
+                       }
+                    }
+                    json += "]";
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    json = "[]";
+                }
+                out.println(json);
+            }
             if(uris[0].equals("getAllOrder")){
                 try {
                     json = "[";
@@ -91,36 +150,42 @@ public class API extends HttpServlet {
                 System.out.println("vip");
                 String purid = uris[1];
                 
-                Purchase theorder = order.find(purid);
-                json ="[{";
-                json +="\"receiver\":\""+theorder.getCusID().getCusName()+"\",";
-                json +="\"address\":\""+theorder.getCusID().getCusAddress()+"\",";
-                json +="\"phone\":\""+theorder.getCusID().getCusPhone()+"\",";
-                json +="\"date\":\""+fmDate.format(theorder.getDateOrderPlaced())+"\"";
-                json +="\"total\":\""+theorder.getTotalPrice()+"\",";
-                json += "}";
-                 json +=",[";
-                int i = 0;
-                for (PurchaseItem lp : orderdetail.ItemofMe(theorder)){
+                Purchase theorder = null;
+                theorder = order.find(purid);
+                if(theorder != null){
                     
-                      json +="{";
+                    json ="[{";
+                    json +="\"receiver\":\""+theorder.getCusID().getCusName()+"\",";
+                    json +="\"address\":\""+theorder.getCusID().getCusAddress()+"\",";
+                    json +="\"phone\":\""+theorder.getCusID().getCusPhone()+"\",";
+                    json +="\"date\":\""+fmDate.format(theorder.getDateOrderPlaced())+"\",";
+                    json +="\"total\":\"$"+theorder.getTotalPrice()+"\"";
+                    json += "}";
+                     json +=",[";
+                    int i = 0;
+                    for (PurchaseItem lp : orderdetail.ItemofMe(theorder)){
 
-                      json +="\"proID\":\""+lp.getProID().getProID()+"\",";
-                      json +="\"proName\":\""+lp.getProID().getProName()+"\",";
-                      json +="\"proImage\":\""+productFacade.imageOf(lp.getProID())+"\",";
-                      json +="\"proPrice\":\""+lp.getProID().getProPrice()+"\"";
+                          json +="{";
 
-                      json +="}";
-                      
-                      
-                      i++;
-                      if(i!= orderdetail.ItemofMe(theorder).size()){
-                          json += ",";
-                      }
+                          json +="\"proURL\":\""+detaillink+lp.getProID().getProID()+"\",";
+                          json +="\"proName\":\""+lp.getProID().getProName()+"\",";
+                          json +="\"proImage\":\""+imglink+productFacade.imageOf(lp.getProID())+"\",";
+                          json +="\"proPrice\":\"$"+lp.getProID().getProPrice()+"\"";
+
+                          json +="}";
+
+
+                          i++;
+                          if(i!= orderdetail.ItemofMe(theorder).size()){
+                              json += ",";
+                          }
+                    }
+
+                    json +="]]";
+                }else{
+                    json = "";
                 }
-
-                  json +="]]";
-                  out.println(json);
+                out.println(json);
             }
             if(!uris[2].isEmpty()){
                 System.out.println(uris[2]);

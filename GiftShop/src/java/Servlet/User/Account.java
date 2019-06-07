@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlet.User;
 
 import entity.Customer;
@@ -28,6 +27,7 @@ import models.WishlistFacadeLocal;
  */
 @WebServlet(name = "Account", urlPatterns = {"/account/*"})
 public class Account extends HttpServlet {
+
     @EJB
     private PurchaseItemFacadeLocal orderdetail;
     @EJB
@@ -47,9 +47,9 @@ public class Account extends HttpServlet {
         switch (action) {
             case "changepass":
                 String password = req.getParameter("password");
-                
+
                 me.setCusPassword(password);
-                
+
                 try {
                     customer.edit(me);
                     resp.setStatus(200);
@@ -57,27 +57,31 @@ public class Account extends HttpServlet {
                     resp.setStatus(404);
                 }
                 break;
-            case"testoldpass":
+            case "testoldpass":
                 String oldpass = req.getParameter("oldpassword");
-                if(!me.getCusPassword().equals(oldpass)){
+                if (!me.getCusPassword().equals(oldpass)) {
                     resp.setStatus(200);
-                } else{
+                } else {
                     resp.setStatus(404);
                 }
                 break;
             case "updateinfo":
                 String address = req.getParameter("address");
                 String phone = req.getParameter("phone");
-                
+                String name = req.getParameter("name");
+                String email = req.getParameter("email");
+
                 me.setCusAddress(address);
                 me.setCusPhone(phone);
+                me.setCusName(name);
+                me.setCusEmail(email);
                 try {
                     customer.edit(me);
                     resp.setStatus(200);
                 } catch (Exception e) {
                     resp.setStatus(404);
                 }
-                
+
                 break;
         }
     }
@@ -86,10 +90,10 @@ public class Account extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String usernamess = (String) session.getAttribute("sessionname");
-        
-        if(usernamess==null){
+
+        if (usernamess == null) {
             resp.sendRedirect(req.getContextPath());
-        }else{
+        } else {
             int myid = (int) session.getAttribute("sessionid");
 
             Customer me = customer.find(myid);
@@ -97,65 +101,49 @@ public class Account extends HttpServlet {
             req.setAttribute("myaddress", me.getCusAddress());
             req.setAttribute("myphone", me.getCusPhone());
             req.setAttribute("myemail", me.getCusEmail());
-            
+
             req.setAttribute("username", usernamess);
             String[] uris = new String[]{};
-            PrintWriter out =  resp.getWriter();
+            PrintWriter out = resp.getWriter();
 
-            
-         
-            
-            
             try {//page != null case
                 uris = req.getPathInfo().substring(1).split("/");
                 String page = uris[0];
                 String subpage = null;//only use subpage for order detail
                 String uri3rd = null;
 
-
-
-    //            prevent any other subpage and blank subpage
+                //            prevent any other subpage and blank subpage
                 try {
                     subpage = uris[1];
-                    if(!subpage.equals("detail")){
-                        subpage = "sdfdsf";//make if no.0 do false things
-                    }
                     uri3rd = uris[2];
                 } catch (Exception e) {
                 }
 
-
-
-
-
-
                 //if no.0 
-                if((subpage == null || (subpage.equals("detail") && page.equals("orders"))) && uri3rd == null){
-                    
+                if ((subpage == null || page.equals("orders")) && uri3rd == null) {
                     switch (page) {
+                        case "":
+                            req.setAttribute("pagename", "DashBoard");
+                            req.setAttribute("tabname", "dashboard");
+                            getServletContext().getRequestDispatcher("/account.jsp").forward(req, resp);
+                            break;
                         case "dashboard":
                             req.setAttribute("pagename", "DashBoard");
                             req.setAttribute("tabname", "dashboard");
                             getServletContext().getRequestDispatcher("/account.jsp").forward(req, resp);
                             break;
 
-
-
-
                         case "orders":
-                            if(subpage !=null && subpage.equals("detail")){
-                                req.setAttribute("pagename", "#201913223");//bip
+                            if (subpage != null) {
+                                req.setAttribute("pagename", subpage);//bip
                                 req.setAttribute("tabname", "orderdetail");
                                 getServletContext().getRequestDispatcher("/account.jsp").forward(req, resp);
-                            }else{
+                            } else {
                                 req.setAttribute("pagename", "Orders");
                                 req.setAttribute("tabname", "orders");
                                 getServletContext().getRequestDispatcher("/account.jsp").forward(req, resp);
                             }
                             break;
-
-
-
 
                         case "wishlist":
                             req.setAttribute("pagename", "Wishlist");
@@ -163,21 +151,17 @@ public class Account extends HttpServlet {
                             getServletContext().getRequestDispatcher("/account.jsp").forward(req, resp);
                             break;
 
-
-
-
                         case "info":
                             req.setAttribute("pagename", "Account");
                             req.setAttribute("tabname", "info");
                             getServletContext().getRequestDispatcher("/account.jsp").forward(req, resp);
                             break;
 
-
                         default:
-                    getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
-                    return;
+                            getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
+                            return;
                     }
-                } else{
+                } else {
                     getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
                     return;
                 }

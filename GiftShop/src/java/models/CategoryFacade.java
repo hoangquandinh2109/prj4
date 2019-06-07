@@ -54,9 +54,14 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
 
     @Override
     public int getCatQuan(Category cat) {
-        List<Product> lp = em.createQuery("SELECT c.productCollection FROM Category c WHERE c.catID = :catID")
-                .setParameter("catID", cat.getCatID())
+        List<Product> lp = em.createQuery("SELECT p FROM Product p WHERE p.catID = :catID")
+                .setParameter("catID", cat)
                 .getResultList();
+        
+        
+        if(lp == null){
+            return 0;
+        }
         return lp.size();
     }
     

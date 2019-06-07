@@ -28,7 +28,7 @@
             }
         </style>
     </head>
-    <body ng-app="cangcucot" ng-controller="cart">
+    <body onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>

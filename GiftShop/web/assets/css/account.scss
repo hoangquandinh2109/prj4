@@ -140,7 +140,7 @@ body{
         img{
             width: 90px;
             height: 90px;
-            object-fit: cover;
+            object-fit: scale-down;
             display: block;
         }
         .pname{
@@ -429,4 +429,11 @@ body{
 .price-io{
     position: absolute;
     right: 20px;bottom: 20px;
+}
+span.varError-form{
+    color: #f00;
+    width: 400px;
+    margin: 0 auto;
+    display: block;
+    font-size: 11px;
 }

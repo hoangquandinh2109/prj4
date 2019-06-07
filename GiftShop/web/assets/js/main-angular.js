@@ -293,6 +293,7 @@ app.controller('wishlist', function($scope, $http) {
                 }
 
             }
+            var vip;
             $.ajax({
                 url: linkpage+"wishlist",
                 method: 'POST',
@@ -303,6 +304,7 @@ app.controller('wishlist', function($scope, $http) {
                     setTimeout(function (){
                         $(".notificate-product").remove();
                     },1500);
+                    vip = true;
                 },
                 error: function(){
                      itemtaghtml.find(".image-product").find(".notificate-product").remove();
@@ -310,9 +312,24 @@ app.controller('wishlist', function($scope, $http) {
                     setTimeout(function (){
                         $(".notificate-product").remove();
                     },1500);
+                    vip = false;
                 }
             });
-            return !dfdf;
+            if(vip){
+                if(dfdf){
+                    alert("dang bat thi de no bat");
+                    return dfdf;
+                } else{
+                    return !dfdf;
+                }
+            }else{
+                if(dfdf){
+                    return !dfdf;
+                } else{
+                    alert("dang tat thi de no tat");
+                    return dfdf;
+                }
+            }
         } else{
             $(".clickdetrove").addClass("havemodal");
             $("body").addClass("square");

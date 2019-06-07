@@ -13,7 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>${pagename} - ${username}</title>
+        <title>&#35;${pagename} - ${username}</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/account.css">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/fav.png">
@@ -29,6 +29,7 @@
             </div>
         </div>
         <input type="hidden" id="tabname" value="${tabname}">
+        <input type="hidden" id="pagename" value="${pagename}">
         <input type="hidden" id="usernamess" value="${username}">
         <div class="ui clearfix">
             <div id="switcher">
@@ -56,7 +57,7 @@
                 <!--////////////////////////////////////////////////////////////////////// dashboard block -->
                 <div  style="display: none;" id="showdashboard" class="everyblock">
                     <div class="block-product">
-                        <h2>Recently purchased <a href>See more</a></h2>
+                        <h2>Recently purchased <a id="atago" href>See more</a></h2>
                         <div class="r list-product">
                             <div class="c-05 ">
                                 <div class="product-item">
@@ -95,7 +96,7 @@
                         </div>
                     </div>
                     <div class="block-product">
-                        <h2 >You haven't bought these <a href>See more</a> </h2>
+                        <h2 >You haven't bought these <a id="atagw" href>See more</a> </h2>
                         <div class="r list-product">
                             <div class="c-05 ">
                                 <div class="product-item">
@@ -147,6 +148,10 @@
                 <div style="display: none;" id="showaccount" class="everyblock form-account">
                     <h2>Update Information</h2>
                     <form>
+                        <div class="label-account">Name</div>
+                        <input id="name-need-fc" type="text">
+                        <div class="label-account">Email</div>
+                        <input id="email-need-fc" type="text">
                         <div class="label-account">Address</div>
                         <input id="address-need-fc" type="text">
                         <div class="label-account">Phone</div>
@@ -161,7 +166,7 @@
                         <input id="newpass" type="password">
                         <div class="label-account">Re-enter new password</div>
                         <input id="renewpass" type="password">
-                        <button class="btn">Change</button>
+                        <button style="margin-bottom: 20px" class="btn">Change</button>
                     </form>
 
                 </div>
@@ -178,28 +183,7 @@
 
                 <div  style="display: none" id="showwishlist" class="table-account everyblock">
                     <h2>Your Wishlist</h2>
-                    <div class="list-product">
-                        <c:set var="i" value="0" />
-                        
-                        <!--<div style="opacity: 0.5;">no items</div>-->
-
-                        <div class="r"><!--row item-->  
-
-
-                            <div class="c-05">
-                                <div class="product-item">
-                                    <a href="${pageContext.request.contextPath}/product/v/someid"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
-                                                                                                                  alt=""></a>
-                                    <a href="${pageContext.request.contextPath}/product/v/someid" class="pname">somename</a>
-                                    <div class="wishlist-price">&#36;123</div>
-                                    <button class="button-remove pbutton-wishlist">Remove</button>
-                                </div>
-                            </div>
-
-
-
-                        </div><!--/row item-->  
-
+                    <div class="list-product" id="bindproductwl">
                     </div>
                 </div>
 
@@ -218,7 +202,7 @@
                         <div id="orderslist">
                             <div  class="table-account">
                                 <h2>Your Order</h2>
-                                <table>
+                                <table id="table-orders">
                                     <tr>
                                         <td>Order ID</td>
                                         <td>Date</td>
@@ -226,22 +210,6 @@
                                         <td>Total Price</td>
                                         <td>Status</td>
                                         <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>listO.purID</td>
-                                        <td>20/09/1998</td>
-                                        <td>2</td>
-                                        <td>&#36;234</td>
-                                        <td>processing</td>
-                                        <td><a href=""  class="button-remove">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>listO.purID</td>
-                                        <td>20/09/1998</td>
-                                        <td>2</td>
-                                        <td>&#36;234</td>
-                                        <td>processing</td>
-                                        <td><a href=""  class="button-remove">View</a></td>
                                     </tr>
                                 </table>
                             </div>                    
@@ -289,16 +257,16 @@
 
                         <!--////////////////////////////////////////////////////////////////////// order detail -->
                         <div style="display: none;" id="order-detail">
-                            <h2 class="h2f">Order #20182603472<span><a href="" class="fr fz13 dib button-remove">Print</a></span></h2>
+                            <h2 class="h2f">Order <span id="bindcode"></span><span><a href="" class="fr fz13 dib button-remove">Print</a></span></h2>
                             <div class="mt70 ml100">
                                 <div class="r mr60i">
                                     <div class="c-05">
                                         <div class="od-box hb">
                                             <h3>Shipping Information</h3>
-                                            <span>Receiver: <strong>Johnny</strong> </span>
-                                            <span>Address: 123 Cach Mang Thang 8, p10, q4, Tp.HCM</span>
-                                            <span>Phone: 0978382929</span>
-                                            <span>Date: 28/03/2019</span>
+                                            <span>Receiver: <strong id="bindreceiver"></strong> </span>
+                                            <span id="bindaddress"></span>
+                                            <span id="bindphone"></span>
+                                            <span id="binddate"></span>
                                             <span>Notes: </span>
                                         </div>
                                     </div>
@@ -310,44 +278,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="block-product">
-                                <h2 class="mr60i">Products <span class="dib fr fz13">Total:<span class="pl20 color-pink">$932</span></span></h2>
-                                <div class="r list-product">
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-6_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="price-io">$233</span>
-                                        </div>
-                                    </div>
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-18_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="price-io">$233</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="r list-product">
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-10_aed5aef2-1985-474e-9f24-a7deb10b70ab_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="price-io">$233</span>
-                                        </div>
-                                    </div>
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-21_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="price-io">$233</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div id="bindproductodd" class="block-product">
+                                <h2 class="mr60i">Products <span class="dib fr fz13">Total:<span id="bindtotal" class="pl20 color-pink"></span></span></h2>
+                                
                             </div>
                         </div>
                     </div>
@@ -372,20 +305,18 @@
                             <a href=""><i class="fal fa-camera"></i>Upload an avatar</a>
                         </div>
                         <div class="profile">
-                            <p class="profile-name">${myname} <a id="pen-edit" href=""><i class="fal fa-pencil"></i></a></p>
+                            <p class="profile-name"><span id="myname" >${myname}</span> <a id="pen-edit" href=""><i class="fal fa-pencil"></i></a></p>
                             <div class="profile-info">
-                                <span><i class="far fa-map-marker-alt"></i> ${myaddress}</span>
-                                <span><i class="fal fa-phone"></i> ${myphone}</span>
-                                <span><i class="fal fa-envelope"></i> ${myemail}</span>
-                                <input type="hidden" id="myaddress" value="${myaddress}">
-                                <input type="hidden" id="myphone" value="${myphone}">
-
+                                <span><i class="far fa-map-marker-alt"></i> <span id="myaddress" >${myaddress}</span></span>
+                                <span><i class="fal fa-phone"></i> <span id="myphone" >${myphone}</span></span>
+                                <span><i class="fal fa-envelope"></i> <span id="myemail" >${myemail}</span></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery.min.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/library/wowjs/wow.js"></script>
             <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
             <script src="${pageContext.request.contextPath}/assets/js/account.js"></script>
         </body>

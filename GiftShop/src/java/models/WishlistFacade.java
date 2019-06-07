@@ -32,7 +32,7 @@ public class WishlistFacade extends AbstractFacade<Wishlist> implements Wishlist
     }
     @Override
     public List<Wishlist> getWishlistOfMe(Customer me) {
-        return em.createQuery("SELECT w FROM Wishlist w WHERE w.cusID = :me")
+        return em.createQuery("SELECT w FROM Wishlist w WHERE w.cusID = :me ORDER BY w.wishlistID DESC")
                 .setParameter("me", me)
                 .getResultList();
     }

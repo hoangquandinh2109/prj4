@@ -53,7 +53,7 @@ body{
         img{
             height: 50px;
             width: 50px;
-            object-fit: cover;
+            object-fit: scale-down;
         }
         >div#ifo-conifi {
             padding: 5px 0 5px 5px;
@@ -156,7 +156,7 @@ body{
                     img{
                         width: 70px;
                         height: 70px;
-                        object-fit: cover;
+                        object-fit: scale-down;
                     }
                     span{
                         width: 20px;

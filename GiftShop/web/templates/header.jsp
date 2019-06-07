@@ -102,15 +102,8 @@
             </li>
             <li><a href="${pageContext.request.contextPath}">Blog</a></li>
         </ul>
-<!--                 <form method="post" ng-controller="suggest">
-            <input ng-keyup="inputkeyup($event)" ng-model="mysearch" id="search-input" type="text"><button id="search-button"><i class="fas fa-search"></i></button>
-            <div id="result-suggest" class="hide" ng-hide="hide">
-                <p ng-repeat="n in listSuggest" ng-click="auto(n)"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png">{{n}}</p>
-            </div>
-        </form>-->
-        <div ng-controller="vippro as ctrl" id="form-autocomplete" layout="column" >
-          <md-content layout-padding layout="column">
-            <form ng-submit="$event.preventDefault()">
+        <div ng-controller="vippro as ctrl" id="form-autocomplete"  >
+            <form method="post" ng-submit="$event.preventDefault()">
               <md-autocomplete
                   id="custom-template"
                   md-selected-item="ctrl.selectedItem"
@@ -125,11 +118,11 @@
                   md-menu-class="autocomplete-custom-template"
                   md-menu-container-class="custom-container">
                 <md-item-template>
-                    <img width="45" height="45" src="{{item.proImage}}"><span md-highlight-text="ctrl.searchText" md-highlight-flags="i">{{item.proName}}</span>
+                    <img class="imgClass" src="{{item.proImage}}"><span class="proNameClass" md-highlight-text="ctrl.searchText" md-highlight-flags="i">{{item.proName}}</span>
                 </md-item-template>
               </md-autocomplete>
+                <button id="search-button"><i class="fas fa-search"></i></button>
             </form>
-          </md-content>
         </div>
     </div>
 </nav>
