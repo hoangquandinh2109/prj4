@@ -37,4 +37,5 @@ public interface CategoryFacadeLocal {
 
     int getCatQuan(Category cat);
     
+    List<Category> FindCatStatus();
 }

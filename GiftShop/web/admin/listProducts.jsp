@@ -124,6 +124,7 @@
                     ]
         </p>-->
     <c:import url="../templates/scriptPrint.jsp"></c:import>
+    <script src="${pageContext.request.contextPath}/assets/js/sweetalert.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#example').DataTable({

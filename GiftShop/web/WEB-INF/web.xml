@@ -140,6 +140,14 @@
         <servlet-name>updateFeatureServlet</servlet-name>
         <servlet-class>Servlet.updateFeatureServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getProductByFCT</servlet-name>
+        <servlet-class>Servlet.getProductByFCT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getAllProductByCategory</servlet-name>
+        <servlet-class>Servlet.getAllProductByCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -280,6 +288,14 @@
         <servlet-name>updateFeatureServlet</servlet-name>
         <url-pattern>/updateFeatureServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getProductByFCT</servlet-name>
+        <url-pattern>/getProductByFCT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getAllProductByCategory</servlet-name>
+        <url-pattern>/getAllProductByCategory</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -295,17 +311,14 @@
         <param-name>host</param-name>
         <param-value>smtp.gmail.com</param-value>
     </context-param>
- 
     <context-param>
         <param-name>port</param-name>
         <param-value>587</param-value>
     </context-param>
- 
     <context-param>
         <param-name>user</param-name>
         <param-value>nghoangtu0123@gmail.com</param-value>
     </context-param>
- 
     <context-param>
         <param-name>pass</param-name>
         <param-value>0976186353</param-value>

@@ -31,4 +31,5 @@ public interface FeatureFacadeLocal {
 
     int count();
     
+    List<Feature> FindFeaStatus();
 }

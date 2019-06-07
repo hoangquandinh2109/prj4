@@ -7,6 +7,7 @@
 package models;
 
 import entity.Category;
+import entity.Feature;
 import entity.ImgStog;
 import entity.Product;
 import entity.ProductType;
@@ -98,7 +99,7 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     @Override
     public List<Product> searchByName(String name){
         try {
-            return em.createQuery("SELECT p FROM Product p WHERE p.proName = :name")
+            return em.createQuery("SELECT p FROM Product p WHERE p.proName = :name AND p.proStatus = :proStatus")
                 .setParameter("name", name)
                 .setParameter("proStatus", true)
                 .getResultList();
@@ -133,10 +134,45 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
                     .getResultList();
         List<String> limgname = new ArrayList<>();
             for(ImgStog img : listImg){
-                limgname.add(img.getImgName());
-            }
+                    limgname.add(img.getImgName());
+                }
             return limgname;
     }
+     @Override
+    public List<Product> getProbyCat(int cat) {
+        try {
+            return em.createQuery("SELECT p FROM Product p WHERE p.catID.catID = :catID and p.proStatus = :proStatus")
+                    .setParameter("catID", cat)
+                    .setParameter("proStatus", true)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Product> getProbyFea(int feaID) {
+        try {
+            return em.createQuery("SELECT p FROM Product p WHERE p.featureID.featureID = :FeatureID and p.proStatus = :proStatus")
+                    .setParameter("FeatureID", feaID)
+                    .setParameter("proStatus", true)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    @Override
+    public List<Product> ProductTruee() {
+          try {
+            return em.createQuery("SELECT f FROM Product f WHERE f.proStatus = :proStatus")
+                    .setParameter("proStatus", true)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+  
     
     
 }

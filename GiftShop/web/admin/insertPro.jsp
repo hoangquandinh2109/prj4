@@ -67,7 +67,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Date Release<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" required name="4" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
+                                        <input class="form-control" type="text" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" required name="4" id="datepicker" placeholder="Enter product DateRelease" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -147,25 +147,25 @@
                         return false;
                 }
                 if (arrInputs[i].files.length <= 3) {
-                alert("File phai la 4 hinh ");
+                alert("Please select at least 4 images");
                         return false;
                 }
                 if (arrInputs[i].files.length >= 5){
-                alert("Chon qua 4 hinh roi ");
+                alert("Please select only 4 images");
                         return false;
                 }
 
                 }
                 }
                 }
-                alert("Insert OKE ")
-                        return true;
+                alert("Success");
+        return true;
                 }
-    </script>
+        </script>
 
     <script>
         //SHOW IMAGE
-        window.URL = window.URL || window.webkitURL;
+                window.URL = window.URL || window.webkitURL;
                 const fileSelect = document.getElementById("fileSelect"),
                 fileElem = document.getElementById("fileElem"),
                 fileList = document.getElementById("fileList");
@@ -178,25 +178,25 @@
                 function handleFiles(files) {
                 if (!files.length) {
                 fileList.innerHTML = "<p>No files selected!</p>";
-                } else {
+                        } else {
                 fileList.innerHTML = "";
                         const list = document.createElement("ul");
                         fileList.appendChild(list);
-                        for (let i = 0; i < files.length; i++) {
-                const li = document.createElement("li");
+                for (let i = 0; i < files.length; i++) {
+                        const li = document.createElement("li");
                         list.appendChild(li);
                               const img = document.createElement("img");
                               img.src = window.URL.createObjectURL(files[i]);
                               img.height = 60;
                               img.onload = function() {
-                        window.URL.revokeObjectURL(this.src);
+                window.URL.revokeObjectURL(this.src);
                               }
                       li.appendChild(img);
                               const info = document.createElement("span");
                               info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
-                              li.appendChild(info);
-                    }
-                  }
+                      li.appendChild(info);
+                }
+          }
                 }
     </script>
 
@@ -208,36 +208,3 @@
 </body>
 
 </html>
-<!-- script imgae
-        $("#fileElem").change(function() {
-
-        var val = $(this).val();
-                switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
-        case 'gif': case 'jpg': case 'png':
-                alert("an image");
-                break;
-                default:
-                $(this).val('');
-                // error message here
-                alert("not an image");
-                $("#fileList").val('');
-                break;
-                }
-        });
-        <script>
-            
-                $("#elem1").validate({
-        rules: {
-                "txtID": {
-                required: true,
-                minlength: 2
-        },
-                "txtName": {
-                required: true,
-                        rangelength: [6, 30]
-                }
-                
-        }
-        });   
-        </script>
--->

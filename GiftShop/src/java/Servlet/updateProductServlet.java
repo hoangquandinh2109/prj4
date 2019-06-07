@@ -79,20 +79,6 @@ public class updateProductServlet extends HttpServlet {
         if (ServletFileUpload.isMultipartContent(request)) {
             try {
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-                System.out.println(multiparts);
-//                System.out.println(multiparts.get(0).getString());
-//                System.out.println(multiparts.get(1).getString());
-//                System.out.println(multiparts.get(2).getString());
-//                System.out.println(multiparts.get(3).getString());
-//                System.out.println(multiparts.get(4).getString());
-//                System.out.println(multiparts.get(5).getString());
-//                System.out.println(multiparts.get(6).getString());
-//                System.out.println(" status " + multiparts.get(7).getString());
-//                System.out.println(multiparts.get(8).getString());
-//                System.out.println("type " + multiparts.get(9).getString());
-//                System.out.println("Fea " + multiparts.get(10).getString());
-//                System.out.println("IMGID " + multiparts.get(11).getString());
-//  s
                 String proID = multiparts.get(0).getString();
                 String proName = multiparts.get(1).getString();
                 String details = multiparts.get(2).getString();
@@ -123,8 +109,6 @@ public class updateProductServlet extends HttpServlet {
                 product.setTypeID(typeID);
                 product.setFeatureID(fID);
                 productFacade.edit(product);
-//                int imgID1 = Integer.parseInt(multiparts.get(11).getString());
-//                int imgID2 = Integer.parseInt(multiparts.get(12).getString());
                 /*
                  TODO CODE HERE
                  */

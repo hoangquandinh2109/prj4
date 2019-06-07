@@ -130,17 +130,7 @@ public class InsertProductServlet extends HttpServlet {
                         i++;
                         newImg.setThumbnail(i == 1); 
                         imgStogFacade.create(newImg);   
-                        //
-//                        for (int i=0;i<4;i++) {
-//                            ImgStog newImg = new ImgStog();
-//                            if (i == 1) {
-//                                newImg.setThumbnail(true);
-//                            }
-//                            newImg.setImgName(name);
-//                            newImg.setProID(PID);
-//                            imgStogFacade.create(newImg);
-//                            //bình thường thêm sao đâu
-//                        }
+                 
                     }
 
                 }

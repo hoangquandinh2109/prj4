@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package models;
 
 import entity.Category;
@@ -32,24 +31,29 @@ public interface ProductFacadeLocal {
     List<Product> findRange(int[] range);
 
     int count();
-    
+
     List<Product> getProductByType(ProductType productType);
-    
+
     List<Product> getProductByCategory(Category category);
 
     Product getSingleProduct(String id);
 
     List<Product> filtCategoryProductByPrice(Category category, int from, int to);
-    
+
     List<Product> filtTypeProductByPrice(ProductType type, int from, int to);
-    
-    
+
     List<Product> searchByName(String name);
-    
+
     Double getMaxPrice();
 
     String imageOf(Product p);
-    
+
     List<String> imagesOf(Product p);
+//Hung
+    List<Product> getProbyCat(int cat);
+
+    List<Product> getProbyFea(int feaID);
+    
+    List<Product> ProductTruee();
     
 }

@@ -35,4 +35,5 @@ public interface ProductTypeFacadeLocal {
 
     int getQuanType(ProductType Pt);
     
+    List<ProductType> FindTypeStatus();
 }

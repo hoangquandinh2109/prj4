@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package models;
 
 import entity.Feature;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +17,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class FeatureFacade extends AbstractFacade<Feature> implements FeatureFacadeLocal {
+
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -28,5 +29,16 @@ public class FeatureFacade extends AbstractFacade<Feature> implements FeatureFac
     public FeatureFacade() {
         super(Feature.class);
     }
-    
+
+    @Override
+    public List<Feature> FindFeaStatus() {
+        try {
+            return em.createQuery("SELECT f FROM Feature f WHERE f.statusFeature = :statusFeature")
+                    .setParameter("statusFeature", true)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
 }

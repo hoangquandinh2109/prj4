@@ -64,5 +64,15 @@ public class CategoryFacade extends AbstractFacade<Category> implements Category
         }
         return lp.size();
     }
-    
+     @Override
+    public List<Category> FindCatStatus() {
+          try {
+            return em.createQuery("SELECT c FROM Category c WHERE c.statusCategory = :statusCategory")
+                    .setParameter("statusCategory", true)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
 }
