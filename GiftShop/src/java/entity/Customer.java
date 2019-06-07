@@ -42,6 +42,18 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Customer.findByCusStatus", query = "SELECT c FROM Customer c WHERE c.cusStatus = :cusStatus"),
     @NamedQuery(name = "Customer.findByCusGender", query = "SELECT c FROM Customer c WHERE c.cusGender = :cusGender")})
 public class Customer implements Serializable {
+    @OneToMany(mappedBy = "cusToNotify")
+    private Collection<TbnotifyPost> tbnotifyPostCollection;
+    @OneToMany(mappedBy = "cusLike")
+    private Collection<TbnotifyPost> tbnotifyPostCollection1;
+    @OneToMany(mappedBy = "cusLike")
+    private Collection<Likes> likesCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Reply> replyCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Post> postCollection;
+    @OneToMany(mappedBy = "cusID")
+    private Collection<Comment> commentCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -239,6 +251,60 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "entity.Customer[ cusID=" + cusID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Post> getPostCollection() {
+        return postCollection;
+    }
+
+    public void setPostCollection(Collection<Post> postCollection) {
+        this.postCollection = postCollection;
+    }
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Reply> getReplyCollection() {
+        return replyCollection;
+    }
+
+    public void setReplyCollection(Collection<Reply> replyCollection) {
+        this.replyCollection = replyCollection;
+    }
+
+    @XmlTransient
+    public Collection<Likes> getLikesCollection() {
+        return likesCollection;
+    }
+
+    public void setLikesCollection(Collection<Likes> likesCollection) {
+        this.likesCollection = likesCollection;
+    }
+
+    @XmlTransient
+    public Collection<TbnotifyPost> getTbnotifyPostCollection() {
+        return tbnotifyPostCollection;
+    }
+
+    public void setTbnotifyPostCollection(Collection<TbnotifyPost> tbnotifyPostCollection) {
+        this.tbnotifyPostCollection = tbnotifyPostCollection;
+    }
+
+    @XmlTransient
+    public Collection<TbnotifyPost> getTbnotifyPostCollection1() {
+        return tbnotifyPostCollection1;
+    }
+
+    public void setTbnotifyPostCollection1(Collection<TbnotifyPost> tbnotifyPostCollection1) {
+        this.tbnotifyPostCollection1 = tbnotifyPostCollection1;
     }
     
 }
