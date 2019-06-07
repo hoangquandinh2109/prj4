@@ -7,6 +7,7 @@
 package Servlet;
 
 import entity.Category;
+import entity.Feature;
 import entity.ProductType;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.CategoryFacadeLocal;
+import models.FeatureFacadeLocal;
 import models.ProductTypeFacadeLocal;
 
 /**
@@ -28,13 +30,17 @@ public class showCatServlet extends HttpServlet {
     private ProductTypeFacadeLocal productTypeFacade;
     @EJB
     private CategoryFacadeLocal categoryFacade;
+     @EJB
+    private FeatureFacadeLocal fe;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             List<Category> listCate = categoryFacade.findAll();
-             List<ProductType> listTyp = productTypeFacade.findAll();
+             List<Category> listCate = categoryFacade.FindCatStatus();
+             List<ProductType> listTyp = productTypeFacade.FindTypeStatus();
+             List<Feature> listFea = fe.FindFeaStatus();
+          request.setAttribute("listFea", listFea);
           request.setAttribute("listCat", listCate);
           request.setAttribute("listType", listTyp);
           request.getRequestDispatcher("admin/insertPro.jsp").forward(request, response);

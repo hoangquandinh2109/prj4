@@ -31,6 +31,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+
 public class InsertProductServlet extends HttpServlet {
 
     @EJB
@@ -103,7 +104,8 @@ public class InsertProductServlet extends HttpServlet {
                 Category categoryid = categoryFacade.find(cboCategory);
                 int cboType = Integer.parseInt(multiparts.get(6).getString());
                 ProductType typeID = productTypeFacade.find(cboType);
-                Feature feaID = featureFacade.find(1);
+                int cboFea = Integer.parseInt(multiparts.get(7).getString());
+                Feature feaID = featureFacade.find(cboFea);
                 Product product = new Product();
                 product.setProID(proID);
                 product.setProName(proName);
@@ -118,7 +120,7 @@ public class InsertProductServlet extends HttpServlet {
                 product.setFeatureID(feaID);
                 productFacade.create(product);
 
-                int i =0;
+                int i = 0;
                 for (FileItem item : multiparts) {
                     if (!item.isFormField()) {
                         String name = new File(item.getName()).getName();
@@ -128,9 +130,9 @@ public class InsertProductServlet extends HttpServlet {
                         newImg.setImgName(name);
                         newImg.setProID(PID);
                         i++;
-                        newImg.setThumbnail(i == 1); 
-                        imgStogFacade.create(newImg);   
-                 
+                        newImg.setThumbnail(i == 1);
+                        imgStogFacade.create(newImg);
+
                     }
 
                 }

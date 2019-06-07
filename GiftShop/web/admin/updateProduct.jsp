@@ -10,14 +10,14 @@
 <html>
     <head>
         <style>
-           .inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
+            .inputfile {
+                width: 0.1px;
+                height: 0.1px;
+                opacity: 0;
+                overflow: hidden;
+                position: absolute;
+                z-index: -1;
+            }
 
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -89,10 +89,16 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Category</label>
                                 <div class="col-md-8">
-                                    <select name="7" class="form-control">
-
+                                    <select name="6" class="form-control">
                                         <c:forEach var="c1" items="${listCat}">
-                                            <option value="${c1.catID}">${c1.catName}</option>
+                                            <c:choose>
+                                                <c:when test="${product.catID.catID eq c1.catID}">
+                                                    <option value="${c1.catID}" selected="true">${c1.catName}</option> 
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${c1.catID}">${c1.catName}</option> 
+                                                </c:otherwise>
+                                            </c:choose>   
                                         </c:forEach>
                                     </select>    
                                 </div>
@@ -100,10 +106,16 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Type</label>
                                 <div class="col-md-8">
-                                    <select name="8" class="form-control">
-
+                                    <select name="7" class="form-control">
                                         <c:forEach var="c" items="${listType}">
-                                            <option value="${c.typeID}">${c.typeName}</option>
+                                           <c:choose>
+                                                <c:when test="${product.typeID.typeID eq c.typeID}">
+                                                    <option value="${c.typeID}" selected="true">${c.typeName}</option> 
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${c.typeID}">${c.typeName}</option> 
+                                                </c:otherwise>
+                                            </c:choose>   
                                         </c:forEach>
                                     </select>    
                                 </div>
@@ -111,22 +123,26 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Feature</label>
                                 <div class="col-md-8">
-                                    <select name="9" class="form-control">
+                                    <select name="8" class="form-control">
                                         <c:forEach var="c" items="${listF}">
-                                            <option value="${c.featureID}">${c.fname}</option>
+                                           <c:choose>
+                                                <c:when test="${product.featureID.featureID eq c.featureID}">
+                                                    <option value="${c.featureID}" selected="true">${c.fname}</option> 
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${c.featureID}">${c.fname}</option> 
+                                                </c:otherwise>
+                                            </c:choose>   
                                         </c:forEach>
                                     </select>    
                                 </div>
                             </div>
-
                             <div class="row">
-
                                 <div class="col-md-3">           
                                     <c:forEach items="${imgg}" var="i">
                                         <c:if test="${i.proID.proID == product.proID}">
-
-                                            <input type="file" name="${i.imgID}" id="file" class="inputfile" accept=".png,.jpg,.bmp,.jpeg">
-                                            <label for="file" class="btn btn-secondary"><strong>Change image</strong></label>
+                                            <input type="file" name="${i.imgID}" id="file" accept=".png,.jpg,.bmp,.jpeg">
+                                            <!--<label for="file"   class="btn btn-secondary"><strong>Change image</strong></label>--> 
                                             <p><img src="productImage/${i.imgName}" alt="pets" width="70px" height="80px" ></p>
                                             </c:if>
                                         </c:forEach>  

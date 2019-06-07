@@ -54,7 +54,7 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> implements Pr
     @Override
     public List<ProductType> FindTypeStatus() {
         try {
-            return em.createQuery("SELECT p FROM productType p WHERE p.statusType = :statusType")
+            return em.createQuery("SELECT p FROM ProductType p WHERE p.statusType = :statusType")
                     .setParameter("statusType", true)
                     .getResultList();
         } catch (Exception e) {

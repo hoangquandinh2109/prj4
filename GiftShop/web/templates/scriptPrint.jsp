@@ -14,3 +14,4 @@
 <script src="${pageContext.request.contextPath}/assets/js/buttons.html5.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/library/jquery/js/dataTables.bootstrap4.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/sweetalert.js"></script>

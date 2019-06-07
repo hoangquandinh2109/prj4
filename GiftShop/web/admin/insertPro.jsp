@@ -73,7 +73,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Category<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <select name="6"  required class="form-control">
+                                        <select name="5"  required class="form-control">
                                             <option value="">Select Category</option>
                                         <c:forEach var="c" items="${listCat}">
                                             <option value="${c.catID}">${c.catName}</option>
@@ -84,10 +84,21 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Type<span class="required">*</span></label>
                                 <div class="col-md-8">
-                                    <select required name="7" class="form-control">
+                                    <select required name="6" class="form-control">
                                         <option value="">Select Type</option>
                                         <c:forEach var="c" items="${listType}">
                                             <option value="${c.typeID}">${c.typeName}</option>
+                                        </c:forEach>
+                                    </select>    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Feature<span class="required">*</span></label>
+                                <div class="col-md-8">
+                                    <select required name="7" class="form-control">
+                                        <option value="">Select Feature</option>
+                                        <c:forEach var="f" items="${listFea}">
+                                            <option value="${f.featureID}">${f.fname}</option>
                                         </c:forEach>
                                     </select>    
                                 </div>
@@ -159,13 +170,13 @@
                 }
                 }
                 alert("Success");
-        return true;
+                        return true;
                 }
-        </script>
+    </script>
 
     <script>
         //SHOW IMAGE
-                window.URL = window.URL || window.webkitURL;
+        window.URL = window.URL || window.webkitURL;
                 const fileSelect = document.getElementById("fileSelect"),
                 fileElem = document.getElementById("fileElem"),
                 fileList = document.getElementById("fileList");
@@ -178,25 +189,25 @@
                 function handleFiles(files) {
                 if (!files.length) {
                 fileList.innerHTML = "<p>No files selected!</p>";
-                        } else {
+                } else {
                 fileList.innerHTML = "";
                         const list = document.createElement("ul");
                         fileList.appendChild(list);
-                for (let i = 0; i < files.length; i++) {
-                        const li = document.createElement("li");
+                        for (let i = 0; i < files.length; i++) {
+                const li = document.createElement("li");
                         list.appendChild(li);
                               const img = document.createElement("img");
                               img.src = window.URL.createObjectURL(files[i]);
                               img.height = 60;
                               img.onload = function() {
-                window.URL.revokeObjectURL(this.src);
+                        window.URL.revokeObjectURL(this.src);
                               }
                       li.appendChild(img);
                               const info = document.createElement("span");
                               info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
-                      li.appendChild(info);
-                }
-          }
+                              li.appendChild(info);
+                    }
+                  }
                 }
     </script>
 

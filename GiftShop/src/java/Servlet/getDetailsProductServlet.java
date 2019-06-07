@@ -44,10 +44,10 @@ public class getDetailsProductServlet extends HttpServlet {
             String code = request.getParameter("code");
 
             // entity.Product product = productFacade.find(code);
-            List<Category> listCate = categoryFacade.findAll();
-            List<ProductType> listTyp = productTypeFacade.findAll();
+            List<Category> listCate = categoryFacade.FindCatStatus();
+            List<ProductType> listTyp = productTypeFacade.FindTypeStatus();
             List<ImgStog> listImg = imgStogFacade.findAll();
-            List<Feature> listF = featureFacade.findAll();
+            List<Feature> listF = featureFacade.FindFeaStatus();
             Product product = productFacade.find(code);
             List<ImgStog> img = imgStogFacade.findList(product);
             request.setAttribute("listCat", listCate);
