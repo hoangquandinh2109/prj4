@@ -41,6 +41,22 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Purchase.findByDateOrderPlaced", query = "SELECT p FROM Purchase p WHERE p.dateOrderPlaced = :dateOrderPlaced"),
     @NamedQuery(name = "Purchase.findByDateOrderPaid", query = "SELECT p FROM Purchase p WHERE p.dateOrderPaid = :dateOrderPaid")})
 public class Purchase implements Serializable {
+   
+    @Size(max = 50)
+    @Column(name = "toName", length = 50)
+    private String toName;
+    @Size(max = 50)
+    @Column(name = "toAddress", length = 50)
+    private String toAddress;
+    @Size(max = 11)
+    @Column(name = "toPhone", length = 11)
+    private String toPhone;
+    @Size(max = 50)
+    @Column(name = "paymentMethod", length = 50)
+    private String paymentMethod;
+    @Size(max = 255)
+    @Column(name = "note", length = 255)
+    private String note;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -151,6 +167,47 @@ public class Purchase implements Serializable {
     @Override
     public String toString() {
         return "entity.Purchase[ purID=" + purID + " ]";
+    }
+
+    
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName;
+    }
+
+    public String getToAddress() {
+        return toAddress;
+    }
+
+    public void setToAddress(String toAddress) {
+        this.toAddress = toAddress;
+    }
+
+    public String getToPhone() {
+        return toPhone;
+    }
+
+    public void setToPhone(String toPhone) {
+        this.toPhone = toPhone;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
     
 }

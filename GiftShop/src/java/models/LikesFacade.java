@@ -41,7 +41,7 @@ public class LikesFacade extends AbstractFacade<Likes> implements LikesFacadeLoc
     }
      @Override
     public int findByPostID(Post p, Customer c) {
-        Query q =em.createQuery("SELECT l FROM Likes l WHERE l.postLiked = :postLiked and l.cusLike = :cusLike");
+        Query q =em.createQuery("SELECT l FROM Likes l WHERE l.postLiked = :postLiked and l.cusID = :cusLike");
         q.setParameter("postLiked", p);
         q.setParameter("cusLike", c);
         List<Likes> l =q.getResultList();
@@ -59,7 +59,7 @@ public class LikesFacade extends AbstractFacade<Likes> implements LikesFacadeLoc
   
     @Override
     public boolean checkLike(Post p, Customer c) {
-          Query q =em.createQuery("SELECT count(l) FROM Likes l WHERE l.postLiked = :postLiked and l.cusLike = :cusLike and l.likeStatus = :likeSt");
+          Query q =em.createQuery("SELECT count(l) FROM Likes l WHERE l.postLiked = :postLiked and l.cusID = :cusLike and l.likeStatus = :likeSt");
           q.setParameter("postLiked", p);
           q.setParameter("cusLike", c);
           q.setParameter("likeSt", true);

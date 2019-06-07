@@ -36,9 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Likes.findByLikeID", query = "SELECT l FROM Likes l WHERE l.likeID = :likeID"),
     @NamedQuery(name = "Likes.findByLikeStatus", query = "SELECT l FROM Likes l WHERE l.likeStatus = :likeStatus")})
 public class Likes implements Serializable {
-    @JoinColumn(name = "cusLike", referencedColumnName = "cusID")
+    @JoinColumn(name = "cusID", referencedColumnName = "cusID")
     @ManyToOne
-    private Customer cusLike;
+    private Customer cusID;
+    
     @JoinColumn(name = "postLiked", referencedColumnName = "postID")
     @ManyToOne
     private Post postLiked;
@@ -60,7 +61,7 @@ public class Likes implements Serializable {
         this.likeStatus = likeStatus;
        
         this.postLiked = postLiked;
-        this.cusLike = cusID;
+        this.cusID = cusID;
     }
 
     public Likes(Integer likeID) {
@@ -116,21 +117,20 @@ public class Likes implements Serializable {
     public String toString() {
         return "entity.Likes[ likeID=" + likeID + " ]";
     }
-
-    public Customer getCusLike() {
-        return cusLike;
-    }
-
-    public void setCusLike(Customer cusLike) {
-        this.cusLike = cusLike;
-    }
-
     public Post getPostLiked() {
         return postLiked;
     }
 
     public void setPostLiked(Post postLiked) {
         this.postLiked = postLiked;
+    }
+
+    public Customer getCusID() {
+        return cusID;
+    }
+
+    public void setCusID(Customer cusID) {
+        this.cusID = cusID;
     }
     
 }

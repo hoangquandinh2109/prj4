@@ -171,7 +171,8 @@
                             </div>
 
                             <div class="col-md-3">
-                                <div class="card ml-4 sticky-top">
+                                <br>
+                                <div class="card ml-4">
                                     <div class="card-body"><img  class="avt shadow-sm p-2 mb-2 bg-white" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png "></div>
                                     <div class="card-body">
                                         <p><u>Author INFOR</u></p>
@@ -191,6 +192,69 @@
                                             <p>4</p>
                                         </span>
                                     </div>
+                                </div>
+                                    <hr>
+                                    <div class="chude">
+                                    <div class="d-md-flex">
+                                        <div class="p-2 bg-secondary text-white">Common tags</div>
+
+                                    </div>
+
+                                    <div class="shadow-sm p-4 mb-4 bg-white">
+                                        <div class="hop">
+                                            <div class="tag p-1">
+                                                <a href="#" class="text-decoration-none"><span class="label text-tags">BirthDay</span></a>                              
+                                                <a href="#" class="text-decoration-none"><span class="label text-tags">weddingGift</span></a>
+                                                <a href="#" class="text-decoration-none"><span class="label text-tags">8/3</span></a>
+                                                <a href="#" class="text-decoration-none"><span class="label text-tags">ForWife</span></a>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="d-md-flex">
+                                    <div class="p-2 bg-secondary text-white">Cung 1 tac GIa</div>
+
+                                </div>
+                                <div class="tacgia shadow-sm p-4 mb-4 bg-white">
+
+                                    <div class="tg-box">
+                                        <div class="left-box">
+                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
+                                        </div>
+                                        <div class="right-box">
+                                            <a href="#" class="text-break text-center text-decoration-none text-info">Toomy</a>
+                                        </div>
+                                    </div>
+                                    <div class="tg-box">
+                                        <div class="left-box">
+                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
+                                        </div>
+                                        <div class="right-box">
+                                            <a href="#" class="text-break text-center text-decoration-none text-info">Mr Johnny</a>
+                                        </div>
+                                    </div>
+                                    <div class="tg-box">
+                                        <div class="left-box">
+                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
+                                        </div>
+                                        <div class="right-box">
+                                            <a href="#" class="text-break text-center text-decoration-none text-info">Kelvin</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="d-md-flex">
+                                    <div class="p-2 bg-secondary text-white">New product</div>
+
+                                </div>
+                                <div class="shadow-sm p-4 mb-4 bg-white">
+                                    <p>New product Here</p>
                                 </div>
                             </div>
                         </div>

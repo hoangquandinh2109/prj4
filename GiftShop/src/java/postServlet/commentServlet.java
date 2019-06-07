@@ -108,7 +108,7 @@ public class commentServlet extends HttpServlet {
                         l.setLikeStatus(true);
 
                         l.setPostLiked(p);
-                        l.setCusLike(u);
+                        l.setCusID(u);
                         likesFacade.edit(l);
                         check = l.getLikeStatus();
                     } else {
@@ -117,7 +117,7 @@ public class commentServlet extends HttpServlet {
                         l.setLikeID(likeID);
                         l.setLikeStatus(false);
                         l.setPostLiked(p);
-                        l.setCusLike(u);
+                        l.setCusID(u);
                         likesFacade.edit(l);
                         check = l.getLikeStatus();
                     }//up date ko thich thanh thich khi da co ID

@@ -111,5 +111,6 @@ public class Wishlist implements Serializable {
     public String toString() {
         return "entity.Wishlist[ wishlistID=" + wishlistID + " ]";
     }
-    
+
+   
 }

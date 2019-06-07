@@ -46,7 +46,7 @@ public class Customer implements Serializable {
     private Collection<TbnotifyPost> tbnotifyPostCollection;
     @OneToMany(mappedBy = "cusLike")
     private Collection<TbnotifyPost> tbnotifyPostCollection1;
-    @OneToMany(mappedBy = "cusLike")
+    @OneToMany(mappedBy = "cusID")
     private Collection<Likes> likesCollection;
     @OneToMany(mappedBy = "cusID")
     private Collection<Reply> replyCollection;

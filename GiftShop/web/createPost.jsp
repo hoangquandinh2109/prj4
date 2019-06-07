@@ -42,7 +42,7 @@
 
                                 <div class="col-md-12">
                                     <br>
-                                    <form action="Home" method="GET" id="myForm">
+                                    <form action="postIndex.jsp" id="myForm">
                                         <div id="contentHere">
 
                                         </div>
@@ -86,9 +86,15 @@
 
         <!-- Initialize Quill editor -->
         <script>
-                    console.log("");
+                    var ID='${sessionid}';
                     $(document).ready(function() {
-            $("#myForm").submit(function() {
+            $("#myForm").submit(function(e) {
+                if(ID ===''){
+                    
+                    alert('login first');
+                    e.preventDefault();
+                    return;
+                }
             var myOP = [];
                     var string = "";
                     myOP = $('form').serializeArray();

@@ -98,17 +98,16 @@
                                     dataType: "json",
                                     data: {action: "createComment", data: s, postID:${p.postID}, resestCount: resestCount},
                                     success: function(data) {
+                                        console.log(data);
                                         //  var x =JSON.stringify(data);
                                         var template = '<div class="media">' +
                                                 '<img src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png" alt="John Doe" class ="mr-3 mt-3 rounded-circle" style="width:60px;">' +
                                                 ' <div class="media-body">' +
                                                 '<h4>' + data.commentItem[0].userName + '</h4><a href="#" data-toggle="tooltip" class="text-time text-secondary" id="' + data.commentItem[0].postID + '"><small>1 day ago</small> </a> ' +
-                                                '<div class="bg-light text-dark rounded editCmt">' +
-                                                '<p class="pl-2 pt-2 pb-2"> ' + data.commentItem[0].commentContent + '<i class="fas fa-ellipsis-v"></i></p>' +
-                                                '</div>' +
-                                                '</div> ' +
-                                                '</div><br>';
-
+                                                '<div class="p-2">'+
+                                                '<span class="text-dark editCmt pt-2 pl-3 pb-2 pr-3">' + data.commentItem[0].commentContent +'</span>'+
+                                                        '<br>'+
+                                                '<span class="btn reply text-primary" id="haha" onClick="$("#haha").toggle();">Reply</span> </div>';
                                         $("#chovaoday").append(template);
                                         document.getElementById(data.commentItem[0].postID).title = data.commentItem[0].dateTime;
                                         $('[data-toggle="tooltip"]').tooltip();

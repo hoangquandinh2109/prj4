@@ -156,14 +156,6 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public Date getDateRelease() {
-        return dateRelease;
-    }
-
-    public void setDateRelease(Date dateRelease) {
-        this.dateRelease = dateRelease;
-    }
-
     public Boolean getProStatus() {
         return proStatus;
     }
@@ -280,5 +272,5 @@ public class Product implements Serializable {
     public String toString() {
         return "entity.Product[ proID=" + proID + " ]";
     }
-    
-}
+
+    }
