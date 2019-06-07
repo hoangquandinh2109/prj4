@@ -93,11 +93,11 @@
                     <li><a href="${pageContext.request.contextPath}/product/type">Type</a></li>
                 </ul>
             </li>
-            <li><a href="${pageContext.request.contextPath}">Blog</a>
+            <li><a href="${pageContext.request.contextPath}/postIndex.jsp">Blog</a>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/postIndex.jsp">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/createPost.jsp">Create new Post</a></li>
                     <li><a href="${pageContext.request.contextPath}/searchPage.jsp">Search Posts/Authors</a></li>
-                     <li><a href="${pageContext.request.contextPath}/postIndex.jsp">My Post</a></li>
+                     <li><a href="${pageContext.request.contextPath}/detailsPostUser.jsp">My Post</a></li>
                    
                 </ul>
             </li>
