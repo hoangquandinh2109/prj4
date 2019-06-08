@@ -1389,4 +1389,43 @@ body .content-n-cart .cart.ra {
 .custom-container {
   min-width: 230px !important;
 }
+
+#list-types {
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+#list-types ul {
+  margin: 0;
+  padding: 10px;
+  padding-right: 30px;
+  list-style: none;
+}
+
+#list-types ul li {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  position: relative;
+}
+
+#list-types a {
+  font-family: "MerriweatherSans";
+  position: relative;
+  display: block;
+  color: #888;
+}
+
+#list-types a:hover {
+  color: #76c4ce;
+}
+
+#list-types .quantity {
+  font-family: "MerriweatherSans";
+  color: #888;
+  position: absolute;
+  left: 100%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  top: 50%;
+}
 /*# sourceMappingURL=style.css.map */

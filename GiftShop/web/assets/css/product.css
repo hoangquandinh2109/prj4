@@ -310,6 +310,7 @@ a.button-dhq-mk#wishlist-btn.added {
 }
 
 #filt-type a {
+  font-family: "MerriweatherSans";
   position: relative;
   padding-left: 20px;
   display: block;
@@ -338,6 +339,7 @@ a.button-dhq-mk#wishlist-btn.added {
 }
 
 #filt-type .quantity {
+  font-family: "MerriweatherSans";
   color: #888;
   position: absolute;
   left: 100%;

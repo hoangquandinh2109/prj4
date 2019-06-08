@@ -1128,7 +1128,38 @@ body{
   }
 
 
-
+#list-types{
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    ul{
+        margin: 0;
+        padding: 10px;
+        padding-right: 30px;
+        list-style: none;
+        li{
+            padding-top: 3px;
+            padding-bottom: 3px;
+            position: relative;
+        }
+    }
+    a{
+        font-family: "MerriweatherSans";
+        position: relative;
+        display: block;
+        color: #888;
+        &:hover{
+            color: $color-blue;
+        }
+        
+    }
+    .quantity{
+        font-family: "MerriweatherSans";
+        color: #888;
+        position: absolute;
+        left: 100%;
+        @include center-in-vertical();
+    }
+}
 
 
 

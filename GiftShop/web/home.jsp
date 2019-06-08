@@ -66,6 +66,15 @@
                                     </div>
                                     <div>
                                         <div class="title-row">sdsd <span>ssdsd</span></div>
+                                        <div id="list-types">
+                                            <ul>
+                                                <li><a href="sdf"><span class="tick"></span>Clock</a> <span class="quantity">3</span></li>
+                                                <li><a href=""><span class="tick"></span>PC</a> <span class="quantity">2</span></li>
+                                                <li><a href=""><span class="tick"></span>Desktop</a> <span class="quantity">7</span></li>
+                                                <li><a href=""><span class="tick"></span>Laptop</a> <span class="quantity">11</span></li>
+                                                <li><a href=""><span class="tick"></span>Tablet</a> <span class="quantity">8</span></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="event">
                                         <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/sidebar_bannertwo_278x189.png?v=1507087021"  alt=""></a>
