@@ -70,6 +70,25 @@ public class LikesFacade extends AbstractFacade<Likes> implements LikesFacadeLoc
               return true;
           }
     }
+
+    @Override
+    public List<Likes> LikedPost(Customer c) {
+         Query q =em.createQuery("SELECT count(l) FROM Likes l WHERE l.cusID = :cusLike and l.likeStatus = :likeSt");
+          q.setParameter("cusLike", c);
+          q.setParameter("likeSt", true);
+          
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Likes> LikedPosts(Customer c) {
+          Query q =em.createQuery("SELECT count(l) FROM Likes l WHERE l.cusID = :cusLike and l.likeStatus = :likeSt");
+          q.setParameter("cusLike", c);
+          q.setParameter("likeSt", true);
+          
+        return q.getResultList();
+    }
+    
     
     
 }

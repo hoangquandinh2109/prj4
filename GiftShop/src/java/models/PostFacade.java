@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Customer;
 import entity.Post;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -46,6 +47,12 @@ public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal 
     @Override
     public List<Post> searchByContent(String content) {
         Query q= em.createQuery("SELECT p FROM Post p WHERE p.infontContent like :infontContent").setParameter("infontContent", "%"+content+"%");
+        
+        return q.getResultList();
+    }
+    @Override
+    public List<Post> findByAuthor(Customer c){
+        Query q= em.createQuery("SELECT p FROM Post p WHERE p.cusID like :cusID").setParameter("cusID", c);
         
         return q.getResultList();
     }

@@ -6,10 +6,14 @@
 
 package models;
 
+import entity.Comment;
+import entity.Post;
 import entity.Reply;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +32,10 @@ public class ReplyFacade extends AbstractFacade<Reply> implements ReplyFacadeLoc
     public ReplyFacade() {
         super(Reply.class);
     }
-    
+       @Override
+    public List<Reply> removeReplies(Comment c) {
+        Query q =em.createQuery("SELECT r FROM Reply r WHERE r.commentID = :commentID");
+        q.setParameter("commentID", c);
+        return  q.getResultList();
+    }
 }

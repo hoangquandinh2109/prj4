@@ -13,6 +13,8 @@ import entity.Post;
 import entity.Reply;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -88,6 +90,7 @@ public class postDetailsServlet extends HttpServlet {
             long ab=0;
             List<Comment> cmt=  commentFacade.listCommentByPostID(p);
             for(Comment co:cmt){
+                co.getDateComment();
                ab+=GetReply(co);
             }
             //GET TAG
@@ -98,6 +101,11 @@ public class postDetailsServlet extends HttpServlet {
               //GET TOTAL post
             long a =commentFacade.countComment(p);
             long totalComment=a+ab;
+                //GET DATE COMMENT
+              DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat beforFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+          //  String postRele = dateFormat.format(cmt.get());
+          //  String before=beforFormat.format(b.getDateRealease());
             /*----------------JSP TAG HERE-----------------*/
             request.setAttribute("cus", c);
       //      request.setAttribute("tagList", any);

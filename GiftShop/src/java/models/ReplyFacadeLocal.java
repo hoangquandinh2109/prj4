@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Comment;
 import entity.Reply;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,5 +31,5 @@ public interface ReplyFacadeLocal {
     List<Reply> findRange(int[] range);
 
     int count();
-    
+    List<Reply> removeReplies(Comment c);
 }

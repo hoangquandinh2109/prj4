@@ -36,5 +36,9 @@ public interface LikesFacadeLocal {
     int findByPostID(Post p,Customer u);
 
     boolean checkLike(Post p, Customer u);
+
+    List<Likes> LikedPost(Customer c);
+
+     List<Likes> LikedPosts(Customer c);
     
 }

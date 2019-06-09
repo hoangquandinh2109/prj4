@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package postServlet;
 
 import entity.Comment;
@@ -13,6 +12,7 @@ import entity.Post;
 import entity.Reply;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,6 +46,7 @@ import models.ReplyFacadeLocal;
  */
 @WebServlet(name = "commentServlet", urlPatterns = {"/commentServlet"})
 public class commentServlet extends HttpServlet {
+
     @EJB
     private ReplyFacadeLocal replyFacade;
 
@@ -79,8 +80,25 @@ public class commentServlet extends HttpServlet {
         String action = request.getParameter("action");
         int user = (int) session.getAttribute("sessionid");
         int post = Integer.parseInt(request.getParameter("postID"));
+        int repID = 0;
+        boolean status = true;
+        String content = "";
+     
         Customer u = customerFacade.find(user);
+        String cusAvt="chuaco";
         Post p = postFacade.find(post);
+        Date dateDB = new Date(System.currentTimeMillis());
+        DateFormat dateFormatRep = new SimpleDateFormat("dd-MM-yyyy");
+        String dateRep = dateFormatRep.format(dateDB);
+        //COUNT AREA//
+        long ab = 0;
+        List<Comment> cmt = commentFacade.listCommentByPostID(p);
+        for (Comment ce : cmt) {
+            ab += GetReply(ce);
+        }   //GET TOTAL post
+        long a = commentFacade.countComment(p);
+        long total = a + ab;
+        String sTotal = String.valueOf(total);
         JsonArrayBuilder jsonUserArray = Json.createArrayBuilder();
         switch (action) {
             case "hitLike":
@@ -89,7 +107,6 @@ public class commentServlet extends HttpServlet {
                 if (!likeStatus && likeID == 0) {//tao khi chua co
                     Likes l = new Likes(true, p, u);
                     likesFacade.create(l);
-
                     String pCountLike = String.valueOf(likesFacade.countLike(p));
                     JsonObjectBuilder likeItem = Json.createObjectBuilder()
                             .add("likeStatus", true)
@@ -98,11 +115,10 @@ public class commentServlet extends HttpServlet {
                     jsonUserArray.add(likeItem);
                     JsonObject jsonFinalOutput = Json.createObjectBuilder().add("likeItem", jsonUserArray).build();
                     out.print(jsonFinalOutput);
-
                 } else {// co roi nhung update thanh thich hoac ko thich
                     boolean check = true;
                     if (!likeStatus && likeID > 0) {//update thich thanh ko thich khi da co ID
-                        System.out.println("VO DAY ");
+
                         Likes l = new Likes();
                         l.setLikeID(likeID);
                         l.setLikeStatus(true);
@@ -112,7 +128,7 @@ public class commentServlet extends HttpServlet {
                         likesFacade.edit(l);
                         check = l.getLikeStatus();
                     } else {
-                        System.out.println("HAY VO DAY");
+
                         Likes l = new Likes();
                         l.setLikeID(likeID);
                         l.setLikeStatus(false);
@@ -121,7 +137,6 @@ public class commentServlet extends HttpServlet {
                         likesFacade.edit(l);
                         check = l.getLikeStatus();
                     }//up date ko thich thanh thich khi da co ID
-                    System.out.println(check);
                     String pCountLike = String.valueOf(likesFacade.countLike(p));
                     JsonObjectBuilder likeItem = Json.createObjectBuilder()
                             .add("likeStatus", check)
@@ -131,45 +146,45 @@ public class commentServlet extends HttpServlet {
                     JsonObject jsonFinalOutput = Json.createObjectBuilder().add("likeItem", jsonUserArray).build();
                     out.print(jsonFinalOutput);
                 }
-                break;
-           
+                return;
+
             case "createComment":
-                String data = request.getParameter("data");
-                Date date = new Date(System.currentTimeMillis());
-                Comment c = new Comment(data, date, p, u);
+                content = request.getParameter("data");
+                Comment c = new Comment(content, dateDB, p, u);
                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                String dateCmt = dateFormat.format(date);
+                String dateCmt = dateFormat.format(dateDB);
                 commentFacade.create(c);
-                //COUNT AREA//
-                long ab = 0;
-                List<Comment> cmt = commentFacade.listCommentByPostID(p);
-                for (Comment ce : cmt) {
-                    ab += GetReply(ce);
-                }   //GET TOTAL post
-                long a = commentFacade.countComment(p);
-                long total = a + ab;
-                String sTotal = String.valueOf(total);
+
                 //----------------JSON AREA-----------------//
-                JsonObjectBuilder list = Json.createObjectBuilder()
-                        .add("postID", p.getPostID())
-                        .add("userName", u.getCusName())
-                        .add("avat", "AVT")
-                        .add("dateTime", dateCmt)
-                        .add("commentContent", data)
-                        .add("sTotal", sTotal);
-                jsonUserArray.add(list);
-                javax.json.JsonObject jsonFinalOutput = Json.createObjectBuilder().add("commentItem", jsonUserArray).build();
-                System.out.println(jsonFinalOutput);
-                out.print(jsonFinalOutput);
                 break;
+            case "editComment":
+                repID = Integer.parseInt(request.getParameter("commentID"));
+                content = request.getParameter("data");
+                Comment edComment = commentFacade.find(repID);
+                edComment.setCommentContent(content);
+                edComment.setDateComment(dateDB);
+                status = true;
+                break;
+            case "deleteComment":
+                repID = Integer.parseInt(request.getParameter("commentID"));
+
+                Comment deleteCmt = commentFacade.find(repID);
+                List<Reply> rmRep = replyFacade.removeReplies(deleteCmt);
+                for (Reply rm : rmRep) {
+                    replyFacade.remove(rm);
+                }
+                
+                commentFacade.remove(deleteCmt);
+
+                break;
+
             case "createReply":
                 String replyContent = request.getParameter("data");
                 int cmtID = Integer.parseInt(request.getParameter("cmtID"));
                 Comment rc = commentFacade.find(cmtID);
-                Date dateDB = new Date(System.currentTimeMillis());
+
                 Reply r = new Reply(replyContent, dateDB, rc, u);
-                DateFormat dateFormatRep = new SimpleDateFormat("dd-MM-yyyy");
-                String dateRep = dateFormatRep.format(dateDB);
+
                 replyFacade.create(r);
                 //COUNT AREA//
                 String subTotal = CountTotal(p);
@@ -182,10 +197,49 @@ public class commentServlet extends HttpServlet {
                         .add("replyContent", replyContent)
                         .add("sTotal", subTotal);
                 jsonUserArray.add(listRep);
-                javax.json.JsonObject jsonFinalOutputRep = Json.createObjectBuilder().add("replyItem", jsonUserArray).build();
+                JsonObject jsonFinalOutputRep = Json.createObjectBuilder().add("replyItem", jsonUserArray).build();
                 out.print(jsonFinalOutputRep);
+                return;
+            case "updateReply":
+                content = request.getParameter("data");
+                repID = Integer.parseInt(request.getParameter("repID"));
+                Reply edr = replyFacade.find(repID);
+                edr.setDateReply(dateDB);
+                edr.setReplyContent(content);
+                replyFacade.edit(edr);
+                status = true;
+                break;
+            case "deleteReply":
+                repID = Integer.parseInt(request.getParameter("repID"));
+                Reply deleteRep = replyFacade.find(repID);
+                replyFacade.remove(deleteRep);
+                status = false;
                 break;
         }
+       
+        //reset Total and count again!!!
+        ab = 0;
+        total = 0;
+        List<Comment> cmtAfter = commentFacade.listCommentByPostID(p);
+        for (Comment ce : cmtAfter) {
+            ab += GetReply(ce);
+        }   //GET TOTAL post
+        // long after = commentFacade.countComment(p);
+        long totalCommentAfterRm = commentFacade.countComment(p);
+        total = totalCommentAfterRm + ab;
+        sTotal = String.valueOf(total);
+        JsonObjectBuilder responseReply = Json.createObjectBuilder()
+                .add("postID", p.getPostID())
+                .add("repID", repID)
+                .add("getContent", content)
+                .add("status", status)
+                .add("sTotal", sTotal)
+                .add("avat", cusAvt)
+                .add("dateTime", dateRep);
+        jsonUserArray.add(responseReply);
+        JsonObject jsonFinalOutputEditRep = Json.createObjectBuilder().add("replyItem", jsonUserArray).build();
+        out.print(jsonFinalOutputEditRep);
+
     }
 
     /**

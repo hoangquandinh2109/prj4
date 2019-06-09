@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Customer;
 import entity.Post;
 import java.util.List;
 import javax.ejb.Local;
@@ -37,6 +38,7 @@ public interface PostFacadeLocal {
     List<Post> searchByTitle(String title);
 
     List<Post> searchByContent(String content);
-
+    List<Post> findByAuthor(Customer c);
+   
    
 }

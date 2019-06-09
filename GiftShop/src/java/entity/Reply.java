@@ -74,6 +74,17 @@ public Reply(String replyContent, Date dateReply, Comment commentID, Customer cu
         this.repID = repID;
     }
 
+    public Reply(Integer repID, String replyContent, Boolean replyStatus, Date dateReply, Comment commentID, Customer cusID) {
+        this.repID = repID;
+        this.replyContent = replyContent;
+        this.replyStatus = replyStatus;
+        this.dateReply = dateReply;
+        this.commentID = commentID;
+        this.cusID = cusID;
+    }
+
+    
+
     public Integer getRepID() {
         return repID;
     }
