@@ -11,11 +11,14 @@ import entity.Feature;
 import entity.ImgStog;
 import entity.Product;
 import entity.ProductType;
+import entity.Report;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -171,6 +174,16 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
             return null;
         }
         
+    }
+    
+     @Override
+    public List<Report> ProductReport(String proID, Date startDate, Date endDate) {
+        Query q = em.createQuery("SELECT r FROM Report r WHERE r.proID = :pro and r.dateOrderPlaced >= :startDate and r.dateOrderPlaced <= :endDate");
+        q.setParameter("pro", proID);
+        q.setParameter("startDate", startDate);
+        q.setParameter("endDate", endDate);
+        return q.getResultList();
+       
     }
 
    

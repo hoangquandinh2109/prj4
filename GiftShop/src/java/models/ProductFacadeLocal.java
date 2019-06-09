@@ -8,6 +8,8 @@ package models;
 import entity.Category;
 import entity.Product;
 import entity.ProductType;
+import entity.Report;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -49,12 +51,14 @@ public interface ProductFacadeLocal {
     String imageOf(Product p);
 
     List<String> imagesOf(Product p);
-//Hung
+
     List<Product> getProbyCat(int cat);
 
     List<Product> getProbyFea(int feaID);
     
     List<Product> ProductTruee();
+    
+    List<Report> ProductReport(String proID, Date startDate, Date endDate);
 
     List<Product> top12New();
 

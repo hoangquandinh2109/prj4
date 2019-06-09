@@ -5,7 +5,6 @@
  */
 package Servlet;
 
-import com.sun.jmx.snmp.BerDecoder;
 import entity.Category;
 import entity.Feature;
 import entity.ImgStog;

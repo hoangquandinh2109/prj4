@@ -108,7 +108,7 @@
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showFeedbackServlet"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
-                    <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
+                       <li><a class="treeview-item" href="${pageContext.request.contextPath}/MailboxServlet?action=ShowMailbox"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
 
                 </ul>
             </li>
@@ -164,7 +164,7 @@
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showFeedbackServlet"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
-                    <li><a class="treeview-item" href="#"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
+                       <li><a class="treeview-item" href="${pageContext.request.contextPath}/MailboxServlet?action=ShowMailbox"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
 
                 </ul>
             </li>

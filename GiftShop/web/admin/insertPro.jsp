@@ -43,7 +43,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Name<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" required type="text" name="0"  placeholder="Enter product name" autocomplete="off">
+                                        <input class="form-control" required type="text" name="0"  placeholder="Enter product name" maxlength="100" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -55,13 +55,13 @@
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Product Price ($)<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" required name="2" placeholder="Enter product price" min="0"  max="99999" autocomplete="off">
+                                        <input class="form-control" type="number" required name="2" placeholder="Enter product price" min="0"  max="9999" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Quantity<span class="required">*</span></label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="number" required name="3"  placeholder="Enter product quantity" min="0" max="99999" autocomplete="off">
+                                        <input class="form-control" type="number" required name="3"  placeholder="Enter product quantity" min="0" max="99" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row">

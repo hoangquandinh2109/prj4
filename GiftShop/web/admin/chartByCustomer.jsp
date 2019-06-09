@@ -1,17 +1,19 @@
 <%-- 
-    Document   : ReportCat
-    Created on : May 26, 2019, 3:45:03 PM
+    Document   : chartByCustomer
+    Created on : Jun 8, 2019, 2:49:36 PM
     Author     : Asus
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-            <c:import url="../templates/adminHead.jsp"></c:import>
+        <c:import url="../templates/adminHead.jsp"></c:import>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" ></script>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         </head>
         <body class="app sidebar-mini rtl">
         <c:import url="../templates/adminPage.jsp"></c:import>
@@ -80,12 +82,12 @@
                                 <c:forEach var="data" items="${list}" varStatus="index">
                                     <tr>
                                         <td>${index.index + 1}</td>
-                                        <td>${data.category}</td>
+                                        <td>${data.email}</td>
                                         <td>${data.income}</td>
                                     </tr>  
                                 </c:forEach>              
                             </table>
-                            <div><b>Total Income: <%=request.getAttribute("total")%></b></div>
+                          
                         </div>
 
                     </div>
@@ -96,7 +98,6 @@
                 <div class="clearix"></div>
                 <div class="col-md"></div>
             </div>
-        </div>
     </main>
 </body>
 
@@ -119,34 +120,30 @@
 </script>
 <script type="text/javascript">
     //load the Google Visualization API and the chart
-    google.load('visualization', '1', {'packages': ['columnchart']});
-
-    //set callback
-    google.setOnLoadCallback(createChart);
+     google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
     //callback function
-    function createChart() {
+    function drawChart() {
 
         //create data table object
         var dataTable = new google.visualization.DataTable();
 
         //define columns
-        dataTable.addColumn('string', 'Quarters 2009');
+        dataTable.addColumn('string', 'Hours per Day');
         dataTable.addColumn('number', 'Income');
 
 
         //define rows of data
-        dataTable.addRows([<c:forEach items = "${list}" var = "data" > ['${data.category}',${data.income} ], </c:forEach>]);
+        dataTable.addRows([<c:forEach items = "${list}" var = "data" > ['${data.name}',${data.income} ], </c:forEach>]);
 
         //instantiate our chart object
-        var chart1 = new google.visualization.ColumnChart(document.getElementById('chart1'));
-
+        var chart1 = new google.visualization.PieChart(document.getElementById('chart1'));
         //define options for visualization
-        var options = {width: 520, height: 300, is3D: true, title: 'Category Income'};
+        var options = {width: 520, height: 300, is3D: true, title: 'Customer Income'};
 
         //draw our chart
         chart1.draw(dataTable, options);
-
     }
 </script>
 

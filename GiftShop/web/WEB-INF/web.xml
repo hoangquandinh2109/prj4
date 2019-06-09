@@ -148,6 +148,14 @@
         <servlet-name>getAllProductByCategory</servlet-name>
         <servlet-class>Servlet.getAllProductByCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>chartByCustomer</servlet-name>
+        <servlet-class>Servlet.chartByCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>reportServlet</servlet-name>
+        <servlet-class>Servlet.reportServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listUserServlet</servlet-name>
         <url-pattern>/listUserServlet</url-pattern>
@@ -295,6 +303,14 @@
     <servlet-mapping>
         <servlet-name>getAllProductByCategory</servlet-name>
         <url-pattern>/getAllProductByCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>chartByCustomer</servlet-name>
+        <url-pattern>/chartByCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reportServlet</servlet-name>
+        <url-pattern>/reportServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
