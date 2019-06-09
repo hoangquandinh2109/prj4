@@ -11,15 +11,16 @@
     <head>
         <c:import url="templates/head.jsp"></c:import>
         <style>
-            body .content-n-cart .content.kovao{
+            body .content-n-cart .content.vao{
                 left: 0!important;
             }
-            body .content-n-cart .content.kovao .clickdetrove{
+            body .content-n-cart .content.vao .clickdetrove{
                 display:none!important;
             }
         </style>
     </head>
-    <body onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
+    <body class="square" onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
+        <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
         <div class="content-n-cart clearfix">
             <div class="content kovao">
                 <div class="clickdetrove"></div>
@@ -67,7 +68,7 @@
                                     <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">{{"$"+subtotal}}</span>
                                 </div>
                                 <div class="pt20 pb20 text-right fz11"><i>Shipping & taxes calculated at checkout</i></div>
-                                <div class="text-right"><a href="${pageContext.request.contextPath}/checkout" class="button-in-cart-page fz13">CHECK OUT</a></div>
+                                <div class="text-right"><a ng-click="checkout(sessionid, numCart)" href="" class="button-in-cart-page fz13">CHECK OUT</a></div>
                             </div>
                         </div>
                     </div>
@@ -76,5 +77,15 @@
             </div>
         </div>
         <c:import url="templates/script.jsp"></c:import>
+        <script>
+            $('a.login-link').click(function(event) {
+                event.preventDefault();
+                $('.content').removeClass("vao");
+            });    
+            $('a.create-acc-link').click(function(event) {
+                event.preventDefault();
+                $('.content').removeClass("vao");
+            });  
+        </script>
     </body>
 </html>

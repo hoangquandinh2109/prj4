@@ -9,6 +9,7 @@
 
 body {
   background-color: #fff;
+  height: auto;
 }
 
 body * {
@@ -85,12 +86,17 @@ body * {
   line-height: 20px;
 }
 
-.main input:not([type=radio]) {
+.main input:not([type=radio]), .main textarea {
   padding: 10px;
   border: 1px solid #e5e5e5;
   display: block;
   width: 100%;
   margin-bottom: 15px;
+}
+
+.main textarea {
+  height: 180px;
+  resize: none;
 }
 
 .main input[type=radio] {
@@ -139,6 +145,7 @@ body * {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-bottom: 30px;
 }
 
 .main .navigator-purchase #backtoprev {

@@ -1,5 +1,14 @@
 var varError = 0;
+var modalon = 0;
 $(document).ready(function() {
+     $('body').keypress(function(){
+         if(modalon == 1){
+            $(".clickdetrove").removeClass("havemodal");
+            $(".modal-form").remove();
+            $('body').removeClass("square");
+            modalon = 0;
+        }
+    });
     ///////////////////////////////////////////////////////////////////////////////////////////////account
     $('#dashboard').click(function(){
         $("#switcher>div").removeClass("active");
@@ -106,7 +115,6 @@ $(document).ready(function() {
     
     
     
-    
     $(".btn").click(function() {
         varError = 0;
         event.preventDefault();
@@ -131,11 +139,19 @@ $(document).ready(function() {
                             "email": email
                         },
                         success: function() {
-                            alert("update info success");
-                            location.reload();
+                            $('input').blur();
+                            $('button').blur();
+                            modalMsg("Update information successfull");
+                            modalon = 1;
+                            document.title= "Account - "+name;
+                             $("#myaddress").text(address);
+                            $("#myphone").text(phone);
+                            $("#myemail").text(email);
+                            $("#myname").text(name);
                         },
                         error: function() {
-                            alert("varError");
+                            modalMsg("<span style=\"color: #a94442;\">Update information failed!</span>");
+                            modalon = 1;
                         }
                 });
                 varError = 1;///cho cái dưới khỏi chạy
@@ -157,11 +173,19 @@ $(document).ready(function() {
                             "email": email
                         },
                         success: function() {
-                            alert("update info success");
-                            location.reload();
+                            $('input').blur();
+                            $('button').blur();
+                            modalMsg("Update information successfull");
+                            modalon = 1;
+                            document.title= "Account - "+name;
+                             $("#myaddress").text(address);
+                            $("#myphone").text(phone);
+                            $("#myemail").text(email);
+                            $("#myname").text(name);
                         },
                         error: function() {
-                            alert("varError");
+                            modalMsg("<span style=\"color: #a94442;\">Update information failed!</span>");
+                            modalon = 1;
                         }
                     });
 
@@ -182,49 +206,62 @@ $(document).ready(function() {
                 varError = 1;
                 $("#renewpass").next('.varError-form').remove();
                 $("#renewpass").after("<span class=\"varError-form\">No field is null!</span>");
-            }
-            // ///////////////////////////////////
-            $.ajax({
-                url: linkpage + "account",
-                method: 'POST',
-                data: {"action": "testoldpass", "oldpassword": op},
-                success: function() {
-                    //sai mk cu
-                    varError = 1;
-                    $("#oldpass").next('.varError-form').remove();
-                    $("#oldpass").after("<span class=\"varError-form\">Pass is wrong!</span>");
+            }else{
+                validatePassword(op);
+                validatePassword(np);
+                validatePassword(rnp);
+                // ///////////////////////////////////
+                if(varError == 0){
+                    $.ajax({
+                        url: linkpage + "account",
+                        method: 'POST',
+                        data: {"action": "testoldpass", "oldpassword": op},
+                        success: function() {
+                            //sai mk cu
+                            varError = 2;
+                            $("#oldpass").next('.varError-form').remove();
+                            $("#oldpass").after("<span class=\"varError-form\">Pass is wrong!</span>");
+                        },
+                        error: function(){
+                            $("#oldpass").next('.varError-form').remove();
+                            if (np == op && varError != 2) {
+                                varError = 1;
+                                $("#renewpass").next('.varError-form').remove();
+                                $("#renewpass").after("<span class=\"varError-form\">You should use new Password!</span>");
+                            } else if (np != rnp ) {
+                                varError = 1;
+                                $("#renewpass").next('.varError-form').remove();
+                                $("#renewpass").after("<span class=\"varError-form\">New Password not match!</span>");
+                            }
+                            if (varError == 0) {
+                                
+                                $('.varError-form').remove();
+                                $.ajax({
+                                    url: linkpage + "account",
+                                    method: 'POST',
+                                    data: {"action": "changepass", "password": np},
+                                    success: function() {
+                                        $('input').blur();
+                                        $('button').blur();
+                                         $("#oldpass").val("");
+                                         $("#newpass").val("");
+                                         $("#renewpass").val("");
+                                        modalMsg("Change your password successfull!");
+                                        modalon = 1;
+                                    },
+                                    error: function() {
+                                        modalMsg("<span style=\"color: #a94442;\">Change your password failed!</span>");
+                                        modalon = 1;
+                                    }
+                                });
+                            }
+                        }
+                    });
                 }
-            });
-            ////////////////////////////////////////
-            validatePassword(op);
-            validatePassword(np);
-            validatePassword(rnp);
-
-            if (np != rnp) {
-                varError = 1;
-                $("#renewpass").next('.varError-form').remove();
-                $("#renewpass").after("<span class=\"varError-form\">New Password not match!</span>");
+                ////////////////////////////////////////
+                
             }
-            if (np == op) {
-                varError = 1;
-                $("#renewpass").next('.varError-form').remove();
-                $("#renewpass").after("<span class=\"varError-form\">You should use new Password!</span>");
-            }
-
-            if (varError == 0) {
-                $.ajax({
-                    url: linkpage + "account",
-                    method: 'POST',
-                    data: {"action": "changepass", "password": np},
-                    success: function() {
-                        alert("change pass success");
-                        location.reload();
-                    },
-                    error: function() {
-                        alert("varError");
-                    }
-                });
-            }
+            
 
 
 
@@ -316,17 +353,24 @@ function loadOrders(){
     get("api/getAllOrder").done(function(data){
         var rowsItem;
         $(".it-ods").remove();
-        $.each(data, function(index, oditem){
-            rowsItem += "<tr class=\"it-ods\">";
-            rowsItem += "<td>"+oditem.id+"</td>";
-            rowsItem += "<td>"+oditem.date+"</td>";
-            rowsItem += "<td>"+oditem.item+"</td>";
-            rowsItem += "<td>"+oditem.total+"</td>";
-            rowsItem += "<td>"+oditem.status+"</td>";
-            rowsItem += "<td><a href=\"\" onclick=\"loadOrderDetail('"+oditem.id+"'); return false;\" class=\"button-remove\">View</a></td>";
-            rowsItem += "</tr>";
-        });
-        $("#table-orders").append(rowsItem);
+        if(data.length == 0){
+            $(".no-item-od").remove();
+            $("#table-orders").after("<div class=\"no-item-od\">No items</div>");   
+        }
+        else{
+            $(".no-item-od").remove();
+            $.each(data, function(index, oditem){
+                rowsItem += "<tr class=\"it-ods\">";
+                rowsItem += "<td>"+oditem.id+"</td>";
+                rowsItem += "<td>"+oditem.date+"</td>";
+                rowsItem += "<td>"+oditem.item+"</td>";
+                rowsItem += "<td>"+oditem.total+"</td>";
+                rowsItem += "<td>"+oditem.status+"</td>";
+                rowsItem += "<td><a href=\"\" onclick=\"loadOrderDetail('"+oditem.id+"'); return false;\" class=\"button-remove\">View</a></td>";
+                rowsItem += "</tr>";
+            });
+            $("#table-orders").append(rowsItem);
+        }
     }).fail(function(){
         alert("fail");
     });
@@ -343,6 +387,8 @@ function loadOrderDetail(code){
         $("#bindaddress").text("Address: "+data[0].address);
         $("#bindphone").text("Phone: "+data[0].phone);
         $("#binddate").text("Date: "+data[0].date);
+        $("#bindnote").text("Notes: "+data[0].note);
+        $("#bindpayment").text(data[0].payment);
         $("#bindtotal").text(data[0].total);
         if(data[1].length != 0){
             var rowsItems = "";
@@ -359,6 +405,7 @@ function loadOrderDetail(code){
                     rowsItems +=                     "alt=\"\">";
                     rowsItems +=             "<a href=\""+p.proURL+"\" class=\"pname\">"+p.proName+"</a>";
                     rowsItems +=             "<span class=\"price-io\">"+p.proPrice+"</span>";
+                    rowsItems +=             "<span class=\"quan-io\">"+p.proItem+" item(s)</span>";
                     rowsItems +=         "</div>";
                     rowsItems +=     "</div>";
                     checkRow++;

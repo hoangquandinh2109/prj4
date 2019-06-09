@@ -55,5 +55,9 @@ public interface ProductFacadeLocal {
     List<Product> getProbyFea(int feaID);
     
     List<Product> ProductTruee();
+
+    List<Product> top12New();
+
+    List<Object[]> getFeautureProduct();
     
 }

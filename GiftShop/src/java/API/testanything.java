@@ -8,6 +8,7 @@ package API;
 
 import entity.ImgStog;
 import entity.Product;
+import entity.PurchaseItem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.CategoryFacadeLocal;
+import models.CustomerFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
 
@@ -47,38 +49,15 @@ public class testanything extends HttpServlet {
     private CategoryFacadeLocal catfacade;
     @EJB
     private ProductFacadeLocal productFacade;
+    @EJB
+    private CustomerFacadeLocal cus;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        
-            ////////////////////ngôi sao
-//        double star = Double.parseDouble(req.getParameter("pro"));
-//        String id = req.getParameter("id");
-//        Product p = productFacade.find(id);
-//        p.setStarAVG(star);
-//        productFacade.edit(p);
-//        resp.sendRedirect("http://localhost:8080/project4/product/type/2");
-////////////////////ngôi sao
-            
-            
-            
-           
-            
-//////////////du lieu product
-//        try {
-//            List<Product> lp = new ArrayList<>();
-//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//            
-//            productFacade.create(new Product(format.parse("2019-05-21"), 2.0, typefacade.find(2), "0392", "Vipkien", "Kientri", 232, 261, true, "hdslkfk", catfacade.find(2)));
-//        } catch (Exception ex) {
-//            System.out.println("Quan vip");
-//            System.out.println(ex.getMessage());
-//        }
-            ////////////////du lieu product
-        
-//        //goi y name
-//        out.println(productFacade.getMaxPrice());
+        for(Product p : productFacade.top12Hot()){
+            System.out.println(p.getProID()+"  "+p.getProName());
+        }
     }
 
 }

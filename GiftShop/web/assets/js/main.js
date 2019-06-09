@@ -12,6 +12,7 @@
 var linkpage = "/GiftShop/";
 function hidedangcap(){
     $("#dangcap").hide();
+    $('body').removeClass("square");
 }
 $(document).ready(function(){   
     $(".showcartajax").click(function(){
@@ -45,7 +46,6 @@ $(document).ready(function(){
 
 
     $('.cart-quantity > input').on('keyup', function(e){
-           console.log(e)
         if ($(this).val() < 1 
             && e.keyCode !== 46 // keycode for delete
             && e.keyCode !== 8 // keycode for backspace
@@ -129,4 +129,18 @@ new WOW().init();
 function showcartajax(){
     $(".content").addClass("vao");
     $(".cart").addClass("ra");
+}
+
+function modalLogin(){
+    $(".clickdetrove").addClass("havemodal");
+    $("body").addClass("square");
+    $(".modal-form").remove();
+    $(".content").append("<div class=\"modal-form fadeInDownMsg\"></div>");
+    $(".modal-form").load(linkpage+"templates/login.html");
+}
+function modalMsg(text){
+    $(".clickdetrove").addClass("havemodal");
+    $("body").addClass("square");
+    $(".modal-form").remove();
+    $(".content").append("<div class=\"modal-form text-center fadeInDownMsg\">"+text+"</div>");
 }

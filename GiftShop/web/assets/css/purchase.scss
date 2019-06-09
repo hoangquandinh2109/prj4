@@ -8,6 +8,7 @@
 
 body{
     background-color: #fff;
+    height: auto;
     *{
         font-family: 'MerriweatherSans';
     }
@@ -63,12 +64,16 @@ body{
             }
         }
     }
-    input:not([type=radio]){
+    input:not([type=radio]), textarea{
         padding: 10px;
         border: 1px solid #e5e5e5;
         display: block;
         width: 100%;
         margin-bottom: 15px;
+    }
+    textarea{
+        height: 180px;
+        resize: none;
     }
     input[type=radio]{
         margin: 0;
@@ -106,6 +111,7 @@ body{
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 30px;
         #backtoprev{
             float: left;
         }

@@ -12,7 +12,8 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/purchase.css">
     </head>
-    <body onload="hidedangcap();" ng-app="cangcucot"  ng-controller="cart">
+    <body class="square" onload="hidedangcap();" ng-app="cangcucot"  ng-controller="cart">
+        <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
         <div class="wrap-page">
             <div class="container">
                 <div class="main col-xs-7">
@@ -30,16 +31,16 @@
                             <div class="iIF">
                                 <div class="ifo-iTF">
                                     <div class="tt-if">Contact</div>
-                                    <div class="ct-if">${thisIsMe.cusEmail}</div>
+                                    <div class="ct-if" id='ftname'></div>
                                 </div>
-                                <a href="">change</a>
+                                <a class='cbt' href="">change</a>
                             </div>
                             <div class="iIF">
                                 <div class="ifo-iTF">
                                     <div class="tt-if">Ship to</div>
-                                    <div class="ct-if">${thisIsMe.cusAddress}</div>
+                                    <div class="ct-if" id='ftaddress'></div>
                                 </div>
-                                <a href="">change</a>
+                                <a class='cbt' href="">change</a>
                             </div>
                         </div>
                     </div>
@@ -66,9 +67,10 @@
                     <p id="title-down"></p>
                     <!------------------------------------------------------------------------------------------------>
                     <div id="inforthings" class="nrwsw bcifst">
-                        <input type="text" placeholder="Name" value="${thisIsMe.cusName}">
-                        <input type="text" placeholder="Address" value="${thisIsMe.cusAddress}">
-                        <input type="text" placeholder="Phone" value="${thisIsMe.cusPhone}">
+                        <input id="ifname" type="text" placeholder="Name" value="${thisIsMe.cusName}">
+                        <input id="ifaddress" type="text" placeholder="Address" value="${thisIsMe.cusAddress}">
+                        <input id="ifphone" type="text" placeholder="Phone" value="${thisIsMe.cusPhone}">
+                        <textarea id="ifnote" placeholder="Notes"></textarea>
                     </div>
                     <!------------------------------------------------------------------------------------------------>
                     <!------------------------------------------------------------------------------------------------>
@@ -77,10 +79,19 @@
                             <div class="it-rd">
                                 <label for="rdd">
                                     <div class="noprice">
-                                        <input type="radio" name="as" checked="" id="rdd">
+                                        <input type="radio" name="ifmethod" checked="" value="COD"  id="rdd">
                                         <div class="namemethod">COD</div>
                                     </div>
-                                    <div class="price">$15.00</div>
+                                    <div class="price">Free</div>
+                                </label>
+                            </div>
+                            <div class="it-rd">
+                                <label for="rdf">
+                                    <div class="noprice">
+                                        <input type="radio" name="ifmethod" checked="" value="Bank Transfer"  id="rdf">
+                                        <div class="namemethod">Bank Transfer</div>
+                                    </div>
+                                    <div class="price">Free</div>
                                 </label>
                             </div>
                         </div>
@@ -106,7 +117,7 @@
                        </div>
                         <div class="ci-pu" ng-repeat="ci in listCartItems">
                             <div>
-                                <div class="imgcipu"><img src="${pageContext.request.contextPath}/productImage/{{ci.proImg}}" alt=""><span>{{numCart}}</span></div>
+                                <div class="imgcipu"><img src="${pageContext.request.contextPath}/productImage/{{ci.proImg}}" alt=""><span>{{ci.quantity}}</span></div>
                                 <p>{{ci.proName}}</p>
                             </div>
                             <p>{{"$"+ci.proPrice}}</p>
@@ -115,7 +126,7 @@
                     <div class="mathing">
                         <div class="clearfix">
                             <div class="leftkey">Subtotal</div>
-                            <div class="rightvalue">{{"$"+subtotal}}</div>
+                            <div class="rightvalue" id='bindsubtotal'>{{"$"+subtotal}}</div>
                         </div>
                         <div class="clearfix">
                             <div class="leftkey">Shipping</div>
@@ -125,7 +136,7 @@
                     <div class="total-to-ca">
                         <div>
                                 <div class="leftkey">Total</div>
-                                <div class="rightvalue">$472.99</div>
+                                <div class="rightvalue" id="bindtotal">{{"$"+subtotal}}</div>
                         </div>
                     </div>
                 </div>
@@ -134,6 +145,8 @@
         <c:import url="templates/script.jsp"></c:import>
         <script>
             var page = "${thispage}";
+            var wenttopayment = 0;
+            var edited = 0;
             $(document).ready(function(){
                 loadpage('${thispage}');
                 $("#bc-if").click(function(){
@@ -143,28 +156,59 @@
                 });
                 $("#bc-pm").click(function(){
                     event.preventDefault();
-                    paymentpage();
-                    page = "payment";
+                    if(wenttopayment == 1 && edited==0){
+                        paymentpage();
+                        page = "payment";
+                    }
+                });
+                $('.cbt').click(function(){
+                    event.preventDefault();
+                    page = "information";
+                    inforpage();
+                });
+                $('input, textarea').focusin(function(){
+                    editted = 1;
                 });
                 $("#nexttocontinue").click(function(){
                     event.preventDefault();
+                    
+                    var name = $("#ifname").val();
+                    var phone = $("#ifphone").val();
+                    var address = $("#ifaddress").val();
+                    var method = $("input[name='ifmethod']:checked").val();
+                    console.log(method);
+                    var note = $("#ifnote").val();
+                    
                     if(page == "information"){
-                        page = "payment";
-                        paymentpage();
+                        if(validatePhone(phone)){
+                            page = "payment";
+                            wenttopayment = 1;
+                            $('#ftname').text(name);
+                            $('#ftaddress').text(address);
+                            paymentpage();
+                        }
                     } else{
                         //// place order code here
-                        alert("pay");
-                        $.ajax({
-                            url: linkpage+"checkout",
-                            method: 'POST',
-                            data: {"payment":"payment"},
-                            success: function(){
-                                alert("okay");
-                            },
-                            error: function(){
-                                alert("fail");
-                            }
-                        });
+                        
+                            $.ajax({
+                                url: linkpage+"checkout",
+                                method: 'POST',
+                                data: {
+                                    "payment":"payment",
+                                    "name":name,
+                                    "phone":phone,
+                                    "address":address,
+                                    "method":method,
+                                    "note":note
+                                },
+                                success: function(){
+                                    alert("okay");
+                                },
+                                error: function(){
+                                    alert("fail");
+                                }
+                            });
+                        
                     }
                 });
                 $("#backtoprev").click(function(){
@@ -202,6 +246,17 @@
                 $("#title-down").text("Payment Method");
                 $("#backtoprev span").text("Return to Shipping Information");
                 $("#nexttocontinue span").text("Place Order");
+            }
+            function validatePhone(phone){
+                $("#ifphone").next('.varError-form').remove(); 
+                var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                if(!vnf_regex.test(phone)){
+                    console.log("phone not ok");
+                    $("#ifphone").after("<span class=\"varError-form\" style=\"color: red; \">Your Phonenumber is not supported!</span>");
+                    return false;
+                }
+                return true;
+
             }
         </script>
     </body>

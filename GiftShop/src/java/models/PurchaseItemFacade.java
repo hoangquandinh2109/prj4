@@ -6,6 +6,8 @@
 
 package models;
 
+import entity.Customer;
+import entity.Product;
 import entity.Purchase;
 import entity.PurchaseItem;
 import java.util.List;
@@ -45,5 +47,13 @@ public class PurchaseItemFacade extends AbstractFacade<PurchaseItem> implements 
                 .setParameter("purID", purID)
                 .getResultList();
     }
+
+    @Override
+    public List<Product> getAllPurchaseItemOfMe(Customer me) {
+        return em.createQuery("SELECT pi.proID FROM Purchase p INNER JOIN p.purchaseItemCollection pi WHERE p.cusID = :me ORDER BY p.dateOrderPlaced DESC")
+                .setParameter("me", me)
+                .getResultList();
+    }
+    
     
 }

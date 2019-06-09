@@ -1,4 +1,27 @@
 var app = angular.module('cangcucot', ['ngMaterial']);
+app.controller('homepagination', function($scope, $http){
+    $scope.numrow = 3;
+    
+    loadPro();
+    function loadPro(){
+       return $http.get(linkpage+"api/featureproduct")
+       .then(function(response) {
+           $scope.listProd = response.data;
+       });
+   }
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 app.controller('vippro', DemoCtrl);
 function DemoCtrl ($timeout, $q, $log, $http) {
@@ -79,13 +102,26 @@ function DemoCtrl ($timeout, $q, $log, $http) {
     var proId = $("#proID").text();
     showAllCartItems();
     $scope.proQuan=1;
+    
+    $scope.sessionid=$("#sessionid").val();
+    
+    
+    
+     $scope.checkout = function(sessionid, numCart){
+         if(sessionid) {
+             if(numCart==0){
+                modalMsg("<span class=\"text-danger\">No product in your cart!</span>");
+             }else{
+                 location.replace(linkpage+"checkout");
+             }
+         } else{
+             modalLogin();
+         }
+             
+     }
 
     $scope.addThisToCart = function(id){
         console.log("proID: "+id+" proQuan: "+$scope.proQuan);
-//        $http.get(linkpage+"cart?proID=&quatity")
-//        .then(function(response) {
-//            $scope.listCartItems = response.data.listCI;
-//        });
         $.ajax({
             url: linkpage+"cart",
             method: "POST",
@@ -136,20 +172,20 @@ function DemoCtrl ($timeout, $q, $log, $http) {
         }
         
     }
-    $scope.inc = function(id,n){
-        reSubTotal();
+    $scope.inc = function(id,n,p){
         if(n==50){
             return 50;
         }else{
+            $scope.subtotal += p;
             updateCartAjax(id,n+1);
             return n+1;
         }
     }
-    $scope.desc = function(id,n){
-        reSubTotal();
+    $scope.desc = function(id,n,p){
        if(n==1){
             deleteCartItems(id);
         }else{
+            $scope.subtotal -= p;
             updateCartAjax(id,n-1);
             return n-1;
         }
@@ -213,46 +249,6 @@ function DemoCtrl ($timeout, $q, $log, $http) {
 });
 
 
-//////////////////////////////////////////////////////////////////////////////////////Search Suggestion
-//app.controller('suggest', function($scope, $http) {
-//    $http.get(linkpage+"autocomplete")
-//    .then(function(response) {
-//        $scope.listName = response.data.listName;
-//    });
-//    $scope.inputkeyup = function(n){
-//        if(n.keyCode == 38 || n.keyCode == 40){
-//            n.preventDefault();
-//        }else{
-//            $scope.suggest(n.target.value);
-//        }
-//    }
-////    $("#search-input").focusout(function(){
-////        $("#result-suggest").addClass("hide");
-////    });
-//    $scope.suggest = function(n){
-////        console.log(e);
-//        $scope.hide = false;
-//        $("#result-suggest").removeClass("hide");
-//        $scope.listSuggest = [];
-//        var count = 0;
-//        $.each($scope.listName,function(index){
-//            if(n != "" && n != " "){
-//                if($scope.listName[index].proName.toLowerCase().includes(n.toLowerCase())){
-//                    if(count<5){
-//                        $scope.listSuggest.push($scope.listName[index].proName);
-//                        count++;
-//                    }
-//                }
-//            }
-//        });
-//    }
-//    $scope.auto = function(n){
-//        $scope.mysearch = n;
-//        $scope.hide = true;
-//    }
-//});
-
-
 
 
 
@@ -293,7 +289,6 @@ app.controller('wishlist', function($scope, $http) {
                 }
 
             }
-            var vip;
             $.ajax({
                 url: linkpage+"wishlist",
                 method: 'POST',
@@ -304,7 +299,6 @@ app.controller('wishlist', function($scope, $http) {
                     setTimeout(function (){
                         $(".notificate-product").remove();
                     },1500);
-                    vip = true;
                 },
                 error: function(){
                      itemtaghtml.find(".image-product").find(".notificate-product").remove();
@@ -312,24 +306,9 @@ app.controller('wishlist', function($scope, $http) {
                     setTimeout(function (){
                         $(".notificate-product").remove();
                     },1500);
-                    vip = false;
                 }
             });
-            if(vip){
-                if(dfdf){
-                    alert("dang bat thi de no bat");
-                    return dfdf;
-                } else{
-                    return !dfdf;
-                }
-            }else{
-                if(dfdf){
-                    return !dfdf;
-                } else{
-                    alert("dang tat thi de no tat");
-                    return dfdf;
-                }
-            }
+            return !dfdf;
         } else{
             $(".clickdetrove").addClass("havemodal");
             $("body").addClass("square");

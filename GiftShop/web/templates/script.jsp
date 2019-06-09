@@ -15,12 +15,11 @@
 <script src="${pageContext.request.contextPath}/assets/js/ajax/product-ajax.js"></script>
 <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular.min.js"></script>
 
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular-animate.min.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular-aria.min.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular-messages.min.js"></script>
 
   <!-- Angular Material Library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/library/angularjs/angular-material.min.js"></script>
   
 <script src="${pageContext.request.contextPath}/assets/js/main-angular.js"></script>

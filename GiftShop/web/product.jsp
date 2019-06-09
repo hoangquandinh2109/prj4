@@ -13,7 +13,7 @@
         <c:import url="templates/head.jsp"></c:import>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
     </head>
-    <body onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
+    <body class="square" onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
         <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
         <div class="content-n-cart clearfix">
             <div class="content">

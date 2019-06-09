@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
 </head>
 
-<body onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
+<body class="square" onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
     <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
     <input type="hidden" value="${thisP.proID}" id="proID">
     <div class="content-n-cart clearfix">
@@ -64,15 +64,15 @@
                                     <span class="numrv quantity-review">(${thisP.reviewCollection.size()})</span>
                                     </c:if>
                                 </div>
-                                <p>Vendor:Women's shirts</p>
-                                <p>THIS IS YOUR FIRST TIME</p>
+                                <!--<p>Vendor:Women's shirts</p>-->
+                                <!--<p>THIS IS YOUR FIRST TIME</p>-->
                                 <hr>
                                 <p class="availability">AVAILABLE</p>
                                 <p><span class="price">&#36;${thisP.proPrice}</span> <span
                                         class="old-price">$400</span></p>
                                 <hr>
                                 <div class="cart-quantity">
-                                    <input ng-model="proQuan" type="number" min="1" max="50">
+                                    <input readonly="" ng-model="proQuan" type="number" min="1" max="50">
                                     <button ng-click="incQuanP()" class="cart-quan-plus"><span>+</span></button>
                                     <button ng-click="descQuanP()" class="cart-quan-minus"><span>-</span></button>
                                 </div><br>

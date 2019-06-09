@@ -75,6 +75,7 @@ public class Account extends HttpServlet {
                 me.setCusPhone(phone);
                 me.setCusName(name);
                 me.setCusEmail(email);
+                session.setAttribute("sessionname", name);  
                 try {
                     customer.edit(me);
                     resp.setStatus(200);

@@ -28,7 +28,8 @@
             }
         </style>
     </head>
-    <body onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
+    <body class="square" onload="hidedangcap();" ng-app="cangcucot" ng-controller="cart">
+        <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
         <div class="content-n-cart clearfix">
             <div class="content">
                 <div class="clickdetrove"></div>

@@ -19,7 +19,8 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/fav.png">
     </head>
 
-    <body onload="hidedangcap();">
+    <body class="square content" onload="hidedangcap();">
+        <div class="clickdetrove"></div>
         <div id="dangcap">
             <div class="lds-ring">
                 <div></div>
@@ -257,7 +258,7 @@
 
                         <!--////////////////////////////////////////////////////////////////////// order detail -->
                         <div style="display: none;" id="order-detail">
-                            <h2 class="h2f">Order <span id="bindcode"></span><span><a href="" class="fr fz13 dib button-remove">Print</a></span></h2>
+                            <h2 class="h2f">Order <span id="bindcode"></span><span><a onclick="window.print();" href="" id="btnprint" class="fr fz13 dib button-remove">Print</a></span></h2>
                             <div class="mt70 ml100">
                                 <div class="r mr60i">
                                     <div class="c-05">
@@ -267,13 +268,13 @@
                                             <span id="bindaddress"></span>
                                             <span id="bindphone"></span>
                                             <span id="binddate"></span>
-                                            <span>Notes: </span>
+                                            <span id="bindnote"></span>
                                         </div>
                                     </div>
                                     <div class="c-05">
                                         <div class="od-box hb">
                                             <h3>Payment Method</h3>
-                                            <span>By: <strong>Paypal</strong> </span>
+                                            <span>By: <strong id="bindpayment"></strong> </span>
                                         </div>
                                     </div>
                                 </div>
@@ -299,6 +300,7 @@
 
                 </div>
                 <div class="right-part">
+                    <a id="backtoshop" href="${pageContext.request.contextPath}" >Back to Shopping <i class="fal fa-long-arrow-right"></i></a>
                     <div id="myaccount">
                         <div class="avatar">
                             <img src="https://2sao.vietnamnetjsc.vn/images/2018/09/01/11/13/shark-Hung-02.jpg" alt="">

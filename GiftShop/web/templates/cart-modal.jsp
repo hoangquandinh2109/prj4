@@ -28,9 +28,9 @@
                     <div class="cart-tools">
                         <div class="cart-quantity" >
                             <!--$event de lay quantity validate-->
-                            <input ng-keyup="ci.quantity = updateQuantity(ci.ID,$event)" ng-model="ci.quantity" type="number" min="1" max="50">
-                            <button ng-click="ci.quantity = inc(ci.ID,ci.quantity)" class="cart-quan-plus"><span>+</span></button>
-                            <button ng-click="ci.quantity = desc(ci.ID,ci.quantity)" class="cart-quan-minus"><span>-</span></button>
+                            <input readonly ng-model="ci.quantity" type="number" min="1" max="50">
+                            <button ng-click="ci.quantity = inc(ci.ID,ci.quantity,ci.proPrice)" class="cart-quan-plus"><span>+</span></button>
+                            <button ng-click="ci.quantity = desc(ci.ID,ci.quantity,ci.proPrice)" class="cart-quan-minus"><span>-</span></button>
                         </div>
                         <button ng-click="deleteItem(ci.ID)" class="cart-items-remove"><i class="fal fa-trash-alt"></i></button>
                     </div>
@@ -44,5 +44,5 @@
         </div>
     </div>
     <a id="toCart" href="${pageContext.request.contextPath}/cart">Go to Cart</a>
-    <a id="Checkout" href="${pageContext.request.contextPath}/checkout">Check out <i class="fal fa-long-arrow-right"></i></a>
+    <a id="Checkout"  ng-click="checkout(sessionid, numCart)" href="">Check out <i class="fal fa-long-arrow-right"></i></a>
 </div>

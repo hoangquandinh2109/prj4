@@ -10,12 +10,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.ProductFacadeLocal;
 
 /**
  *
@@ -23,8 +25,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "Home", urlPatterns = {"/home"})
 public class Home extends HttpServlet {
-
-    @Override
+    
+    @EJB
+    private ProductFacadeLocal proDB;
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<String> list = new ArrayList<>();
         list.add("Vipkien");
@@ -32,21 +35,11 @@ public class Home extends HttpServlet {
         list.add("Iphone 7");
         list.add("Samsung 7");
         list.add("Kzenton 0392");
-//        list.add("Fovien 830");
-//        list.add("Moutain Dew ");
-//        list.add("Vip 700 S7");
-//        list.add("Black Milktea");
-//        list.add("Aleader Funky");
-//        list.add("Black coil");
-//        list.add("Logitech Mouse");
-//        list.add("Vippro");
-//        list.add("Nguoi dung lang im");
-//        list.add("Monster");
-//        list.add("Vip bien hoa");
-//        list.add("Guitar Solo");
-//        list.add("Bip Na Dang");
-//        list.add("Sony Z8");
         req.setAttribute("list", list);
+        
+        List<entity.Product> listnew = proDB.top12New();
+        req.setAttribute("listn", listnew);
+        
         req.setAttribute("pagename", "Home");
         HttpSession session=req.getSession();
         req.setAttribute("sessionname", session.getAttribute("sessionname"));

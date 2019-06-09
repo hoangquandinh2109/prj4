@@ -11,7 +11,8 @@
     <head>
         <c:import url="templates/head.jsp"></c:import>
         </head>
-        <body onload="hidedangcap();" ng-app="cangcucot"  ng-controller="cart">
+        <body class="square" onload="hidedangcap();" ng-app="cangcucot"  ng-controller="cart">
+            <input type="hidden" value="${sessionScope.sessionid}" id="sessionid">
             <div class="content-n-cart clearfix">
                 <div class="content">
                     <div class="clickdetrove"></div>
@@ -87,7 +88,7 @@
                                         <div class="owl-carousel left-vertical-product-slide">
                                         <c:set var="i" value="0" />
                                         <c:set var="j" value="0" />
-                                        <c:forEach items="${list}" var="ssd">
+                                        <c:forEach items="${listn}" var="listnew">
                                             <c:if test="${i == 0}">
                                                 <div>
                                                 </c:if>
@@ -96,9 +97,9 @@
                                                         <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                                     </div>
                                                     <div class="product-info">
-                                                        <a href="">${ssd}</a>
+                                                        <a href="">${listnew.proName}</a>
                                                         <!-- <span class="price">$234.32</span> -->
-                                                        <span class="old-price">$2349</span> <span class="new-price">$2349</span>
+                                                        <span class="old-price">${listnew.proPrice}</span> <span class="new-price">${listnew.proPrice}</span>
                                                     </div>
                                                     <div class="review-n-button-tu">
                                                         <div class="review-tu clearfix">
@@ -122,7 +123,7 @@
                                                 </div>
                                                 <c:set var="i" value="${i+1}" />
                                                 <c:set var="j" value="${j+1}" />
-                                                <c:if test="${i == 2 || j == list.size()}">
+                                                <c:if test="${i == 2 || j == listn.size()}">
                                                 </div>
                                                 <c:set var="i" value="0" /> 
                                             </c:if>
@@ -155,56 +156,72 @@
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
                                 </div>
                                 <div class="title-row">Features <span>Product</span></div>
-                                <div class="product-block">
-                                    <c:set var="i" value="0" />
-                                    <c:set var="j" value="0" />
-                                    <c:forEach items="${list}" var="sd">
-                                        <c:if test="${i == 0}">
-                                            <div class="row"  style="overflow: hidden;">
-                                            </c:if>
-                                            <div class="product-item wow fadeInUp">
-                                                <div class="image-product">
-                                                    <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
-                                                </div>
-                                                <div class="product-info">
-                                                    <a href="">${sd}</a>
-                                                    <!-- <span class="price">$234.32</span> -->
-                                                    <span class="old-price">$2349</span> <span class="new-price">$2349</span>
-                                                </div>
-                                                <div class="review-n-button-tu">
-                                                    <div class="review-tu clearfix">
-                                                        <div class="star-review">
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <div class="star-reviewed">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <span class="quantity-review">No reviews</span>
-                                                    </div>
-                                                    <div class="button-tu clearfix">
-                                                        <div class="btn-addtocart addtocart clearfix">
-                                                            <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                            <span class="tool-title">Add to Cart</span>
-                                                        </div>
-                                                        <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                            <c:set var="i" value="${i+1}" />
-                                            <c:set var="j" value="${j+1}" />
-                                            <c:if test="${i == 4 || j == list.size()}">
+                                <div class="product-block" ng-controller="homepagination">
+                                    <div class="row"  style="overflow: hidden;">
+                                        <div ng-repeat="p in listProd" ng-if="p.feature != 'New'" class="product-item wow fadeInUp">
+                                            <span class="box-ft-label"></span>
+                                            <span class="ft-label">{{p.feature}}</span>
+                                            <div class="image-product">
+                                                <a href="{{p.url}}"><img src="{{p.img}}" alt=""></a>
                                             </div>
-                                            <c:set var="i" value="0" />
-                                        </c:if>
-                                    </c:forEach>
+                                            <div class="product-info">
+                                                <a href="{{p.url}}">{{p.name}}</a>
+                                                <!-- <span class="price">$234.32</span> -->
+                                                <span class="old-price">$2349</span> <span class="new-price">{{p.price}}</span>
+                                            </div>
+                                            <div class="review-n-button-tu">
+                                                <div class="review-tu clearfix">
+                                                    <div class="star-review">
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <div class="star-reviewed">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <span class="quantity-review">No reviews</span>
+                                                </div>
+                                                <div class="button-tu clearfix">
+                                                    <div class="btn-addtocart addtocart clearfix">
+                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
+                                                        <span class="tool-title">Add to Cart</span>
+                                                    </div>
+                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="row text-center">
+                                        <div id="pagination" class="clearfix">
+                                            <ul class="pagination">
+                                                <li>
+                                                    <a title="« Previous">
+                                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">1</a>
+                                                </li>
+                                                <li class="active">
+                                                    <span>2</span>
+                                                </li>
+                                                <li>
+                                                    <a href="">3</a>
+                                                </li>
+                                                <li>
+                                                    <a title="« Previous">
+                                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="event">
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannercenter_873x160.png?v=1507088526" alt=""></a>

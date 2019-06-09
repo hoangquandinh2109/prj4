@@ -14,16 +14,49 @@ $color-border-pink: #db1952;
 background: #f5f5f5; 
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-background: $color-blue; 
+    background: $color-pink; 
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-background: $color-pink; 
+@-webkit-keyframes fadeInDownModal {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+        transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0) translate(-50%, -50%);
+        transform: translate3d(0, 0, 0) translate(-50%, -50%);
+    }
 }
 
+@keyframes fadeInDownModal {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+        transform: translate3d(0, -100%, 0) translate(-50%, -50%);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0) translate(-50%, -50%);
+        transform: translate3d(0, 0, 0) translate(-50%, -50%);
+    }
+}
+
+.fadeInDownMsg {
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: fadeInDownModal;
+    animation-name: fadeInDownModal;
+}
+
+
+.text-center{
+    text-align: center;
+}
 
 #dangcap{
 /*  animation: dangcap1 1.5s infinite;*/
@@ -128,6 +161,7 @@ a{
 *{
     font-family: 'MerriweatherSans';
 }
+
 body{
     margin: 0;padding: 0;
     .product-item{
@@ -430,10 +464,74 @@ body{
     position: absolute;
     right: 20px;bottom: 20px;
 }
+.quan-io {
+    position: absolute;
+    left: 100px;
+    bottom: 20px;
+    opacity: 0.5;
+}
 span.varError-form{
     color: #f00;
     width: 400px;
     margin: 0 auto;
     display: block;
     font-size: 11px;
+}
+.no-item-od{
+    text-align: center;
+    padding: 30px 0;
+    opacity: 0.5;
+}
+body{
+    overflow-y: scroll;
+    &.square{
+        position: fixed;
+        width: 100%;
+        top: 0;
+    }   
+}
+.clickdetrove.havemodal{
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #0000005c;
+    z-index: 100000;
+    opacity:1;
+}
+.modal-form{
+    padding: 20px;
+    width: 500px;
+    overflow: auto;
+    max-height: 100%;
+    background-color: #fff;
+    position: fixed;
+    transform: translate(-50%, -50%);  
+    top: 50%;
+    left: 50%;
+    z-index: 100001;
+}
+#backtoshop {
+    display: block;
+    text-align: right;
+    margin-right: 20px;
+    color: #000;
+    &:hover{
+        color: $color-pink;
+    }
+}
+@media print{
+    .right-part{
+        display: none!important;
+    }
+    #switcher{
+        display: none!important;
+    }
+    .left-part{
+        width: 100%!important;
+    }
+    #btnprint{
+        display:none;
+    }
+    .od-box h3 {
+        border: 1px solid #ebebeb;
+    }
 }

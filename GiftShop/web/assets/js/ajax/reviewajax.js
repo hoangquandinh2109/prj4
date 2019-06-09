@@ -99,7 +99,7 @@ function loadAll(){
                     code+="                        </div>";
                     code+="                    </div>";
                     code+="                    <h2>"+data[index].title+"</h2>";
-                    code+="                    <span class=\"info-people\"><strong>"+data[index].cusName+"</strong> on <strong>May 21, 2019</strong></span>";
+                    code+="                    <span class=\"info-people\">by <strong>"+data[index].cusName+"</strong></span>";
                     code+="                    <p>"+data[index].content+"</p>                 ";
                     code+="                </div>  ";
                 }

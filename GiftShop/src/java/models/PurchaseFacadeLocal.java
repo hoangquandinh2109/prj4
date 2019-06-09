@@ -36,7 +36,5 @@ public interface PurchaseFacadeLocal {
     String getLastPurchaseID();
 
     List<Purchase> orderofme(Customer me);
-
-    List<Product> top4productordered(Customer me);
     
 }

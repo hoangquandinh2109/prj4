@@ -85,6 +85,13 @@ public class PurchaseServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int cusID= (int) session.getAttribute("sessionid");
         String payment = request.getParameter("payment");
+        
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String method = request.getParameter("method");
+        String note = request.getParameter("note");
+        
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	Date now = new Date();
 	String purId= dateFormat.format(now);
@@ -120,6 +127,13 @@ public class PurchaseServlet extends HttpServlet {
             purchase.setCusID(customer.find(cusID));
             purchase.setDateOrderPlaced(now);
             purchase.setPurID(purId);
+            
+            purchase.setToName(name);
+            purchase.setToPhone(phone);
+            purchase.setToAddress(address);
+            purchase.setPaymentMethod(method);
+            purchase.setNote(note);
+            
             purchase.setPurchaseStatus(Short.parseShort("0"));
             purchase.setTotalPrice(cartFacade.getTotalPrice());
             purchaseFacade.create(purchase);
@@ -132,15 +146,15 @@ public class PurchaseServlet extends HttpServlet {
                 purchaseItem.setPurID(purchase);
                 purchaseItem.setQuantity(cartItem.getQuantity());
                 cPI.add(purchaseItem);
-               
+                purchase.setPurchaseItemCollection(cPI);
+                purchaseFacade.edit(purchase);
             }
-            purchase.setPurchaseItemCollection(cPI);
-            purchaseFacade.edit(purchase);
             cartFacade.removeAll();
             response.setStatus(200);
             return;
         }
         response.setStatus(404);
     }
+
 
 }

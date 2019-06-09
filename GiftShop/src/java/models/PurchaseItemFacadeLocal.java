@@ -6,6 +6,8 @@
 
 package models;
 
+import entity.Customer;
+import entity.Product;
 import entity.Purchase;
 import entity.PurchaseItem;
 import java.util.List;
@@ -35,5 +37,7 @@ public interface PurchaseItemFacadeLocal {
     List<PurchaseItem> purItemByPur(String purchaseID);
     
     List<PurchaseItem> ItemofMe(Purchase purID);
+
+    List<Product> getAllPurchaseItemOfMe(Customer me);
     
 }

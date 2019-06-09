@@ -46,14 +46,7 @@ public class PurchaseFacade extends AbstractFacade<Purchase> implements Purchase
 
     @Override
     public List<Purchase> orderofme(Customer me) {
-        return em.createQuery("SELECT p FROM Purchase p WHERE p.cusID = :cusID ORDER BY p.dateOrderPlaced DESC")
-                .setParameter("cusID", me)
-                .getResultList();
-    }
-    @Override
-    public List<Product> top4productordered(Customer me) {
-        return em.createQuery("SELECT p2.proID FROM Purchase p INNER JOIN p.purchaseItemCollection p2 WHERE p.cusID = :cusID")
-                .setMaxResults(4)
+        return em.createQuery("SELECT p FROM Purchase p WHERE p.cusID = :cusID ORDER BY p.purID DESC")
                 .setParameter("cusID", me)
                 .getResultList();
     }
