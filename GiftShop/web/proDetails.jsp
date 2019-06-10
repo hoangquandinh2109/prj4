@@ -89,21 +89,12 @@
                             <div class="tab-for-somthing">
                                 <ul class="button-tab">
                                     <li class="active"><a href="" id="info">More Details</a></li>
-                                    <li><a href="" id="faq">FAQs</a></li>
                                     <li><a href="" id="review">Reviews</a></li>
                                     <li><a href="" id="comment">Comment</a></li>
                                 </ul>
                                 <div class="tab-things">
                                     <div id="infoTab" class="tabs">
                                         ${thisP.proDetails}
-                                    </div>
-                                    <div style="display: none;" id="faqTab" class="tabs">
-                                        <h4>vip</h4>
-                                        <input  placeholder="Give your review a title" class="review-input"/>    
-                                        <input  placeholder="Give your review a title" class="review-input"/>    
-                                        <input  placeholder="Give your review a title" class="review-input"/>    
-                                        <textarea class="review-input" placeholder="Write your comment here"></textarea>     
-                                        <button id="btn-faq">SUBMIT REVIEW</button>                                          
                                     </div>
                                     <div style="display: none;" id="reviewTab" class="tabs">
                                         <h3 class="review-h3">Customer Reviews</h3>  

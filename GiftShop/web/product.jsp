@@ -24,47 +24,16 @@
                             <div class="row"  ng-controller="wishlist">
                                 <div class="left-column">
                                     <div class="categories">
-                                        <h4 class="title-bar-categories"><i class="far fa-list"></i>Categories</h4>
+                                        <h4 class="title-bar-categories"><i class="far fa-list"></i>For</h4>
                                         <ul>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fa fa-gamepad"></i>Boys</span>
-                                                <span class="categories-desc">Proin gravida nibh vel velit auctor aliquet</span></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fal fa-diploma"></i></i>Girls</span>
-                                                <span class="categories-desc">Aenean sollicitudin, lorem quis bibendum auctor</span></span>
-                                            <!--<i class="fas fa-caret-left"></i>-->
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fa fa-female"></i>Women</span>
-                                                <span class="categories-desc">Duis sed odio sit amet nibh vulputate</span></span>
-                                            <!--<i class="fas fa-caret-left"></i>-->
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="fa fa-male"></i>Men</span>
-                                                <span class="categories-desc">Morbi accumsan ipsum velit. Nam nec tellus</span></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="categories-title"><i class="far fa-user-friends"></i></i>For All</span>
-                                                <span class="categories-desc">Sed non  mauris vitae erat consequat auctor eu in elit</span></span>
-                                            <!--<i class="fas fa-caret-left"></i>-->
-                                            </a>
-                                        </li>
-<!--                                            <li>
-                                                <a href="">
-                                                    <span class="categories-title"><i class="far fa-tennis-ball"></i>Sports</span>
-                                                    <span class="categories-desc">Class aptent taciti sociosqu ad litora</span></span>
+                                            <c:forEach items="${listCat}" var="lC">
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/product/category/${lC[0]}">
+                                                    <span class="categories-title"><i class=" ${lC[3]}"></i>${lC[1]}</span>
+                                                    <span class="categories-desc">${lC[2]}</span>
                                                 </a>
-                                            </li>-->
+                                            </li>
+                                            </c:forEach>
                                         </ul>
                                     </div>
                                     <div>
@@ -79,6 +48,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <c:if test="${nameColl == 'category'}">
                                     <div>
                                         <div class="title-row">REFINE BY <span>TYPE</span></div>
                                         <div id="filt-type">
@@ -91,6 +61,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    </c:if>
                                     <div class="event">
                                         <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/sidebar_bannertwo_278x189.png?v=1507087021"  alt=""></a>
                                     </div>
@@ -149,7 +120,7 @@
                                         <div id="pagination" class="clearfix">
                                             <ul class="pagination">
                                                 <li ng-if='!disableleft()'>
-                                                    <a ng-click="switchpage(currPage - 1)" title="« Previous">
+                                                    <a ng-click="switchpage(currPage - 1)" title="">
                                                         <i class="fa fa-chevron-left" aria-hidden="true"></i>
                                                     </a>
                                                 </li>
@@ -158,7 +129,7 @@
                                                     <span ng-if="active(n) == 'active'" >{{n}}</span>
                                                 </li>
                                                 <li ng-if='!disableright()'>
-                                                    <a ng-click="switchpage(currPage + 1)" title="« Previous">
+                                                    <a ng-click="switchpage(currPage + 1)" title="">
                                                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                                     </a>
                                                 </li>

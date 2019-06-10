@@ -54,10 +54,6 @@ public class testanything extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        for(Product p : productFacade.top12Hot()){
-            System.out.println(p.getProID()+"  "+p.getProName());
-        }
     }
 
 }

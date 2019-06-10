@@ -202,7 +202,7 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     @Override
     public List<Object[]> getFeautureProduct() {
         try {
-            return em.createQuery("SELECT p,f FROM Feature f INNER JOIN f.productCollection p WHERE p.proStatus = true AND f.statusFeature = true")
+            return em.createQuery("SELECT p,f FROM Feature f INNER JOIN f.productCollection p WHERE p.proStatus = true AND f.statusFeature = true AND f.featureID <> 1")
                     .getResultList();
         } catch (Exception e) {
             return null;

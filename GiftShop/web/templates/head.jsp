@@ -14,6 +14,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cart.css">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/fav.png">
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/angularjs/angular-material.min.css">
+
 <title>GiftStore - ${pagename}</title>

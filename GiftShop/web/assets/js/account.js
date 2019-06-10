@@ -311,6 +311,45 @@ function removeW(id){
         loadWishlist();
     });
 }
+function loadTop4Wishlist(){
+    get("api/getMyWishlist").done(function(data){
+     
+        if(data.length != 0){
+//            var rowsItems = "";
+//            var checkRow = 0;
+            for(var i = 0 ; i<4;i++){
+                console.log(data[i].url);
+//                if(checkRow === 0){
+//                    rowsItems +="<div class=\"r lpwl1\">";
+                }}else console.log("rong roi ba");
+//                
+//                rowsItems +=    "<div class=\"c-05\">";
+//                rowsItems +=        "<div class=\"product-item\">";
+//                rowsItems +=            "<a href=\""+data[i].url+"\"><img src=\""+data[i].img+"\" alt=\"\"></a>";
+//                rowsItems +=            "<a href=\""+data[i].url+"\" class=\"pname\">"+data[i].name+"</a>";
+//                rowsItems +=            "<div class=\"wishlist-price\">"+data[i].price+"</div>";
+//                rowsItems +=            "<button onclick=\"removeW('"+data[i].id+"'); return false;\" class=\"button-remove pbutton-wishlist\">Remove</button>";
+//                rowsItems +=        "</div>";
+//                rowsItems +=    "</div>";
+//                checkRow++;
+//                
+//                if(checkRow === 2 || !data[i+1]){
+//                    rowsItems += "</div>";
+//                    checkRow = 0;
+//                }
+//            }
+//            $(".lpwl1").remove();
+//            $("#erodd1").remove();
+//            $("#bindproductwl1").append(rowsItems);
+//        }else{
+//            $(".lpwl1").remove();
+//            $("#erodd1").remove();
+//            $("#bindproductwl1").append("<div id=\"erodd1\" style=\"opacity: 0.5;\">no items</div>");
+//        }
+    }).fail(function(){
+        
+    });
+}            
 function loadWishlist(){
     get("api/getMyWishlist").done(function(data){
         if(data.length != 0){
