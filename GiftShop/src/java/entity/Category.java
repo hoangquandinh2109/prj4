@@ -37,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Category.findByStatusCategory", query = "SELECT c FROM Category c WHERE c.statusCategory = :statusCategory"),
     @NamedQuery(name = "Category.findByCateDescription", query = "SELECT c FROM Category c WHERE c.cateDescription = :cateDescription")})
 public class Category implements Serializable {
+    @OneToMany(mappedBy = "catID")
+    private Collection<ProductType> productTypeCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -139,6 +141,15 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return "entity.Category[ catID=" + catID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<ProductType> getProductTypeCollection() {
+        return productTypeCollection;
+    }
+
+    public void setProductTypeCollection(Collection<ProductType> productTypeCollection) {
+        this.productTypeCollection = productTypeCollection;
     }
     
 }

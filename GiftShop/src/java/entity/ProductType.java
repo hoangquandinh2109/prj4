@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ProductType.findByStatusType", query = "SELECT p FROM ProductType p WHERE p.statusType = :statusType"),
     @NamedQuery(name = "ProductType.findByTypeDescription", query = "SELECT p FROM ProductType p WHERE p.typeDescription = :typeDescription")})
 public class ProductType implements Serializable {
+    @JoinColumn(name = "catID", referencedColumnName = "catID")
+    @ManyToOne
+    private Category catID;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -125,6 +130,14 @@ public class ProductType implements Serializable {
     @Override
     public String toString() {
         return "entity.ProductType[ typeID=" + typeID + " ]";
+    }
+
+    public Category getCatID() {
+        return catID;
+    }
+
+    public void setCatID(Category catID) {
+        this.catID = catID;
     }
     
 }

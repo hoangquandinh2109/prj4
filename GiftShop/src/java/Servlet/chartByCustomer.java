@@ -57,22 +57,11 @@ public class chartByCustomer extends HttpServlet {
                 if (income > 0.0D) {
                     ChartByCustomer cus = new ChartByCustomer(email, name, income);
                     list.add(cus);
+                    total += income;
+                    request.setAttribute("total", total);
                 }
             }
-            for (int i = 0; i < list.size(); i++) {
-                for (int j = 0; j < list.size(); j++) {
-                    if (((ChartByCustomer) list.get(i)).getIncome() < ((ChartByCustomer) list.get(j)).getIncome()) {
-                        ChartByCustomer tem = new ChartByCustomer((ChartByCustomer) list.get(i));
-                        list.set(i, new ChartByCustomer((ChartByCustomer) list.get(j)));
-                        list.set(j, new ChartByCustomer(tem));
-                    }
-                }
-            }
-            int endIndex = (list.size() >= 5) ? 5 : list.size();
-            for (ChartByCustomer cr : list.subList(1, endIndex)) {
-                total += cr.getIncome();
-                request.setAttribute("list", list.subList(1, endIndex));
-            }
+            request.setAttribute("list", list);//Luu ten hang doang thu vao bien
             request.getRequestDispatcher("admin/chartByCustomer.jsp").forward(request, response);
 
         }

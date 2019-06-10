@@ -7,9 +7,11 @@
 package models;
 
 import entity.TbTag;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,6 @@ public class TbTagFacade extends AbstractFacade<TbTag> implements TbTagFacadeLoc
     public TbTagFacade() {
         super(TbTag.class);
     }
+
     
 }

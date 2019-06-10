@@ -8,6 +8,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+          <style type="text/css">
+                .required {
+                    color: red;
+                }
+            </style>
         <c:import url="../templates/adminHead.jsp"></c:import>
         </head>
         <body class="app sidebar-mini rtl">
@@ -15,8 +20,8 @@
         <main class="app-content">
             <div class="app-title">
                 <div>
-                    <h1><i class="fa fa-edit"></i>Category & Type</h1>
-                    <p>Insert new category & type</p>
+                    <h1><i class="fa fa-edit"></i>Category </h1>
+                    <p>Update category </p>
                 </div>
               <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>

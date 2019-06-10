@@ -19,8 +19,8 @@
         <main class="app-content">
             <div class="app-title">
                 <div>
-                    <h1><i class="fa fa-edit"></i>List Products</h1>
-                    <p>List products</p>
+                    <h1><i class="fa fa-edit"></i>List Purchase</h1>
+                    <p>List Purchase</p>
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>

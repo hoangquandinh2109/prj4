@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Wishlist.findByWishlistID", query = "SELECT w FROM Wishlist w WHERE w.wishlistID = :wishlistID"),
     @NamedQuery(name = "Wishlist.findByQuantity", query = "SELECT w FROM Wishlist w WHERE w.quantity = :quantity")})
 public class Wishlist implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -112,5 +113,8 @@ public class Wishlist implements Serializable {
         return "entity.Wishlist[ wishlistID=" + wishlistID + " ]";
     }
 
+    
+
+    
    
 }

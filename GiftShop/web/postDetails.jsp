@@ -60,7 +60,7 @@
                                                     <div class="tag col1 tags edpostShow" style="display:none">
                                                         <select name="gg" id="mySelect2" style="width: 100%"  multiple="multiple">
                                                             <c:forTokens items="${p.postTag}" delims=";" var="tag">
-                                                                <option value="${tag}">${tag}</option>
+                                                                <option value="${tag}" selected="selected">${tag}</option>
                                                             </c:forTokens>
                                                         </select>
                                                         <br>
@@ -127,7 +127,7 @@
 
                                                                     <c:if test="${sessionid eq cmt.cusID.cusID}">
                                                                         <button class="btn btn-outline-primary edit-cmt" style="cursor: pointer"  onClick="$('#editCmtInput${cmt.commentID}').show();
-                                                                            $('#edCmtValue${cmt.commentID}').hide();"><i class="fal fa-edit"></i></button>
+                                                                                    $('#edCmtValue${cmt.commentID}').hide();"><i class="fal fa-edit"></i></button>
                                                                         <button class="btn btn-outline-danger" onclick="deleteCommentFunction(${cmt.commentID})"><i class="fal fa-trash-alt"></i></button>
                                                                         </c:if>
                                                                 </div>
@@ -153,7 +153,7 @@
                                                                                     <span class="btn reply text-primary" id='haha${rep.repID}'  onClick="$('#cmt${cmt.commentID}').show();"><i class="fal fa-reply"></i>Reply</span> 
                                                                                     <c:if test="${sessionid eq rep.cusID.cusID}">
                                                                                         <button class="btn btn-outline-primary edit-cmt" style="cursor: pointer"  onClick="$('#edit${rep.repID}').show();
-                                                                                            $('#rep${rep.repID}').hide();"><i class="fal fa-edit"></i></button>
+                                                                                                    $('#rep${rep.repID}').hide();"><i class="fal fa-edit"></i></button>
                                                                                         <button id="delete${rep.repID}}" onClick=" deleteReplyFunction(${rep.repID});" class="btn btn-outline-danger"><i class="fal fa-trash-alt"></i></button>
                                                                                         </c:if>
 
@@ -182,44 +182,46 @@
                                             <br>
                                             <div>
                                                 <div class="d-md-flex">
-                                                    <div class="p-2 bg-secondary text-white">Cung 1 tac GIa</div>
+                                                    <div class="p-2 bg-secondary text-white">Same Author</div>
 
                                                 </div>
                                                 <div class="pl-3 hop">
                                                     <br>
-                                                    <div class="media p-1">
-                                                        <div class="left-content">
-                                                            <div class="pl-4">
-                                                                <img src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" class="rounded-circle avt2" alt="Cinque Terre"/>
-                                                            </div>
-
-                                                            <a href="#" class="text-decoration-none text-info"><p class="text-break text-center font-weight-bold">NGUYEN HUU THANG</p></a> 
-                                                        </div>
-                                                        <div class="media-body content-Same">
-                                                            <div class="post-title">
-                                                                <a href="#" class="text-decoration-none title-text"><span class="tx font-weight-bold">Toi da ngu nhu the nao trong hoan canh nay</span></a>
-                                                                <a href="#" data-toggle="tooltip" class="text-time text-secondary" title="February 19, 2016!"><small>1 day ago</small></a> 
-                                                            </div>
-                                                            <div class="post-body">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>      
-                                                            </div>
-                                                            <div class="post-footer">
-                                                                <div class="tag col1">
-                                                                    <a href="#" class="text-decoration-none"><span class="label text-tags">Success</span></a>
-                                                                    <a href="#" class="text-decoration-none"><span class="label text-tags">dep trai roi</span></a>
-                                                                    <a href="#" class="text-decoration-none"><span class="label text-tags">Success</span></a>
-                                                                    <a href="#" class="text-decoration-none"><span class="label text-tags">Success</span></a>
+                                                    <c:forEach items="${authorPost}" var="au" begin="0" end="3">
+                                                        <div class="media p-1">
+                                                            <div class="left-content">
+                                                                <div class="pl-4">
+                                                                    <img src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png" class="rounded-circle avt2" alt="Cinque Terre"/>
                                                                 </div>
-                                                                <div class="col2 pl-3">
-                                                                    <span>1<i class="far fa-thumbs-up"></i></span></a>
-                                                                    <span>1<i class="far fa-comment"></i></span></a>
-                                                                    <a href="#" class="text-decoration-none"><span><i class="far fa-flag"></i></span></a>
 
+                                                                <a href="#" class="text-decoration-none text-info"><p class="text-break text-center font-weight-bold">${au.cusID.cusName}</p></a> 
+                                                            </div>
+                                                            <div class="media-body content-Same">
+                                                                <div class="post-title">
+                                                                    <a href="#" class="text-decoration-none title-text"><span class="tx font-weight-bold">${au.titlePost}</span></a>
+                                                                    <a href="#" data-toggle="tooltip" class="text-time text-secondary" title="February 19, 2016!"><small>1 day ago</small></a> 
+                                                                </div>
+                                                                <div class="post-body">
+                                                                    <p>${au.infontContent}</p>      
+                                                                </div>
+                                                                <div class="post-footer">
+                                                                    <div class="tag col1">
+                                                                    <c:forTokens items="${au.postTag}" delims=";" var="tag">
+                                                                        <a href="#" class="text-decoration-none"><span class="label text-tags">${tag}</span></a>
+                                                                    </c:forTokens>
+                                                                    </div>
+                                                                 <!--   <div class="col2 pl-3">
+                                                                        <span>1<i class="far fa-thumbs-up"></i></span></a>
+                                                                        <span>1<i class="far fa-comment"></i></span></a>
+                                                                        <a href="#" class="text-decoration-none"><span><i class="far fa-flag"></i></span></a>
+
+                                                                    </div>-->
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                    </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                    <a style="float:right" href="#">More post ->></a>
 
                                                 </div>
                                             </div>
@@ -227,14 +229,14 @@
                                         </div>
                                     </div></c:when>
                                 <c:otherwise>
-                                   
+
                                     <div class="col-md-9 col-sm-12">
-                                         <br>
+                                        <br>
                                         <div class="jumbotron">
                                             <h1>CANNOT NOT FOUND</h1>      
                                             <p>THIS POST IS NOT AVALIABLE</p>
                                         </div>
-                                            
+
                                     </div>
                                 </c:otherwise>
                             </c:choose>
@@ -245,22 +247,20 @@
                                 <div class="card ml-4">
                                     <div class="card-body"><img  class="avt shadow-sm p-2 mb-2 bg-white" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png "></div>
                                     <div class="card-body">
-                                        <p><u>Author INFOR</u></p>
-                                        <p>    ${p.cusID.cusName}</p>
+                                        <p><u>Author information</u></p>
+                                    <a href="#"><h3 class="font-weight-bold">${p.cusID.cusName}</h3></a>
                                     </div> 
                                     <div class="card-footer">
                                         <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                            <p>LUOT THICH</p>
-                                            <p>2</p>
+                                          <span>200 <i style="color:blue" class="far fa-thumbs-up"></i></span>
+                                          
                                         </span>
                                         <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                            <p>SO BAI VIET</p>
-                                            <p>3</p>
+                                           <span>300 <i class="far fa-comment"></i></span>
+                                           
                                         </span>
-                                        <span class="border1 border-0">
-                                            <p>ICON</p>
-                                            <p>4</p>
-                                        </span>
+                                       
+                                      
                                     </div>
                                 </div>
                                 <hr>
@@ -273,10 +273,14 @@
                                     <div class="shadow-sm p-4 mb-4 bg-white">
                                         <div class="hop">
                                             <div class="tag p-1">
-                                                <a href="#" class="text-decoration-none"><span class="label text-tags">BirthDay</span></a>                              
-                                                <a href="#" class="text-decoration-none"><span class="label text-tags">weddingGift</span></a>
-                                                <a href="#" class="text-decoration-none"><span class="label text-tags">8/3</span></a>
-                                                <a href="#" class="text-decoration-none"><span class="label text-tags">ForWife</span></a>
+                                                 <c:set var="a" value="post"></c:set>
+                                                <c:forEach   items="${tags}" var="tag">
+                                                     <c:if  test="${tag.tagType eq a}">
+                                                     <a href="#" class="text-decoration-none"><span class="label text-tags">${tag.tag}</span></a> 
+                                                     </c:if>    
+                                                </c:forEach>
+                                                    
+                                               
 
                                             </div>
                                         </div>
@@ -287,7 +291,7 @@
                                 </div>
                                 <hr>
                                 <div class="d-md-flex">
-                                    <div class="p-2 bg-secondary text-white">Cung 1 tac GIa</div>
+                                    <div class="p-2 bg-secondary text-white">Top author</div>
 
                                 </div>
                                 <div class="tacgia shadow-sm p-4 mb-4 bg-white">

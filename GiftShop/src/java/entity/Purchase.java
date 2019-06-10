@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Purchase.findByDateOrderPlaced", query = "SELECT p FROM Purchase p WHERE p.dateOrderPlaced = :dateOrderPlaced"),
     @NamedQuery(name = "Purchase.findByDateOrderPaid", query = "SELECT p FROM Purchase p WHERE p.dateOrderPaid = :dateOrderPaid")})
 public class Purchase implements Serializable {
-   
+  
     @Size(max = 50)
     @Column(name = "toName", length = 50)
     private String toName;
@@ -209,5 +209,5 @@ public class Purchase implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
-    
+
 }

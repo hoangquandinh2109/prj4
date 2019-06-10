@@ -56,7 +56,7 @@
                                     </c:otherwise>
                                 </c:choose></td>
                             <td>
-                                <a class="btn btn-sm" href="getDetailsCatServlet?feaID=${s.featureID}">Update</a>
+                                <a class="btn btn-sm" href="getDetailsFeaServlet?feaID=${s.featureID}">Update</a>
                                 <br/>
                                 <br/>
                                 <input type="hidden" value="${s.featureID}" name="id1"/>     
