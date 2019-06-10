@@ -53,7 +53,7 @@
                         <div  id="pagination" class="clearfix">
                             <ul class="pagination">
                                 <li ng-if='!disableleft()'>
-                                    <a ng-click="switchpage(currPage-1)" title="« Previous">
+                                    <a ng-click="switchpage(currPage-1)" >
                                         <i class="fa fa-chevron-left" aria-hidden="true"></i>
                                     </a>
                                 </li>
@@ -62,7 +62,7 @@
                                     <span ng-if="active(n) == 'active'" >{{n}}</span>
                                 </li>
                                 <li ng-if='!disableright()'>
-                                    <a ng-click="switchpage(currPage+1)" title="« Previous">
+                                    <a ng-click="switchpage(currPage+1)" >
                                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                     </a>
                                 </li>

@@ -19,61 +19,28 @@
                 <c:import url="templates/header.jsp"></c:import>
                     <div class="web-body">
                         <div class="container">
-                            <div class="row">
+                            <div class="row" ng-controller="wishlist">
                                 <div class="left-column">
                                     <div class="categories">
-                                        <h4 class="title-bar-categories"><i class="far fa-list"></i>Categories</h4>
+                                        <h4 class="title-bar-categories"><i class="far fa-list"></i>For</h4>
                                         <ul>
+                                            <c:forEach items="${listCat}" var="lC">
                                             <li>
-                                                <a href="">
-                                                    <span class="categories-title"><i class="fa fa-gamepad"></i>Boys</span>
-                                                    <span class="categories-desc">Proin gravida nibh vel velit auctor aliquet</span></span>
+                                                <a href="${pageContext.request.contextPath}/product/category/${lC[0]}">
+                                                    <span class="categories-title"><i class=" ${lC[3]}"></i>${lC[1]}</span>
+                                                    <span class="categories-desc">${lC[2]}</span>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="">
-                                                    <span class="categories-title"><i class="fal fa-diploma"></i></i>Girls</span>
-                                                    <span class="categories-desc">Aenean sollicitudin, lorem quis bibendum auctor</span></span>
-                                                    <!--<i class="fas fa-caret-left"></i>-->
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <span class="categories-title"><i class="fa fa-female"></i>Women</span>
-                                                    <span class="categories-desc">Duis sed odio sit amet nibh vulputate</span></span>
-                                                    <!--<i class="fas fa-caret-left"></i>-->
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <span class="categories-title"><i class="fa fa-male"></i>Men</span>
-                                                    <span class="categories-desc">Morbi accumsan ipsum velit. Nam nec tellus</span></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <span class="categories-title"><i class="far fa-user-friends"></i></i>For All</span>
-                                                    <span class="categories-desc">Sed non  mauris vitae erat consequat auctor eu in elit</span></span>
-                                                    <!--<i class="fas fa-caret-left"></i>-->
-                                                </a>
-                                            </li>
-                                            <!--                                        <li>
-                                                                                        <a href="">
-                                                                                            <span class="categories-title"><i class="far fa-tennis-ball"></i>Sports</span>
-                                                                                            <span class="categories-desc">Class aptent taciti sociosqu ad litora</span></span>
-                                                                                        </a>
-                                                                                    </li>-->
+                                            </c:forEach>
                                         </ul>
                                     </div>
                                     <div>
-                                        <div class="title-row">sdsd <span>ssdsd</span></div>
+                                        <div class="title-row">Types <span></span></div>
                                         <div id="list-types">
                                             <ul>
-                                                <li><a href="sdf"><span class="tick"></span>Clock</a> <span class="quantity">3</span></li>
-                                                <li><a href=""><span class="tick"></span>PC</a> <span class="quantity">2</span></li>
-                                                <li><a href=""><span class="tick"></span>Desktop</a> <span class="quantity">7</span></li>
-                                                <li><a href=""><span class="tick"></span>Laptop</a> <span class="quantity">11</span></li>
-                                                <li><a href=""><span class="tick"></span>Tablet</a> <span class="quantity">8</span></li>
+                                                <c:forEach items="${listType}" var="lT">
+                                                <li><a href="${pageContext.request.contextPath}/product/type/${lT[0]}"><span class="tick"></span>${lT[1]}</a> <span class="quantity">${lT[2]}</span></li>
+                                                </c:forEach>
                                             </ul>
                                         </div>
                                     </div>
@@ -94,10 +61,10 @@
                                                 </c:if>
                                                 <div class="product-item wow fadeIn">
                                                     <div class="image-product">
-                                                        <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
+                                                        <a href="${pageContext.request.contextPath}/product/v/${listnew.proID}"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
                                                     </div>
                                                     <div class="product-info">
-                                                        <a href="">${listnew.proName}</a>
+                                                        <a href="${pageContext.request.contextPath}/product/v/${listnew.proID}">${listnew.proName}</a>
                                                         <!-- <span class="price">$234.32</span> -->
                                                         <span class="old-price">${listnew.proPrice}</span> <span class="new-price">${listnew.proPrice}</span>
                                                     </div>
@@ -109,7 +76,7 @@
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
-                                                                <div class="star-reviewed">
+                                                                <div  style="width: ${(listnew.starAVG / 5)*100}%" class="star-reviewed">
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
@@ -117,7 +84,12 @@
                                                                     <i class="fas fa-star"></i>
                                                                 </div>
                                                             </div>
-                                                            <span class="quantity-review">No reviews</span>
+                                                            <c:if test="${listnew.starAVG == 0 || listnew.starAVG == null}">
+                                                            <span class="quantity-review">No review</span>
+                                                            </c:if>        
+                                                            <c:if test="${listnew.starAVG != 0.0 && listnew.starAVG != null}">
+                                                            <span class="numrv quantity-review">(${listnew.reviewCollection.size()})</span>
+                                                            </c:if>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -155,10 +127,10 @@
                                 <div class="event">
                                     <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
                                 </div>
-                                <div class="title-row">Features <span>Product</span></div>
+                                <div id="featureproduct-title" class="title-row">Features <span>Product</span></div>
                                 <div class="product-block" ng-controller="homepagination">
-                                    <div class="row"  style="overflow: hidden;">
-                                        <div ng-repeat="p in listProd" ng-if="p.feature != 'New'" class="product-item wow fadeInUp">
+                                    <div class="row" ng-repeat="r in range(1,3)"  style="overflow: hidden;">
+                                        <div ng-repeat="p in productRow(r)" class="product-item wow fadeInUp">
                                             <span class="box-ft-label"></span>
                                             <span class="ft-label">{{p.feature}}</span>
                                             <div class="image-product">
@@ -177,7 +149,7 @@
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
+                                                        <div class="star-reviewed" ng-style="star(p.starAVG)">
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
@@ -185,38 +157,33 @@
                                                             <i class="fas fa-star"></i>
                                                         </div>
                                                     </div>
-                                                    <span class="quantity-review">No reviews</span>
+                                                    <span ng-class="classnumRev(p.numReview)" class="quantity-review">{{numRV(p.numReview)}}</span>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart addtocart clearfix">
+                                                    <div ng-click="addThisToCart(p.id)" class="btn-addtocart clearfix">
                                                         <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Add to Cart</span>
+                                                        <span class="tool-title">Add to cart</span>
                                                     </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                    <div ng-class="addedClass(p.onW)" class="btn-love" ng-click="p.onW = btnWishlist(p.id, p.onW)"><span ><i class="fa fa-heart"></i></span></div>
                                                 </div>
                                             </div>
                                         </div> 
                                     </div>
-                                    <div class="row text-center">
+                                    <div ng-if="numpage>1" class="row text-center">
                                         <div id="pagination" class="clearfix">
                                             <ul class="pagination">
-                                                <li>
-                                                    <a title="« Previous">
+                                                <li ng-if="currpage > 1">
+                                                    <a ng-click="switchpage(currpage-1)" title="« Previous">
                                                         <i class="fa fa-chevron-left" aria-hidden="true"></i>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="">1</a>
+                                                <li ng-repeat="n in range(1, numpage)" ng-class="active(n)">
+                                                    <a ng-click="switchpage(n)" ng-if="active(n) != 'active'" href="">{{n}}</a>
+                                                    <span ng-if="active(n) == 'active'">{{n}}</span>
                                                 </li>
-                                                <li class="active">
-                                                    <span>2</span>
-                                                </li>
-                                                <li>
-                                                    <a href="">3</a>
-                                                </li>
-                                                <li>
-                                                    <a title="« Previous">
-                                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                <li ng-if="currpage < numpage">
+                                                    <a ng-click="switchpage(currpage+1)" title="« Previous">
+                                                        <i  class="fa fa-chevron-right" aria-hidden="true"></i>
                                                     </a>
                                                 </li>
                                             </ul>

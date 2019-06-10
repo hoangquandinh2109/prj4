@@ -85,6 +85,27 @@ public class Product extends HttpServlet {
                     getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
                 }
                 else{
+                     List<String[]> listCat = new ArrayList<>();
+        
+       
+                    String icon, catdescription;
+                    for(Category c : proCat.FindCatStatus()){
+                        try {
+                            catdescription = c.getCateDescription().split(":")[0];
+                            icon = c.getCateDescription().split(":")[1];
+                        } catch (Exception e) {
+                            catdescription = c.getCateDescription();
+                            icon = "fa fa-gamepad";
+                        }
+                        listCat.add(new String[]{
+                            c.getCatID()+"",
+                            c.getCatName(),
+                            catdescription,
+                            icon
+                        });
+                    }
+                    req.setAttribute("listCat", listCat);
+                    
                     req.setAttribute("pagename", name);
                     req.setAttribute("collVal", id);
                     req.setAttribute("nameColl", "type");
@@ -137,6 +158,27 @@ public class Product extends HttpServlet {
                     getServletContext().getRequestDispatcher("/404.jsp").forward(req, resp);
                 }
                 else{
+                    
+                     List<String[]> listCat = new ArrayList<>();
+        
+       
+                    String icon, catdescription;
+                    for(Category c : proCat.FindCatStatus()){
+                        try {
+                            catdescription = c.getCateDescription().split(":")[0];
+                            icon = c.getCateDescription().split(":")[1];
+                        } catch (Exception e) {
+                            catdescription = c.getCateDescription();
+                            icon = "fa fa-gamepad";
+                        }
+                        listCat.add(new String[]{
+                            c.getCatID()+"",
+                            c.getCatName(),
+                            catdescription,
+                            icon
+                        });
+                    }
+                    req.setAttribute("listCat", listCat);
                     req.setAttribute("pagename", name);
                     req.setAttribute("collVal", id);
                     req.setAttribute("nameColl", "category");

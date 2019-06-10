@@ -82,13 +82,16 @@ public class API extends HttpServlet {
                     id++;
                     json += "{";
                     
+                    json += "\"id\":\""+((Product) p[0]).getProID()+"\",";
                     json += "\"url\":\""+detaillink+((Product) p[0]).getProID()+"\",";
                     json += "\"name\":\""+((Product) p[0]).getProName()+"\",";
                     json += "\"img\":\""+imglink+productFacade.imageOf(((Product) p[0]))+"\",";
                     json += "\"feature\":\""+((Feature) p[1]).getFname()+"\",";
                     json += "\"price\":\""+((Product) p[0]).getProPrice()+"\",";
                     json += "\"discount\":\""+((Product) p[0]).getDiscout()+"\",";
-                    json += "\"onW\":\""+onWoC(((Product) p[0]).getWishlistCollection())+"\"";
+                    json += "\"starAVG\":\""+((Product) p[0]).getStarAVG()+"\",";
+                    json += "\"numReview\":\""+((Product) p[0]).getReviewCollection().size()+"\",";
+                    json += "\"onW\":"+onWoC(((Product) p[0]).getWishlistCollection());
                     
                     json += "}";
                     if(id != productFacade.getFeautureProduct().size()){
@@ -98,9 +101,7 @@ public class API extends HttpServlet {
                 json += "]";
                 out.println(json);
             }
-            
-            
-            if(uris[0].equals("top4purchase")){                    
+            if(uris[0].equals("toppurchase")){                    
                 try {
                     json = "[";
                     Customer me = customer.find(((int) req.getSession().getAttribute("sessionid")));

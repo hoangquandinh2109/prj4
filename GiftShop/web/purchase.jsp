@@ -106,21 +106,23 @@
                     </div>
                 </div>
                 <div class="side-bar col-xs-5">
-                    <div class="list-cart">
-                        <div style="padding: 40px 0;
-                            text-align: center; 
-                            font-family: 'MerriweatherSans';
-                            font-size: 21px; 
-                            opacity: 0.5;" 
-                            ng-if="numCart == 0">
-                           no item
-                       </div>
-                        <div class="ci-pu" ng-repeat="ci in listCartItems">
-                            <div>
-                                <div class="imgcipu"><img src="${pageContext.request.contextPath}/productImage/{{ci.proImg}}" alt=""><span>{{ci.quantity}}</span></div>
-                                <p>{{ci.proName}}</p>
+                    <div id="blc">
+                        <div class="list-cart">
+                            <div style="padding: 40px 0;
+                                text-align: center; 
+                                font-family: 'MerriweatherSans';
+                                font-size: 21px; 
+                                opacity: 0.5;" 
+                                ng-if="numCart == 0">
+                               no item
+                           </div>
+                            <div class="ci-pu" ng-repeat="ci in listCartItems">
+                                <div>
+                                    <div class="imgcipu"><img src="${pageContext.request.contextPath}/productImage/{{ci.proImg}}" alt=""><span>{{ci.quantity}}</span></div>
+                                    <p>{{ci.proName}}</p>
+                                </div>
+                                <p>{{"$"+ci.proPrice}}</p>
                             </div>
-                            <p>{{"$"+ci.proPrice}}</p>
                         </div>
                     </div>
                     <div class="mathing">
@@ -167,7 +169,7 @@
                     inforpage();
                 });
                 $('input, textarea').focusin(function(){
-                    editted = 1;
+                    edited = 1;
                 });
                 $("#nexttocontinue").click(function(){
                     event.preventDefault();
@@ -180,7 +182,7 @@
                     var note = $("#ifnote").val();
                     
                     if(page == "information"){
-                        if(validatePhone(phone)){
+                        if(validate(phone, name, address)){
                             page = "payment";
                             wenttopayment = 1;
                             $('#ftname').text(name);
@@ -247,12 +249,29 @@
                 $("#backtoprev span").text("Return to Shipping Information");
                 $("#nexttocontinue span").text("Place Order");
             }
-            function validatePhone(phone){
-                $("#ifphone").next('.varError-form').remove(); 
+            function validate(phone, name, address){
+                $('.varError-form').remove(); 
                 var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-                if(!vnf_regex.test(phone)){
-                    console.log("phone not ok");
-                    $("#ifphone").after("<span class=\"varError-form\" style=\"color: red; \">Your Phonenumber is not supported!</span>");
+                var error = 0 ;
+                if(phone.trim() == ""){
+                    $("#ifphone").after("<span class=\"varError-form\" style=\"color: red; \">This field can't be empty!</span>");
+                    error++;
+                }
+                if(name.trim() == ""){
+                    $("#ifname").after("<span class=\"varError-form\" style=\"color: red; \">This field can't be empty!</span>");
+                    error++;
+                }
+                if(address.trim() == ""){
+                    $("#ifaddress").after("<span class=\"varError-form\" style=\"color: red; \">This field can't be empty!</span>");
+                    error++;
+                }
+                if(error == 0){
+                    if(!vnf_regex.test(phone)){
+                        console.log("phone not ok");
+                        $("#ifphone").after("<span class=\"varError-form\" style=\"color: red; \">Your Phonenumber is not supported!</span>");
+                        return false;
+                    }
+                }else{
                     return false;
                 }
                 return true;
