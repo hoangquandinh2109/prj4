@@ -31,6 +31,45 @@
                 <li><a onclick="return filterwishlist(${signedIn});" href="${pageContext.request.contextPath}/account/wishlist"><i class="far fa-list-alt"></i> Wishlist</a></li>
                 <li><a onclick="return filterwishlist(${signedIn});" href="${pageContext.request.contextPath}/account"><i class="fas fa-user-alt"></i> My Account</a></li>
                 <li><a href="${pageContext.request.contextPath}/cart"><i class="fas fa-share"></i> Checkout</a></li>
+                <li class="por unseen" id="btn-bell">
+                    <a href="${pageContext.request.contextPath}/cart"><i class="fas fa-bell"></i></a>
+                    <div id="hopvip" style="display: none;">
+                        <div class="listhop">
+                            <div class="hv-item">
+                                <a href="">
+                                    <span class="hv-title">Toi da ngu nhu the nao trong hoan canh nay</span>
+                                    <span class="hv-info">
+                                        by <strong>Nguyen Hoang Tu</strong> on <strong>21/09/2027</strong>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="hv-item">
+                                <a href="">
+                                    <span class="hv-title">Toi da ngu nhu the nao trong hoan canh nay</span>
+                                    <span class="hv-info">
+                                        by <strong>Nguyen Hoang Tu</strong> on <strong>21/09/2027</strong>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="hv-item">
+                                <a href="">
+                                    <span class="hv-title">Toi da ngu nhu the nao trong hoan canh nay</span>
+                                    <span class="hv-info">
+                                        by <strong>Nguyen Hoang Tu</strong> on <strong>21/09/2027</strong>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="hv-item">
+                                <a href="">
+                                    <span class="hv-title">Toi da ngu nhu the nao trong hoan canh nay</span>
+                                    <span class="hv-info">
+                                        by <strong>Nguyen Hoang Tu</strong> on <strong>21/09/2027</strong>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
 <!--                <li><div id="tools-setting"><i class="fas fa-cog"></i> Setting <i class="fas fa-caret-down"></i></div></li>-->
             </ul>
         </div>
