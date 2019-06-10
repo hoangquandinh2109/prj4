@@ -438,24 +438,24 @@ insert into staff values
 
 go
 insert into customer values
-('Dylan Joseph White','user1@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Derek Matthew','user2@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Dustin Thomas','user3@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Devin Daniel','user4@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Name','user5@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Dray Joshua','user6@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Donell Samuel','user7@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Dhaval James','user8@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Derice Jack','user9@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Dereece Alexander','user10@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Dainton Luke','user11@mail.com','pw','address','cusPhone','cusAvt','1','1'),
-('Dante','user12@mail.com','pw','address','cusPhone','cusAvt','1','2'),
-('Darcy','user13@mail.com','pw','address','cusPhone','cusAvt','1','2'),
-('Drew','user14@mail.com','pw','address','cusPhone','cusAvt','1','2'),
-('Delilah','user15@mail.com','pw','address','cusPhone','cusAvt','1','2'),
-('Thema ','user16@mail.com','pw','address','cusPhone','cusAvt','1','2'),
-('Doris','user17@mail.com','pw','address','cusPhone','cusAvt','1','2'),
-('Denise','user18@mail.com','pw','address','cusPhone','cusAvt','1','2')
+('Dylan Joseph White','user1@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Derek Matthew','user2@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Dustin Thomas','user3@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Devin Daniel','user4@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Name','user5@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Dray Joshua','user6@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Donell Samuel','user7@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Dhaval James','user8@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Derice Jack','user9@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Dereece Alexander','user10@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Dainton Luke','user11@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','1'),
+('Dante','user12@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','2'),
+('Darcy','user13@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','2'),
+('Drew','user14@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','2'),
+('Delilah','user15@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','2'),
+('Thema ','user16@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','2'),
+('Doris','user17@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','2'),
+('Denise','user18@mail.com','Asdfdf1','address','cusPhone','cusAvt','1','2')
 go
 insert into feedback values
 ('Feedback Website','all the system is good for me','2019-06-06','1','3'),
