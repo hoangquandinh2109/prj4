@@ -22,7 +22,7 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-edit"></i>Chart by Category</h1>
+                <h1><i class="fa fa-edit"></i>Chart by Customer</h1>
                 <p>Chart</p>
             </div>
             <ul class="app-breadcrumb breadcrumb">
@@ -67,7 +67,7 @@
                     <div class="col-md-6 grid-margin stretch-card">
 
                         <div class="col-lg-12 animated fadeInRightBig">  
-                            <div class="col-md-10"><h1 class="text-center">Income report by Category</h1></div>
+                            <div class="col-md-10"><h1 class="text-center">Income by Customer</h1></div>
                             <div class="d-print-none col-md-2">
                                 <div class="col-xs-12">
                                     <a href="#" target="_blank" onclick="window.print();" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
@@ -76,7 +76,7 @@
                             <table border="1" id="example" class="table table-striped table-bordered table-hover">
                                 <tr>
                                     <th>No.</th>
-                                    <th>Brand</th>
+                                    <th>Email</th>
                                     <th>Income</th>
                                 </tr>                                
                                 <c:forEach var="data" items="${list}" varStatus="index">
@@ -87,7 +87,7 @@
                                     </tr>  
                                 </c:forEach>              
                             </table>
-                          
+                            <div><b>Total Income: <%=request.getAttribute("total")%></b></div>
                         </div>
 
                     </div>

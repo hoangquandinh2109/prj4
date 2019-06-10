@@ -109,13 +109,7 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#example').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    });
+        $('#example').DataTable();
 </script>
 <script type="text/javascript">
     //load the Google Visualization API and the chart

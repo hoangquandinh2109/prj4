@@ -108,7 +108,7 @@
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showFeedbackServlet"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
-                       <li><a class="treeview-item" href="${pageContext.request.contextPath}/MailboxServlet?action=ShowMailbox"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
+                    <li><a class="treeview-item" href="${pageContext.request.contextPath}/MailboxServlet?action=ShowMailbox"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
 
                 </ul>
             </li>
@@ -126,7 +126,17 @@
         </div>
         <ul class="app-menu">
             <li><a class="app-menu__item active" href="index.jsp"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fas fa-chart-pie-alt"></i><span class="app-menu__label">Charts</span></a></li>
+           
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-chart-pie-alt"></i><span class="app-menu__label">Charts & Report</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="${pageContext.request.contextPath}/reportCatServlet"><i class="icon far fa-dot-circle"></i>Chart by Category</a></li>
+                    <li><a class="treeview-item" href="${pageContext.request.contextPath}/chartByCustomer"><i class="icon far fa-dot-circle"></i>Chart by Customer</a></li>
+                    <li><a class="treeview-item" href="${pageContext.request.contextPath}/reportServlet"><i class="icon far fa-dot-circle"></i>Report Product</a></li>
+                </ul>
+            </li>
+
+
+
 
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Staff</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
@@ -154,17 +164,11 @@
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/admin/insertFeature.jsp"><i class="icon far fa-dot-circle"></i>Insert Feature</a></li>
                 </ul>
             </li>
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Chart & Report</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="${pageContext.request.contextPath}/reportCatServlet"><i class="icon far fa-dot-circle"></i>Chart by Category</a></li>
-                    <li><a class="treeview-item" href="${pageContext.request.contextPath}/admin/insertCatvType.jsp"><i class="icon far fa-dot-circle"></i>Chart by Customer</a></li>
-                </ul>
-            </li>
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user fa-lg"></i><span class="app-menu__label">User</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showUserServlet"><i class="icon far fa-dot-circle"></i>User List</a></li>
                     <li><a class="treeview-item" href="${pageContext.request.contextPath}/showFeedbackServlet"><i class="icon far fa-dot-circle"></i>Feedback</a></li>
-                       <li><a class="treeview-item" href="${pageContext.request.contextPath}/MailboxServlet?action=ShowMailbox"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
+                    <li><a class="treeview-item" href="${pageContext.request.contextPath}/MailboxServlet?action=ShowMailbox"><i class="icon far fa-dot-circle"></i>Mailbox</a></li>
 
                 </ul>
             </li>

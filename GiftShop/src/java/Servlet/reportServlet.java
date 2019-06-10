@@ -78,6 +78,8 @@ public class reportServlet extends HttpServlet {
             }
         }
         request.setAttribute("totalProfit", totalPrice);
+        request.setAttribute("dateStart", dateC);
+        request.setAttribute("dateEndd", dateE);
 //        request.setAttribute("dateRange", daterange);
         request.setAttribute("pro", productF.find(proid));
         request.setAttribute("reportList", reportList);
