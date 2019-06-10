@@ -102,8 +102,8 @@
             </li>
             <li><a href="${pageContext.request.contextPath}/postIndex.jsp">Blog</a>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/createPost.jsp">Create new Post</a></li>
-                    <li><a href="${pageContext.request.contextPath}/searchPage.jsp">Search Posts/Authors</a></li>
+                    <li><a href="${pageContext.request.contextPath}/createPostServlet">Create new Post</a></li>
+                    <li><a href="${pageContext.request.contextPath}/searchForwardPage">Search Posts/Authors</a></li>
                      <li><a href="${pageContext.request.contextPath}/detailsPostUser.jsp">My Post</a></li>
                    
                 </ul>

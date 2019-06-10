@@ -6,10 +6,14 @@
 
 <script>
     var xx;
+    var bex=2;
+     var count=5;
+        var checkCmt=true;
     $(document).ready(function() {
         var now = new Date();
         var checkLiked =${checkLike};
         var likeID = '${likeID}';
+         
         $('[data-toggle="tooltip"]').tooltip();
         $('#hitLike').click(function() {
             $.ajax({
@@ -46,6 +50,7 @@
         var name = "${sessionname}";
         //   var blak =ID.toLocaleString('');
         //REPLY HERE
+        
         $("input[name='createReply']").keyup(function(e) {
             if (e.keyCode === 13) {
                 if (ID === '') {
@@ -165,6 +170,7 @@
                 });
             }
         });
+      
         $('#inputCmt').keyup(function(e) {
             if (e.keyCode === 13)
             {
@@ -177,8 +183,15 @@
                     alert("INPUT FIELD CANNOT BLANK");
                     return;
                 }
+                console.log("count truoc khi vo ajax"+count);
+                var testC= checkCmtSpam(checkCmt,count);
+               // console.log(testC);
+                if(testC<=5){
+                    
+                }
                 var shortTempCmt = "";
                 $(this).val("");
+                
                 if (ID === '${p.postID}') {
                     shortTempCmt = '<h4 class="text-dark font-weight-bold" style="margin-bottom:auto" title="Author Post">' + name + '</h4>';
                 }
@@ -192,7 +205,8 @@
                     dataType: "json",
                     data: {action: "createComment", data: s, postID:${p.postID}, resestCount: resestCount},
                     success: function(data) {
-                        console.log(data);
+                        
+                        
                         //  var x =JSON.stringify(data);
                         var template = '<div class="media">' +
                                 '<img src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png" alt="John Doe" class ="mr-3 mt-3 rounded-circle" style="width:60px;">' +
@@ -366,7 +380,21 @@
         });
 
     }
-    
+   
+    function checkCmtSpam(checkCmt,count){
+        if(checkCmt ===true && count<=5){
+            count=count-1;
+           //var xax=count;
+           return count;
+            //console.log(count);
+            
+        }
+        else{
+            checkCmt=false;
+            count=6;
+        }
+        console.log(count+" as");
+    }
     function deletePostFunction(pid) {
         $.ajax({
             type: 'POST',

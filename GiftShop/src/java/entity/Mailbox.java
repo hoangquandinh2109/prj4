@@ -41,6 +41,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mailbox.findByReceivedDate", query = "SELECT m FROM Mailbox m WHERE m.receivedDate = :receivedDate"),
     @NamedQuery(name = "Mailbox.findByReplyDate", query = "SELECT m FROM Mailbox m WHERE m.replyDate = :replyDate")})
 public class Mailbox implements Serializable {
+    @Column(name = "mailStatus")
+    private Boolean mailStatus;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -178,6 +180,14 @@ public class Mailbox implements Serializable {
     @Override
     public String toString() {
         return "entity.Mailbox[ mailID=" + mailID + " ]";
+    }
+
+    public Boolean getMailStatus() {
+        return mailStatus;
+    }
+
+    public void setMailStatus(Boolean mailStatus) {
+        this.mailStatus = mailStatus;
     }
     
 }

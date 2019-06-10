@@ -35,6 +35,7 @@ import models.CustomerFacadeLocal;
 import models.LikesFacadeLocal;
 import models.PostFacadeLocal;
 import models.ReplyFacadeLocal;
+import models.TbTagFacadeLocal;
 
 /**
  *
@@ -42,6 +43,8 @@ import models.ReplyFacadeLocal;
  */
 @WebServlet(name = "postDetailsServlet", urlPatterns = {"/postDetailsServlet"})
 public class postDetailsServlet extends HttpServlet {
+    @EJB
+    private TbTagFacadeLocal tbTagFacade;
     @EJB
     private CustomerFacadeLocal customerFacade;
 
@@ -93,6 +96,10 @@ public class postDetailsServlet extends HttpServlet {
                 co.getDateComment();
                ab+=GetReply(co);
             }
+            //Find Same Author
+            Customer postCus=customerFacade.find(p.getCusID().getCusID());
+            List<Post> authorPost =postFacade.findByAuthor(postCus);
+                System.out.println(authorPost);
             //GET TAG
             String tagList[]=p.getPostTag().split(";");
             for(int i=0;i<tagList.length;i++){
@@ -117,6 +124,8 @@ public class postDetailsServlet extends HttpServlet {
             request.setAttribute("p", p);
             request.setAttribute("cmt", cmt);
             request.setAttribute("list", post);
+            request.setAttribute("tags", tbTagFacade.findAll());
+            request.setAttribute("authorPost", authorPost);
             request.setAttribute("content", g.toJson(p.getTitleContent()));
         //    out.print("cc");
             request.getRequestDispatcher("/postDetails.jsp").forward(request, response);

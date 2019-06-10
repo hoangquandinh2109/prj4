@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByDiscout", query = "SELECT p FROM Product p WHERE p.discout = :discout"),
     @NamedQuery(name = "Product.findByStarAVG", query = "SELECT p FROM Product p WHERE p.starAVG = :starAVG")})
 public class Product implements Serializable {
-
+  
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -96,14 +96,6 @@ public class Product implements Serializable {
     private Collection<ImgStog> imgStogCollection;
 
     public Product() {
-    }
-
-    public Date getDateRelease() {
-        return dateRelease;
-    }
-
-    public void setDateRelease(Date dateRelease) {
-        this.dateRelease = dateRelease;
     }
 
     public Product(String proID, String proName, String proDetails, Double proPrice, Integer quantity, Date dateRelease, Boolean proStatus, String tags, Double starAVG, Category catID, ProductType typeID) {
@@ -281,4 +273,5 @@ public class Product implements Serializable {
         return "entity.Product[ proID=" + proID + " ]";
     }
 
+  
 }

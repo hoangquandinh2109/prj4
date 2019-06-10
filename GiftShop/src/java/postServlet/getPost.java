@@ -6,6 +6,7 @@
 package postServlet;
 
 import com.google.gson.Gson;
+import entity.Comment;
 import entity.Customer;
 import entity.Likes;
 import entity.Post;
@@ -17,10 +18,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,6 +54,10 @@ public class getPost extends HttpServlet {
     private CommentFacadeLocal commentFacade;
     @EJB
     private LikesFacadeLocal likesFacade;
+    @PersistenceContext(unitName = "project4PU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
 
     @EJB
     private PostFacadeLocal postFacade;
@@ -61,14 +72,20 @@ public class getPost extends HttpServlet {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
         String data = request.getParameter("data");
-        HttpSession session=request.getSession();
+        System.out.println(data);
+        System.out.println(action);
+        HttpSession session = request.getSession();
         int cID;
-        
+        long ab;
+        long total;
+        long totalCommentAfterRm;
+        //count total Like
+        long totalLike;
 
         List<Post> postList = new ArrayList<>();
         if (action.equals("showAll")) {
             postList = postFacade.findAll();
-        } else if (action.equals("searchByTag")) {
+        } else if (action.equals("SearchByTag")) {
             postList = postFacade.searchByTag(data);
             if (postList.isEmpty()) {
                 list.add("status", false);
@@ -79,7 +96,7 @@ public class getPost extends HttpServlet {
                 return;
             }
 
-        } else if (action.equals("searchByTitle")) {
+        } else if (action.equals("SearchByTitle")) {
             postList = postFacade.searchByTitle(data);
             if (postList.isEmpty()) {
                 list.add("status", false);
@@ -89,23 +106,40 @@ public class getPost extends HttpServlet {
                 return;
             }
 
-        } else if (action.equals("searchByContent")) {
+        } else if (action.equals("SearchByContent")) {
             postList = postFacade.searchByContent(data);
+           
             if (postList.isEmpty()) {
                 list.add("status", false);
                 jsonUserArray.add(list);
                 javax.json.JsonObject jsonFinalOutput = Json.createObjectBuilder().add("POST", jsonUserArray).build();
                 out.print(jsonFinalOutput);
+                System.out.println(jsonFinalOutput);
                 return;
             }
 
         } else if (action.equals("Liked")) {
-            cID=(int)(session.getAttribute("sessionid"));
-            List<Likes> gg= new ArrayList<>();
+            cID = (int) (session.getAttribute("sessionid"));
+            List<Likes> gg = new ArrayList<>();
             Customer cus = customerFacade.find(cID);
-             gg=likesFacade.LikedPosts(cus);
-             System.out.println(gg.get(0).getCusID().getCusAvatar());
-            for (Likes like : gg) {
+            List<Likes> listLiked = likesFacade.LikedPosts(cus);
+
+            for (Likes like : listLiked) {
+                Post p = postFacade.find(like.getPostLiked().getPostID());
+                ab = 0;
+                total = 0;
+                List<Comment> cmtAfter = commentFacade.listCommentByPostID(p);
+                for (Comment ce : cmtAfter) {
+                    ab += GetReply(ce);
+                }   //GET TOTAL comment post
+                // long after = commentFacade.countComment(p);
+                totalCommentAfterRm = commentFacade.countComment(p);
+                //count total Like
+                totalLike = likesFacade.countLike(p);
+                ///
+                 
+                total = totalCommentAfterRm + ab;
+                String sTotal = String.valueOf(total);
                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 DateFormat beforFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
                 String postRele = dateFormat.format(like.getPostLiked().getDateRealease());
@@ -118,17 +152,35 @@ public class getPost extends HttpServlet {
                         .add("userName", like.getPostLiked().getCusID().getCusName())
                         .add("status", like.getPostLiked().getPostStatus())
                         .add("postTag", like.getPostLiked().getPostTag())
-                        .add("beforFormatTime", before);
+                        .add("beforFormatTime", before)
+                        .add("sTotal", sTotal).add("totalLike", totalLike);
                 jsonUserArray.add(list);
             }
             javax.json.JsonObject jsonFinalOutput = Json.createObjectBuilder().add("POSTLiked", jsonUserArray).build();
             out.print(jsonFinalOutput);
+            
             return;
             //lay 1 list nhung post da dc like
 
         }
 
         for (Post b : postList) {
+
+            Post p = postFacade.find(b.getPostID());
+            ab = 0;
+            total = 0;
+            List<Comment> cmtAfter = commentFacade.listCommentByPostID(p);
+            for (Comment ce : cmtAfter) {
+                ab += GetReply(ce);
+            }   //GET TOTAL comment post
+            // long after = commentFacade.countComment(p);
+            totalCommentAfterRm = commentFacade.countComment(p);
+            //count total Like
+            totalLike = likesFacade.countLike(p);
+            ///
+          
+            total = totalCommentAfterRm + ab;
+            String sTotal = String.valueOf(total);
             //  Date date = Calendar.getInstance().getTime();
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             DateFormat beforFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
@@ -143,7 +195,9 @@ public class getPost extends HttpServlet {
                     .add("userName", b.getCusID().getCusName())
                     .add("status", b.getPostStatus())
                     .add("postTag", b.getPostTag())
-                    .add("beforFormatTime", before);
+                    .add("beforFormatTime", before)
+                    .add("sTotal", sTotal)
+                    .add("totalLike", totalLike);
             jsonUserArray.add(list);
 
         }
@@ -157,7 +211,7 @@ public class getPost extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
         String getCT = request.getParameter("data");
-        System.out.println(getCT);
+       
         Gson g = new Gson();
         Post p = new Post("blabla", getCT, getCT);
         postFacade.create(p);
@@ -171,4 +225,33 @@ public class getPost extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public long GetReply(Comment c) {
+        Query q = em.createQuery("SELECT count(r) FROM Reply r WHERE r.commentID = :commentID");
+        q.setParameter("commentID", c);
+
+        return (long) q.getSingleResult();
+    }
+
+    public String CountTotal(Post p) {
+        long ab = 0;
+        List<Comment> cmt = commentFacade.listCommentByPostID(p);
+        for (Comment ce : cmt) {
+            ab += GetReply(ce);
+        }   //GET TOTAL post
+        long a = commentFacade.countComment(p);
+        long total = a + ab;
+        String sTotal = String.valueOf(total);
+        return sTotal;
+    }
+
+    public void persist(Object object) {
+        try {
+            utx.begin();
+            em.persist(object);
+            utx.commit();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            throw new RuntimeException(e);
+        }
+    }
 }

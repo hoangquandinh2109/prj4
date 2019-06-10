@@ -161,7 +161,7 @@
 
 .tag a {
   display: inline-block;
-  margin-top: 7px;
+  margin-top: 10px;
   padding-left: 5px;
 }
 
@@ -216,7 +216,7 @@
   display: inline-block;
   width: 50px;
   height: 50px;
-  margin-left: 10px;
+  margin-left: 60px;
 }
 
 .card-body {
@@ -528,6 +528,11 @@ body .navigation md-autocomplete {
   height: auto;
 }
 
+body .navigation .md-whiteframe-1dp, body .navigation .md-whiteframe-z1 {
+  -webkit-box-shadow: 0 0;
+          box-shadow: 0 0;
+}
+
 body .navigation md-autocomplete md-autocomplete-wrap {
   height: auto;
 }
@@ -542,6 +547,11 @@ body .navigation #form-autocomplete {
   top: 50%;
 }
 
+body .navigation form {
+  position: relative;
+  margin-right: 30px;
+}
+
 body .navigation form input {
   border: none;
   height: 30px;
@@ -554,6 +564,12 @@ body .navigation form input:focus {
 }
 
 body .navigation form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+body .navigation form button#search-button {
   height: 30px;
   width: 30px;
   -webkit-box-shadow: none;
@@ -561,9 +577,12 @@ body .navigation form button {
   border: none;
   background-color: #aaa;
   color: #fff;
+  position: absolute;
+  top: 0;
+  left: 100%;
 }
 
-body .navigation form button:focus {
+body .navigation form button#search-button:focus {
   outline: none;
 }
 

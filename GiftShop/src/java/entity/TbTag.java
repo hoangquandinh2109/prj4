@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TbTag.findByTag", query = "SELECT t FROM TbTag t WHERE t.tag = :tag"),
     @NamedQuery(name = "TbTag.findByTagDescription", query = "SELECT t FROM TbTag t WHERE t.tagDescription = :tagDescription")})
 public class TbTag implements Serializable {
+    @Size(max = 20)
+    @Column(name = "tagType", length = 20)
+    private String tagType;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -105,6 +108,14 @@ public class TbTag implements Serializable {
     @Override
     public String toString() {
         return "entity.TbTag[ tagID=" + tagID + " ]";
+    }
+
+    public String getTagType() {
+        return tagType;
+    }
+
+    public void setTagType(String tagType) {
+        this.tagType = tagType;
     }
     
 }

@@ -39,6 +39,8 @@ public interface PostFacadeLocal {
 
     List<Post> searchByContent(String content);
     List<Post> findByAuthor(Customer c);
+
+    long countTotalPostPerUser(Customer c);
    
    
 }
