@@ -85,8 +85,8 @@
                                             </div>
                                             <div class="product-info">
                                                 <a href="${pageContext.request.contextPath}/product/v/{{item.proID}}">{{item.proName}}</a>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349</span> <span class="new-price">{{'$'+item.proPrice}}</span>
+                                                 <span ng-if="item.newprice == 0.0" class="price">{{'$'+item.proPrice}}</span> 
+                                                 <span ng-if="item.newprice > 0" class="old-price">{{'$'+item.proPrice}}</span> <span ng-if="item.newprice > 0" class="new-price">{{'$'+item.newprice}}</span>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">

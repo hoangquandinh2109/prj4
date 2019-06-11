@@ -37,7 +37,7 @@ public class Autocomplete extends HttpServlet {
       PrintWriter out = resp.getWriter();
       String json ="[";
       int i = 0;
-        for(Product p : product.findAll()){
+        for(Product p : product.ProductTruee()){
             json +="{";
             
             json +="\"proURL\":\""+detaillink+p.getProID()+"\",";
@@ -46,7 +46,7 @@ public class Autocomplete extends HttpServlet {
             
             json +="}";
             i++;
-            if(i!= product.count()){
+            if(i!= product.ProductTruee().size()){
                 json += ",";
             }
             

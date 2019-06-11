@@ -27,11 +27,11 @@ public class CartFacade {
         this.session = session;
     }
     public int getTotalPrice(){
-        int totalprice = 0;
+        double totalprice = 0.0;
         for (Cart c : getAllCartItems()){
-            totalprice += c.getQuantity()*c.getProduct().getProPrice();
+            totalprice += countingItem(c);
         }
-        return totalprice;
+        return (int) totalprice;
     }
     public void deletefromCart(int id){
         List<Cart> cart = getAllCartItems();
@@ -83,5 +83,10 @@ public class CartFacade {
     }
     public List<Cart> getAllCartItems(){
         return (session.getAttribute("cart") != null)? (List<Cart>)session.getAttribute("cart") : new ArrayList<>();
+    }
+    private Double countingItem(Cart cart){
+        Double countingItem;
+           countingItem = cart.getQuantity() *  (cart.getProduct().getProPrice() * (100-cart.getProduct().getDiscout()) / 100);
+        return countingItem;
     }
 }

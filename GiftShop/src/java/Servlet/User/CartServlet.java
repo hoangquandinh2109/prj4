@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.ProductFacadeLocal;
 import entity.Product;
+import java.text.DecimalFormat;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 
@@ -38,6 +39,7 @@ public class CartServlet extends HttpServlet {
     private HttpServletResponse res;
     private PrintWriter out;
     private CartFacade c;
+    DecimalFormat fmd = new DecimalFormat("#.##");
     
     String form = "<form action=\"purchase\" method=\"post\">" +
 "                <input type=\"hidden\" name=\"payment\" value=\"payment\">" +
@@ -53,10 +55,10 @@ public class CartServlet extends HttpServlet {
             session=request.getSession();
             c = new CartFacade(session);
             List<Cart> cart = c.getAllCartItems();
-            int price = 0;
+            Double price = 0.0;
             JsonArrayBuilder jab = Json.createArrayBuilder();
             for(Cart c : cart){
-                price += c.getQuantity() * c.getProduct().getProPrice();
+                price += c.getQuantity() * proPrice(c);
                 jab.add(JSONGen.Cart.getTypeJson(c, productFacade.imageOf(c.getProduct())));
             }
             out.println(JSONGen.Cart.getTypeThings(jab.build(), price));
@@ -66,6 +68,7 @@ public class CartServlet extends HttpServlet {
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
     }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -124,6 +127,12 @@ public class CartServlet extends HttpServlet {
             System.out.println("Loi put: "+e.getMessage());
             resp.setStatus(400);
         }
+    }
+
+    private Double proPrice(Cart cart) {
+        Double proprice;
+           proprice =  (cart.getProduct().getProPrice() * (100-cart.getProduct().getDiscout()) / 100);
+        return proprice;
     }
     
 

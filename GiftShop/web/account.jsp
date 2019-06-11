@@ -57,83 +57,11 @@
 
                 <!--////////////////////////////////////////////////////////////////////// dashboard block -->
                 <div  style="display: none;" id="showdashboard" class="everyblock">
-                    <div class="block-product">
+                    <div class="block-product" id="bindTopPurchaseDashboard">
                         <h2>Recently purchased <a id="atago" href>See more</a></h2>
-                        <div class="r list-product">
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-6_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung A8</a>
-                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                </div>
-                            </div>
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung Galaxy S7</a>
-                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="r list-product">
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-13_979e1434-012b-483d-b3b4-29841771141b_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung A8</a>
-                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                </div>
-                            </div>
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung Galaxy S7</a>
-                                    <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="block-product" id="bindproductwl1" >
+                    <div class="block-product" id="bindTopWishlistDashboard" >
                         <h2 >You haven't bought these <a id="atagw" href>See more</a> </h2>
-                        <div class="r list-product">
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-12_5676fcc2-14d3-4280-b5dd-9396d2e2b5c1_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung A8</a>
-                                    <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
-                                </div>
-                            </div>
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung Galaxy S7</a>
-                                    <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="r list-product">
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung A8</a>
-                                    <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
-                                </div>
-                            </div>
-                            <div class="c-05 ">
-                                <div class="product-item">
-                                    <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-25_160x140.png"
-                                         alt="">
-                                    <a href="" class="pname">Samsung Galaxy S7</a>
-                                    <button class="pbutton-wishlist button-remove">Remove from wishlist</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -214,44 +142,8 @@
                                     </tr>
                                 </table>
                             </div>                    
-                            <div class="block-product">
+                            <div class="block-product" id="bindTopPurchaseOrders">
                                 <h2>Last purchased</h2>
-                                <div class="r list-product">
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-6_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-18_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="r list-product">
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-10_aed5aef2-1985-474e-9f24-a7deb10b70ab_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="c-05 ">
-                                        <div class="product-item">
-                                            <img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-21_160x140.png"
-                                                 alt="">
-                                            <a href="" class="pname">Samsung A8</a>
-                                            <span class="pdate">Order date: <span>27-09-2019</span></span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

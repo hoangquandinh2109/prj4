@@ -49,7 +49,7 @@
                                     <td class="r1">
                                         <a href="">{{ci.proName}}</a>
                                     </td>
-                                    <td class="r2 fz13">{{"$"+ci.proPrice}}</td>
+                                    <td class="r2 fz13">{{"$"+ci.proPrice.toFixed(2)}}</td>
                                     <td class="r3">
                                        <div class="cart-quantity" id="asdkkfjasfd">
                                             <!--$event de lay quantity validate-->
@@ -58,14 +58,14 @@
                                             <button ng-click="ci.quantity = desc(ci.ID,ci.quantity)" class="cart-quan-minus"><span>-</span></button>
                                         </div>
                                     </td>
-                                    <td class="r4 fz13">{{"$"+(ci.proPrice*ci.quantity)}}</td>
+                                    <td class="r4 fz13">{{"$"+(ci.proPrice*ci.quantity).toFixed(2)}}</td>
                                     <td class="r5"><a href="" ng-click="deleteItem(ci.ID)" class="button-in-cart-page fz13" id="btn-remove-cart">Remove</a></td>
                                 </tr>
                                 <!-- end foreach -->
                             </table>
                             <div class="cart-footer">
                                 <div class="text-right">
-                                    <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">{{"$"+subtotal}}</span>
+                                    <span class="fz15">Subtotal</span><span id="cf-subtotal" class="fz13">{{"$"+subtotal.toFixed(2)}}</span>
                                 </div>
                                 <div class="pt20 pb20 text-right fz11"><i>Shipping & taxes calculated at checkout</i></div>
                                 <div class="text-right"><a ng-click="checkout(sessionid, numCart)" href="" class="button-in-cart-page fz13">CHECK OUT</a></div>

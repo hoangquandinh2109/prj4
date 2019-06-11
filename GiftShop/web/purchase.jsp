@@ -121,14 +121,14 @@
                                     <div class="imgcipu"><img src="${pageContext.request.contextPath}/productImage/{{ci.proImg}}" alt=""><span>{{ci.quantity}}</span></div>
                                     <p>{{ci.proName}}</p>
                                 </div>
-                                <p>{{"$"+ci.proPrice}}</p>
+                                <p>{{"$"+(ci.proPrice*ci.quantity).toFixed(2)}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="mathing">
                         <div class="clearfix">
                             <div class="leftkey">Subtotal</div>
-                            <div class="rightvalue" id='bindsubtotal'>{{"$"+subtotal}}</div>
+                            <div class="rightvalue" id='bindsubtotal'>{{"$"+subtotal.toFixed(2)}}</div>
                         </div>
                         <div class="clearfix">
                             <div class="leftkey">Shipping</div>
@@ -138,7 +138,7 @@
                     <div class="total-to-ca">
                         <div>
                                 <div class="leftkey">Total</div>
-                                <div class="rightvalue" id="bindtotal">{{"$"+subtotal}}</div>
+                                <div class="rightvalue" id="bindtotal">{{"$"+subtotal.toFixed(2)}}</div>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,8 @@
                                     "note":note
                                 },
                                 success: function(){
-                                    alert("okay");
+                                    alert("Thank for buying this");
+                                    location.replace(linkpage);
                                 },
                                 error: function(){
                                     alert("fail");

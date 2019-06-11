@@ -49,8 +49,8 @@ public class PurchaseItemFacade extends AbstractFacade<PurchaseItem> implements 
     }
 
     @Override
-    public List<Product> getAllPurchaseItemOfMe(Customer me) {
-        return em.createQuery("SELECT pi.proID FROM Purchase p INNER JOIN p.purchaseItemCollection pi WHERE p.cusID = :me ORDER BY p.purID DESC")
+    public List<Object[]> getAllPurchaseItemOfMe(Customer me) {
+        return em.createQuery("SELECT p,pi.proID FROM Purchase p INNER JOIN p.purchaseItemCollection pi WHERE p.cusID = :me ORDER BY p.purID DESC")
                 .setParameter("me", me)
                 .getResultList();
     }

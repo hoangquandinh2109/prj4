@@ -61,12 +61,16 @@
                                                 </c:if>
                                                 <div class="product-item wow fadeIn">
                                                     <div class="image-product">
-                                                        <a href="${pageContext.request.contextPath}/product/v/${listnew.proID}"><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
+                                                        <a href="${pageContext.request.contextPath}/product/v/${listnew[0]}"><img src="${pageContext.request.contextPath}/productImage/${listnew[3]}" alt=""></a>
                                                     </div>
                                                     <div class="product-info">
-                                                        <a href="${pageContext.request.contextPath}/product/v/${listnew.proID}">${listnew.proName}</a>
-                                                        <!-- <span class="price">$234.32</span> -->
-                                                        <span class="old-price">${listnew.proPrice}</span> <span class="new-price">${listnew.proPrice}</span>
+                                                        <a href="${pageContext.request.contextPath}/product/v/${listnew[0]}">${listnew[1]}</a>
+                                                        <c:if test="${listnew[6] == '$0.0'}">
+                                                            <span class="price">${listnew[2]}</span> 
+                                                        </c:if>
+                                                        <c:if test="${listnew[6] != '$0.0'}">
+                                                            <span class="old-price">${listnew[2]}</span> <span class="new-price">${listnew[6]}</span>
+                                                        </c:if>
                                                     </div>
                                                     <div class="review-n-button-tu">
                                                         <div class="review-tu clearfix">
@@ -76,7 +80,7 @@
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
-                                                                <div  style="width: ${(listnew.starAVG / 5)*100}%" class="star-reviewed">
+                                                                <div  style="width: ${(listnew[4] / 5)*100}%" class="star-reviewed">
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
@@ -84,11 +88,11 @@
                                                                     <i class="fas fa-star"></i>
                                                                 </div>
                                                             </div>
-                                                            <c:if test="${listnew.starAVG == 0 || listnew.starAVG == null}">
+                                                            <c:if test="${listnew[4] == '0.0'}">
                                                             <span class="quantity-review">No review</span>
                                                             </c:if>        
-                                                            <c:if test="${listnew.starAVG != 0.0 && listnew.starAVG != null}">
-                                                            <span class="numrv quantity-review">(${listnew.reviewCollection.size()})</span>
+                                                            <c:if test="${listnew[4] > '0.0'}">
+                                                            <span class="numrv quantity-review">(${listnew[5]})</span>
                                                             </c:if>
                                                         </div>
                                                     </div>
@@ -138,8 +142,8 @@
                                             </div>
                                             <div class="product-info">
                                                 <a href="{{p.url}}">{{p.name}}</a>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349</span> <span class="new-price">{{p.price}}</span>
+                                                 <span ng-if="p.newprice == 0.0" class="price">{{'$'+p.oldprice}}</span> 
+                                                 <span ng-if="p.newprice > 0" class="old-price">{{'$'+p.oldprice}}</span> <span ng-if="p.newprice > 0" class="new-price">{{'$'+p.newprice}}</span>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">
