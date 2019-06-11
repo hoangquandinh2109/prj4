@@ -15,6 +15,7 @@ $(document).ready(function() {
         $(this).addClass("active");
         $(".everyblock").hide();
         $("#showdashboard").show();
+        loadTopOnDashboard();
         window.history.pushState("Details", "Title", linkpage+"account/dashboard");
         document.title= "Dashboard - "+usernamess;
     });
@@ -54,6 +55,7 @@ $(document).ready(function() {
         $("#order-detail").hide();
         $("#orderslist").show();
         $("#showorders").show();
+        loadTopOnOrder();
         loadOrders();
         window.history.pushState("Details", "Title", linkpage+"account/orders");
         document.title= "Orders - "+usernamess;
@@ -68,6 +70,7 @@ $(document).ready(function() {
             $("#order-detail").hide();
             $("#orderslist").show();
             $("#showorders").show();
+            loadTopOnOrder();
             loadOrders();
             break;
         case "orderdetail":
@@ -91,6 +94,7 @@ $(document).ready(function() {
             $('#dashboard').addClass("active");
             $(".everyblock").hide();
             $("#showdashboard").show();
+            loadTopOnDashboard();
             break;
         case "info":
             $("#switcher>div").removeClass("active");
@@ -311,45 +315,135 @@ function removeW(id){
         loadWishlist();
     });
 }
-function loadTop4Wishlist(){
+
+
+
+function removeWDB(id){
+    post("wishlist", {"proID": id}).fail(function(){
+        loadWishlistDB();
+    });
+}
+function loadWishlistDB(){
     get("api/getMyWishlist").done(function(data){
-     
         if(data.length != 0){
-//            var rowsItems = "";
-//            var checkRow = 0;
-            for(var i = 0 ; i<4;i++){
-                console.log(data[i].url);
-//                if(checkRow === 0){
-//                    rowsItems +="<div class=\"r lpwl1\">";
-                }}else console.log("rong roi ba");
-//                
-//                rowsItems +=    "<div class=\"c-05\">";
-//                rowsItems +=        "<div class=\"product-item\">";
-//                rowsItems +=            "<a href=\""+data[i].url+"\"><img src=\""+data[i].img+"\" alt=\"\"></a>";
-//                rowsItems +=            "<a href=\""+data[i].url+"\" class=\"pname\">"+data[i].name+"</a>";
-//                rowsItems +=            "<div class=\"wishlist-price\">"+data[i].price+"</div>";
-//                rowsItems +=            "<button onclick=\"removeW('"+data[i].id+"'); return false;\" class=\"button-remove pbutton-wishlist\">Remove</button>";
-//                rowsItems +=        "</div>";
-//                rowsItems +=    "</div>";
-//                checkRow++;
-//                
-//                if(checkRow === 2 || !data[i+1]){
-//                    rowsItems += "</div>";
-//                    checkRow = 0;
-//                }
-//            }
-//            $(".lpwl1").remove();
-//            $("#erodd1").remove();
-//            $("#bindproductwl1").append(rowsItems);
-//        }else{
-//            $(".lpwl1").remove();
-//            $("#erodd1").remove();
-//            $("#bindproductwl1").append("<div id=\"erodd1\" style=\"opacity: 0.5;\">no items</div>");
-//        }
-    }).fail(function(){
+            var topWitems="";
+            var checkRow = 0;
+            $.each(data,function(ip, p){
+                if(ip < 4){
+                    if(checkRow === 0){
+                        topWitems += "<div class=\"r twd list-product\">";
+                    }
+                        topWitems +=     "<div class=\"c-05 \">";
+                        topWitems +=         "<div class=\"product-item\">";
+                        topWitems +=             "<img src=\""+p.img+"\"";
+                        topWitems +=                     "alt=\"\">";
+                        topWitems +=             "<a href=\""+p.url+"\" class=\"pname\">"+p.name+"</a>";
+                        topWitems +=             "<button onclick=\"removeWDB('"+p.id+"'); return false;\" class=\"pbutton-wishlist button-remove\">Remove from wishlist</button>";
+                        topWitems +=         "</div>";
+                        topWitems +=     "</div>";
+                        checkRow++;
+                    if(checkRow === 2 || !data[ip+1]){
+                        topWitems += "</div>";
+                        checkRow = 0;
+                    }
+                }
+            });
+            $(".twd").remove();
+            $("#etwd").remove();
+            $("#bindTopWishlistDashboard").append(topWitems);
+        }else{
+            $(".twd").remove();
+            $("#etwd").remove();
+            $("#bindTopWishlistDashboard").append("<div id=\"etwd\" class=\"list-product op50\">You haven't add anything to wishlist</div>");
+        }
+      
         
     });
-}            
+}
+function loadTopOnDashboard(){
+    loadWishlistDB();
+        console.log("hello");
+    get("api/toppurchase").done(function(data){
+        console.log("hello1");
+        if(data.length != 0){
+            var topPitems="";
+            var checkRow = 0;
+            $.each(data,function(ip, p){
+                if(ip < 4){
+                    if(checkRow === 0){
+                        topPitems += "<div class=\"tpd r list-product\">";
+                    }
+                        topPitems +=     "<div class=\"c-05 \">";
+                        topPitems +=         "<div class=\"product-item\">";
+                        topPitems +=             "<img src=\""+p.img+"\"";
+                        topPitems +=                     "alt=\"\">";
+                        topPitems +=             "<a href=\""+p.url+"\" class=\"pname\">"+p.name+"</a>";
+                        topPitems +=             "<span class=\"pdate\">Order date: <span>"+p.odate+"</span></span>";
+                        topPitems +=         "</div>";
+                        topPitems +=     "</div>";
+                        checkRow++;
+
+                    if(checkRow === 2 || !data[ip+1]){
+                        topPitems += "</div>";
+                        checkRow = 0;
+                    }
+                }
+            });
+            $(".tpd").remove();
+            $("#etpd").remove();
+            $("#bindTopPurchaseDashboard").append(topPitems);
+        }else{
+            $(".tpd").remove();
+            $("#etpd").remove();
+            $("#bindTopPurchaseDashboard").append("<div id=\"etpd\" class=\"list-product op50\">You haven't bought any gift</div>");
+        }
+    }).fail(function(error){
+        console.log(error);
+    });
+}
+function loadTopOnOrder(){
+    get("api/toppurchase").done(function(data){
+        if(data.length != 0){
+            var topPOitems="";
+            var checkRow = 0;
+            $.each(data,function(ip, p){
+                if(ip < 4){
+                    if(checkRow === 0){
+                        topPOitems += "<div class=\"r tpo list-product\">";
+                    }
+                        topPOitems +=     "<div class=\"c-05 \">";
+                        topPOitems +=         "<div class=\"product-item\">";
+                        topPOitems +=             "<img src=\""+p.img+"\"";
+                        topPOitems +=                     "alt=\"\">";
+                        topPOitems +=             "<a href=\""+p.url+"\" class=\"pname\">"+p.name+"</a>";
+                        topPOitems +=             "<span class=\"pdate\">Order date: <span>"+p.odate+"</span></span>";
+                        topPOitems +=         "</div>";
+                        topPOitems +=     "</div>";
+                        checkRow++;
+                        
+                    if(checkRow === 2 || !data[ip+1]){
+                        topPOitems += "</div>";
+                        checkRow = 0;
+                    }
+                }
+            });
+            $(".tpo").remove();
+            $("#etpo").remove();
+            $("#bindTopPurchaseOrders").append(topPOitems);
+        }else{
+            $(".tpo").remove();
+            $("#etpo").remove();
+            $("#bindTopPurchaseOrders").append("<div id=\"etpo\" class=\"list-product op50\">You haven't bought any gift</div>");
+        }
+    });
+}
+
+
+
+
+
+
+
 function loadWishlist(){
     get("api/getMyWishlist").done(function(data){
         if(data.length != 0){
@@ -470,6 +564,7 @@ function loadOrderDetail(code){
 }            
 
 function get(url){
+    console.log(linkpage+url);
     return $.ajax({
             type: "GET",
             dataType: 'json',

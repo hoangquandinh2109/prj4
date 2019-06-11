@@ -19,7 +19,7 @@ $(document).ready(function(){
     
     $('#btn-bell > a').click(function(){
         event.preventDefault();
-        $(this).removeClass('unseen');
+        $('#btn-bell').removeClass('unseen');
         $('#hopvip').show();
         $("body").addClass("square");
         $('.clickdetrove').addClass('havenotification');

@@ -222,7 +222,7 @@ public class Product extends HttpServlet {
             case "v":
             if(!id.isEmpty()){
                 entity.Product p = productDB.getSingleProduct(id);
-                if(p != null){
+                if(p != null && p.getProStatus()){
                     List<String> list = new ArrayList<>();
                     list.add("Vipkien");
                     list.add("Tunzin 093");

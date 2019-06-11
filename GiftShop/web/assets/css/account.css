@@ -576,6 +576,10 @@ body .ui .profile .profile-info > span {
   bottom: 20px;
 }
 
+.op50 {
+  opacity: 0.5;
+}
+
 .quan-io {
   position: absolute;
   left: 100px;

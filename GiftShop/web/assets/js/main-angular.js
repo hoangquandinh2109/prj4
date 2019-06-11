@@ -68,7 +68,6 @@ app.controller('homepagination', function($scope, $http){
            }
        }
        $scope.numPro = numPro;
-       console.log(list);
        return list;
    }
    $scope.star = function (avg){
@@ -161,6 +160,7 @@ function DemoCtrl ($timeout, $q, $log, $http) {
     
     function loadAll(vip) {
       var repos = vip;
+      
       return repos.map(function (repo) {
         repo.value = repo.proName.toLowerCase();
         return repo;

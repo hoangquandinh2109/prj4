@@ -381,10 +381,13 @@ body .navigation form input {
   height: 30px;
   width: 200px;
   padding-left: 10px;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 body .navigation form input:focus {
   outline: none;
+  width: 600px;
 }
 
 body .navigation form button {
@@ -546,6 +549,10 @@ body .web-body .left-column .categories ul li .categories-title i {
 
 body .web-body .left-column .categories ul li .categories-desc {
   color: #f7c7d5;
+  display: block;
+  height: 40px;
+  overflow: hidden;
+  width: calc(100% - 20px);
 }
 
 body .web-body .left-column .block-title-n-slide-left .left-vertical-product-slide {
@@ -1386,7 +1393,7 @@ body .content-n-cart .cart.ra {
 }
 
 .custom-container {
-  min-width: 230px !important;
+  min-width: 600px !important;
 }
 
 #list-types {

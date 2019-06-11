@@ -38,6 +38,6 @@ public interface PurchaseItemFacadeLocal {
     
     List<PurchaseItem> ItemofMe(Purchase purID);
 
-    List<Product> getAllPurchaseItemOfMe(Customer me);
+    List<Object[]> getAllPurchaseItemOfMe(Customer me);
     
 }

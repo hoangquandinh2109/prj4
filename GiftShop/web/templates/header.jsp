@@ -120,7 +120,7 @@
                 <div class="cart-inner">
                     <span class="cart-title">Shopping cart</span>
                     <span id="CartCount">{{numCart}}</span> <span>items</span>
-                    <span id="CartCost"> - <span class="money">{{"$"+subtotal}}</span></span>
+                    <span id="CartCost"> - <span class="money">{{"$"+subtotal.toFixed(2)}}</span></span>
                 </div>
             </div>
         </div>

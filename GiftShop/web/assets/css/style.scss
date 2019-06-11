@@ -289,8 +289,10 @@ body{
                 height: 30px; 
                 width: 200px;
                 padding-left: 10px; 
+                transition: 0.3s ease-in-out;
                 &:focus{
                     outline: none;
+                    width: 600px;
                 }
             }
             button{
@@ -424,6 +426,10 @@ body{
                         }
                         .categories-desc{
                             color: #f7c7d5;
+                            display: block;
+                            height: 40px;
+                            overflow: hidden;
+                            width: calc(100% - 20px);
                         }
                     }
                 }
@@ -1123,7 +1129,7 @@ body{
     }
 }
 .custom-container {
-    min-width: 230px !important;
+    min-width: 600px !important;
   }
 
 

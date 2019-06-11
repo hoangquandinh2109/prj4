@@ -13,6 +13,7 @@ import entity.ProductType;
 import entity.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -40,6 +41,7 @@ import models.ProductTypeFacadeLocal;
  */
 public class FilterProduct {
     HttpSession session;
+    DecimalFormat fmd = new DecimalFormat("#.##");
 
     public FilterProduct(String[] uri, HttpServletRequest req, HttpServletResponse resp,ProductFacadeLocal db, CategoryFacadeLocal dbCat,ProductTypeFacadeLocal dbType) {
             session=req.getSession();  
@@ -148,6 +150,7 @@ public class FilterProduct {
                 .add("onWishlist", onWoC(p.getWishlistCollection()))
                 .add("starAVG", ifNull(p.getStarAVG()))
                 .add("proDetails", ifNull(p.getProDetails()))
+                .add("newprice", ifNull(newprice(p)))
                 .add("proImg", ifNull(img))
                 .add("numReview", ifNull(p.getReviewCollection().size()))
                 .build();
@@ -172,6 +175,9 @@ public class FilterProduct {
         } catch (Exception e) {
             return false;
         }
+    }
+    private String newprice(Product p) {
+        return (p.getDiscout() == 0)? "0" : fmd.format((100 - p.getDiscout()) * p.getProPrice() /100);
     }
 
 }

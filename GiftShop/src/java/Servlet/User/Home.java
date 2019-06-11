@@ -10,6 +10,7 @@ import entity.Category;
 import entity.ProductType;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -36,11 +37,26 @@ public class Home extends HttpServlet {
     private ProductTypeFacadeLocal typeDB;
     @EJB
     private CategoryFacadeLocal catDB;
+    DecimalFormat fmd = new DecimalFormat("#.##");
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<String> list = new ArrayList<>();
         
         
-        List<entity.Product> listnew = proDB.top12New();
+        List<entity.Product> listnewP = proDB.top12New();
+        List<String[]> listnew = new ArrayList<>();
+        
+        
+        for(entity.Product p : listnewP){
+            listnew.add(new String[]{
+                p.getProID(),
+                p.getProName(),
+                "$"+p.getProPrice(),
+                proDB.imageOf(p),
+                p.getStarAVG()+"",
+                p.getReviewCollection().size()+"",
+                "$"+newprice(p)
+            });
+        }
         
         List<String[]> listType = new ArrayList<>();
         List<String[]> listCat = new ArrayList<>();
@@ -84,6 +100,9 @@ public class Home extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
+    private String newprice(entity.Product p) {
+        return (p.getDiscout() == 0)? "0.0" : fmd.format((100 - p.getDiscout()) * p.getProPrice() /100);
     }
 
 }

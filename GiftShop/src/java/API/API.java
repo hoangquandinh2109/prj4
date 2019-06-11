@@ -28,6 +28,7 @@ import entity.Purchase;
 import entity.PurchaseItem;
 import entity.Wishlist;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,7 +62,7 @@ public class API extends HttpServlet {
     @EJB
     private ProductFacadeLocal productFacade;
     private HttpSession session;
-
+    DecimalFormat fmd = new DecimalFormat("#.##");
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] uris = new String[]{};
@@ -75,6 +76,7 @@ public class API extends HttpServlet {
             String detaillink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/product/v/";
             String imglink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/productImage/";
             
+            
             if(uris[0].equals("featureproduct")){
                 json = "[";
                 int id=0;
@@ -87,8 +89,8 @@ public class API extends HttpServlet {
                     json += "\"name\":\""+((Product) p[0]).getProName()+"\",";
                     json += "\"img\":\""+imglink+productFacade.imageOf(((Product) p[0]))+"\",";
                     json += "\"feature\":\""+((Feature) p[1]).getFname()+"\",";
-                    json += "\"price\":\""+((Product) p[0]).getProPrice()+"\",";
-                    json += "\"discount\":\""+((Product) p[0]).getDiscout()+"\",";
+                    json += "\"oldprice\":\""+((Product) p[0]).getProPrice()+"\",";
+                    json += "\"newprice\":\""+newprice((Product)p[0])+"\",";
                     json += "\"starAVG\":\""+((Product) p[0]).getStarAVG()+"\",";
                     json += "\"numReview\":\""+((Product) p[0]).getReviewCollection().size()+"\",";
                     json += "\"onW\":"+onWoC(((Product) p[0]).getWishlistCollection());
@@ -105,22 +107,23 @@ public class API extends HttpServlet {
                 try {
                     json = "[";
                     Customer me = customer.find(((int) req.getSession().getAttribute("sessionid")));
-                    List<Product> lo = orderdetail.getAllPurchaseItemOfMe(me);
+                    List<Object[]> lo = orderdetail.getAllPurchaseItemOfMe(me);
                     int i = 0;
-                    List<Product> topProduct = new ArrayList<>();
-                    for(Product pn : lo){
+                    List<Object[]> topProduct = new ArrayList<>();
+                    for(Object[] pn : lo){
                         if(topProduct.indexOf(pn) == -1){
                             topProduct.add(pn);
                         }
                     }
                     int j = 0;
-                    for (Product p : topProduct) {
+                    for (Object[] p : topProduct) {
                         j++;
                         json += "{";
-                        json +="\"url\":\""+detaillink+p.getProID()+"\",";
-                        json +="\"name\":\""+p.getProName()+"\",";
-                        json +="\"price\":\"$"+p.getProPrice()+"\",";
-                        json +="\"img\":\""+imglink+productFacade.imageOf(p)+"\"";
+                        json +="\"url\":\""+detaillink+((Product)p[1]).getProID()+"\",";
+                        json +="\"name\":\""+((Product)p[1]).getProName()+"\",";
+                        json +="\"price\":\"$"+((Product)p[1]).getProPrice()+"\",";
+                        json +="\"odate\":\""+fmDate.format(((Purchase)p[0]).getDateOrderPlaced())+"\",";
+                        json +="\"img\":\""+imglink+productFacade.imageOf(((Product)p[1]))+"\"";
                         json+= "}";
                        
                         if(j != 4 && j != topProduct.size()){
@@ -135,6 +138,7 @@ public class API extends HttpServlet {
                     json = "[]";
                 }
                 out.println(json);
+                resp.setStatus(200);
 
             }
             
@@ -150,7 +154,7 @@ public class API extends HttpServlet {
                         json +="\"id\":\""+mywishlist.get(i).getProID().getProID()+"\",";
                         json +="\"url\":\""+detaillink+mywishlist.get(i).getProID().getProID()+"\",";
                         json +="\"name\":\""+mywishlist.get(i).getProID().getProName()+"\",";
-                        json +="\"price\":\"&"+mywishlist.get(i).getProID().getProPrice()+"\",";
+                        json +="\"price\":\"$"+mywishlist.get(i).getProID().getProPrice()+"\",";
                         json +="\"img\":\""+imglink+productFacade.imageOf(mywishlist.get(i).getProID())+"\"";
                         json+= "}";
                        if( (i+1) < mywishlist.size()){
@@ -281,6 +285,10 @@ public class API extends HttpServlet {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private String newprice(Product p) {
+        return (p.getDiscout() == 0)? "0" : fmd.format((100 - p.getDiscout()) * p.getProPrice() /100);
     }
 
 }
