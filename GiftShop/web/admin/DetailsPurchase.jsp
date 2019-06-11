@@ -19,57 +19,57 @@
                     <h1><i class="fa fa-edit"></i>Order Details </h1>
                     <p>Order Information </p>
                 </div>
-                <ul class="app-breadcrumb breadcrumb">
+             <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                     <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/index.jsp">Home</a></li>
-            </ul>
-        </div>
-        <div class="wrapper">
-            <!-- Main content -->
-            <section class="content d-none d-print-block">
-                <!-- title row -->
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h2 class="page-header">
-                            &nbsp; &nbsp;<i class="fa fa-globe"></i> Cangcucotv2, Group 4.
-                            <br/>
-                            &nbsp; &nbsp;<small class="pull-right">Date:<i id="date"></i></small>
-                        </h2>
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- info row -->
-                <div class="row invoice-info d-none d-print-block">
-                    <div class="col-sm-4 invoice-col">
-                        &nbsp;   Addess
-                        <address>
-                            <strong> &nbsp; &nbsp;CangcucotV2, Inc.</strong><br>
-                            &nbsp; &nbsp;  590 Cach mang thang 8, District 3<br>     
-                            &nbsp; &nbsp;  Phone: (804) 123-5432<br>
-                            &nbsp; &nbsp;  Email: cangcucotV2@gmail.com
-                        </address>
-                    </div>
-                    <!-- /.col -->
-
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </section>
-            <div class="col-lg-6 animated fadeInDown">
-                <div id="chart1"></div>
+                </ul>
             </div>
+            <div class="wrapper">
+                <!-- Main content -->
+                <section class="content d-none d-print-block">
+                    <!-- title row -->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="page-header">
+                                &nbsp; &nbsp;<i class="fa fa-globe"></i> Cangcucotv2, Group 4.
+                                <br/>
+                                &nbsp; &nbsp;<small class="pull-right">Date:<i id="date"></i></small>
+                            </h2>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- info row -->
+                    <div class="row invoice-info d-none d-print-block">
+                        <div class="col-sm-4 invoice-col">
+                            &nbsp;   Addess
+                            <address>
+                                <strong> &nbsp; &nbsp;CangcucotV2, Inc.</strong><br>
+                                &nbsp; &nbsp;  590 Cach mang thang 8, District 3<br>     
+                                &nbsp; &nbsp;  Phone: (804) 123-5432<br>
+                                &nbsp; &nbsp;  Email: cangcucotV2@gmail.com
+                            </address>
+                        </div>
+                        <!-- /.col -->
 
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="tile">
-                        <h3 class="tile-title">Order # </h3>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </section>
+                <div class="col-lg-6 animated fadeInDown">
+                    <div id="chart1"></div>
+                </div>
 
-                        <div class="tile-body">
-                            <form class="form-horizontal">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Purchase ID</label>
-                                    <div class="col-md-8">
-                                        <b>${purchase.purID}</b>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="tile">
+                            <h3 class="tile-title">Order # </h3>
+
+                            <div class="tile-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Purchase ID</label>
+                                        <div class="col-md-8">
+                                            <b>${purchase.purID}</b>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -118,36 +118,31 @@
                         <div class="tile-body">
                             <form class="form-horizontal">
                                 <div class="form-group row">
-                                    <label class="control-label col-md-4">Shipping to name</label>
+                                    <label class="control-label col-md-4">Customer Name</label>
                                     <div class="col-md-7">
-                                        <b>${purchase.toName}</b>
+                                        <b>${purchase.cusID.cusName}</b>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-4">To Address</label>
+                                    <label class="control-label col-md-4">Email</label>
                                     <div class="col-md-7">
-                                        <b>${purchase.toAddress}</b>
+                                        <b>${purchase.cusID.cusEmail}</b>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-4">Phone</label>
+                                    <label class="control-label col-md-4">Customer Address</label>
                                     <div class="col-md-7">
-                                        <b>${purchase.toPhone}</b>
+                                        <b>${purchase.cusID.cusAddress}</b>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-md-4">Payment</label>
+                                    <label class="control-label col-md-4">Number Phone</label>
                                     <div class="col-md-7">
-                                        <b>${purchase.paymentMethod}</b>
+                                        <b>${purchase.cusID.cusPhone}</b>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="control-label col-md-4">Note</label>
-                                        <div class="col-md-7">
-                                            <b>${purchase.note}</b>
-                                        </div>
-                                </div>
-                             
+                                <br/>
+                                <br/>
                             </form>
                         </div>
                     </div>
@@ -165,7 +160,6 @@
                                     <th scope="col">Product Name</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">&#36;Price</th>
-                                    <th scope="col">&#36;Total</th>
                                     <th scope="col"></th>
 
                                 </tr>
@@ -177,8 +171,6 @@
                                         <td>${c.proID.proName}</td>
                                         <td>${c.quantity}</td>
                                         <td>${c.proID.proPrice}</td>
-                                        <td>${c.proID.proPrice*c.quantity}</td>
-                                        <td></td>
                                         <td></td>
                                     </tr>
                                 </c:forEach>
@@ -187,8 +179,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td><h3>Subtotal &nbsp; &#36;<b>${purchase.totalPrice}</b></h3></td>
+                                    <td>Total Price &nbsp; &#36;<b>${purchase.totalPrice}</b></td>
                                 </tr>     
                             </tbody>
                         </table>

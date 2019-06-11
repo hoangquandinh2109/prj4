@@ -10,7 +10,7 @@
 <html>
     <head>
         <c:import url="../templates/adminHead.jsp"></c:import>
-          
+            <!--<link rel="stylesheet" href="$.{pageContext.request.contextPath}/assets/library/bootstrap/css/bootstrap.min.css"/>-->
         <c:import url="../templates/datatablecss.jsp"></c:import>
         </head>
         <body class="app sidebar-mini rtl">
@@ -83,10 +83,20 @@
                             <tr>
                                 <td>${s.purID}</td>
                                 <td>${s.cusID.cusName}</td>
-                                <td>${s.cusID.cusEmail}</td>
-                                <td><fmt:formatDate value="${s.dateOrderPlaced}" pattern="yyyy-MM-dd" /></td>
-                                <td><fmt:formatDate value="${s.dateOrderPaid}" pattern="yyyy-MM-dd" /></td>
-                                <td>${s.totalPrice}</td>
+
+                                <td>
+                                    ${s.cusID.cusEmail}
+                                </td>
+                                <td>  
+                                    <fmt:formatDate value="${s.dateOrderPlaced}" pattern="yyyy-MM-dd" />
+                                </td>
+                                <td>  
+                                    <fmt:formatDate value="${s.dateOrderPaid}" pattern="yyyy-MM-dd" />
+                                </td>
+                                <td>
+                                    ${s.totalPrice}
+                                </td>
+
                                 <c:if test="${s.purchaseStatus == 0}">
                                     <td>
                                         <b>Process</b>
@@ -108,30 +118,33 @@
                                     </td>  
                                 </c:if>
 
-                              
+
                                 <c:if test="${s.purchaseStatus == 0 }">       
                                     <td>
-                               
-                                                <a class="btn btn-outline-primary btn-sm" href="changeStatusServlet?purID=${s.purID}&status=1">Shipping</a>
+                                        <c:forEach var="c" items="${listPurItem}">
+                                            <c:if test="${s.purID == c.purID.purID}">
+                                                <a class="btn btn-outline-primary btn-sm" href="changeStatusServlet?purID=${s.purID}&status=1&proID=${c.proID.proID}&puritem=${c.purItemID}">Shipping</a>
                                                 &nbsp;
-                                                <a class="btn btn-outline-danger btn-sm" href="changeStatusServlet?purID=${s.purID}&status=3">Cancel</a>
+                                                <a class="btn btn-outline-danger btn-sm" href="changeStatusServlet?purID=${s.purID}&status=3&proID=${c.proID.proID}&puritem=${c.purItemID}">Cancel</a>
                                                 &nbsp;
                                                 <a class="btn btn-outline-secondary btn-sm" href="getDetailsPurServlet?purID=${s.purID}">Details</a>
-                                    
-                                      
+                                            </c:if>
+                                        </c:forEach>
                                     </td>
                                 </c:if>
                                 <c:if test="${s.purchaseStatus == 1 }">
                                     <td>
-                                     
-                                                <a class="btn btn-outline-success btn-sm" href="changeStatusServlet?purID=${s.purID}&status=2">Completed</a>
+                                        <c:forEach var="c" items="${listPurItem}">
+                                            <c:if test="${s.purID == c.purID.purID}">
+                                                <a class="btn btn-outline-success btn-sm" href="changeStatusServlet?purID=${s.purID}&status=2&proID=${c.proID.proID}&puritem=${c.purItemID}">Completed</a>
                                                 &nbsp;
-                                                <a class="btn btn-outline-danger btn-sm" href="changeStatusServlet?purID=${s.purID}&status=3">Cancel</a>
+                                                <a class="btn btn-outline-danger btn-sm" href="changeStatusServlet?purID=${s.purID}&status=3&proID=${c.proID.proID}&puritem=${c.purItemID}">Cancel</a>
                                                 &nbsp;
                                                 <br/>
                                                 <br/>
                                                 <a class="btn btn-outline-secondary btn-sm" href="getDetailsPurServlet?purID=${s.purID}">Details</a>
-                                        
+                                            </c:if>
+                                        </c:forEach>
                                     </td>
                                 </c:if>
                                 <c:if test="${s.purchaseStatus == 2 }">
@@ -166,11 +179,11 @@
                 buttons: [
                     {extend: 'excel', footer: true,
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            columns: [0,1,2,3,4,5,6,7]
                         }},
                     {extend: 'pdf', footer: true,
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                            columns: [0,1,2,3,4,5,6,7]
                         },
                         customize: function(doc) {
                             doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
