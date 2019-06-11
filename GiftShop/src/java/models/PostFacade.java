@@ -40,22 +40,30 @@ public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal 
 
     @Override
     public List<Post> searchByTitle(String title) {
-       Query q= em.createQuery("SELECT p FROM Post p WHERE p.titlePost like :titlePost").setParameter("titlePost", "%"+title+"%");
+       Query q= em.createQuery("SELECT p FROM Post p WHERE p.titlePost like :titlePost").setParameter("titlePost", '%'+title+'%');
         return q.getResultList();
     }
 
     @Override
     public List<Post> searchByContent(String content) {
-        Query q= em.createQuery("SELECT p FROM Post p WHERE p.infontContent like :infontContent").setParameter("infontContent", "%"+content+"%");
+        Query q= em.createQuery("SELECT p FROM Post p WHERE p.infontContent like :infontContent").setParameter("infontContent", '%'+content+'%');
         
         return q.getResultList();
     }
     @Override
     public List<Post> findByAuthor(Customer c){
-        Query q= em.createQuery("SELECT p FROM Post p WHERE p.cusID like :cusID").setParameter("cusID", c);
+        Query q= em.createQuery("SELECT p FROM Post p WHERE p.cusID = :cusID and p.postStatus = :pStatus").setParameter("cusID", c).setParameter("pStatus", true);
         
         return q.getResultList();
     }
+
+    @Override
+    public long countTotalPostPerUser(Customer c) {
+         Query q= em.createQuery("SELECT count(p) FROM Post p WHERE p.cusID = :cusID and p.postStatus = :pStatus").setParameter("cusID", c).setParameter("pStatus", true);
+         
+        return (long)q.getSingleResult();
+    }
+    
 
     
 }

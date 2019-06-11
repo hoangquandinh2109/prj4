@@ -137,7 +137,7 @@ align-items: center;
 .tag{
     a{
         display: inline-block;
-        margin-top: 7px;
+        margin-top: 10px;
         padding-left:5px;
     }
     .label {
@@ -190,7 +190,7 @@ align-items: center;
     display: inline-block;
     width: 50px;
     height: 50px;
-    margin-left: 10px;
+    margin-left: 60px;
   }
 .card-body{
     background-color: #76c4ce;
@@ -232,7 +232,7 @@ align-items: center;
                 height: 100px;
             }
             q {font-style: italic;}
-    
+            
             /*---------------------------*/
 ////HEADER
 $color-blue: #76c4ce;
@@ -434,6 +434,9 @@ body{
         md-autocomplete {
             height: auto;
         }
+        .md-whiteframe-1dp, .md-whiteframe-z1{
+            box-shadow: 0 0;
+        }
         md-autocomplete md-autocomplete-wrap {
             height: auto;
         }
@@ -445,6 +448,8 @@ body{
             @include center-in-vertical();
         }
         form{
+            position: relative;
+            margin-right: 30px;
             input{
                 border: none;
                 height: 30px; 
@@ -455,12 +460,20 @@ body{
                 }
             }
             button{
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+            button#search-button{
                 height: 30px;
                 width: 30px;
                 box-shadow: none;
                 border: none;
                 background-color: #aaa;
                 color: #fff;
+                position: absolute;
+                top: 0;
+                left: 100%;
                 &:focus{
                     outline: none;
                 }

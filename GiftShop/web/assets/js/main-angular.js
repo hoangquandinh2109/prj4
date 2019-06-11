@@ -1,15 +1,100 @@
 var app = angular.module('cangcucot', ['ngMaterial']);
 app.controller('homepagination', function($scope, $http){
     $scope.numrow = 3;
-    
+    $scope.currpage = 1;
+//    $scope.numpage = 1;
     loadPro();
+    
+    function loadPage(n){
+        $scope.listPagePro = [];
+        var skipP = 12 * (n-1);
+        var bien = "";
+        for(var index = skipP; index <skipP+12; index++){
+            if($scope.listProd[index]){
+                $scope.listPagePro.push($scope.listProd[index]);
+            }
+        }
+        
+    }
     function loadPro(){
        return $http.get(linkpage+"api/featureproduct")
        .then(function(response) {
            $scope.listProd = response.data;
+            var numpage =0;
+           for(var id = 0; id < response.data.length ; id++){
+               if((id+1) % 12 == 0){
+                   numpage++;
+               }
+           }
+           if(id % 12 > 0 || id % 12 < 12) numpage++;
+           $scope.numpage = numpage;
+           loadPage(1);
        });
    }
+   $scope.switchpage = function(n){
+       $scope.currpage = n;
+       loadPage(n);
+       $('html, body').animate({
+            scrollTop: $("#featureproduct-title").offset().top
+        }, 1000);
+   }
+   $scope.active = function(n){
+        if(n == $scope.currpage) {
+            return "active";
+        } else {
+            return "";
+        }
+    }
+   $scope.range = function(min, max, step) {
+       step = step || 1;
+       var input = [];
+       for (var i = min; i <= max; i += step) {
+           input.push(i);
+       }
+       return input;
+   };
+   $scope.productRow = function(n){
+       var skiprow = 4 * (n-1);
+       var list = [];
+       var countitemrow = 0;
+       var numPro = 0;
+       for (var i = 1; i<= $scope.listPagePro.length; i++){
+           numPro++;
+           if(i>skiprow){
+               if(countitemrow < 4){
+                   list.push($scope.listPagePro[i-1]);
+                   countitemrow++;
+               }
+           }
+       }
+       $scope.numPro = numPro;
+       console.log(list);
+       return list;
+   }
+   $scope.star = function (avg){
+       if(avg == "null"){
+           return {"width":"0%"}
+       }
+       return {
+           "width" : (avg/5)*100+"%"
+         }
+   }
+   $scope.classnumRev = function(numrv){
+        if(numrv == 0.0 || numrv == "null"){
+            return  "";
+        }else{
+            return "numrv";
+        }
+    }
+    $scope.numRV = function(numrv){
+        if(numrv == 0.0 || numrv == "null"){
+            return "No review";
+        }else{
+            return "("+numrv+")";
+        }
+    }
 });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -249,10 +334,6 @@ function DemoCtrl ($timeout, $q, $log, $http) {
 });
 
 
-
-
-
-
  /************************************************************************************************************************************************/
     /***************************WISHLIST*************************************************************************************************************/
     /************************************************************************************************************************************************/
@@ -466,10 +547,8 @@ app.controller('proPagination', function($scope, $http) {
     }
     $scope.numRV = function(numrv){
         if(numrv == 0.0 || numrv == "null"){
-            $scope.numRev = "";
             return "No review";
         }else{
-            $scope.numRev = "numrv";
             return "("+numrv+")";
         }
     }
@@ -508,7 +587,7 @@ app.controller('pagination', function($scope, $http) {
             }
             $scope.switchpage = function(n){
                 getColl(n).then(function(){
-                    window.history.pushState("Details", "Title", linkpage+"product/type/page/"+n);
+                    window.history.pushState("Details", "Title", linkpage+"product/"+link+"/page/"+n);
                 });
             }
             $scope.disableleft = function(){

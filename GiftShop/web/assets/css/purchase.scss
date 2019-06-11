@@ -5,6 +5,9 @@
     font-weight: normal;
     font-style: normal;
 }
+::-webkit-scrollbar-track {
+    background: #fff; 
+}
 
 body{
     background-color: #fff;
@@ -140,10 +143,15 @@ body{
     padding-right: 50px;
     bottom: 0;
     top: 0;
-    
-    .list-cart{
+    #blc{
         padding-bottom: 35px;
         border-bottom: 1px solid #e5e5e5;
+    }
+    .list-cart{
+        max-height: 255px;
+        overflow-y: scroll;
+        padding-right: 10px;
+        padding-top: 15px;
         .ci-pu{///cart item
             display: flex;
             align-items: center;

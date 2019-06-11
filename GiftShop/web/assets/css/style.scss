@@ -126,7 +126,8 @@ background: $color-pink;
     font-style: normal;
 }
 body{
-    background-color: #f5f5f5;
+    height: unset;
+    min-height: unset;
     overflow-y: scroll!important;
     &.square{
         position: fixed;
@@ -638,6 +639,7 @@ body{
         .content{
             position: absolute;
             top: 0;
+            background-color: #f5f5f5;
             width: 100%;
             left: 0;
             transition: 0.3s ease;
@@ -1177,4 +1179,108 @@ body{
     transform: rotateZ(-45deg) translate(-2px, 4px);
 }
 
-
+.por{
+    position: relative;
+}
+#btn-bell{
+    z-index: 100001;
+}
+.unseen{
+    i{
+        animation: unseen 0.7s infinite;
+        color: $color-pink;
+    }
+}
+@keyframes unseen {
+    0%   {
+        transform: scale(1,1);
+    }
+    50%   {
+        transform: scale(2,2);
+    }
+    100%   {
+        transform: scale(1,1);
+    }
+}
+#dotvip{
+    z-index: 100001;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: $color-dark-pink;
+}
+#hopvip .listhop::-webkit-scrollbar-thumb {
+    background: $color-pink; 
+}
+#hopvip .listhop::-webkit-scrollbar-track {
+    background: #fff; 
+}
+#hopvip{
+    position: absolute;
+    width: 300px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    right: 0;
+    top: 29px;
+    box-shadow: 4px 4px 4px #00000026;
+    z-index: 100001;
+    .listhop{
+        max-height: 211px;
+        overflow-y: auto;
+    }
+    &:after{
+        content: '';
+        border-top: 0px;
+        border-right: 15px solid transparent;
+        border-left: 15px solid transparent;
+        border-bottom: 15px solid white;
+        right: 0;
+        position: absolute;
+        bottom: 100%;
+    }
+    .hv-item{
+        a{
+            padding: 20px;
+            display: block;
+            &:hover{
+                background-color: #ebebeb;
+            }
+        }
+        .hv-title{
+            font-size: 11px;
+            display: block;
+            color: #000;
+        }
+        .hv-info{
+            color: #000;
+            display: block;
+            opacity: 0.5;
+        }
+        &:not(:first-child){
+            a{
+                margin-top: 1px;
+            }
+            position: relative;
+            &:after{
+                content: '';
+                position: absolute;
+                top: -1px;
+                left: 20px;
+                width: calc(100% - 40px);
+                height: 1px;
+                background-color: #ebebeb;
+            }
+        }
+    }
+}
+body .content-n-cart .content .clickdetrove.havenotification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    opacity: 1;
+}

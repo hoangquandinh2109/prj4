@@ -7,6 +7,10 @@
   font-style: normal;
 }
 
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
 body {
   background-color: #fff;
   height: auto;
@@ -178,9 +182,16 @@ body * {
   top: 0;
 }
 
-.side-bar .list-cart {
+.side-bar #blc {
   padding-bottom: 35px;
   border-bottom: 1px solid #e5e5e5;
+}
+
+.side-bar .list-cart {
+  max-height: 255px;
+  overflow-y: scroll;
+  padding-right: 10px;
+  padding-top: 15px;
 }
 
 .side-bar .list-cart .ci-pu {

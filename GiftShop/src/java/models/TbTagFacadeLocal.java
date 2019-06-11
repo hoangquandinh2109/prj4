@@ -30,5 +30,7 @@ public interface TbTagFacadeLocal {
     List<TbTag> findRange(int[] range);
 
     int count();
+
+  
     
 }

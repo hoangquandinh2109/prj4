@@ -7,10 +7,12 @@ package postServlet;
 
 import entity.Customer;
 import entity.Post;
+import entity.TbTag;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -23,9 +25,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.CommentFacadeLocal;
 import models.CustomerFacadeLocal;
 import models.PostFacadeLocal;
+import models.TbTagFacadeLocal;
 
 /**
  *
@@ -33,6 +37,8 @@ import models.PostFacadeLocal;
  */
 @WebServlet(name = "createPostServlet", urlPatterns = {"/createPostServlet"})
 public class createPostServlet extends HttpServlet {
+    @EJB
+    private TbTagFacadeLocal tbTagFacade;
 
     @EJB
     private CustomerFacadeLocal customerFacade;
@@ -42,30 +48,17 @@ public class createPostServlet extends HttpServlet {
     @EJB
     private PostFacadeLocal postFacade;
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Date date = new Date(System.currentTimeMillis());
-        //   System.out.println(date);
+        List<TbTag> t= tbTagFacade.findAll();
+      
+        request.setAttribute("tags", t);
+        request.getRequestDispatcher("createPost.jsp").forward(request, response);
+        
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,11 +69,12 @@ public class createPostServlet extends HttpServlet {
         String tag = request.getParameter("tag");
         String content = request.getParameter("content");
         String infor = request.getParameter("infor");
+        HttpSession session=request.getSession();
         Date date = new Date(System.currentTimeMillis());
         JsonArrayBuilder jsonUserArray = Json.createArrayBuilder();
         if (action.equals("create")) {
             try {
-                Customer u = customerFacade.find(1);
+                Customer u = customerFacade.find((int)session.getAttribute("sessionid"));
                 Post p = new Post(title, infor, content, date, tag, u);
                 postFacade.create(p);
 
@@ -89,16 +83,11 @@ public class createPostServlet extends HttpServlet {
             }
         } else if (action.equals("update")) {
              Post edPost = postFacade.find(postID);
-            if(tag.equals("")){
-                edPost.setPostTag(edPost.getPostTag());
-            }
-            else{
-                  edPost.setPostTag(tag);
-            }
             edPost.setTitleContent(content);
             edPost.setTitlePost(title);
             edPost.setInfontContent(infor);
             edPost.setDateRealease(date);
+            edPost.setPostTag(tag);
             postFacade.edit(edPost);
         } else {
             Post rmPost = postFacade.find(postID);

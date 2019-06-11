@@ -53,7 +53,7 @@
                                     <td class="r3">
                                        <div class="cart-quantity" id="asdkkfjasfd">
                                             <!--$event de lay quantity validate-->
-                                            <input ng-keyup="ci.quantity = updateQuantity(ci.ID,$event)" ng-model="ci.quantity" type="number" min="1" max="50">
+                                            <input readonly ng-model="ci.quantity" type="number" min="1" max="50">
                                             <button ng-click="ci.quantity = inc(ci.ID,ci.quantity)" class="cart-quan-plus"><span>+</span></button>
                                             <button ng-click="ci.quantity = desc(ci.ID,ci.quantity)" class="cart-quan-minus"><span>-</span></button>
                                         </div>

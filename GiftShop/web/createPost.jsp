@@ -5,28 +5,28 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
 
         <c:import url="templates/postHead.jsp"></c:import>
-            <link rel="stylesheet" href="assets/css/index.css"/>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-            <style>
-                li {
-                    list-style-type: none;
-                }
-            </style>
-        </head>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            li {
+                list-style-type: none;
+            }
+        </style>
+    </head>
 
-        <body ng-app="cangcucot"  ng-controller="cart">
-            <div class="content-n-cart clearfix">
-                <div class="content">
-                    <div class="clickdetrove"></div>
+    <body ng-app="cangcucot"  ng-controller="cart">
+        <div class="content-n-cart clearfix">
+            <div class="content">
+                <div class="clickdetrove"></div>
                 <c:import url="templates/header.jsp"></c:import>
                     <div class="web-body">
                         <div class="container-fluid">
@@ -46,35 +46,31 @@
                                         <div id="contentHere">
 
                                         </div>
+                                    
                                         <div class="tags">
                                             <select name="gg" id="mySelect2" style="width: 100%"  multiple="multiple">
-                                                <option>One</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
+                                           <c:set var="a" value="post"></c:set>
+                                                <c:forEach   items="${tags}" var="tag">
+                                                     <c:if  test="${tag.tagType eq a}">
+                                                         <option value="${tag.tag}">${tag.tag}</option>
+                                                     </c:if>    
+                                                </c:forEach>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div id="editor">
 
-                                            </select>
-                                        </div>
-                                        <br>
-                                        <div id="editor" >
-                                            <p>dit me</p>
-                                        </div>
-                                        <br>
-                                        <button type="submit" id="btn1" class="btn btn-primary btn-block">Upload Post</button>
+                                    </div>
+                                    <br>
+                                    <button type="submit" id="btn1" class="btn btn-primary btn-block">Upload Post</button>
 
-                                    </form>
-                                    
-                                </div>
+                                </form>
 
                             </div>
+
                         </div>
                     </div>
+                </div>
                 <c:import url="templates/footer.jsp"></c:import>
                 </div>
             </div>
@@ -109,13 +105,13 @@
                                 type: 'POST',
                                 url: 'createPostServlet',
                                 dataType: 'json',
-                                data: {action:"create", content: contentPost, tag: string, infor: infor, title: title,postID:0},
+                                data: {action: "create", content: contentPost, tag: string, infor: infor, title: title, postID: 0},
                                 success: function(data) {
 
 
                                 }
                             });
-                            alert("THANH CONG nHE");
+                            alert("Success!!");
                             return true;
                         });
                         $('#mySelect2').select2({
@@ -138,7 +134,7 @@
                                 // handlers object will be merged with default handlers object
 
                                 'image': function image() {
-                                    var lengthQuills=quill.getLength()*10;
+                                    var lengthQuills = quill.getLength() * 10;
                                     var _this3 = this;
                                     var fileInput = this.container.querySelector('input.ql-image[type=file]');
                                     if (fileInput == null) {
@@ -200,7 +196,7 @@
                             modules: {
                                 toolbar: toolbarOptions
                             },
-                            placeholder: 'Insert an image...',
+                            placeholder: 'Insert an Text...Make a gift and give it to someone you love',
                             theme: 'snow',
                         });
                         var quills = new Quill('#contentHere', {

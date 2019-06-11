@@ -14,7 +14,18 @@ function hidedangcap(){
     $("#dangcap").hide();
     $('body').removeClass("square");
 }
-$(document).ready(function(){   
+$(document).ready(function(){ 
+    ///thong bao
+    
+    $('#btn-bell > a').click(function(){
+        event.preventDefault();
+        $(this).removeClass('unseen');
+        $('#hopvip').show();
+        $("body").addClass("square");
+        $('.clickdetrove').addClass('havenotification');
+    });
+    
+    
     $(".showcartajax").click(function(){
         event.preventDefault();
         showcartajax();
@@ -23,8 +34,10 @@ $(document).ready(function(){
         $(".content").removeClass("vao");
         $(".cart").removeClass("ra");
         $(this).removeClass("havemodal");
+        $(this).removeClass("havenotification");
         $(".modal-form").remove();
         $("body").removeClass("square");
+        $('#hopvip').hide();
     });
 
     $('a.login-link').click(function(event) {
@@ -73,13 +86,6 @@ $(document).ready(function(){
         $(this).parent().addClass("active");
         $(".tabs").hide();
         $("#infoTab").show();
-    });
-    $("#faq").click(function(){
-        event.preventDefault();
-        $(".button-tab>li").removeClass("active");
-        $(this).parent().addClass("active");
-        $(".tabs").hide();
-        $("#faqTab").show();
     });
     $("#review").click(function(){
         event.preventDefault();
