@@ -52,12 +52,12 @@ public class testanything extends HttpServlet {
     @EJB
     private CustomerFacadeLocal cus;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        for(Product p : productFacade.top12Hot()){
-            System.out.println(p.getProID()+"  "+p.getProName());
-        }
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        
+//        for(Product p : productFacade.top12Hot()){
+//            System.out.println(p.getProID()+"  "+p.getProName());
+//        }
+//    }
 
 }
