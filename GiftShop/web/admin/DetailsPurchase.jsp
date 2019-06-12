@@ -177,7 +177,7 @@
                                         <td>${c.proID.proName}</td>
                                         <td>${c.quantity}</td>
                                         <td>${c.proID.proPrice}</td>
-                                        <td>${c.proID.proPrice*c.quantity}</td>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${c.proID.proPrice*c.quantity}" /></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
@@ -188,7 +188,8 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><h3>Subtotal &nbsp; &#36;<b>${purchase.totalPrice}</b></h3></td>
+                                    <!--<td><h3>Subtotal &nbsp; &#36;<b>$.{purchase.totalPrice}</b></h3></td>-->
+                                <td><h3>Subtotal &nbsp; &#36; <b>  <fmt:formatNumber type="number" maxFractionDigits="2" value="${purchase.totalPrice}" /></b></h3></td>
                                 </tr>     
                             </tbody>
                         </table>

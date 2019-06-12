@@ -103,17 +103,22 @@ public class updateProductServlet extends HttpServlet {
                 product.setProPrice(price);
                 product.setQuantity(quantity);
                 product.setDateRelease(dateRe);
-                product.setTags("");
+                product.setTags(null);
                 product.setProStatus(status);
                 product.setCatID(categoryid);
                 product.setTypeID(typeID);
                 product.setFeatureID(fID);
                 productFacade.edit(product);
+                  String tags = "";
                 /*
                  TODO CODE HERE
                  */
                 int i = 0;
                 for (FileItem item : multiparts) {
+                      if (item.getFieldName().toString().equals("tagInput")) {
+                        tags = tags.concat(item.getString() + ";");
+//                        System.out.println("trong for " + tags);
+                    }
                     if (!item.isFormField()) {
                         if (item.getSize() > 0) {
                             String name = new File(item.getName()).getName();
@@ -131,6 +136,10 @@ public class updateProductServlet extends HttpServlet {
                     }
 
                 }
+                Product pSingle = productFacade.find(product.getProID());
+                pSingle.setProID(product.getProID());
+                pSingle.setTags(tags);
+                productFacade.edit(pSingle);
                 request.setAttribute("message", "Insert product successful.");
             } catch (Exception ex) {
                 request.setAttribute("message", "File upload failed due to : " + ex);

@@ -166,7 +166,7 @@
     $('#datetimepicker2').datepicker({
         uiLibrary: 'bootstrap4', maxDate: new Date, minDate: moment().add(1)});
 </script>-->
-<%--<c:import url="../templates/scriptPrint.jsp"></c:import>--%>
+<c:import url="../templates/sriptReport.jsp"></c:import>
 <script>
     $(function() {
 

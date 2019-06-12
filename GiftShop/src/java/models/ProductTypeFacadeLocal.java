@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Category;
 import entity.ProductType;
 import java.util.List;
 import javax.ejb.Local;
@@ -36,4 +37,6 @@ public interface ProductTypeFacadeLocal {
     int getQuanType(ProductType Pt);
     
     List<ProductType> FindTypeStatus();
+
+    List<ProductType> FilterByCate(Category cate);
 }

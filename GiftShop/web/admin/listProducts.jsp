@@ -28,7 +28,7 @@
                         <th class="d-print-none">Image ID</th>
                         <th>Product ID</th>
                         <th>Product Name</th>
-                        <th>Product Details</th>
+                        <!--<th>Product Details</th>-->
                         <th>Product Price</th>
                         <th>Quantity</th>
                         <th>Date Release</th>
@@ -50,7 +50,7 @@
                                 </td> 
                                 <td>${s.proID}</td>
                             <td>${s.proName}</td>
-                            <td>${s.proDetails}</td>
+                            <!--<td>$.{s.proDetails}</td>-->
                             <td>&#36;${s.proPrice}</td>
                             <td>${s.quantity}</td>
                             <td> <fmt:formatDate value="${s.dateRelease}" pattern="yyyy-MM-dd" /></td>
