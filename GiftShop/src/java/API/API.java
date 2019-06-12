@@ -77,6 +77,7 @@ public class API extends HttpServlet {
             String imglink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/productImage/";
             
             
+            
             if(uris[0].equals("featureproduct")){
                 json = "[";
                 int id=0;
@@ -107,25 +108,31 @@ public class API extends HttpServlet {
                 try {
                     json = "[";
                     Customer me = customer.find(((int) req.getSession().getAttribute("sessionid")));
-                    List<Object[]> lo = orderdetail.getAllPurchaseItemOfMe(me);
-                    int i = 0;
                     List<Object[]> topProduct = new ArrayList<>();
-                    for(Object[] pn : lo){
-                        if(topProduct.indexOf(pn) == -1){
-                            topProduct.add(pn);
+                    List<String> tempString = new ArrayList<>();
+                    
+                    int j = 0;
+                    int i = 0;
+                    for (Object[] p : orderdetail.getAllPurchaseItemOfMe(me)) {
+                        if(tempString.indexOf(((Product)p[1]).getProID()) == -1){
+                            tempString.add(((Product)p[1]).getProID());
+                            if(i<4){
+                                topProduct.add(p);
+                                i++;
+                            }
                         }
                     }
-                    int j = 0;
-                    for (Object[] p : topProduct) {
+                    for(Object[] p2 : topProduct){
                         j++;
-                        json += "{";
-                        json +="\"url\":\""+detaillink+((Product)p[1]).getProID()+"\",";
-                        json +="\"name\":\""+((Product)p[1]).getProName()+"\",";
-                        json +="\"price\":\"$"+((Product)p[1]).getProPrice()+"\",";
-                        json +="\"odate\":\""+fmDate.format(((Purchase)p[0]).getDateOrderPlaced())+"\",";
-                        json +="\"img\":\""+imglink+productFacade.imageOf(((Product)p[1]))+"\"";
-                        json+= "}";
-                       
+                        if(j<=topProduct.size()){
+                            json += "{";
+                            json +="\"url\":\""+detaillink+((Product)p2[1]).getProID()+"\",";
+                            json +="\"name\":\""+((Product)p2[1]).getProName()+"\",";
+                            json +="\"price\":\"$"+((Product)p2[1]).getProPrice()+"\",";
+                            json +="\"odate\":\""+fmDate.format(((Purchase)p2[0]).getDateOrderPlaced())+"\",";
+                            json +="\"img\":\""+imglink+productFacade.imageOf(((Product)p2[1]))+"\"";
+                            json+= "}";
+                        }
                         if(j != 4 && j != topProduct.size()){
                             json+=",";
                         }

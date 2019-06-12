@@ -151,6 +151,7 @@ public class FilterProduct {
                 .add("starAVG", ifNull(p.getStarAVG()))
                 .add("proDetails", ifNull(p.getProDetails()))
                 .add("newprice", ifNull(newprice(p)))
+                .add("type", ifNull(p.getTypeID().getTypeName()))
                 .add("proImg", ifNull(img))
                 .add("numReview", ifNull(p.getReviewCollection().size()))
                 .build();

@@ -6,16 +6,22 @@
 package Servlet.User;
 
 import entity.Customer;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import models.CustomerFacadeLocal;
 import models.PurchaseFacadeLocal;
 import models.PurchaseItemFacadeLocal;
@@ -25,6 +31,7 @@ import models.WishlistFacadeLocal;
  *
  * @author johnn
  */
+@MultipartConfig
 @WebServlet(name = "Account", urlPatterns = {"/account/*"})
 public class Account extends HttpServlet {
 
@@ -37,6 +44,10 @@ public class Account extends HttpServlet {
     @EJB
     private CustomerFacadeLocal customer;
 
+    private static final long serialVersionUID = 1L;
+    private String path = "";
+    public static final String SAVE_DIRECTORY = "avatar";
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -45,6 +56,12 @@ public class Account extends HttpServlet {
 
         Customer me = customer.find(myid);
         switch (action) {
+            case "upavatar":
+                path = uploadFile(req);
+                me.setCusAvatar(path);
+                customer.edit(me);
+                resp.sendRedirect(req.getContextPath()+req.getServletPath());
+                break;
             case "changepass":
                 String password = req.getParameter("password");
 
@@ -75,7 +92,7 @@ public class Account extends HttpServlet {
                 me.setCusPhone(phone);
                 me.setCusName(name);
                 me.setCusEmail(email);
-                session.setAttribute("sessionname", name);  
+                session.setAttribute("sessionname", name);
                 try {
                     customer.edit(me);
                     resp.setStatus(200);
@@ -85,6 +102,75 @@ public class Account extends HttpServlet {
 
                 break;
         }
+    }
+
+    private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
+        String fileName = "";
+        String filePath = "";
+        try {
+            Part filePart = request.getPart("file");
+            // fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+            fileName = (String) getFileName(filePart);
+            String basePath = getServletContext().getRealPath("") + File.separator + SAVE_DIRECTORY + File.separator;
+            //String warFile = basePath.substring(0, basePath.length() - 74) + "\\DKHK4\\Web Pahes\\images" + File.separator + SAVE_DIRECTORY + File.separator;
+
+            File uploadDir = new File(basePath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+            filePath = getServletContext().getContextPath() + SAVE_DIRECTORY + "\\" + fileName;
+            try {
+
+                File outputFilePath = new File(basePath + fileName);
+                inputStream = filePart.getInputStream();
+                outputStream = new FileOutputStream(outputFilePath);
+                int read = 0;
+                final byte[] bytes = new byte[1024];
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+//                request.setAttribute("msg", SAVE_DIRECTORY + "/" + fileName);
+//                request.setAttribute("message",
+//                        "Upload has been done successfully >>" + SAVE_DIRECTORY + "/" + fileName);
+            } catch (Exception e) {
+                e.printStackTrace();
+                fileName = "";
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileName;
+    }
+
+    private String getFileName(Part part) {
+        // form-data; name="file"; filename="C:\file1.zip"
+        // form-data; name="file"; filename="C:\Note\file2.zip"
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                // C:\file1.zip
+                // C:\Note\file2.zip
+                String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
+                clientFileName = clientFileName.replace("\\", "/");
+                int i = clientFileName.lastIndexOf('/');
+                // file1.zip
+                // file2.zip
+                return clientFileName.substring(i + 1);
+            }
+        }
+        return null;
     }
 
     @Override
@@ -102,6 +188,7 @@ public class Account extends HttpServlet {
             req.setAttribute("myaddress", me.getCusAddress());
             req.setAttribute("myphone", me.getCusPhone());
             req.setAttribute("myemail", me.getCusEmail());
+            req.setAttribute("avatar", me.getCusAvatar());
 
             req.setAttribute("username", usernamess);
             String[] uris = new String[]{};

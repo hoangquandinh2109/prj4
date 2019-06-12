@@ -11,6 +11,7 @@ import entity.Cart;
 import entity.Customer;
 import entity.Purchase;
 import entity.PurchaseItem;
+import entity.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -28,6 +29,7 @@ import models.CustomerFacadeLocal;
 import models.ProductFacadeLocal;
 import models.PurchaseFacadeLocal;
 import models.PurchaseItemFacadeLocal;
+import models.WishlistFacadeLocal;
 
 /**
  *
@@ -37,6 +39,8 @@ import models.PurchaseItemFacadeLocal;
 public class PurchaseServlet extends HttpServlet {
     @EJB
     private ProductFacadeLocal productFacade;
+    @EJB
+    private WishlistFacadeLocal wishlistFacade;
     @EJB
     private CustomerFacadeLocal customer;
     @EJB
@@ -142,6 +146,24 @@ public class PurchaseServlet extends HttpServlet {
             Collection<PurchaseItem> cPI = purchase.getPurchaseItemCollection();
             for(Cart cartItem: cartFacade.getAllCartItems()){
 //                System.out.println(cartItem.getProduct().getProName());
+                entity.Product p = cartItem.getProduct();
+                Customer c = customer.find((int) request.getSession().getAttribute("sessionid"));
+                Collection<Wishlist> cwP = p.getWishlistCollection();
+                Wishlist toR = null;
+                for(Wishlist wl : cwP){
+                    if(wl.getCusID().getCusName().equals(c.getCusName())){
+                        System.out.println("so sanh "+wl.getCusID().getCusName()+" va "+c.getCusName());
+                        toR = wl;
+                    }
+                }
+                if(toR != null){
+                    System.out.println("toR ko null");
+                    cwP.remove(toR);
+                     p.setWishlistCollection(cwP);
+                     productFacade.edit(p);
+                     wishlistFacade.remove(toR);
+                }
+                
                 purchaseItem.setProID(cartItem.getProduct());
                 purchaseItem.setPurID(purchase);
                 purchaseItem.setQuantity(cartItem.getQuantity());

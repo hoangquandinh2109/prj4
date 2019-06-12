@@ -8,10 +8,12 @@ package Servlet.User;
 
 import entity.Category;
 import entity.ProductType;
+import entity.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -37,8 +39,10 @@ public class Home extends HttpServlet {
     private ProductTypeFacadeLocal typeDB;
     @EJB
     private CategoryFacadeLocal catDB;
+    HttpSession session;
     DecimalFormat fmd = new DecimalFormat("#.##");
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
         List<String> list = new ArrayList<>();
         
         
@@ -92,8 +96,14 @@ public class Home extends HttpServlet {
         req.setAttribute("listn", listnew);
         req.setAttribute("listCat", listCat);
         req.setAttribute("listType", listType);
+        req.setAttribute("PHer", listforTag("Her", req));
+        req.setAttribute("PHim", listforTag("Him", req));
+        req.setAttribute("PTG", listforTag("TeenGirl", req));
+        req.setAttribute("PTB", listforTag("TeenBoy", req));
+        req.setAttribute("PKid", listforTag("Kids", req));
+        req.setAttribute("P4A", listforTag("For all", req));
         req.setAttribute("pagename", "Home");
-        HttpSession session=req.getSession();
+        session=req.getSession();
         req.setAttribute("sessionname", session.getAttribute("sessionname"));
         getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
     }
@@ -103,6 +113,49 @@ public class Home extends HttpServlet {
     }
     private String newprice(entity.Product p) {
         return (p.getDiscout() == 0)? "0.0" : fmd.format((100 - p.getDiscout()) * p.getProPrice() /100);
+    }
+    private List<String[]> listforTag(String name, HttpServletRequest req){
+        List<String[]> listreturn = new ArrayList<>();
+        String detaillink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/product/v/";
+        String imglink = "http://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/productImage/";
+        
+         List<entity.Product> slideProduct = new ArrayList<>();
+        for(entity.Product slP : proDB.ProductTruee()){
+            String[] tags = slP.getTags().split(":");
+
+            for(String tag : tags){
+                if(tag.equals(name)){
+                    slideProduct.add(slP);
+                }
+            }
+        }
+        for(entity.Product p : slideProduct){
+            listreturn.add(new String[]{
+                p.getProID(),
+                detaillink+p.getProID(),
+                p.getProName(),
+                imglink+proDB.imageOf(p),
+                "$"+p.getProPrice(),
+                "$"+newprice(p),
+                (p.getStarAVG()/5*100)+"%",
+                p.getReviewCollection().size()+"",
+                onWoC(p.getWishlistCollection())+""
+            });
+        }
+        return listreturn;
+    }
+    private boolean onWoC(Collection<Wishlist> cw) {
+        try {
+            int cusid = (int) session.getAttribute("sessionid");
+            for(Wishlist wh : cw){
+                if(wh.getCusID().getCusID() == cusid){
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
