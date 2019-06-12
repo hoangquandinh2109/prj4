@@ -32,5 +32,5 @@ public interface MailboxFacadeLocal {
 
     int count();
     Staff findByEmail(String email);
-    
+    List<Mailbox> searchMail(String name);
 }

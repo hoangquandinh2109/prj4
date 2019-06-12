@@ -37,4 +37,5 @@ public interface CustomerFacadeLocal {
 
     boolean register(Customer customer);
 
+    Customer findByEmail(String email);
 }

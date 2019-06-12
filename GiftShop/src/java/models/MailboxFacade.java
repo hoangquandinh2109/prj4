@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package models;
 
 import entity.Mailbox;
 import entity.Staff;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +19,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class MailboxFacade extends AbstractFacade<Mailbox> implements MailboxFacadeLocal {
+
     @PersistenceContext(unitName = "project4PU")
     private EntityManager em;
 
@@ -34,11 +35,17 @@ public class MailboxFacade extends AbstractFacade<Mailbox> implements MailboxFac
     @Override
     public Staff findByEmail(String email) {
 // List<Staff> list = new ArrayList<>();
-        Query q= em.createQuery("SELECT s FROM Staff s WHERE s.staffEmail = :staffEmail");
+        Query q = em.createQuery("SELECT s FROM Staff s WHERE s.staffEmail = :staffEmail");
         q.setParameter("staffEmail", email);
-        
+
         return (Staff) q.getSingleResult();
     }
-    
-    
+
+    @Override
+    public List<Mailbox> searchMail(String name) {
+        Query q = em.createQuery("SELECT m FROM Mailbox m WHERE m.message like :name");
+        q.setParameter("name", "%" + name + "%");
+        return q.getResultList();
+    }
+
 }

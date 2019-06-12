@@ -124,7 +124,7 @@ public class InsertProductServlet extends HttpServlet {
                 int i = 0;
                 for (FileItem item : multiparts) {
                     if (item.getFieldName().toString().equals("tagInput")) {
-                        tags = tags.concat(item.getString() + ";");
+                        tags = tags.concat(item.getString() + ":");
 //                        System.out.println("trong for " + tags);
                     }
                     if (!item.isFormField()) {

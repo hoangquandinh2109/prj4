@@ -155,7 +155,7 @@
                                                 <option value="${tagE.tag}">${tagE.tag}</option> 
                                             </c:if>   
                                         </c:forEach> 
-                                        <c:forTokens items="${product.tags}" delims=";" var="tag">
+                                        <c:forTokens items="${product.tags}" delims=":" var="tag">
                                             <option value="${tag}" selected="selected">${tag}</option>
                                             <%--  --%>
                                         </c:forTokens>

@@ -10,6 +10,7 @@ import entity.Customer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,13 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
 
     public CustomerFacade() {
         super(Customer.class);
+    }
+    @Override
+    public Customer findByEmail(String email) {
+        Query q = em.createQuery("SELECT c FROM Customer c WHERE c.cusEmail = :cusEmail");
+        q.setParameter("cusEmail", email);
+        System.out.println(q.getResultList());
+        return (Customer) q.getSingleResult();
     }
     
     @Override

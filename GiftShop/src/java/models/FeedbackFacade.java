@@ -7,9 +7,11 @@
 package models;
 
 import entity.Feedback;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +31,10 @@ public class FeedbackFacade extends AbstractFacade<Feedback> implements Feedback
         super(Feedback.class);
     }
     
+    @Override
+    public List<Feedback> searchFeed(String name) {
+        Query q = em.createQuery("SELECT f FROM Feedback f WHERE f.subject like :name");
+        q.setParameter("name", "%"+name+"%");      
+        return q.getResultList();
+    }
 }

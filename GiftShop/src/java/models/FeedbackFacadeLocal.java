@@ -31,4 +31,5 @@ public interface FeedbackFacadeLocal {
 
     int count();
     
+    List<Feedback> searchFeed(String name);
 }
