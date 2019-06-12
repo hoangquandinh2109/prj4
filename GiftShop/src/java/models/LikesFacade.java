@@ -72,10 +72,10 @@ public class LikesFacade extends AbstractFacade<Likes> implements LikesFacadeLoc
     }
 
     @Override
-    public long totalUserisLiked(Post p) {
-         Query q =em.createQuery("SELECT count(l) FROM Likes l WHERE l.postLiked =:postLiked  and l.likeStatus = :likeSt");
+    public long totalUserisLiked(Post p,Customer c) {
+         Query q =em.createQuery("SELECT count(l) FROM Likes l WHERE l.postLiked =:postLiked  and l.cusID = :cusID and l.likeStatus = :likeSt");
          q.setParameter("postLiked", p);
-        
+         q.setParameter("cusID", c);
           q.setParameter("likeSt", true);
           
         return (long)q.getSingleResult();

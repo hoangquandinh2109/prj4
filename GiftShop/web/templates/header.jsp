@@ -139,12 +139,14 @@
                     <li><a href="${pageContext.request.contextPath}/product/type">Type</a></li>
                 </ul>
             </li>
-            <li><a href="${pageContext.request.contextPath}/postIndex.jsp">Blog</a>
+            <li><a href="${pageContext.request.contextPath}/postIndex">Blog</a>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/createPostServlet">Create new Post</a></li>
                     <li><a href="${pageContext.request.contextPath}/searchForwardPage">Search Posts/Authors</a></li>
-                     <li><a href="${pageContext.request.contextPath}/detailsPostUser.jsp">My Post</a></li>
+                    <c:if test="${sessionid ne null}">
+                        <li><a href="${pageContext.request.contextPath}/countRuntime?id=${sessionid}">My Post</a></li>
                    
+                    </c:if>
                 </ul>
             </li>
         </ul>

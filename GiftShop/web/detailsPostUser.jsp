@@ -9,12 +9,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-       
+
         <c:import url="templates/postHead.jsp"></c:import>
-         <link rel="stylesheet" href="assets/css/index.css"/>
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="assets/css/index.css"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         </head>
 
 
@@ -25,72 +25,56 @@
                 <c:import url="templates/header.jsp"></c:import>
                     <div class="web-body">
                         <div class="container-fluid">
-                            <br>
-                            <div class="top">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="card">
-                                            <div class="card-body"><img  class="avt shadow-sm p-2 mb-2 bg-white" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png "></div>
-                                            <div class="card-body">${u.userName}</div> 
-                                        <div class="card-footer">
-                                            <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                                <p>ICON</p>
-                                                <p>2</p>
-                                            </span>
-                                            <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                                <p>ICON</p>
-                                                <p>3</p>
-                                            </span>
-                                            <span class="border1 border-0">
-                                                <p>ICON</p>
-                                                <p>4</p>
-                                            </span>
-                                        </div>
-                                    </div>
+                          
+                        <div class="top">
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <h3 class="text-secondary font-weight-bold">Details User's Post</h3>
+                                    <div class="card">
+                                    <div class="card-body"><img  class="avt shadow-sm p-2 mb-2 bg-white" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png "></div>
+                                    <div class="card-body"><p class="font-weight-bold">${sessionname}</p></div> 
+                                <div class="card-footer">
+                                    <span class="border1 border-bottom-0 border-top-0 border-left-0">
+                                       <span id="getTTLikeRT">${totalLike}</span> <i style="color:blue" class="far fa-thumbs-up"></i>
+
+                                    </span>
+                                    <span class="border1 border-bottom-0 border-top-0 border-left-0">
+                                       <span>${totalComment} </span><i class="far fa-comment"></i>
+
+                                    </span>
+
+                                </div>
+                            </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <h3 class="text-secondary font-weight-bold">POSTS</h3>
-                                    <div class="shadow p-4 mb-4 bg-white">
-                                        <div class="media">
-                                            <img src="img_avatar1.png" class="align-self-start mr-3" style="width:60px">
-                                            <div class="media-body">
-                                                <h4><a data-toggle="modal" href="#" data-target="#myModal">firt lsts</a></h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="media">
-                                            <img src="img_avatar1.png" class="align-self-start mr-3" style="width:60px">
-                                            <div class="media-body">
-                                                <h4>SECOND POST</h4>
-                                                <p class="text-break">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                        <div class="media">
-                                            <img src="img_avatar1.png" class="align-self-start mr-3" style="width:60px">
-                                            <div class="media-body">
-                                                <h4>4 POST</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                        <div class="media">
-                                            <img src="img_avatar1.png" class="align-self-start mr-3" style="width:60px">
-                                            <div class="media-body">
-                                                <h4>3 POST</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                 <c:forEach varStatus="loop" items="${p}" var="p">
+                                        '<div class="shadow-sm p-4 mb-4 bg-white postList"> <div class="media p-1">
+                                                <div class="left-content">
+                                                    <div class="p-4 ml-3">
+                                                        <img src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png" class="rounded-circle avt2" alt="Cinque Terre"/>
+                                                    </div>
+                                                    <a href="#" class="text-decoration-none text-info"><p class="pr-4 text-break text-center font-weight-bold">${p.cusID.cusName}</p></a>
+                                                </div>
+                                                <div class="media-body content-Same">
+                                                    <div class="post-title">
+                                                        <a href="postDetailsServlet?pid=' + result.POST[index].postID + '" class="text-decoration-none title-text"><h3  style="margin:0px;padding:0px" class="tx font-weight-bold"> ${p.titlePost}</h3></a>
+                                                        <a href="#" data-toggle="tooltip" class="text-time text-secondary" id=""><small>${p.dateRealease}</small></a> 
+                                                    </div>
+                                                    <div class="post-body"> <p>
+                                                            ${post.infontContent}
+                                                        </p> </div>
+                                                        <br>
+                                                    <div class="post-footer">
+                                                        <div class="tag col1" id="tag">
+                                                          <c:forTokens items="${p.postTag}" delims=";" var="tag">
+                                                        <a href="searchForwardPage?data=${tag}" class="text-decoration-none"><span class="label text-tags">${tag}</span></a>
+                                                        </c:forTokens>
+                                                        </div>
+                                                        
+                                                        </div> </div>  </div></div>
+                                                                    </c:forEach>
                                 </div>
-
                             </div>
                         </div>
                         <br>

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package postServlet;
 
 import com.google.gson.Gson;
 import entity.Comment;
 import entity.Customer;
+import entity.Likes;
 import entity.Post;
 import entity.Reply;
 import java.io.IOException;
@@ -43,12 +43,13 @@ import models.TbTagFacadeLocal;
  */
 @WebServlet(name = "postDetailsServlet", urlPatterns = {"/postDetailsServlet"})
 public class postDetailsServlet extends HttpServlet {
+
     @EJB
     private TbTagFacadeLocal tbTagFacade;
     @EJB
     private CustomerFacadeLocal customerFacade;
 
-      @EJB
+    @EJB
     private LikesFacadeLocal likesFacade;
     @EJB
     private ReplyFacadeLocal replyFacade;
@@ -58,37 +59,57 @@ public class postDetailsServlet extends HttpServlet {
     private EntityManager em;
     @Resource
     private javax.transaction.UserTransaction utx;
-   
-    
-   
+
     @EJB
     private PostFacadeLocal postFacade;
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-        PrintWriter out =response.getWriter();
-        HttpSession session =request.getSession();
-            response.setCharacterEncoding("text/html;charset=UTF-8");
-            response.setContentType("text/html;charset=UTF-8");
-            List<String> any=new ArrayList<String>();
-            Gson g = new Gson();
-            String pid=request.getParameter("pid");
-            if(pid.equals("getPost")){
-                System.out.println("ko co gi");
-            }
-            else{
-            int parseID =Integer.parseInt(pid);
-            Post p =postFacade.find(parseID);
-            Customer c = customerFacade.find(p.getCusID().getCusID());//get user LOGGED
-            List<Post> post = postFacade.findAll();
-            List<Reply> reply=replyFacade.findAll();
-            int getLikeID =likesFacade.findByPostID(p,c);
+
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        response.setCharacterEncoding("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        List<String> any = new ArrayList<String>();
+        Gson g = new Gson();
+        boolean check =false;
+        int getLikeID=0;
+        String pid = request.getParameter("pid");
+        String cusName = (String) session.getAttribute("sessionname");
+        
+        if (pid.equals("getPost")) {
+            System.out.println("ko co gi");
+        }
+        else{
+            Post p = postFacade.find(Integer.parseInt(pid));
+             List<Post> post = postFacade.findAll();
+                List<Reply> reply=replyFacade.findAll();
+                //// check////
+              if(cusName!=null){
+                  int cusID=(int) session.getAttribute("sessionid");
+                Customer c = customerFacade.find(cusID);//get user LOGGED
+                check=likesFacade.checkLike(p, c);
+                  getLikeID =likesFacade.findByPostID(p,c);
+                  
                if(getLikeID==0){
                    getLikeID=0;
                };
+            }
+           //FIND TOTAL USER IS LIKED
+              long totalLikedPAllpost =0;
+              List<Post> fPost=postFacade.findByAuthor(p.getCusID());
+              for(Post pe:fPost){
+                  totalLikedPAllpost+=likesFacade.countLike(pe);
+              }
+           
+            
+                          /////////////
+           
+            //FIND TOTAL POST USER POST!
+              //List<Post> postTotal=postFacade.findByAuthor(p.getCusID());
+            int tPost=  fPost.size();
+           //////////////////
             long totalLike =likesFacade.countLike(p);
             long ab=0;
             List<Comment> cmt=  commentFacade.listCommentByPostID(p);
@@ -99,25 +120,26 @@ public class postDetailsServlet extends HttpServlet {
             //Find Same Author
             Customer postCus=customerFacade.find(p.getCusID().getCusID());
             List<Post> authorPost =postFacade.findByAuthor(postCus);
-                System.out.println(authorPost);
+               
             //GET TAG
             String tagList[]=p.getPostTag().split(";");
             for(int i=0;i<tagList.length;i++){
                any.add(tagList[i]);
             }
-              //GET TOTAL post
+              //GET TOTAL Comment
             long a =commentFacade.countComment(p);
             long totalComment=a+ab;
                 //GET DATE COMMENT
-              DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            DateFormat beforFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+           //   DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+           // DateFormat beforFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
           //  String postRele = dateFormat.format(cmt.get());
           //  String before=beforFormat.format(b.getDateRealease());
             /*----------------JSP TAG HERE-----------------*/
-            request.setAttribute("cus", c);
-      //      request.setAttribute("tagList", any);
+        //    request.setAttribute("cus", c);
+            request.setAttribute("totalPost", tPost);
+            request.setAttribute("totalLikedAllpost", totalLikedPAllpost);
             request.setAttribute("likeID", getLikeID);
-            request.setAttribute("checkLike", likesFacade.checkLike(p, c));
+            request.setAttribute("checkLike", check);
             request.setAttribute("totalComment", totalComment);
             request.setAttribute("totalLike", totalLike);
             request.setAttribute("rep", reply);
@@ -131,18 +153,16 @@ public class postDetailsServlet extends HttpServlet {
             request.getRequestDispatcher("/postDetails.jsp").forward(request, response);
               
             }
-            
+
          //  out.print(vip);
-          
     }
 
- 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setCharacterEncoding("text/html;charset=UTF-8");
-            response.setContentType("text/html;charset=UTF-8");
-    }   
+        response.setCharacterEncoding("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+    }
 
     /**
      * Returns a short description of the servlet.
@@ -154,12 +174,12 @@ public class postDetailsServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
- public long GetReply(Comment c){
-     Query q=em.createQuery("SELECT count(r) FROM Reply r WHERE r.commentID = :commentID");
-     q.setParameter("commentID", c);
-     
-     return (long)q.getSingleResult();
- }
+    public long GetReply(Comment c) {
+        Query q = em.createQuery("SELECT count(r) FROM Reply r WHERE r.commentID = :commentID");
+        q.setParameter("commentID", c);
+
+        return (long) q.getSingleResult();
+    }
 
     public void persist(Object object) {
         try {

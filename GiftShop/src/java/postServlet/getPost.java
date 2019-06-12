@@ -10,9 +10,10 @@ import entity.Comment;
 import entity.Customer;
 import entity.Likes;
 import entity.Post;
+import entity.TbTag;
+import entity.author;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import models.CommentFacadeLocal;
 import models.CustomerFacadeLocal;
 import models.LikesFacadeLocal;
 import models.PostFacadeLocal;
+import models.TbTagFacadeLocal;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -47,6 +49,9 @@ import org.joda.time.Days;
  */
 @WebServlet(name = "getPost", urlPatterns = {"/getPost"})
 public class getPost extends HttpServlet {
+
+    @EJB
+    private TbTagFacadeLocal tbTagFacade;
 
     @EJB
     private CustomerFacadeLocal customerFacade;
@@ -72,19 +77,23 @@ public class getPost extends HttpServlet {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
         String data = request.getParameter("data");
-        System.out.println(data);
-        System.out.println(action);
         HttpSession session = request.getSession();
         int cID;
         long ab;
         long total;
         long totalCommentAfterRm;
+        long totalLikedPAllpost = 0;
+        int tPost = 0;
         //count total Like
         long totalLike;
+        List<TbTag> tag = tbTagFacade.findAll();
+        Gson gson = new Gson();
 
         List<Post> postList = new ArrayList<>();
         if (action.equals("showAll")) {
+            ////////////////////////////
             postList = postFacade.findAll();
+            ////////////////////
         } else if (action.equals("SearchByTag")) {
             postList = postFacade.searchByTag(data);
             if (postList.isEmpty()) {
@@ -108,7 +117,7 @@ public class getPost extends HttpServlet {
 
         } else if (action.equals("SearchByContent")) {
             postList = postFacade.searchByContent(data);
-           
+
             if (postList.isEmpty()) {
                 list.add("status", false);
                 jsonUserArray.add(list);
@@ -118,6 +127,53 @@ public class getPost extends HttpServlet {
                 return;
             }
 
+        } else if (action.equals("Hot")) {
+
+            postList = postFacade.findAll();
+            for (Post allP : postList) {
+                long totalLikes = likesFacade.countLike(allP);
+                long abs = 0;
+                List<Comment> cmt = commentFacade.listCommentByPostID(allP);
+                for (Comment co : cmt) {
+                    co.getDateComment();
+                    abs += GetReply(co);
+                }
+                //Find Same Author
+                Customer postCus = customerFacade.find(allP.getCusID().getCusID());
+                List<Post> authorPost = postFacade.findByAuthor(postCus);
+                //GET TOTAL Comment
+                long a = commentFacade.countComment(allP);
+                long totalComment = a + abs;
+                long subTotal = totalLikes + totalComment;
+
+                System.out.println(allP.getPostID() + " total " + (totalLikes + totalComment));
+                if (subTotal >= 5) {
+                    //newPost.add(allP);
+                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    DateFormat beforFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+                    String postRele = dateFormat.format(allP.getDateRealease());
+                    String before = beforFormat.format(allP.getDateRealease());
+                    list.add("postID", allP.getPostID())
+                            .add("postTitle", allP.getTitlePost())
+                            .add("postContent", allP.getInfontContent())
+                            .add("dateTime", postRele)
+                            .add("postTag", allP.getPostTag())
+                            .add("userName", allP.getCusID().getCusName())
+                            .add("status", allP.getPostStatus())
+                            .add("beforFormatTime", before)
+                            .add("sTotal", totalComment)
+                            .add("totalLike", totalLikes);
+
+                    jsonUserArray.add(list);
+                }
+
+            }
+            javax.json.JsonObject jsonFinalOutput = Json.createObjectBuilder().add("POST", jsonUserArray).build();
+            out.print(jsonFinalOutput);
+
+            // System.out.println(jsonFinalOutput);
+            return;
+            //Tim nhung post co tong so like + binh luan tren 50 vut vao 1 list
         } else if (action.equals("Liked")) {
             cID = (int) (session.getAttribute("sessionid"));
             List<Likes> gg = new ArrayList<>();
@@ -125,6 +181,7 @@ public class getPost extends HttpServlet {
             List<Likes> listLiked = likesFacade.LikedPosts(cus);
 
             for (Likes like : listLiked) {
+
                 Post p = postFacade.find(like.getPostLiked().getPostID());
                 ab = 0;
                 total = 0;
@@ -137,7 +194,7 @@ public class getPost extends HttpServlet {
                 //count total Like
                 totalLike = likesFacade.countLike(p);
                 ///
-                 
+
                 total = totalCommentAfterRm + ab;
                 String sTotal = String.valueOf(total);
                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -154,18 +211,31 @@ public class getPost extends HttpServlet {
                         .add("postTag", like.getPostLiked().getPostTag())
                         .add("beforFormatTime", before)
                         .add("sTotal", sTotal).add("totalLike", totalLike);
+
                 jsonUserArray.add(list);
             }
             javax.json.JsonObject jsonFinalOutput = Json.createObjectBuilder().add("POSTLiked", jsonUserArray).build();
             out.print(jsonFinalOutput);
-            
+
             return;
             //lay 1 list nhung post da dc like
 
         }
+        //////////////TOTAL LIKE BY USER
 
+        if ((String) session.getAttribute("sessionname") != null) {
+            Customer cusLogged = customerFacade.find((int) session.getAttribute("sessionid"));
+            List<Post> fPost = postFacade.findByAuthor(cusLogged);
+            for (Post pe : fPost) {
+                totalLikedPAllpost += likesFacade.countLike(pe);
+            }
+            /////////////
+            //FIND TOTAL POST USER POST!
+            //   List<Post> postTotal=postFacade.findByAuthor(cusLogged);
+            tPost = fPost.size();
+        }
+        //////////////////////////////
         for (Post b : postList) {
-
             Post p = postFacade.find(b.getPostID());
             ab = 0;
             total = 0;
@@ -178,7 +248,7 @@ public class getPost extends HttpServlet {
             //count total Like
             totalLike = likesFacade.countLike(p);
             ///
-          
+
             total = totalCommentAfterRm + ab;
             String sTotal = String.valueOf(total);
             //  Date date = Calendar.getInstance().getTime();
@@ -197,12 +267,17 @@ public class getPost extends HttpServlet {
                     .add("postTag", b.getPostTag())
                     .add("beforFormatTime", before)
                     .add("sTotal", sTotal)
-                    .add("totalLike", totalLike);
+                    .add("totalLike", totalLike)
+                    .add("totalPost", tPost)
+                    .add("totalLikedAllpost", totalLikedPAllpost);
             jsonUserArray.add(list);
 
         }
+
         javax.json.JsonObject jsonFinalOutput = Json.createObjectBuilder().add("POST", jsonUserArray).build();
         out.print(jsonFinalOutput);
+        //  out.print();
+        //    System.out.println(gson.toJson(tbTagFacade.findAll()));
     }
 
     @Override
@@ -211,7 +286,7 @@ public class getPost extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
         String getCT = request.getParameter("data");
-       
+
         Gson g = new Gson();
         Post p = new Post("blabla", getCT, getCT);
         postFacade.create(p);
