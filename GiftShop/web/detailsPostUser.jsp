@@ -33,7 +33,7 @@
                                     <h3 class="text-secondary font-weight-bold">Details User's Post</h3>
                                     <div class="card">
                                     <div class="card-body"><img  class="avt shadow-sm p-2 mb-2 bg-white" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png "></div>
-                                    <div class="card-body"><p class="font-weight-bold">${sessionname}</p></div> 
+                                    <div class="card-body"><p class="font-weight-bold">${c.cusName}</p></div> 
                                 <div class="card-footer">
                                     <span class="border1 border-bottom-0 border-top-0 border-left-0">
                                        <span id="getTTLikeRT">${totalLike}</span> <i style="color:blue" class="far fa-thumbs-up"></i>

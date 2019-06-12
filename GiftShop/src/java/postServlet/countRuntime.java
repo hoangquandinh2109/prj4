@@ -80,6 +80,7 @@ public class countRuntime extends HttpServlet {
       request.setAttribute("totalComment", tPost);
             request.setAttribute("totalLike", totalLikedPAllpost);
       request.setAttribute("p", p);
+      request.setAttribute("c", c);
       request.getRequestDispatcher("detailsPostUser.jsp").forward(request, response);
     }
 

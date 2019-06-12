@@ -46,15 +46,15 @@
                                         <div id="contentHere">
 
                                         </div>
-                                    
+
                                         <div class="tags">
                                             <select name="gg" id="mySelect2" style="width: 100%"  multiple="multiple">
-                                           <c:set var="a" value="post"></c:set>
-                                                <c:forEach   items="${tags}" var="tag">
-                                                     <c:if  test="${tag.tagType eq a}">
-                                                         <option value="${tag.tag}">${tag.tag}</option>
-                                                     </c:if>    
-                                                </c:forEach>
+                                            <c:set var="a" value="post"></c:set>
+                                            <c:forEach   items="${tags}" var="tag">
+                                                <c:if  test="${tag.tagType eq a}">
+                                                    <option value="${tag.tag}">${tag.tag}</option>
+                                                </c:if>    
+                                            </c:forEach>
                                         </select>
                                     </div>
                                     <br>
@@ -89,6 +89,7 @@
                                 e.preventDefault();
                                 return;
                             }
+                            var checkString="";
                             var myOP = [];
                             var string = "";
                             myOP = $('form').serializeArray();
@@ -97,10 +98,11 @@
                             });
                             string = string.slice(1);
                             var title = quills.getText();
+                           
                             var contentPost = JSON.stringify(quill.getContents());
                             //    var ss = JSON.parse(strins);
                             var infor = quill.getText();
-
+                            
                             $.ajax({
                                 type: 'POST',
                                 url: 'createPostServlet',

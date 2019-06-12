@@ -220,7 +220,7 @@
 
                                                         </div>
                                                     </c:forEach>
-                                                    <a style="float:right" href="#">More post ->></a>
+                                                   <a href="countRuntime?id=${p.cusID.cusID}" style="float:right"><p>More posts->></p></a>
 
                                                 </div>
                                             </div>

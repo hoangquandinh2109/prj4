@@ -59,7 +59,7 @@
                                                 <li id="pagination"></li>
                                             </ul>
                                         </div>
-                                          <span id="totalrow" class="hide">4</span>
+                                          
                                     </div>
 
                                 </div>
@@ -119,39 +119,7 @@
 
                                 </div>
                                 <hr>
-                                <div class="d-md-flex">
-                                    <div class="p-2 bg-secondary text-white">Top author</div>
-
-                                </div>
-                                <div class="tacgia shadow-sm p-4 mb-4 bg-white">
-
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Toomy</a>
-                                        </div>
-                                    </div>
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Mr Johnny</a>
-                                        </div>
-                                    </div>
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Kelvin</a>
-                                        </div>
-                                    </div>
-
-
-                                </div>
+                               
                                 <div class="d-md-flex">
                                     <div class="p-2 bg-secondary text-white">New product</div>
 
@@ -177,7 +145,7 @@
             </div>
         <c:import url="templates/postScript.jsp"></c:import>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>
-      
+      <span id="totalrow" class="hide">8</span>
         <script type="text/javascript">
                                                     function lazy() {
                                                         $("#getContent").removeClass("wow fadeIn animated");
@@ -496,7 +464,7 @@
                                                            setTimeout(function() {
                                                             $(function() {
                                                                 console.log(" ewe");
-                                                                var pageSize = 3; // Hiển thị 6 sản phẩm trên 1 trang
+                                                                var pageSize = 10; // Hiển thị 6 sản phẩm trên 1 trang
                                                                 showPage = function(page) {
                                                                     $(".postList").hide();
                                                                     $(".postList").each(function(n) {

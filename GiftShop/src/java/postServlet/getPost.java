@@ -147,7 +147,7 @@ public class getPost extends HttpServlet {
                 long subTotal = totalLikes + totalComment;
 
                 System.out.println(allP.getPostID() + " total " + (totalLikes + totalComment));
-                if (subTotal >= 5) {
+                if (subTotal >= 15) {
                     //newPost.add(allP);
                     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     DateFormat beforFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
