@@ -22,7 +22,7 @@ import models.StaffFacadeLocal;
  */
 public class changPassServlet extends HttpServlet {
 
-    @EJB
+     @EJB
     private StaffFacadeLocal staffFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -39,6 +39,8 @@ public class changPassServlet extends HttpServlet {
             String id = (String) session.getAttribute("staff_id");
 
             Staff list = staffFacade.find(id);
+            String message = null;
+            
             if (id != null) {
                 if (list.getStaffPassword().equals(currentPassword)) {
                     if (newPassword.equals(retypePass)) {
@@ -50,6 +52,7 @@ public class changPassServlet extends HttpServlet {
                         staff.setStaffEmail(list.getStaffEmail());
                         staff.setStaffPassword(newPassword);
                         staff.setRole(list.getRole());
+                        staff.setStaffStatus(true);
                         staffFacade.edit(staff);
                         session.setAttribute("msg", true);
 //                        response.sendRedirect("admin/profile.jsp");
@@ -57,6 +60,7 @@ public class changPassServlet extends HttpServlet {
                         return;
                     } else {
                         session.setAttribute("msg", true);
+                        session.setAttribute("message", "Password Confirm incorrect");
                         response.sendRedirect("admin/changepassword.jsp");
                         return;
 

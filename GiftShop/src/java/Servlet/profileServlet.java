@@ -53,7 +53,7 @@ public class profileServlet extends HttpServlet {
                 String email = request.getParameter("email");
                 String address = request.getParameter("address");
                 String phone = request.getParameter("phone");
-                String role = request.getParameter("role");
+               
    
                 Staff st = new Staff();
                 st.setStaffID(staff_id);

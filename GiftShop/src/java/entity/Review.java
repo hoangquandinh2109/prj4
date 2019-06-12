@@ -61,6 +61,8 @@ public class Review implements Serializable {
     public Review() {
     }
 
+    
+    
     public Review(Integer rateID) {
         this.rateID = rateID;
     }
