@@ -20,7 +20,7 @@
                 <div class="clickdetrove"></div>
                 <c:import url="templates/header.jsp"></c:import>
                     <div class="web-body" >
-                        <div class="container">
+                        <div class="container" ng-controller="proPagination">
                             <div class="row"  ng-controller="wishlist">
                                 <div class="left-column">
                                     <div class="categories">
@@ -53,11 +53,7 @@
                                         <div class="title-row">REFINE BY <span>TYPE</span></div>
                                         <div id="filt-type">
                                             <ul>
-                                                <li><a href="sdf"><span class="tick"></span>Clock</a> <span class="quantity">3</span></li>
-                                                <li><a href=""><span class="tick"></span>PC</a> <span class="quantity">2</span></li>
-                                                <li><a href=""><span class="tick"></span>Desktop</a> <span class="quantity">7</span></li>
-                                                <li><a href=""><span class="tick"></span>Laptop</a> <span class="quantity">11</span></li>
-                                                <li><a href=""><span class="tick"></span>Tablet</a> <span class="quantity">8</span></li>
+                                                <li ng-repeat="lT in listType" ><a ng-click="check(lT, $event)" href=""><span class="tick"></span>{{lT}}</a> <span class="quantity"></span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -76,7 +72,7 @@
                                         <a href=""><img class="wow fadeIn" src="https://cdn.shopify.com/s/files/1/2334/1307/files/home_bannertop_8cd761c7-55bc-49a8-8fe5-552c5466d5ee_873x160.png?v=1509421734" alt=""></a>
                                     </div>
                                     <div class="title-row" id="product-filter-element" data-thistext="${pagename}"></div>
-                                <div class="product-block"  ng-controller="proPagination">
+                                <div class="product-block"  >
                                     <div ng-if="listPro.length == 0" style="padding: 67px 0; text-align: center; opacity: 0.5;">No result</div>
                                     <div class="row" style="overflow: hidden;" ng-repeat="row in range(1, numrow)">
                                         <div class="product-item wow fadeInUp" ng-repeat="item in productRow(row)" >

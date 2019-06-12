@@ -253,7 +253,7 @@ a.button-dhq-mk{
         padding-left: 20px;
         display: block;
         color: #888;
-        &:hover{
+        &:hover, &.active{
             color: $color-blue;
             .tick:before{
                 content: "\f14a";
@@ -275,7 +275,7 @@ a.button-dhq-mk{
         }
     }
     .quantity{
-        font-family: "MerriweatherSans";w
+        font-family: "MerriweatherSans";
         color: #888;
         position: absolute;
         left: 100%;

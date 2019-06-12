@@ -200,15 +200,20 @@
                                 <div class="block-title-n-slide">
                                     <div class="title-row">FOR <span>HER</span></div>
                                     <div class="owl-carousel product-slide nothing" >
-                                        <c:forEach items="${list}" var="ssd">
+                                        <c:set var="i" value="1"/>
+                                        <c:forEach items="${PHer}" var="ph">
                                             <div class="product-item wow fadeIn">
                                                 <div class="image-product">
-                                                    <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
+                                                    <a href="${ph[1]}"><img src="${ph[3]}" alt=""></a>
                                                 </div>
                                                 <div class="product-info">
-                                                    <a href="">${ssd}</a>
-                                                    <!-- <span class="price">$234.32</span> -->
-                                                    <span class="old-price">$2349</span> <span class="new-price">$2349</span>
+                                                    <a href="${ph[1]}">${ph[2]}</a>
+                                                    <c:if test="${ph[5] == '$0.0'}">
+                                                        <span class="price">${ph[4]}</span> 
+                                                    </c:if>
+                                                    <c:if test="${ph[5] != '$0.0'}">
+                                                        <span class="old-price">${ph[4]}</span> <span class="new-price">${ph[5]}</span>
+                                                    </c:if>
                                                 </div>
                                                 <div class="review-n-button-tu">
                                                     <div class="review-tu clearfix">
@@ -218,7 +223,7 @@
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
-                                                            <div class="star-reviewed">
+                                                            <div style="width: ${ph[6]}}" class="star-reviewed">
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
@@ -226,32 +231,43 @@
                                                                 <i class="fas fa-star"></i>
                                                             </div>
                                                         </div>
-                                                        <span class="quantity-review">No reviews</span>
+                                                        <c:if test="${ph[6] == '0.0%'}">
+                                                        <span class="quantity-review">No review</span>
+                                                        </c:if>        
+                                                        <c:if test="${ph[6] != '0.0%'}">
+                                                        <span class="numrv quantity-review">(${ph[7]})</span>
+                                                        </c:if>
                                                     </div>
                                                     <div class="button-tu clearfix">
-                                                        <div class="btn-addtocart addtocart clearfix">
+                                                        <div ng-click="addThisToCart('${ph[0]}')" class="btn-addtocart addtocart clearfix">
                                                             <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
                                                             <span class="tool-title">Add to Cart</span>
                                                         </div>
-                                                        <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                        <div ng-init="onW${i} = ${ph[8]}" ng-class="addedClass(onW${i})" class="btn-love" ng-click="onW${i} = btnWishlist('${ph[0]}', onW${i})"><span><i class="fa fa-heart"></i></span></div>
                                                     </div>
                                                 </div>
                                             </div>
+                                                        <c:set var="i" value="${i+1}"/>
                                         </c:forEach>
                                     </div>
                                 </div>
                                 <div class="block-title-n-slide">
                                     <div class="title-row">FOR <span>HIM</span></div>
                                     <div class="owl-carousel product-slide nothing" >
-                                        <c:forEach items="${list}" var="ssd">
+                                        <c:set var="i" value="1"/>
+                                        <c:forEach items="${PHim}" var="phm">
                                             <div class="product-item wow fadeIn">
                                                 <div class="image-product">
-                                                    <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
+                                                    <a href="${phm[1]}"><img src="${phm[3]}" alt=""></a>
                                                 </div>
                                                 <div class="product-info">
-                                                    <a href="">${ssd}</a>
-                                                    <!-- <span class="price">$234.32</span> -->
-                                                    <span class="old-price">$2349</span> <span class="new-price">$2349</span>
+                                                    <a href="${phm[1]}">${phm[2]}</a>
+                                                    <c:if test="${phm[5] == '$0.0'}">
+                                                        <span class="price">${phm[4]}</span> 
+                                                    </c:if>
+                                                    <c:if test="${phm[5] != '$0.0'}">
+                                                        <span class="old-price">${phm[4]}</span> <span class="new-price">${phm[5]}</span>
+                                                    </c:if>
                                                 </div>
                                                 <div class="review-n-button-tu">
                                                     <div class="review-tu clearfix">
@@ -261,7 +277,7 @@
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
-                                                            <div class="star-reviewed">
+                                                            <div style="width: ${phm[6]}}" class="star-reviewed">
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
@@ -269,32 +285,151 @@
                                                                 <i class="fas fa-star"></i>
                                                             </div>
                                                         </div>
-                                                        <span class="quantity-review">No reviews</span>
+                                                        <c:if test="${phm[6] == '0.0%'}">
+                                                        <span class="quantity-review">No review</span>
+                                                        </c:if>        
+                                                        <c:if test="${phm[6] != '0.0%'}">
+                                                        <span class="numrv quantity-review">(${phm[7]})</span>
+                                                        </c:if>
                                                     </div>
                                                     <div class="button-tu clearfix">
-                                                        <div class="btn-addtocart addtocart clearfix">
+                                                        <div ng-click="addThisToCart('${phm[0]}')" class="btn-addtocart addtocart clearfix">
                                                             <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
                                                             <span class="tool-title">Add to Cart</span>
                                                         </div>
-                                                        <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                        <div ng-init="onWHM${i} = ${phm[8]}" ng-class="addedClass(onWHM${i})" class="btn-love" ng-click="onWHM${i} = btnWishlist('${phm[0]}', onWHM${i})"><span><i class="fa fa-heart"></i></span></div>
                                                     </div>
                                                 </div>
                                             </div>
+                                                        <c:set var="i" value="${i+1}"/>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                                <div class="block-title-n-slide">
+                                    <div class="title-row">FOR <span>TEEN GIRL</span></div>
+                                    <div class="owl-carousel product-slide nothing" >
+                                        <c:set var="i" value="1"/>
+                                        <c:forEach items="${PTG}" var="ptg">
+                                            <div class="product-item wow fadeIn">
+                                                <div class="image-product">
+                                                    <a href="${ptg[1]}"><img src="${ptg[3]}" alt=""></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <a href="${ptg[1]}">${ptg[2]}</a>
+                                                    <c:if test="${ptg[5] == '$0.0'}">
+                                                        <span class="price">${ptg[4]}</span> 
+                                                    </c:if>
+                                                    <c:if test="${ptg[5] != '$0.0'}">
+                                                        <span class="old-price">${ptg[4]}</span> <span class="new-price">${ptg[5]}</span>
+                                                    </c:if>
+                                                </div>
+                                                <div class="review-n-button-tu">
+                                                    <div class="review-tu clearfix">
+                                                        <div class="star-review">
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <div style="width: ${ptg[6]}}" class="star-reviewed">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                        <c:if test="${ptg[6] == '0.0%'}">
+                                                        <span class="quantity-review">No review</span>
+                                                        </c:if>        
+                                                        <c:if test="${ptg[6] != '0.0%'}">
+                                                        <span class="numrv quantity-review">(${ptg[7]})</span>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="button-tu clearfix">
+                                                        <div ng-click="addThisToCart('${ptg[0]}')" class="btn-addtocart addtocart clearfix">
+                                                            <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
+                                                            <span class="tool-title">Add to Cart</span>
+                                                        </div>
+                                                        <div ng-init="onWPTG${i} = ${ptg[8]}" ng-class="addedClass(onWPTG${i})" class="btn-love" ng-click="onWPTG${i} = btnWishlist('${ptg[0]}', onWPTG${i})"><span><i class="fa fa-heart"></i></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        <c:set var="i" value="${i+1}"/>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                                <div class="block-title-n-slide">
+                                    <div class="title-row">FOR <span>TEEN BOY</span></div>
+                                    <div class="owl-carousel product-slide nothing" >
+                                        <c:set var="i" value="1"/>
+                                        <c:forEach items="${PTB}" var="ptb">
+                                            <div class="product-item wow fadeIn">
+                                                <div class="image-product">
+                                                    <a href="${ptb[1]}"><img src="${ptb[3]}" alt=""></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <a href="${ptb[1]}">${ptb[2]}</a>
+                                                    <c:if test="${ptb[5] == '$0.0'}">
+                                                        <span class="price">${ptb[4]}</span> 
+                                                    </c:if>
+                                                    <c:if test="${ptb[5] != '$0.0'}">
+                                                        <span class="old-price">${ptb[4]}</span> <span class="new-price">${ptb[5]}</span>
+                                                    </c:if>
+                                                </div>
+                                                <div class="review-n-button-tu">
+                                                    <div class="review-tu clearfix">
+                                                        <div class="star-review">
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <div style="width: ${ptb[6]}}" class="star-reviewed">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                        <c:if test="${ptb[6] == '0.0%'}">
+                                                        <span class="quantity-review">No review</span>
+                                                        </c:if>        
+                                                        <c:if test="${ptb[6] != '0.0%'}">
+                                                        <span class="numrv quantity-review">(${ptb[7]})</span>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="button-tu clearfix">
+                                                        <div ng-click="addThisToCart('${ptb[0]}')" class="btn-addtocart addtocart clearfix">
+                                                            <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
+                                                            <span class="tool-title">Add to Cart</span>
+                                                        </div>
+                                                        <div ng-init="onWPTB${i} = ${ptb[8]}" ng-class="addedClass(onWPTB${i})" class="btn-love" ng-click="onWPTB${i} = btnWishlist('${ptb[0]}', onWPTB${i})"><span><i class="fa fa-heart"></i></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        <c:set var="i" value="${i+1}"/>
                                         </c:forEach>
                                     </div>
                                 </div>
                                 <div class="block-title-n-slide">
                                     <div class="title-row">FOR <span>KIDS</span></div>
                                     <div class="owl-carousel product-slide nothing" >
-                                        <c:forEach items="${list}" var="ssd">
+                                        <c:set var="i" value="1"/>
+                                        <c:forEach items="${PKid}" var="pk">
                                             <div class="product-item wow fadeIn">
                                                 <div class="image-product">
-                                                    <a href=""><img src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png" alt=""></a>
+                                                    <a href="${pk[1]}"><img src="${pk[3]}" alt=""></a>
                                                 </div>
                                                 <div class="product-info">
-                                                    <a href="">${ssd}</a>
-                                                    <!-- <span class="price">$234.32</span> -->
-                                                    <span class="old-price">$2349</span> <span class="new-price">$2349</span>
+                                                    <a href="${pk[1]}">${pk[2]}</a>
+                                                    <c:if test="${pk[5] == '$0.0'}">
+                                                        <span class="price">${pk[4]}</span> 
+                                                    </c:if>
+                                                    <c:if test="${pk[5] != '$0.0'}">
+                                                        <span class="old-price">${pk[4]}</span> <span class="new-price">${pk[5]}</span>
+                                                    </c:if>
                                                 </div>
                                                 <div class="review-n-button-tu">
                                                     <div class="review-tu clearfix">
@@ -304,7 +439,7 @@
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
-                                                            <div class="star-reviewed">
+                                                            <div style="width: ${pk[6]}}" class="star-reviewed">
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
@@ -312,17 +447,77 @@
                                                                 <i class="fas fa-star"></i>
                                                             </div>
                                                         </div>
-                                                        <span class="quantity-review">No reviews</span>
+                                                        <c:if test="${pk[6] == '0.0%'}">
+                                                        <span class="quantity-review">No review</span>
+                                                        </c:if>        
+                                                        <c:if test="${pk[6] != '0.0%'}">
+                                                        <span class="numrv quantity-review">(${pk[7]})</span>
+                                                        </c:if>
                                                     </div>
                                                     <div class="button-tu clearfix">
-                                                        <div class="btn-addtocart addtocart clearfix">
+                                                        <div ng-click="addThisToCart('${pk[0]}')" class="btn-addtocart addtocart clearfix">
                                                             <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
                                                             <span class="tool-title">Add to Cart</span>
                                                         </div>
-                                                        <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                        <div ng-init="onWpk${i} = ${pk[8]}" ng-class="addedClass(onWpk${i})" class="btn-love" ng-click="onWpk${i} = btnWishlist('${pk[0]}', onWpk${i})"><span><i class="fa fa-heart"></i></span></div>
                                                     </div>
                                                 </div>
                                             </div>
+                                                        <c:set var="i" value="${i+1}"/>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                                <div class="block-title-n-slide">
+                                    <div class="title-row">FOR <span>ALL</span></div>
+                                    <div class="owl-carousel product-slide nothing" >
+                                        <c:set var="i" value="1"/>
+                                        <c:forEach items="${P4A}" var="pfa">
+                                            <div class="product-item wow fadeIn">
+                                                <div class="image-product">
+                                                    <a href="${pfa[1]}"><img src="${pfa[3]}" alt=""></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <a href="${pfa[1]}">${pfa[2]}</a>
+                                                    <c:if test="${pfa[5] == '$0.0'}">
+                                                        <span class="price">${pfa[4]}</span> 
+                                                    </c:if>
+                                                    <c:if test="${pfa[5] != '$0.0'}">
+                                                        <span class="old-price">${pfa[4]}</span> <span class="new-price">${pfa[5]}</span>
+                                                    </c:if>
+                                                </div>
+                                                <div class="review-n-button-tu">
+                                                    <div class="review-tu clearfix">
+                                                        <div class="star-review">
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <div style="width: ${pfa[6]}}" class="star-reviewed">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                        <c:if test="${pfa[6] == '0.0%'}">
+                                                        <span class="quantity-review">No review</span>
+                                                        </c:if>        
+                                                        <c:if test="${pfa[6] != '0.0%'}">
+                                                        <span class="numrv quantity-review">(${pfa[7]})</span>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="button-tu clearfix">
+                                                        <div ng-click="addThisToCart('${pfa[0]}')" class="btn-addtocart addtocart clearfix">
+                                                            <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
+                                                            <span class="tool-title">Add to Cart</span>
+                                                        </div>
+                                                        <div ng-init="onWpfa${i} = ${pfa[8]}" ng-class="addedClass(onWpfa${i})" class="btn-love" ng-click="onWpfa${i} = btnWishlist('${pfa[0]}', onWpfa${i})"><span><i class="fa fa-heart"></i></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        <c:set var="i" value="${i+1}"/>
                                         </c:forEach>
                                     </div>
                                 </div>

@@ -449,6 +449,28 @@ app.controller('proPagination', function($scope, $http) {
             scrollTop: $("#product-filter-element").offset().top
         }, 1000);
      });
+     $scope.listType = [];
+     $scope.listFiltType = [];
+   $scope.check = function(n, e){
+       var idofthis = $scope.listFiltType.indexOf(n);
+       if(idofthis === -1){
+           $scope.listFiltType.push(n);
+           $(e.target).addClass("active");
+       } else{
+           $scope.listFiltType.splice(idofthis, 1);
+           $(e.target).removeClass("active");
+       }
+       $http.get(linkpage+"api/product/"+nameColl+"/"+collVal)
+       .then(function(response) {
+           var lP = [];
+           $.each(response.data.listPro,function(i,per){
+                if($scope.listFiltType.indexOf(per.type) !== -1){
+                    lP.push(per);
+                }
+            });
+            $scope.listPro = lP;
+       });
+   }
    loadPage(1);
    
    
@@ -517,6 +539,12 @@ app.controller('proPagination', function($scope, $http) {
            
            $scope.numpage = response.data.numofpage;
            $scope.currPage = response.data.currPage;
+           $.each(response.data.listPro, function(id, lP){
+               if($scope.listType.indexOf(lP.type) === -1){
+                   $scope.listType.push(lP.type);
+               }
+           });
+           console.log($scope.listType);
        });
    }
    function filtbyprice(page){
@@ -524,7 +552,17 @@ app.controller('proPagination', function($scope, $http) {
        console.log(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page+"?from="+minPrice+"&to="+maxPrice);
        return $http.get(linkpage+"api/product/"+nameColl+"/"+collVal+"/"+page+"?from="+minPrice+"&to="+maxPrice)
        .then(function(response) {
-           $scope.listPro = response.data.listPro;
+           if($scope.listFiltType.length < 1){
+               $scope.listPro = response.data.listPro;
+           }else{
+                var lP = [];
+                $.each(response.data.listPro,function(i,per){
+                     if($scope.listFiltType.indexOf(per.type) !== -1){
+                         lP.push(per);
+                     }
+                 });
+                 $scope.listPro = lP;
+           }
            
            $scope.numpage = response.data.numofpage;
            $scope.currPage = response.data.currPage;

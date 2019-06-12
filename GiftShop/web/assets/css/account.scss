@@ -367,6 +367,30 @@ body{
         }
     }
 }
+.btn-yes{
+    background-color: $color-blue;
+    border: 1px solid $color-blue;
+    padding: 5px;
+    width: 60px;
+    text-align: center;
+    color: #fff;
+    &:hover{
+        background-color: #fff;
+        color: $color-blue;
+    }
+}
+.btn-no{
+    width: 60px;
+    text-align: center;
+    background-color: $color-pink;
+    border: 1px solid $color-pink;
+    padding: 5px;
+    color: #fff;
+    &:hover{
+        background-color: #fff;
+        color: $color-pink;
+    }
+}
 .table-account{
     h2{
         padding: 14px 0 14px 50px;
@@ -500,7 +524,8 @@ body{
     z-index: 100000;
     opacity:1;
 }
-.modal-form{
+.filecontainer{display: none;}
+.modal-form, .filecontainer{
     padding: 20px;
     width: 500px;
     overflow: auto;
@@ -511,6 +536,9 @@ body{
     top: 50%;
     left: 50%;
     z-index: 100001;
+    >form{
+        text-align: center;
+    }
 }
 #backtoshop {
     display: block;

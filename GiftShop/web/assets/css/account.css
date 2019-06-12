@@ -456,6 +456,34 @@ body .ui .profile .profile-info > span {
   color: #76c4ce;
 }
 
+.btn-yes {
+  background-color: #76c4ce;
+  border: 1px solid #76c4ce;
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+  color: #fff;
+}
+
+.btn-yes:hover {
+  background-color: #fff;
+  color: #76c4ce;
+}
+
+.btn-no {
+  width: 60px;
+  text-align: center;
+  background-color: #ee6c92;
+  border: 1px solid #ee6c92;
+  padding: 5px;
+  color: #fff;
+}
+
+.btn-no:hover {
+  background-color: #fff;
+  color: #ee6c92;
+}
+
 .table-account h2 {
   padding: 14px 0 14px 50px;
   position: fixed;
@@ -622,7 +650,11 @@ body.square {
   opacity: 1;
 }
 
-.modal-form {
+.filecontainer {
+  display: none;
+}
+
+.modal-form, .filecontainer {
   padding: 20px;
   width: 500px;
   overflow: auto;
@@ -634,6 +666,10 @@ body.square {
   top: 50%;
   left: 50%;
   z-index: 100001;
+}
+
+.modal-form > form, .filecontainer > form {
+  text-align: center;
 }
 
 #backtoshop {

@@ -317,11 +317,11 @@ a.button-dhq-mk#wishlist-btn.added {
   color: #888;
 }
 
-#filt-type a:hover {
+#filt-type a:hover, #filt-type a.active {
   color: #76c4ce;
 }
 
-#filt-type a:hover .tick:before {
+#filt-type a:hover .tick:before, #filt-type a.active .tick:before {
   content: "\f14a";
   color: #76c4ce;
 }

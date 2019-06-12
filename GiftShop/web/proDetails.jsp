@@ -4,6 +4,7 @@
     Author     : bemap
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
             <div class="web-body">
                 <div id="fb-root"></div>
                 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
-                <div class="container">
+                <div class="container" ng-controller="wishlist">
                     <div class="row details">
                         <div class="col-md-5">
                             <div class="img">
@@ -39,7 +40,7 @@
                                 </c:forEach>
                             </div>
                         </div>
-                        <div ng-controller="wishlist" class="col-md-7 pro-details">
+                        <div class="col-md-7 pro-details">
                             <div class="details-block">
                                 <h1>${thisP.proName}</h1>
                                 <div class="review-tu clearfix">
@@ -68,8 +69,13 @@
                                 <!--<p>THIS IS YOUR FIRST TIME</p>-->
                                 <hr>
                                 <p class="availability">AVAILABLE</p>
-                                <p><span class="price">&#36;${thisP.proPrice}</span> <span
-                                        class="old-price">$400</span></p>
+                                <c:if test="${thisP.discout == 0}">
+                                <p><span class="price">&#36;${thisP.proPrice}</span></p>
+                                </c:if>
+                                <c:if test="${thisP.discout > 0}">
+                                    <p><span class="price">&#36;<fmt:formatNumber type="number" maxFractionDigits="2" value="${thisP.proPrice * (100-thisP.discout)/100}"/></span> <span
+                                            class="old-price">&#36;${thisP.proPrice}</span></p>
+                                </c:if>
                                 <hr>
                                 <div class="cart-quantity">
                                     <input readonly="" ng-model="proQuan" type="number" min="1" max="50">
@@ -159,22 +165,24 @@
                                     alt="">
                             </a>
                         </div>
+                        <c:if test="${ not empty sessionScope.sessionid}">
                         <div class="col-lg-9">
                             <div class="col-lg-6">
-                                <div class="title-row">FOR <span>HER</span></div>
+                                <div class="title-row">SAME <span>CATEGORY</span></div>
                                 <div class="owl-carousel product-slide quanvippro">
-                                    <c:forEach items="${list}" var="ssd">
+                                    <c:forEach items="${samecat}" var="smc">
                                         <div class="product-item wow fadeIn">
                                             <div class="image-product">
-                                                <a href=""><img
-                                                        src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
-                                                        alt=""></a>
+                                                <a href="${smc[1]}"><img src="${smc[3]}" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <a href="">${ssd}</a>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349</span> <span
-                                                    class="new-price">$2349</span>
+                                                <a href="${smc[1]}">${smc[2]}</a>
+                                                <c:if test="${smc[5] == '$0.0'}">
+                                                    <span class="price">${smc[4]}</span> 
+                                                </c:if>
+                                                <c:if test="${smc[5] != '$0.0'}">
+                                                    <span class="old-price">${smc[4]}</span> <span class="new-price">${smc[5]}</span>
+                                                </c:if>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">
@@ -184,7 +192,7 @@
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
+                                                        <div style="width: ${smc[6]}}" class="star-reviewed">
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
@@ -192,36 +200,42 @@
                                                             <i class="fas fa-star"></i>
                                                         </div>
                                                     </div>
-                                                    <span class="quantity-review">No reviews</span>
+                                                    <c:if test="${smc[6] == '0.0%'}">
+                                                    <span class="quantity-review">No review</span>
+                                                    </c:if>        
+                                                    <c:if test="${smc[6] != '0.0%'}">
+                                                    <span class="numrv quantity-review">(${smc[7]})</span>
+                                                    </c:if>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart addtocart clearfix">
-                                                        <span class="icon-btn"><i
-                                                                class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                    <div ng-click="addThisToCart('${smc[0]}')" class="btn-addtocart addtocart clearfix">
+                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                    <div ng-init="onWsmc${i} = ${smc[8]}" ng-class="addedClass(onWsmc${i})" class="btn-love" ng-click="onWsmc${i} = btnWishlist('${smc[0]}', onWsmc${i})"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
                                             </div>
                                         </div>
+                                                    <c:set var="i" value="${i+1}"/>
                                     </c:forEach>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="title-row">FOR <span>HER</span></div>
+                                <div class="title-row">YOU MAY <span>LIKE</span></div>
                                 <div class="owl-carousel product-slide quanvippro">
-                                    <c:forEach items="${list}" var="ssd">
+                                    <c:forEach items="${youmaylike}" var="yml">
                                         <div class="product-item wow fadeIn">
                                             <div class="image-product">
-                                                <a href=""><img
-                                                        src="https://cdn.shopify.com/s/files/1/2334/1307/products/Untitled-4_f4c92dfe-1709-4406-bec4-21c707ea1b38_160x140.png"
-                                                        alt=""></a>
+                                                <a href="${yml[1]}"><img src="${yml[3]}" alt=""></a>
                                             </div>
                                             <div class="product-info">
-                                                <a href="">${ssd}</a>
-                                                <!-- <span class="price">$234.32</span> -->
-                                                <span class="old-price">$2349</span> <span
-                                                    class="new-price">$2349</span>
+                                                <a href="${yml[1]}">${yml[2]}</a>
+                                                <c:if test="${yml[5] == '$0.0'}">
+                                                    <span class="price">${yml[4]}</span> 
+                                                </c:if>
+                                                <c:if test="${yml[5] != '$0.0'}">
+                                                    <span class="old-price">${yml[4]}</span> <span class="new-price">${yml[5]}</span>
+                                                </c:if>
                                             </div>
                                             <div class="review-n-button-tu">
                                                 <div class="review-tu clearfix">
@@ -231,7 +245,7 @@
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
-                                                        <div class="star-reviewed">
+                                                        <div style="width: ${yml[6]}}" class="star-reviewed">
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
@@ -239,22 +253,28 @@
                                                             <i class="fas fa-star"></i>
                                                         </div>
                                                     </div>
-                                                    <span class="quantity-review">No reviews</span>
+                                                    <c:if test="${yml[6] == '0.0%'}">
+                                                    <span class="quantity-review">No review</span>
+                                                    </c:if>        
+                                                    <c:if test="${yml[6] != '0.0%'}">
+                                                    <span class="numrv quantity-review">(${yml[7]})</span>
+                                                    </c:if>
                                                 </div>
                                                 <div class="button-tu clearfix">
-                                                    <div class="btn-addtocart addtocart clearfix">
-                                                        <span class="icon-btn"><i
-                                                                class="fas fa-shopping-cart"></i></span>
-                                                        <span class="tool-title">Addtocart</span>
+                                                    <div ng-click="addThisToCart('${yml[0]}')" class="btn-addtocart addtocart clearfix">
+                                                        <span class="icon-btn"><i class="fas fa-shopping-cart"></i></span>
+                                                        <span class="tool-title">Add to Cart</span>
                                                     </div>
-                                                    <div class="btn-love"><span><i class="fa fa-heart"></i></span></div>
+                                                    <div ng-init="onWyml${i} = ${yml[8]}" ng-class="addedClass(onWyml${i})" class="btn-love" ng-click="onWyml${i} = btnWishlist('${yml[0]}', onWyml${i})"><span><i class="fa fa-heart"></i></span></div>
                                                 </div>
                                             </div>
                                         </div>
+                                                    <c:set var="i" value="${i+1}"/>
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>
+                        </c:if>
                     </div>
                 </div>
             </div>

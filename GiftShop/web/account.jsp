@@ -195,8 +195,13 @@
                     <a id="backtoshop" href="${pageContext.request.contextPath}" >Back to Shopping <i class="fal fa-long-arrow-right"></i></a>
                     <div id="myaccount">
                         <div class="avatar">
+                            <c:if test="${avatar == null}">
                             <img src="https://2sao.vietnamnetjsc.vn/images/2018/09/01/11/13/shark-Hung-02.jpg" alt="">
-                            <a href=""><i class="fal fa-camera"></i>Upload an avatar</a>
+                            </c:if>
+                            <c:if test="${avatar != null}">
+                            <img src="${pageContext.request.contextPath}/avatar/${avatar}" alt="">
+                            </c:if>
+                            <a id="uploadclick" href=""><i class="fal fa-camera"></i>Upload an avatar</a>
                         </div>
                         <div class="profile">
                             <p class="profile-name"><span id="myname" >${myname}</span> <a id="pen-edit" href=""><i class="fal fa-pencil"></i></a></p>
@@ -208,6 +213,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="fadeInDownMsg filecontainer">
+                <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/account" >
+                    <input class="form-control" id="fileElem" style="display:none" onchange="handleFiles(this.files)" type="file" name="file" accept=".png,.jpg,.bmp,.jpeg" >
+                    <input type="hidden" name="action" value="upavatar">
+                    <h5>Are you sure to upload this picture to avatar?</h5>
+                    <div id="fileList"></div>
+                    <button class="btn-yes" type="submit">Yes</button>
+                    <button id="cancelfile" type="button" class="btn-no">Cancel</button>
+                </form>
             </div>
             <script src="${pageContext.request.contextPath}/assets/library/jquery/js/jquery.min.js"></script>
             <script src="${pageContext.request.contextPath}/assets/library/wowjs/wow.js"></script>

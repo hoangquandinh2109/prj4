@@ -1,10 +1,39 @@
 var varError = 0;
 var modalon = 0;
+
+var fileList = document.getElementById("fileList");
+function handleFiles(file) {
+if (file.length) {
+  $(".filecontainer").show();
+  $(".clickdetrove").addClass('havemodal');
+  fileList.innerHTML = "";
+  var img = document.createElement("img");
+  img.src = window.URL.createObjectURL(file[0]);
+  img.height = 120;
+  img.onload = function() {
+      window.URL.revokeObjectURL(this.src);
+  }
+  fileList.appendChild(img);
+}
+}
+
 $(document).ready(function() {
+    $('.clickdetrove').click(function(){
+        $(".filecontainer").fadeOut();
+    });
+    $('#uploadclick').click(function(){
+        event.preventDefault();
+        document.getElementById("fileElem").click();
+    });
+    $('#cancelfile').click(function(){
+        $(".filecontainer").fadeOut();
+        $(".clickdetrove").removeClass("havemodal");
+    });
      $('body').keypress(function(){
          if(modalon == 1){
             $(".clickdetrove").removeClass("havemodal");
             $(".modal-form").remove();
+            
             $('body').removeClass("square");
             modalon = 0;
         }
@@ -131,7 +160,7 @@ $(document).ready(function() {
 
             validatePhone(phone);
             validateEmail(email);
-            if(email == $("#myemail").text().toLowerCase()){
+            if(email == $("#myemail").text().toLowerCase() && varError ===0){
                 $.ajax({
                         url: linkpage + "account",
                         method: 'POST',
