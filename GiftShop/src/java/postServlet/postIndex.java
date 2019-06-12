@@ -11,7 +11,6 @@ import entity.Post;
 import entity.TbTag;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -29,35 +28,22 @@ import models.TbTagFacadeLocal;
  *
  * @author bemap
  */
-@WebServlet(name = "searchForwardPage", urlPatterns = {"/searchForwardPage"})
-public class searchForwardPage extends HttpServlet {
+@WebServlet(name = "postIndex", urlPatterns = {"/postIndex"})
+public class postIndex extends HttpServlet {
     @EJB
-    private CustomerFacadeLocal customerFacade;
-    @EJB
-    private PostFacadeLocal postFacade;
+    private TbTagFacadeLocal tbTagFacade;
     @EJB
     private LikesFacadeLocal likesFacade;
     @EJB
-    private TbTagFacadeLocal tbTagFacade;
-  
+    private PostFacadeLocal postFacade;
+    @EJB
+    private CustomerFacadeLocal customerFacade;
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-          List<TbTag> t= tbTagFacade.findAll();
-          Post p=postFacade.find(1);
-          List<Post> findByTag= new ArrayList<>();
-        //  Customer c=customerFacade.find((int)session.getAttribute("sessionid"));
-          String tagData=request.getParameter("data");
-          if(tagData!=null){
-              System.out.println("hahaha");
-              findByTag=postFacade.searchByTag(tagData);
-              System.out.println(findByTag);
-              request.setAttribute("tagData", findByTag);
-          }
-          String name=(String)session.getAttribute("sessionname");
+        HttpSession session=request.getSession();
+      String name=(String)session.getAttribute("sessionname");
           if(name!=null){
               int id=(int) session.getAttribute("sessionid");
               Customer cusLogged=customerFacade.find(id);
@@ -76,9 +62,9 @@ public class searchForwardPage extends HttpServlet {
           request.setAttribute("like", totalLikedPAllpost);
           request.setAttribute("post", tPost);
           }
-        request.setAttribute("tags", t);
-        request.getRequestDispatcher("searchPage.jsp").forward(request, response);
-        
+          List<TbTag> tag=tbTagFacade.findAll();
+          request.setAttribute("tags", tag);
+            request.getRequestDispatcher("postIndex.jsp").forward(request, response);
     }
 
     @Override
