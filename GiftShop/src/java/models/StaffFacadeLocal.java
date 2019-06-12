@@ -30,5 +30,8 @@ public interface StaffFacadeLocal {
     List<Staff> findRange(int[] range);
 
     int count();
-    
+
+    List<Staff> searchStaff(String name);
+    List<Staff> findByEmail(String email);
+    List<Staff> findByID(int id);
 }

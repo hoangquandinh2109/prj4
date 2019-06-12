@@ -6,59 +6,42 @@
 
 package Servlet;
 
-import entity.Mailbox;
-import entity.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.MailboxFacadeLocal;
-import models.StaffFacadeLocal;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "MailboxServlet", urlPatterns = {"/MailboxServlet"})
-public class MailboxServlet extends HttpServlet {
-   @EJB
-    private StaffFacadeLocal staffFacade;
-    @EJB
-    private MailboxFacadeLocal mailboxFacade;
+public class UpdateStatusServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            String action = request.getParameter("action");
-            if (action.equals("ShowMailbox")) {
-                List<Mailbox> listMail = mailboxFacade.findAll();
-
-                request.setAttribute("list", listMail);
-                request.getRequestDispatcher("admin/listMail.jsp").forward(request, response);
-            } else if (action.equals("ResetPassword")) {
-                //System.out.println(email);
-                Staff staf = mailboxFacade.findByEmail(email);
-                if (staf != null) {
-                    staf.setStaffPassword("123123");
-                    staffFacade.edit(staf);
-                    //out.print("THANH CONG");
-                    // request.getRequestDispatcher("MailboxServlet?action=ShowMailbox").forward(request, response);
-                }
-                request.getRequestDispatcher("MailboxServlet?action=ShowMailbox").forward(request, response);
-            } else if (action.equals("Delete")) {
-                String code = request.getParameter("code");
-                Mailbox mai = mailboxFacade.find(Integer.parseInt(code));
-                mailboxFacade.remove(mai);
-                request.getRequestDispatcher("MailboxServlet?action=ShowMailbox").forward(request, response);
-            }
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateStatusServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateStatusServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

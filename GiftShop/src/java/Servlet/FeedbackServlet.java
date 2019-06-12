@@ -6,57 +6,44 @@
 
 package Servlet;
 
-import entity.Mailbox;
-import entity.Staff;
+import entity.Feedback;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.MailboxFacadeLocal;
-import models.StaffFacadeLocal;
+import models.FeedbackFacadeLocal;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "MailboxServlet", urlPatterns = {"/MailboxServlet"})
-public class MailboxServlet extends HttpServlet {
-   @EJB
-    private StaffFacadeLocal staffFacade;
+@WebServlet(name = "FeedbackServlet", urlPatterns = {"/FeedbackServlet"})
+public class FeedbackServlet extends HttpServlet {
+
     @EJB
-    private MailboxFacadeLocal mailboxFacade;
+    private FeedbackFacadeLocal feedbackFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            String action = request.getParameter("action");
-            if (action.equals("ShowMailbox")) {
-                List<Mailbox> listMail = mailboxFacade.findAll();
 
-                request.setAttribute("list", listMail);
-                request.getRequestDispatcher("admin/listMail.jsp").forward(request, response);
-            } else if (action.equals("ResetPassword")) {
-                //System.out.println(email);
-                Staff staf = mailboxFacade.findByEmail(email);
-                if (staf != null) {
-                    staf.setStaffPassword("123123");
-                    staffFacade.edit(staf);
-                    //out.print("THANH CONG");
-                    // request.getRequestDispatcher("MailboxServlet?action=ShowMailbox").forward(request, response);
-                }
-                request.getRequestDispatcher("MailboxServlet?action=ShowMailbox").forward(request, response);
-            } else if (action.equals("Delete")) {
+            String action = request.getParameter("action");
+            if (action.equals("Detail")) {
                 String code = request.getParameter("code");
-                Mailbox mai = mailboxFacade.find(Integer.parseInt(code));
-                mailboxFacade.remove(mai);
-                request.getRequestDispatcher("MailboxServlet?action=ShowMailbox").forward(request, response);
+                Feedback feed = feedbackFacade.find(Integer.parseInt(code));
+                request.setAttribute("feed", feed);
+                request.getRequestDispatcher("admin/detailFeed.jsp").forward(request, response);
+            }
+            if (action.equals("Delete")) {
+                String code = request.getParameter("code");
+                Feedback fee = feedbackFacade.find(Integer.parseInt(code));
+                feedbackFacade.remove(fee);
+                request.getRequestDispatcher("showFeedbackServlet").forward(request, response);
             }
 
         }

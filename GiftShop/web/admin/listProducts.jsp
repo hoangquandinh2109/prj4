@@ -96,11 +96,11 @@
                 buttons: [
                     {extend: 'excel', footer: true,
                         exportOptions: {
-                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9,10]
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         }},
                     {extend: 'pdf', footer: true,
                         exportOptions: {
-                            columns: [ 2, 3, 4, 5, 6, 7, 8, 9,10]
+                            columns: [ 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         },
                         customize: function(doc) {
                             doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');

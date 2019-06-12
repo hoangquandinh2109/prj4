@@ -31,28 +31,11 @@ public class ResetPasswordServlet extends HttpServlet {
     @EJB
     private MailboxFacadeLocal mailboxFacade;
 
-    
-    
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //String action = request.getParameter("action");
-            String action = request.getParameter("action");
-            String email = request.getParameter("email");
-      //      String sub = "FOR GOT PASS WORD"
-            String messa = request.getParameter("message");
-            //date = request.getParameter("date");
-                //System.out.println(sub);
-                System.out.println(messa);
-                Mailbox mail = new Mailbox(messa);
-
-                mailboxFacade.create(mail);
-
-                request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
-            
-
+            request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
         }
     }
 
@@ -82,6 +65,30 @@ public class ResetPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("action");
+        String email = request.getParameter("email");
+        //      String sub = "FOR GOT PASS WORD"
+        String messa = request.getParameter("abcxyz");
+        int i = 0;
+        int count = 0;
+        String errmess = null;
+        while (i < staffFacade.findAll().size()) {
+            if (staffFacade.findAll().get(i).getStaffEmail().equals(messa)) {
+                count++;
+            }
+            i++;
+        }
+        if (count == 0) {
+            errmess = "Email does not exist";
+            request.setAttribute("loi", true);
+            request.setAttribute("abc", errmess);
+        } else {
+            errmess = "Success";
+            Mailbox mail = new Mailbox(messa);
+            mailboxFacade.create(mail);
+            request.setAttribute("loi1", true);
+            request.setAttribute("abc", errmess);
+        }
         processRequest(request, response);
     }
 

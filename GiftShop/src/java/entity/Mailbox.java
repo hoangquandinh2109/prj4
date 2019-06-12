@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Mailbox.findAll", query = "SELECT m FROM Mailbox m"),
     @NamedQuery(name = "Mailbox.findByMailID", query = "SELECT m FROM Mailbox m WHERE m.mailID = :mailID"),
+    @NamedQuery(name = "Mailbox.findByMessage", query = "SELECT m FROM Mailbox m WHERE m.message = :message"),
     @NamedQuery(name = "Mailbox.findBySubject", query = "SELECT m FROM Mailbox m WHERE m.subject = :subject"),
     @NamedQuery(name = "Mailbox.findByReceivedDate", query = "SELECT m FROM Mailbox m WHERE m.receivedDate = :receivedDate"),
     @NamedQuery(name = "Mailbox.findByReplyDate", query = "SELECT m FROM Mailbox m WHERE m.replyDate = :replyDate")})

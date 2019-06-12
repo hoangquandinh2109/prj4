@@ -3,69 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Servlet;
 
 import entity.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.StaffFacadeLocal;
 
 /**
  *
  * @author USER
  */
-public class loginStafftServlet extends HttpServlet {
-
+public class SearchStaffServlet extends HttpServlet {
     @EJB
     private StaffFacadeLocal staffFacade;
 
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            String pwd = request.getParameter("password");
-           // boolean status = Boolean.parseBoolean(request.getParameter("status"));
-//            List<Staff> listStaff = new ArrayList<>();
-            HttpSession session = request.getSession();
-            String mess = null;
-int i=0;
-            for (Staff staff : staffFacade.findAll()) {
-                if (staff.getStaffEmail().equals(email)) {
-                    System.out.println("in lan1");
-                    if (pwd.equals(staff.getStaffPassword().toString())) {
-                        if (staff.getStaffStatus() == false) {
-                            request.setAttribute("eror", true);
-                            //session.setAttribute("message", "Your account is locked, please contact Admin to unlock it");
-                            request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
-                            
-                        }
-                        mess = staff.getStaffEmail();
-
-                        session.setAttribute("staff_name", staff.getStaffName().toString());
-                        session.setAttribute("staff_id", staff.getStaffID().toString());
-                        session.setAttribute("role", staff.getRole().toString());
-                        request.setAttribute("mess2", true);
-                        request.getRequestDispatcher("admin/index.jsp").forward(request, response);
-                    } else {
-                        request.setAttribute("mess3", true);
-                        request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
-                        
-                    }
-                } else {
-                    i =0;
-                }
-            }
-             if(i==0){
-                                 request.getRequestDispatcher("admin/LoginStaff.jsp").forward(request, response);
-
-             }
+            String name = request.getParameter("name");
+            List<Staff> listStaff = staffFacade.searchStaff(name);
+            request.setAttribute("list", listStaff);
+            request.getRequestDispatcher("admin/listStaff.jsp").forward(request, response);
         }
     }
 
