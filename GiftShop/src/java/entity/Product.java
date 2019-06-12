@@ -98,6 +98,14 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    public Date getDateRelease() {
+        return dateRelease;
+    }
+
+    public void setDateRelease(Date dateRelease) {
+        this.dateRelease = dateRelease;
+    }
+
     public Product(String proID, String proName, String proDetails, Double proPrice, Integer quantity, Date dateRelease, Boolean proStatus, String tags, Double starAVG, Category catID, ProductType typeID) {
         this.proID = proID;
         this.proName = proName;

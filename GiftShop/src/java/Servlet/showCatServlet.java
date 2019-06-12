@@ -9,6 +9,7 @@ package Servlet;
 import entity.Category;
 import entity.Feature;
 import entity.ProductType;
+import entity.TbTag;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,12 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 import models.CategoryFacadeLocal;
 import models.FeatureFacadeLocal;
 import models.ProductTypeFacadeLocal;
+import models.TbTagFacadeLocal;
 
 /**
  *
  * @author Asus
  */
 public class showCatServlet extends HttpServlet {
+    @EJB
+    private TbTagFacadeLocal tbTagFacade;
     @EJB
     private ProductTypeFacadeLocal productTypeFacade;
     @EJB
@@ -40,6 +44,8 @@ public class showCatServlet extends HttpServlet {
              List<Category> listCate = categoryFacade.FindCatStatus();
              List<ProductType> listTyp = productTypeFacade.FindTypeStatus();
              List<Feature> listFea = fe.FindFeaStatus();
+             List<TbTag> listTag=tbTagFacade.findAll();
+             request.setAttribute("tags", listTag);
           request.setAttribute("listFea", listFea);
           request.setAttribute("listCat", listCate);
           request.setAttribute("listType", listTyp);

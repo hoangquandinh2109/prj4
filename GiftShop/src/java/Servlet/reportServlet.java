@@ -47,9 +47,6 @@ public class reportServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String proid = request.getParameter("productID");
-
-//        String dateValue1 = daterange.substring(0, 10);
-//        String dateValue2 = daterange.substring(13, 23);
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         String dateC = request.getParameter("dateSt");
         String dateE = request.getParameter("dateEnd");
@@ -61,15 +58,6 @@ public class reportServlet extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-//        Date Startdate = new Date();
-//        Date Enddate = new Date();
-//        try {
-//            Startdate = formatter.parse(dateValue1);
-//            Enddate = formatter.parse(dateValue2);
-//
-//        } catch (ParseException e) {
-//        }
         List<Report> reportList = productF.ProductReport(proid, dateCr, dateEnd);
         int totalPrice = 0;
         for (int i = 0; i < reportList.size(); i++) {
@@ -80,7 +68,6 @@ public class reportServlet extends HttpServlet {
         request.setAttribute("totalProfit", totalPrice);
         request.setAttribute("dateStart", dateC);
         request.setAttribute("dateEndd", dateE);
-//        request.setAttribute("dateRange", daterange);
         request.setAttribute("pro", productF.find(proid));
         request.setAttribute("reportList", reportList);
         request.getRequestDispatcher("admin/viewReportProduct.jsp").forward(request, response);

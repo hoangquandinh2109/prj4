@@ -47,7 +47,8 @@ public class reportCatServlet extends HttpServlet {
                 double income = 0.0D;
                 for (Product p : productofBrand(c)) {
                     for (PurchaseItem pItem : odbyp(p)) {
-                        income += pItem.getPurID().getTotalPrice();
+                        income += pItem.getProID().getProPrice()* pItem.getQuantity();
+                        System.out.println(pItem.getProID().getCatID().getCatName()+" "+pItem.getPurID().getTotalPrice()+" income "+income);
                     }
                 }
                 CategoryReport cReport = new CategoryReport(category, income);

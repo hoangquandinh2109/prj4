@@ -20,12 +20,18 @@
             }
 
         </style>
-          <style type="text/css">
-                .required {
-                    color: red;
-                }
-            </style>
+        <style>
+            .select2-results__option[aria-selected=true] {
+                display: none;
+            }
+        </style>
+        <style type="text/css">
+            .required {
+                color: red;
+            }
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />   
@@ -57,7 +63,6 @@
                                     <input readonly value="${product.proID}" class="form-control" type="text" name="0" placeholder="Enter product ID">
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Name </label>
                                 <div class="col-md-8">
@@ -70,7 +75,6 @@
                                     <textarea  class="form-control" rows="4" name="2" placeholder="Enter product details">${product.proDetails}</textarea>
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Product Price </label>
                                 <div class="col-md-8">
@@ -87,14 +91,13 @@
                                 <label class="control-label col-md-3">Date Release </label>
                                 <div class="col-md-8">
                                     <input class="form-control" value="<fmt:formatDate value="${product.dateRelease}" pattern="MM/dd/yyyy"/>" type="text" name="5" id="datepicker" placeholder="Enter product DateRelease">
-
                                 </div>
                             </div>  
                             <input type="hidden" value="${product.proStatus}" name="6">
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Category</label>
                                 <div class="col-md-8">
-                                    <select name="6" class="form-control">
+                                    <select name="7" class="form-control" id="cate">
                                         <c:forEach var="c1" items="${listCat}">
                                             <c:choose>
                                                 <c:when test="${product.catID.catID eq c1.catID}">
@@ -111,9 +114,9 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Type</label>
                                 <div class="col-md-8">
-                                    <select name="7" class="form-control">
+                                    <select name="8" id="type" class="form-control">
                                         <c:forEach var="c" items="${listType}">
-                                           <c:choose>
+                                            <c:choose>
                                                 <c:when test="${product.typeID.typeID eq c.typeID}">
                                                     <option value="${c.typeID}" selected="true">${c.typeName}</option> 
                                                 </c:when>
@@ -128,9 +131,9 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Feature</label>
                                 <div class="col-md-8">
-                                    <select name="8" class="form-control">
+                                    <select name="9" class="form-control">
                                         <c:forEach var="c" items="${listF}">
-                                           <c:choose>
+                                            <c:choose>
                                                 <c:when test="${product.featureID.featureID eq c.featureID}">
                                                     <option value="${c.featureID}" selected="true">${c.fname}</option> 
                                                 </c:when>
@@ -140,6 +143,23 @@
                                             </c:choose>   
                                         </c:forEach>
                                     </select>    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Tags<span class="required">*</span></label>
+                                <div class="col-md-8">
+                                    <select required name="tagInput" id="mySelect2" class="form-control" multiple="multiple"> 
+                                        <c:set var="a" value="product"></c:set>
+                                        <c:forEach items="${tags}" var="tagE">
+                                            <c:if  test="${tagE.tagType eq a}">
+                                                <option value="${tagE.tag}">${tagE.tag}</option> 
+                                            </c:if>   
+                                        </c:forEach> 
+                                        <c:forTokens items="${product.tags}" delims=";" var="tag">
+                                            <option value="${tag}" selected="selected">${tag}</option>
+                                            <%--  --%>
+                                        </c:forTokens>
+                                    </select>            
                                 </div>
                             </div>
                             <div class="row">
@@ -152,7 +172,7 @@
                                             </c:if>
                                         </c:forEach>  
                                 </div>
-                            </div
+                            </div>
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-3">
@@ -167,7 +187,46 @@
             </div>
         </div>
     </main>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script>
+        $('#mySelect2').select2({
+            tags: true
+        });
+        //Get type by Cat
+        $(document).ready(function() {
+            //    $("#type").text("");
+            $("#cate").change(function() {
+                console.log($(this).val());
+                var cateID = $(this).val();
+                // data = $("#searchInput").val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'filterByCate',
+                    headers: {
+                        Accept: 'application/json ,chartset=utf-8',
+                        'Content-Type': 'Apllication/json;chartset=utf-8',
+                    },
+                    data: {data: cateID},
+                    success: function(result) {
+                        $("#type").text("");
+                        // var x =JSON.parse(result);
+                        // console.log();
+                        $.each(result.type, function(index) {
+                            //var arrayTag = result.POST[index].postTag.split(";");
+                            var template = '<option value="' + result.type[index].typeID + '">' + result.type[index].typeName + '</option>';
+                            $("#type").append(template);
+                            console.log(template);
+
+
+
+
+
+                        });
+                    }
+                });
+            });
+        });
         $('#datepicker').datepicker({
             uiLibrary: 'bootstrap4', maxDate: new Date, minDate: new Date(2018, 10, 12)});
     </script>

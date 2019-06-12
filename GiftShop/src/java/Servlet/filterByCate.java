@@ -3,43 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Servlet;
 
-import entity.Purchase;
-import entity.PurchaseItem;
+import entity.Category;
+import entity.ProductType;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.PurchaseFacadeLocal;
-import models.PurchaseItemFacadeLocal;
+import models.CategoryFacadeLocal;
+import models.ProductTypeFacadeLocal;
 
 /**
  *
  * @author Asus
  */
-public class getDetailsPurServlet extends HttpServlet {
+@WebServlet(name = "filterByCate", urlPatterns = {"/filterByCate"})
+public class filterByCate extends HttpServlet {
+    @EJB
+    private CategoryFacadeLocal categoryFacade;
+    @EJB
+    private ProductTypeFacadeLocal productTypeFacade;
 
-    @EJB
-    private PurchaseItemFacadeLocal purchaseItemFacade;
-    @EJB
-    private PurchaseFacadeLocal purchaseFacade;
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String purID = request.getParameter("purID");
-            Purchase purIDD = purchaseFacade.find(purID);
-            request.setAttribute("purchase", purIDD);
-            request.setAttribute("purItem", purchaseItemFacade.purItemByPur(purID));
-            request.getRequestDispatcher("admin/DetailsPurchase.jsp").forward(request, response);
-        }
-    }
+ 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -53,7 +50,30 @@ public class getDetailsPurServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter out =response.getWriter();
+        int CateID=Integer.parseInt(request.getParameter("data"));
+        
+        Category cat=categoryFacade.find(CateID);
+            List<ProductType> type=productTypeFacade.FilterByCate(cat);
+            System.out.println(type);
+             JsonArrayBuilder jsonUserArray = Json.createArrayBuilder();
+            for(ProductType t:type){
+                JsonObjectBuilder likeItem = Json.createObjectBuilder()
+                            .add("typeStatus", true)
+                            .add("typeID", t.getTypeID()).
+                            add("typeName", t.getTypeName());
+                            
+                    jsonUserArray.add(likeItem);
+            }
+           
+           
+                    JsonObject jsonFinalOutput = Json.createObjectBuilder().add("type", jsonUserArray).build();
+                    //System.out.println("");
+                    out.print(jsonFinalOutput);
+                    //System.out.println(jsonFinalOutput);
+        
     }
 
     /**
@@ -67,7 +87,7 @@ public class getDetailsPurServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**

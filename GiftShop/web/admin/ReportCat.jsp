@@ -3,12 +3,13 @@
     Created on : May 26, 2019, 3:45:03 PM
     Author     : Asus
 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-            <c:import url="../templates/adminHead.jsp"></c:import>
+        <c:import url="../templates/adminHead.jsp"></c:import>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" ></script>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -81,11 +82,12 @@
                                     <tr>
                                         <td>${index.index + 1}</td>
                                         <td>${data.category}</td>
-                                        <td>${data.income}</td>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${data.income}"/></td>
                                     </tr>  
                                 </c:forEach>              
                             </table>
-                            <div><b>Total Income: <%=request.getAttribute("total")%></b></div>
+
+                            <div><b>Total Income:<fmt:formatNumber type="number" maxFractionDigits="2" value="${total}" /></b></div>
                         </div>
 
                     </div>
@@ -109,39 +111,29 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#example').DataTable();
-</script>
+    $('#example').DataTable();</script>
 <script type="text/javascript">
-    //load the Google Visualization API and the chart
-    google.load('visualization', '1', {'packages': ['columnchart']});
+            //load the Google Visualization API and the chart
+            google.load('visualization', '1', {'packages': ['columnchart']});
+            //set callback
+            google.setOnLoadCallback(createChart);
+            //callback function
+                    function createChart() {
 
-    //set callback
-    google.setOnLoadCallback(createChart);
-
-    //callback function
-    function createChart() {
-
-        //create data table object
-        var dataTable = new google.visualization.DataTable();
-
-        //define columns
-        dataTable.addColumn('string', 'Quarters 2009');
-        dataTable.addColumn('number', 'Income');
-
-
-        //define rows of data
-        dataTable.addRows([<c:forEach items = "${list}" var = "data" > ['${data.category}',${data.income} ], </c:forEach>]);
-
-        //instantiate our chart object
-        var chart1 = new google.visualization.ColumnChart(document.getElementById('chart1'));
-
-        //define options for visualization
-        var options = {width: 520, height: 300, is3D: true, title: 'Category Income'};
-
-        //draw our chart
-        chart1.draw(dataTable, options);
-
-    }
+                    //create data table object
+                    var dataTable = new google.visualization.DataTable();
+                            //define columns
+                            dataTable.addColumn('string', 'Quarters 2009');
+                            dataTable.addColumn('number', 'Income');
+                            //define rows of data
+                            dataTable.addRows([<c:forEach items = "${list}" var = "data" > ['${data.category}',${data.income} ], </c:forEach>]);
+                            //instantiate our chart object
+                            var chart1 = new google.visualization.ColumnChart(document.getElementById('chart1'));
+                            //define options for visualization
+                            var options = {width: 520, height: 300, is3D: true, title: 'Category Income'};
+                            //draw our chart
+                            chart1.draw(dataTable, options);
+                    }
 </script>
 
 </html>

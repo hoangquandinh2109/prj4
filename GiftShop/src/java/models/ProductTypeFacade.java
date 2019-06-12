@@ -6,6 +6,7 @@
 
 package models;
 
+import entity.Category;
 import entity.Feature;
 import entity.Product;
 import entity.ProductType;
@@ -61,6 +62,14 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> implements Pr
             return null;
         }
 
+    }
+
+    @Override
+    public List<ProductType> FilterByCate(Category cate) {
+        List<ProductType> lp = em.createQuery("SELECT p FROM ProductType p WHERE p.catID = :cateID")
+                .setParameter("cateID", cate)
+                .getResultList();
+        return lp;
     }
 
 }

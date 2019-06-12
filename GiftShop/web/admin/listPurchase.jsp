@@ -72,7 +72,7 @@
                             <th>Customer Name</th>
                             <th>Customer Email</th>
                             <th>Date Order</th>
-                            <th>Date Paid</th>
+                            <th>Date Received</th>
                             <th>Total Price</th>
                             <th>Status</th>
                             <th>Actions</th>

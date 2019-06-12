@@ -5,8 +5,10 @@ import entity.Feature;
 import entity.ImgStog;
 import entity.Product;
 import entity.ProductType;
+import entity.TbTag;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -18,6 +20,8 @@ import models.FeatureFacadeLocal;
 import models.ImgStogFacadeLocal;
 import models.ProductFacadeLocal;
 import models.ProductTypeFacadeLocal;
+import models.TbTagFacade;
+import models.TbTagFacadeLocal;
 
 /**
  *
@@ -36,6 +40,8 @@ public class getDetailsProductServlet extends HttpServlet {
     private CategoryFacadeLocal categoryFacade;
     @EJB
     private ProductFacadeLocal productFacade;
+    @EJB
+    private TbTagFacadeLocal tbTagF;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,9 +56,18 @@ public class getDetailsProductServlet extends HttpServlet {
             List<Feature> listF = featureFacade.FindFeaStatus();
             Product product = productFacade.find(code);
             List<ImgStog> img = imgStogFacade.findList(product);
+            List<TbTag> listTag = tbTagF.findAll();
+            request.setAttribute("tags", listTag);
+            /// Ngu vl
+//            List<String> any = new ArrayList<String>();
+//            String tagCurrent[] = product.getTags().split(";");
+//            for (int i = 0; i < tagCurrent.length; i++) {
+//                any.add(tagCurrent[i]);
+//            }
+//            ///
             request.setAttribute("listCat", listCate);
             request.setAttribute("listType", listTyp);
-            
+
             request.setAttribute("listF", listF);
             //request.setAttribute("product", product);
             request.setAttribute("imgg", listImg);

@@ -30,7 +30,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-
 public class InsertProductServlet extends HttpServlet {
 
     @EJB
@@ -117,10 +116,17 @@ public class InsertProductServlet extends HttpServlet {
                 product.setCatID(categoryid);
                 product.setTypeID(typeID);
                 product.setFeatureID(feaID);
+                product.setStarAVG(Double.parseDouble("0"));
+                product.setDiscout(0);
                 productFacade.create(product);
-
+                //  System.out.println(multiparts.get(8));;
+                String tags = "";
                 int i = 0;
                 for (FileItem item : multiparts) {
+                    if (item.getFieldName().toString().equals("tagInput")) {
+                        tags = tags.concat(item.getString() + ";");
+//                        System.out.println("trong for " + tags);
+                    }
                     if (!item.isFormField()) {
                         String name = new File(item.getName()).getName();
                         item.write(new File(getServletContext().getRealPath("") + File.separator + SAVE_DIRECTORY + File.separator + name));
@@ -135,6 +141,13 @@ public class InsertProductServlet extends HttpServlet {
                     }
 
                 }
+                Product pSingle = productFacade.find(product.getProID());
+                pSingle.setProID(product.getProID());
+                pSingle.setTags(tags);
+                productFacade.edit(pSingle);
+//                   System.out.println("ProID hien tai "+pSingle);
+//                System.out.println("Ngoai for  "+tags);
+
                 request.setAttribute("message", "Insert product successful.");
             } catch (Exception ex) {
                 request.setAttribute("message", "File upload failed due to : " + ex);
