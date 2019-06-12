@@ -1290,3 +1290,7 @@ body .content-n-cart .content .clickdetrove.havenotification {
     z-index: 100000;
     opacity: 1;
 }
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
