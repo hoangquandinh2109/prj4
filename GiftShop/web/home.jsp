@@ -22,7 +22,7 @@
                             <div class="row" ng-controller="wishlist">
                                 <div class="left-column">
                                     <div class="categories">
-                                        <h4 class="title-bar-categories"><i class="far fa-list"></i>For</h4>
+                                        <h4 class="title-bar-categories"><i class="far fa-list"></i>CATEGORIES</h4>
                                         <ul>
                                             <c:forEach items="${listCat}" var="lC">
                                             <li>
