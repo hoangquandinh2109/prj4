@@ -43,7 +43,7 @@
                                                     <option value="SearchByTitle">Title</option>
                                                     <option value="SearchByContent">Content Post</option>
                                                     <option value="SearchByTag">Tag</option>
-                                                    <option value="SearchByTitle">Author</option>
+                                                  
                                                 </select>
                                             </div>
 
@@ -51,7 +51,7 @@
 
                                         </form>
                                     </div>
-
+   
                                     <br>
 
                                     <div class="alert alert-danger alert-dismissible" id="404" style="display: none">
@@ -60,31 +60,33 @@
                                     </div>
                                     <div  class="jumbotron hop">
                                         <div id="home" class="tab-pane active"><br>
-                                            <div id="getContent" class="wow row">
-                                                <div class="hopUser">
-                                                    <div class="chua-user">
-                                                          <div class="col-md-4">
-                                                    <div class="card ml-4">
-                                                    <div class="card-body"><img  class="avt shadow-sm p-2 mb-2 bg-white" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png "></div>
-                                                    <div class="card-body">
-                                                        <p><u>Author information</u></p>
-                                                        <a href="#"><h3 class="font-weight-bold">ahaha</h3></a>
-                                                </div> 
-                                                <div class="card-footer">
-                                                    <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                                        <span>Total Like 2</span>
-
-                                                    </span>
-                                                    <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                                        <span>Total Post 3</span>
-
-                                                    </span>
-
-                                                </div>
+                                            <div id="getContent" class="wow">
+                                         
+                                            <c:if test="${testData eq null}">
+                                                <c:forEach items="${tagData}" var="tag">
+                                                    <div class="shadow-sm p-4 mb-4 bg-white postList"> <div class="media p-1">
+                                             <div class="left-content">
+                                             <div class="p-4 ml-3">
+                                            <img src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png" class="rounded-circle avt2" alt="Cinque Terre"/>
                                             </div>
-                                                </div>
-                                                    </div>
-                                                </div>
+                                             <a href="#" class="text-decoration-none text-info"><p class="pr-4 text-break text-center font-weight-bold">${tag.cusID.cusName}</p></a>
+                                            </div>
+                                             <div class="media-body content-Same">
+                                             <div class="post-title">
+                                             <a href="postDetailsServlet?pid=${tag.postID}" class="text-decoration-none title-text"><h3  style="margin:0px;padding:0px" class="tx font-weight-bold">${tag.titlePost}</h3></a>
+                                          
+                                             </div>
+                                               <div class="post-body"> <p>
+                                            ${tag.infontContent}
+                                            </p> </div>
+                                            <div class="post-footer">
+                                             <div class="tag col1" id="GG">
+                                                 <c:forTokens items="${tag.postTag}" var="tag" delims=";"> 
+                                                     <a href="searchForwardPage?data=${tag}" class="text-decoration-none"><span class="label text-tags">${tag}</span></a> 
+                                                 </c:forTokens>
+                                            <a href="#" class="text-decoration-none"><span><i class="far fa-flag"></i></span></a> </div> </div> </div>  </div></div>
+                                                </c:forEach>
+                                         </c:if>
                                               
                                         </div>
 
@@ -105,10 +107,10 @@
 
                                             <p class="text-info font-weight-bold pt-2 text-center">${sessionname}</p>
                                             <div class="infor">
-                                                <a href="#">0 </a>
+                                                <a href="#">${post} </a>
                                                 <span class="text-secondary">Posts</span>
                                                 <br>
-                                                <a href="#">0</a>
+                                                <a href="#">${like}</a>
                                                 <span class="text-secondary">Likes</span>
                                             </div>
                                         </div>
@@ -130,7 +132,7 @@
                                                 <c:set var="a" value="post"></c:set>
                                                 <c:forEach   items="${tags}" var="tag">
                                                     <c:if  test="${tag.tagType eq a}">
-                                                        <a href="#" class="text-decoration-none"><span class="label text-tags">${tag.tag}</span></a> 
+                                                        <a href="searchForwardPage?data=${tag.tag}" class="text-decoration-none"><span class="label text-tags">${tag.tag}</span></a> 
                                                         </c:if>    
                                                     </c:forEach>
                                             </div>
@@ -141,39 +143,7 @@
 
                                 </div>
                                 <hr>
-                                <div class="d-md-flex">
-                                    <div class="p-2 bg-secondary text-white">Top author</div>
-
-                                </div>
-                                <div class="tacgia shadow-sm p-4 mb-4 bg-white">
-
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Toomy</a>
-                                        </div>
-                                    </div>
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Mr Johnny</a>
-                                        </div>
-                                    </div>
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Kelvin</a>
-                                        </div>
-                                    </div>
-
-
-                                </div>
+                           
                                 <div class="d-md-flex">
                                     <div class="p-2 bg-secondary text-white">New product</div>
 
@@ -226,6 +196,7 @@
                                     return;
                                 }
                                 $("#getContent").text("");
+                              //  $("#getContent").removeClass("row");
                                 $.each(result.POST, function(index) {
                                     var arrayTag = result.POST[index].postTag.split(";");
                                     var template = '<div class="shadow-sm p-4 mb-4 bg-white postList"> <div class="media p-1">' +

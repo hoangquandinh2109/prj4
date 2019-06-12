@@ -37,7 +37,7 @@ public interface LikesFacadeLocal {
 
     boolean checkLike(Post p, Customer u);
 
-    long totalUserisLiked(Post p);
+    long totalUserisLiked(Post p, Customer c);
 
      List<Likes> LikedPosts(Customer c);
     

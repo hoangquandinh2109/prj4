@@ -41,19 +41,18 @@
                                             <div class="contentPost">
                                                 <div class="content-head">
                                                     <img  class="avt2" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png ">
-                                                    <a href="#" data-toggle="tooltip" class="text-time text-secondary text-decoration-none" title="February 19, 2016!">${p.cusID.cusName} <small>1 day ago</small></a>  
+                                                    <a href="#" data-toggle="tooltip" class="text-time text-secondary text-decoration-none" title="February 19, 2016!">${p.cusID.cusName} <small>${p.dateRealease}</small></a>  
                                                     <br>
                                                 </div>
                                                 <div class="content-body" id="content-body">
-                                                    <img src="https://raw.githubusercontent.com/wiki/ocornut/imgui/web/v149/gallery_TheDragonsTrap-01-thumb.jpg" width="100%"/>
-                                                    <hr>
+                                                 <div class="spinner-border text-primary"></div>
                                                 </div>
                                             </div>
                                             <hr>
                                             <div class="content-footer">
                                                 <div class="tag col1 edpostHide">
                                                     <c:forTokens items="${p.postTag}" delims=";" var="tag">
-                                                        <a href="#" class="text-decoration-none"><span class="label text-tags">${tag}</span></a>
+                                                        <a href="searchForwardPage?data=${tag}" class="text-decoration-none"><span class="label text-tags">${tag}</span></a>
                                                         </c:forTokens>
                                                 </div>
                                                 <form action='#' id='myForm'>
@@ -194,12 +193,12 @@
                                                                     <img src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png" class="rounded-circle avt2" alt="Cinque Terre"/>
                                                                 </div>
 
-                                                                <a href="#" class="text-decoration-none text-info"><p class="text-break text-center font-weight-bold">${au.cusID.cusName}</p></a> 
+                                                                <a href="#" class="text-decoration-none text-info"><span class="text-break text-center font-weight-bold">${au.cusID.cusName}</span></a> 
                                                             </div>
                                                             <div class="media-body content-Same">
                                                                 <div class="post-title">
-                                                                    <a href="#" class="text-decoration-none title-text"><span class="tx font-weight-bold">${au.titlePost}</span></a>
-                                                                    <a href="#" data-toggle="tooltip" class="text-time text-secondary" title="February 19, 2016!"><small>1 day ago</small></a> 
+                                                                    <a href="postDetailsServlet?pid=${au.postID}" class="text-decoration-none title-text"><span class="tx font-weight-bold">${au.titlePost}</span></a>
+                                                                    <a href="#" data-toggle="tooltip" class="text-time text-secondary" title="${au.dateRealease}"><small>${au.dateRealease}</small></a> 
                                                                 </div>
                                                                 <div class="post-body">
                                                                     <p>${au.infontContent}</p>      
@@ -207,7 +206,7 @@
                                                                 <div class="post-footer">
                                                                     <div class="tag col1">
                                                                     <c:forTokens items="${au.postTag}" delims=";" var="tag">
-                                                                        <a href="#" class="text-decoration-none"><span class="label text-tags">${tag}</span></a>
+                                                                       <a href="searchForwardPage?data=${tag}" class="text-decoration-none"><span class="label text-tags">${tag}</span></a> 
                                                                     </c:forTokens>
                                                                     </div>
                                                                  <!--   <div class="col2 pl-3">
@@ -248,15 +247,15 @@
                                     <div class="card-body"><img  class="avt shadow-sm p-2 mb-2 bg-white" src="https://kipalog.com/assets/common/male_avatar-f0133698a204bbc1684476efffe76f51.png "></div>
                                     <div class="card-body">
                                         <p><u>Author information</u></p>
-                                    <a href="#"><h3 class="font-weight-bold">${p.cusID.cusName}</h3></a>
+                                    <a href="countRuntime?id=${p.cusID.cusID}"><h3 class="font-weight-bold">${p.cusID.cusName}</h3></a>
                                     </div> 
                                     <div class="card-footer">
                                         <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                          <span>200 <i style="color:blue" class="far fa-thumbs-up"></i></span>
+                                          <span id="getTTLikeRT">${totalLikedAllpost}</span> <i style="color:blue" class="far fa-thumbs-up"></i>
                                           
                                         </span>
                                         <span class="border1 border-bottom-0 border-top-0 border-left-0">
-                                           <span>300 <i class="far fa-comment"></i></span>
+                                           <span>${totalPost} </span><i class="far fa-comment"></i>
                                            
                                         </span>
                                        
@@ -276,7 +275,7 @@
                                                  <c:set var="a" value="post"></c:set>
                                                 <c:forEach   items="${tags}" var="tag">
                                                      <c:if  test="${tag.tagType eq a}">
-                                                     <a href="#" class="text-decoration-none"><span class="label text-tags">${tag.tag}</span></a> 
+                                                     <a href="searchForwardPage?data=${tag.tag}" class="text-decoration-none"><span class="label text-tags">${tag.tag}</span></a> 
                                                      </c:if>    
                                                 </c:forEach>
                                                     
@@ -290,39 +289,7 @@
 
                                 </div>
                                 <hr>
-                                <div class="d-md-flex">
-                                    <div class="p-2 bg-secondary text-white">Top author</div>
-
-                                </div>
-                                <div class="tacgia shadow-sm p-4 mb-4 bg-white">
-
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Toomy</a>
-                                        </div>
-                                    </div>
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Mr Johnny</a>
-                                        </div>
-                                    </div>
-                                    <div class="tg-box">
-                                        <div class="left-box">
-                                            <img  class="avt2" src="https://st.quantrimang.com/photos/image/072015/22/avatar.jpg" width="50px">
-                                        </div>
-                                        <div class="right-box">
-                                            <a href="#" class="text-break text-center text-decoration-none text-info">Kelvin</a>
-                                        </div>
-                                    </div>
-
-
-                                </div>
+                                
                                 <div class="d-md-flex">
                                     <div class="p-2 bg-secondary text-white">New product</div>
 
